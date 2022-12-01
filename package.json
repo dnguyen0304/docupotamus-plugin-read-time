@@ -1,9 +1,9 @@
 {
-    "name": "@docupotamus/docupotamus-theme-read-time",
+    "name": "@docupotamus/docusaurus-plugin-read-time",
     "version": "0.1.0",
-    "description": "Docusaurus read time UI component.",
+    "description": "Docusaurus read time plugin.",
     "main": "lib/index.js",
-    "types": "src/docusaurus-theme-editor.d.ts",
+    "types": "src/docusaurus-plugin-read-time.d.ts",
     "dependencies": {
         "@docusaurus/utils-validation": "^2.1.0",
         "@emotion/react": "^11.9.3",
@@ -37,7 +37,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/dnguyen0304/docupotamus-theme-read-time.git"
+        "url": "git+https://github.com/dnguyen0304/docusaurus-plugin-read-time.git"
     },
     "keywords": [
         "react",
@@ -53,7 +53,7 @@
     "author": "Duy Nguyen <dnguyen0304@gmail.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/dnguyen0304/docupotamus-theme-read-time/issues"
+        "url": "https://github.com/dnguyen0304/docusaurus-plugin-read-time/issues"
     },
-    "homepage": "https://github.com/dnguyen0304/docupotamus-theme-read-time#readme"
+    "homepage": "https://github.com/dnguyen0304/docusaurus-plugin-read-time#readme"
 }

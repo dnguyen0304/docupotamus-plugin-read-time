@@ -1,5 +1,5 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import type { DocupotamusThemeConfig } from './docusaurus-theme-editor';
+import type { DocupotamusThemeConfig } from './docusaurus-plugin-read-time';
 
 export function useDocupotamusThemeConfig(): DocupotamusThemeConfig {
     return (

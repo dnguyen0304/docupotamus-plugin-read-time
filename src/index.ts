@@ -1,8 +1,8 @@
 import type { Plugin } from '@docusaurus/types';
 
-export default function themeReadTime(): Plugin<undefined> {
+export default function pluginReadTime(): Plugin<undefined> {
     return {
-        name: 'docupotamus-theme-read-time',
+        name: 'docusaurus-plugin-read-time',
 
         getThemePath() {
             return './theme';
