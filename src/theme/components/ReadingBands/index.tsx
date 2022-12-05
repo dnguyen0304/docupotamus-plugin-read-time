@@ -23,23 +23,21 @@ const UPDATE_RUNNING_TOTALS_RATE_MILLI: number = 5 * 1000;
 
 export default function ReadingBands(): JSX.Element | null {
     const {
-        readTimePlugin: {
-            contentRootSelector,
-            contentSelector,
-            debug: {
-                band: {
-                    isEnabled: debugBandIsEnabled,
-                    colors: bandColors,
-                },
-                border: {
-                    isEnabled: debugBorderIsEnabled,
-                },
+        contentRootSelector,
+        contentSelector,
+        debug: {
+            band: {
+                isEnabled: debugBandIsEnabled,
+                colors: bandColors,
+            },
+            border: {
+                isEnabled: debugBorderIsEnabled,
             },
         },
     } = useDocusaurusContext()
         .siteConfig
         .themeConfig
-        .docupotamus as DocupotamusThemeConfig;
+        .docupotamusReadTimePlugin as DocupotamusThemeConfig;
 
     // TODO(dnguyen0304): Investigate migrating from ref to constant.
     // Samples are keyed first for each target then keyed for each band.
