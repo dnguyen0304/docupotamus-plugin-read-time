@@ -8,7 +8,7 @@ const CONTENT_ROOT_SELECTOR: string =
     'main[class*="docMainContainer"] article div.markdown';
 
 export const DOCUPOTAMUS_DEFAULT_CONFIG = {
-    readTime: {
+    readTimePlugin: {
         contentRootSelector: CONTENT_ROOT_SELECTOR,
         contentSelector: `${CONTENT_ROOT_SELECTOR} > *`,
         debug: {
@@ -36,23 +36,23 @@ export const DOCUPOTAMUS_DEFAULT_CONFIG = {
 // TODO(dnguyen0304): Fix incorrect ThemeConfig type.
 export const ThemeConfigSchema = Joi.object<ThemeConfig>({
     docupotamus: Joi.object({
-        readTime: Joi.object({
+        readTimePlugin: Joi.object({
             contentRootSelector: Joi
                 .string()
-                .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.contentRootSelector),
+                .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.contentRootSelector),
             contentSelector: Joi
                 .string()
-                .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.contentSelector),
+                .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.contentSelector),
             debug: Joi.object({
                 band: Joi.object({
                     isEnabled: Joi
                         .boolean()
-                        .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.debug.band.isEnabled),
+                        .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.debug.band.isEnabled),
                     colors: Joi
                         .array()
                         .items(Joi.string())
                         .length(5)
-                        .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.debug.band.colors)
+                        .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.debug.band.colors)
                         .when(
                             'isEnabled',
                             {
@@ -62,17 +62,17 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                             },
                         ),
                 })
-                    .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.debug.band),
+                    .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.debug.band),
                 border: Joi.object({
                     isEnabled: Joi
                         .boolean()
-                        .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.debug.border.isEnabled),
+                        .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.debug.border.isEnabled),
                 })
-                    .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.debug.border),
+                    .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.debug.border),
             })
-                .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime.debug),
+                .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin.debug),
         })
-            .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTime),
+            .default(DOCUPOTAMUS_DEFAULT_CONFIG.readTimePlugin),
     })
         .label('themeConfig.docupotamus')
         .default(DOCUPOTAMUS_DEFAULT_CONFIG),
@@ -83,4 +83,4 @@ export function validateThemeConfig({
     themeConfig,
 }: ThemeConfigValidationContext<ThemeConfig>): ThemeConfig {
     return validate(ThemeConfigSchema, themeConfig);
-}
+};

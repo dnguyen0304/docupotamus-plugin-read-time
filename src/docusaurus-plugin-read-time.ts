@@ -1,5 +1,5 @@
 export type DocupotamusThemeConfig = {
-    readTime: {
+    readTimePlugin: {
         contentRootSelector: string;
         contentSelector: string;
         debug: {

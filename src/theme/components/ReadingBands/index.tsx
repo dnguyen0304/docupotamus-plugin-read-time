@@ -23,7 +23,7 @@ const UPDATE_RUNNING_TOTALS_RATE_MILLI: number = 5 * 1000;
 
 export default function ReadingBands(): JSX.Element | null {
     const {
-        readTime: {
+        readTimePlugin: {
             contentRootSelector,
             contentSelector,
             debug: {
