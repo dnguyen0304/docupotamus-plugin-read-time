@@ -3,13 +3,15 @@ import type {
     ThemeConfigValidationContext
 } from '@docusaurus/types';
 import { Joi } from '@docusaurus/utils-validation';
+import type { DocupotamusThemeConfig } from './docusaurus-plugin-read-time';
 
 const CONTENT_ROOT_SELECTOR: string =
     'main[class*="docMainContainer"] article div.markdown';
 
-const DEFAULT_CONFIG = {
+const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
     contentRootSelector: CONTENT_ROOT_SELECTOR,
     contentSelector: `${CONTENT_ROOT_SELECTOR} > *`,
+    workbenchIsOpen: true,
     debug: {
         band: {
             isEnabled: false,
@@ -36,20 +38,23 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
     docupotamusReadTimePlugin: Joi.object({
         contentRootSelector: Joi
             .string()
-            .default(DEFAULT_CONFIG.contentRootSelector),
+            .default(DEFAULT_THEME_CONFIG.contentRootSelector),
         contentSelector: Joi
             .string()
-            .default(DEFAULT_CONFIG.contentSelector),
+            .default(DEFAULT_THEME_CONFIG.contentSelector),
+        workbenchIsOpen: Joi
+            .boolean()
+            .default(DEFAULT_THEME_CONFIG.workbenchIsOpen),
         debug: Joi.object({
             band: Joi.object({
                 isEnabled: Joi
                     .boolean()
-                    .default(DEFAULT_CONFIG.debug.band.isEnabled),
+                    .default(DEFAULT_THEME_CONFIG.debug.band.isEnabled),
                 colors: Joi
                     .array()
                     .items(Joi.string())
                     .length(5)
-                    .default(DEFAULT_CONFIG.debug.band.colors)
+                    .default(DEFAULT_THEME_CONFIG.debug.band.colors)
                     .when(
                         'isEnabled',
                         {
@@ -59,18 +64,18 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                         },
                     ),
             })
-                .default(DEFAULT_CONFIG.debug.band),
+                .default(DEFAULT_THEME_CONFIG.debug.band),
             border: Joi.object({
                 isEnabled: Joi
                     .boolean()
-                    .default(DEFAULT_CONFIG.debug.border.isEnabled),
+                    .default(DEFAULT_THEME_CONFIG.debug.border.isEnabled),
             })
-                .default(DEFAULT_CONFIG.debug.border),
+                .default(DEFAULT_THEME_CONFIG.debug.border),
         })
-            .default(DEFAULT_CONFIG.debug),
+            .default(DEFAULT_THEME_CONFIG.debug),
     })
         .label('themeConfig.docupotamusReadTimePlugin')
-        .default(DEFAULT_CONFIG),
+        .default(DEFAULT_THEME_CONFIG),
 });
 
 export function validateThemeConfig({
