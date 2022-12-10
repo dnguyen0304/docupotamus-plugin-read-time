@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
+import '../styles.css';
 import App from '../theme/components/App';
-import './styles.css';
 
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
 const COLOR_ACCENT_GREEN: string = '#64ffda';
