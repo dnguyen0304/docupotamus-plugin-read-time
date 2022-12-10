@@ -143,6 +143,7 @@ interface RunningTotal {
     // Total visible time, in milliseconds.
     visibleTimeMilli: number;
 
+    // TODO(dnguyen0304): Implement RunningTotal.lastSample.
     // Last sample included in the calculation.
     lastSample: IntersectionSample | null;
 }
