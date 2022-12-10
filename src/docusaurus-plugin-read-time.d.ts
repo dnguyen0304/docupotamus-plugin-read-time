@@ -49,7 +49,7 @@ export interface DocupotamusThemeConfig {
 }
 
 // Contiguous region of content.
-export type Target = {
+export interface Target {
     // Target unique identifier.
     readonly id: string;
 
@@ -64,18 +64,18 @@ export type Target = {
     readonly selectors: Selector[];
 }
 
-export type Document = {
+export interface Document {
     readonly href: string;
 }
 
 // Locates a region of content using XPaths and character offsets.
-export type RangeSelector = {
+export interface RangeSelector {
     readonly type: 'RangeSelector';
     readonly startContainer: string;
     readonly startOffset: number;
     readonly endContainer: string;
     readonly endOffset: number;
-};
+}
 
 // Serialized queries for locating a target on a page.
 export type Selector = RangeSelector;
@@ -87,7 +87,7 @@ export type BandFriendlyKey =
     | 'B1-bottom'
     | 'B2-bottom';
 
-export type Band = {
+export interface Band {
     // Unique identifier that is human-readable.
     readonly friendlyKey: BandFriendlyKey;
 
@@ -101,9 +101,9 @@ export type Band = {
 
     // Currently unused.
     readonly multiplier: number;
-};
+}
 
-export type StartIntersectionSample = {
+export interface StartIntersectionSample {
     // Measurement time as a Unix epoch timestamp, in milliseconds.
     readonly timestampMilli: number;
 
@@ -121,7 +121,7 @@ export type StartIntersectionSample = {
 
     // Details about the device being used to view the target.
     readonly deviceInfo: DeviceInfo;
-};
+}
 
 export type StopIntersectionSample = Pick<
     StartIntersectionSample,
@@ -134,10 +134,10 @@ export type StopIntersectionSample = Pick<
 export type IntersectionSample =
     StartIntersectionSample | StopIntersectionSample;
 
-export type DeviceInfo = {
+export interface DeviceInfo {
     // Viewport height, in pixels.
     readonly viewportHeightPx: number;
-};
+}
 
 export interface CardViewModel {
     readonly targetId: string;
