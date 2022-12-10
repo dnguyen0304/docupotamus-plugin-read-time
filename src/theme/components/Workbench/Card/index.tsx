@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import type { CardViewModel } from '../../../../docusaurus-theme-read-time';
+import type { CardViewModel } from '../../../../docusaurus-plugin-read-time';
 
 const StyledList = styled('li')({
     display: 'flex',

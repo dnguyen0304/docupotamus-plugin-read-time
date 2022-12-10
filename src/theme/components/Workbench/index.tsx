@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { useToolbar } from '../../../contexts/toolbar';
-import { CardViewModel } from '../../../docusaurus-theme-read-time';
+import { CardViewModel } from '../../../docusaurus-plugin-read-time';
 import Card from './Card';
 
 const KEY_PREFIX: string = 'workbenchCard';
