@@ -1,4 +1,3 @@
-import { BAND_FRIENDLY_KEYS } from '../config';
 import type {
     Band,
     BandFriendlyKey,
@@ -6,7 +5,8 @@ import type {
     StartIntersectionSample,
     StopIntersectionSample,
     Target
-} from '../reading-bands';
+} from '../../../../docusaurus-plugin-read-time';
+import { BAND_FRIENDLY_KEYS } from '../config';
 import { getViewportHeight } from './dom';
 
 const INTERSECTION_SAMPLING_RATE_MILLI: number = 1 * 1000;

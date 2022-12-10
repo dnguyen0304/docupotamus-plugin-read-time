@@ -1,9 +1,9 @@
-import { BAND_FRIENDLY_KEYS } from '../config';
 import type {
     BandFriendlyKey,
     IntersectionSample,
     StartIntersectionSample
-} from '../reading-bands';
+} from '../../../../docusaurus-plugin-read-time';
+import { BAND_FRIENDLY_KEYS } from '../config';
 
 type RunningTotal = {
     // Total visible time, in milliseconds.

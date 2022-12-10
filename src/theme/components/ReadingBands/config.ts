@@ -1,4 +1,4 @@
-import type { Band, BandFriendlyKey } from './reading-bands';
+import type { Band, BandFriendlyKey } from '../../../docusaurus-plugin-read-time';
 
 const CENTER: number = .5;
 const STANDARD_DEVIATION_1: number = .341;
