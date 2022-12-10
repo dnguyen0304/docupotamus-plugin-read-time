@@ -8,4 +8,4 @@ export default function App(): JSX.Element {
             {() => <ReadingBands />}
         </BrowserOnly>
     );
-}
+};
