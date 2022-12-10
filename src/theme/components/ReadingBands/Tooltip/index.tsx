@@ -16,7 +16,9 @@ type GetTooltipPropsProps = {
     readonly bottomPx: number;
 }
 
-type SubsetTooltipProps = Pick<TooltipProps, 'title' | 'placement'>;
+type SubsetTooltipProps =
+    Pick<TooltipProps, 'title'>
+    & Required<Pick<TooltipProps, 'placement'>>;
 
 const getTooltipProps = (
     {
@@ -67,4 +69,4 @@ export default function Tooltip(
         );
     }
     return children;
-}
+};
