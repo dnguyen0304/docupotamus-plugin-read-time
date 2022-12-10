@@ -67,7 +67,8 @@ export default function ReadingBands(): JSX.Element | null {
                     source: {
                         href: document.location.href,
                     },
-                    root: new RangeAnchor(document.body, rootRange).toSelector(),
+                    selectorRoot:
+                        new RangeAnchor(document.body, rootRange).toSelector(),
                     selectors: [
                         new RangeAnchor(rootElement, range).toSelector(),
                     ],

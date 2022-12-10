@@ -58,7 +58,7 @@ export interface Target {
     readonly source: Source;
 
     // Root to reference for relative selector paths.
-    readonly root: RangeSelector;
+    readonly selectorRoot: RangeSelector;
 
     // Serialized queries for locating a target on a page.
     readonly selectors: Selector[];
