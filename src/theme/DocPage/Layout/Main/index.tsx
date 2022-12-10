@@ -14,4 +14,4 @@ export default function DocPageLayoutMainWrapper(props: Props): JSX.Element {
             <Toolbar />
         </>
     );
-}
+};

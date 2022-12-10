@@ -34,4 +34,4 @@ export default function Root({ children }: Props): JSX.Element {
             {children}
         </ThemeProvider>
     );
-}
+};
