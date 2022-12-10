@@ -55,7 +55,7 @@ export interface Target {
 
     // TODO(dnguyen0304): Add repository information.
     // Page containing the target.
-    readonly document: Document;
+    readonly source: Document;
 
     // Root to reference for relative selector paths.
     readonly root: RangeSelector;

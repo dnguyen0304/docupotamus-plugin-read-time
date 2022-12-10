@@ -64,7 +64,7 @@ export default function ReadingBands(): JSX.Element | null {
 
                 const target: Target = {
                     id: uuidv4(),
-                    document: {
+                    source: {
                         href: document.location.href,
                     },
                     root: new RangeAnchor(document.body, rootRange).toSelector(),
