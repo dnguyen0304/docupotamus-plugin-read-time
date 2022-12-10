@@ -34,16 +34,16 @@ declare module '@theme-init/Layout/Provider' {
 }
 
 export interface DocupotamusThemeConfig {
-    contentRootSelector: string;
-    contentSelector: string;
-    workbenchIsOpen: boolean;
+    readonly contentRootSelector: string;
+    readonly contentSelector: string;
+    readonly workbenchIsOpen: boolean;
     debug: {
         band: {
-            isEnabled: boolean;
-            colors: string[];
+            readonly isEnabled: boolean;
+            readonly colors: string[];
         };
         border: {
-            isEnabled: boolean;
+            readonly isEnabled: boolean;
         };
     };
 }
@@ -51,8 +51,8 @@ export interface DocupotamusThemeConfig {
 export interface CardViewModel {
     readonly targetId: string;
     readonly details: string;
-    readonly readTime: {
-        minute: number;
-        second: number;
+    readTime: {
+        readonly minute: number;
+        readonly second: number;
     };
 }
