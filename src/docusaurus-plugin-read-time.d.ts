@@ -139,6 +139,14 @@ export interface DeviceInfo {
     readonly viewportHeightPx: number;
 }
 
+interface RunningTotal {
+    // Total visible time, in milliseconds.
+    visibleTimeMilli: number;
+
+    // Last sample included in the calculation.
+    lastSample: IntersectionSample | null;
+}
+
 export interface CardViewModel {
     readonly targetId: string;
     readonly details: string;

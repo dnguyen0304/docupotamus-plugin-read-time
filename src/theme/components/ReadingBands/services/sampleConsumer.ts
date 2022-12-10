@@ -1,17 +1,10 @@
 import type {
     BandFriendlyKey,
     IntersectionSample,
+    RunningTotal,
     StartIntersectionSample
 } from '../../../../docusaurus-plugin-read-time';
 import { BAND_FRIENDLY_KEYS } from '../config';
-
-type RunningTotal = {
-    // Total visible time, in milliseconds.
-    visibleTimeMilli: number;
-
-    // Last sample included in the calculation.
-    lastSample: IntersectionSample | null;
-};
 
 // stale closure can't use entry
 function getIntersectionRatio(sample: IntersectionSample): number {
