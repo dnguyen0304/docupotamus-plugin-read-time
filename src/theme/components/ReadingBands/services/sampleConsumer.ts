@@ -91,7 +91,7 @@ export function createUpdateRunningTotals(
 
                 setTargetIdToSamples(prev => ({
                     ...prev,
-                    targetId: {
+                    [targetId]: {
                         target: runningTotal.lastSample!.target,
                         runningTotal: {
                             visibleTimeMilli: Array
