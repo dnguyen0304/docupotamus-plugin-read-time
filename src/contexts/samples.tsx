@@ -8,7 +8,7 @@ interface RunningTotalSample {
 };
 
 export interface TargetIdToSamples {
-    [key: string]: RunningTotalSample;
+    readonly [key: string]: RunningTotalSample;
 };
 
 // TODO(dnguyen0304): Investigate migrating to Map.
@@ -38,7 +38,7 @@ function useContextValue(): ContextValue {
 };
 
 interface Props {
-    children: React.ReactNode;
+    readonly children: React.ReactNode;
 };
 
 export function SamplesProvider({ children }: Props): JSX.Element {
