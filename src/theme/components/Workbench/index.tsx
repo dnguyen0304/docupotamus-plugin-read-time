@@ -1,36 +1,13 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
 import Card from './Card';
 
 const KEY_PREFIX: string = 'workbenchCard';
-const fakeData = [
-    {
-        targetId: 'ABC',
-        details: 'Setting up your environment',
-        readTime: {
-            minute: 61,
-            second: 87,
-        },
-    },
-    {
-        targetId: 'IJK',
-        details: 'Database backup',
-        readTime: {
-            minute: 11,
-            second: 32,
-        },
-    },
-    {
-        targetId: 'XYZ',
-        details: 'It is important to...',
-        readTime: {
-            minute: 130,
-            second: 49,
-        },
-    },
-];
+const MILLISECOND_TO_MINUTE: number = 60 * 1000;
+const MILLISECOND_TO_SECOND: number = 1000;
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
@@ -92,6 +69,7 @@ export default function Workbench(
     }: Props
 ): JSX.Element {
     const { workbenchIsOpen } = useToolbar();
+    const { targetIdToSamples } = useSamples();
 
     return (
         // TODO(dnguyen0304): Migrate to use MUI List.
@@ -101,14 +79,26 @@ export default function Workbench(
             boxShadowWidth={'var(--space-xs)'}
         >
             <StyledOrderedList>
-                {fakeData.map((card, i) =>
-                    <Card
-                        key={`${KEY_PREFIX}-${i}`}
-                        targetId={card.targetId}
-                        details={card.details}
-                        readTime={card.readTime}
-                    />
-                )}
+                {Object.entries(targetIdToSamples).map(
+                    ([targetId, sample], i) => {
+                        const minute = Math.floor(
+                            sample.runningTotal.visibleTimeMilli
+                            / MILLISECOND_TO_MINUTE);
+                        const second = Math.round(
+                            (sample.runningTotal.visibleTimeMilli % 60000)
+                            / MILLISECOND_TO_SECOND);
+                        return (
+                            <Card
+                                key={`${KEY_PREFIX}-${i}`}
+                                targetId={targetId}
+                                details={sample.target.selectors[0].startContainer}
+                                readTime={{
+                                    minute,
+                                    second,
+                                }}
+                            />
+                        );
+                    })}
             </StyledOrderedList>
         </StyledBox>
     );
