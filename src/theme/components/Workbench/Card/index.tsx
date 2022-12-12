@@ -23,7 +23,7 @@ const StyledList = styled('li')({
 interface Props {
     readonly targetId: string;
     readonly details: string;
-    readTime: {
+    readonly readTime: {
         readonly minute: number;
         readonly second: number;
     };
