@@ -96,7 +96,7 @@ export function createUpdateRunningTotals(
                         target: runningTotal.lastSample!.target,
                         runningTotal: {
                             visibleTimeMilli: Array
-                                .from(runningTotals.values())
+                                .from(runningTotals.get(targetId)!.values())
                                 .reduce(
                                     (accumulator, current) =>
                                         accumulator + current.visibleTimeMilli,
