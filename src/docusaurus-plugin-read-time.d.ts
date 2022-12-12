@@ -37,12 +37,12 @@ export interface DocupotamusThemeConfig {
     readonly contentRootSelector: string;
     readonly contentSelector: string;
     readonly workbenchIsOpen: boolean;
-    debug: {
-        band: {
+    readonly debug: {
+        readonly band: {
             readonly isEnabled: boolean;
             readonly colors: string[];
         };
-        border: {
+        readonly border: {
             readonly isEnabled: boolean;
         };
     };
