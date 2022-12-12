@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import type { CardViewModel } from '../../../../docusaurus-plugin-read-time';
 
 const StyledList = styled('li')({
     display: 'flex',
@@ -22,24 +21,31 @@ const StyledList = styled('li')({
 });
 
 interface Props {
-    readonly card: CardViewModel;
+    readonly targetId: string;
+    readonly details: string;
+    readTime: {
+        readonly minute: number;
+        readonly second: number;
+    };
 };
 
 export default function Card(
     {
-        card,
+        targetId,
+        details,
+        readTime,
     }: Props
 ): JSX.Element {
     return (
         <StyledList>
             <Box>
-                <Box>{card.targetId}</Box>
+                <Box>{targetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
-                    {card.details}
+                    {details}
                 </Box>
             </Box>
             <Box component='span'>
-                {`${card.readTime.minute}m:${card.readTime.second}s`}
+                {`${readTime.minute}m:${readTime.second}s`}
             </Box>
         </StyledList>
     );

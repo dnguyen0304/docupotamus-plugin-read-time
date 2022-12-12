@@ -2,11 +2,10 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { useToolbar } from '../../../contexts/toolbar';
-import { CardViewModel } from '../../../docusaurus-plugin-read-time';
 import Card from './Card';
 
 const KEY_PREFIX: string = 'workbenchCard';
-const fakeData: CardViewModel[] = [
+const fakeData = [
     {
         targetId: 'ABC',
         details: 'Setting up your environment',
@@ -105,7 +104,9 @@ export default function Workbench(
                 {fakeData.map((card, i) =>
                     <Card
                         key={`${KEY_PREFIX}-${i}`}
-                        card={card}
+                        targetId={card.targetId}
+                        details={card.details}
+                        readTime={card.readTime}
                     />
                 )}
             </StyledOrderedList>

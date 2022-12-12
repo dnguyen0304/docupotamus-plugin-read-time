@@ -147,12 +147,3 @@ interface RunningTotal {
     // Last sample included in the calculation.
     lastSample: IntersectionSample | null;
 }
-
-export interface CardViewModel {
-    readonly targetId: string;
-    readonly details: string;
-    readTime: {
-        readonly minute: number;
-        readonly second: number;
-    };
-}
