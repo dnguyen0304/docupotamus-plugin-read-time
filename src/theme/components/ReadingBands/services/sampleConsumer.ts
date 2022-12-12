@@ -64,16 +64,16 @@ export function createUpdateRunningTotals(
                     continue;
                 }
 
-                const lastSample = runningTotal.lastSample || bandSamples[0];
-                const tempSamples =
+                const prevSample = runningTotal.lastSample || bandSamples[0];
+                const remainingSamples =
                     (runningTotal.lastSample)
                         ? bandSamples
                         : bandSamples.slice(1);
 
-                let prevTimestampMilli = lastSample.timestampMilli;
-                let prevIntersectionRatio = getIntersectionRatio(lastSample);
+                let prevTimestampMilli = prevSample.timestampMilli;
+                let prevIntersectionRatio = getIntersectionRatio(prevSample);
 
-                for (const bandSample of tempSamples) {
+                for (const bandSample of remainingSamples) {
                     const currVisibleTime =
                         (bandSample.timestampMilli - prevTimestampMilli)
                         * prevIntersectionRatio
