@@ -71,7 +71,7 @@ export function createUpdateRunningTotals(
                         : bandSamples.slice(1);
 
                 let prevTimestampMilli = lastSample.timestampMilli;
-                let prevIntersectionRatio = getIntersectionRatio(lastSample)
+                let prevIntersectionRatio = getIntersectionRatio(lastSample);
 
                 for (const bandSample of tempSamples) {
                     const currVisibleTime =
