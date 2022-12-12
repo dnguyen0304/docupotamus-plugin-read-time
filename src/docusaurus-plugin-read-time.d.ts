@@ -148,6 +148,11 @@ interface RunningTotal {
     lastSample: IntersectionSample | null;
 }
 
+interface RunningTotalSample {
+    readonly target: Target;
+    readonly runningTotal: RunningTotal;
+}
+
 export interface CardViewModel {
     readonly targetId: string;
     readonly details: string;

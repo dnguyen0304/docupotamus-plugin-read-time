@@ -1,3 +1,4 @@
+import type { TargetIdToSamples } from '../../../../contexts/samples';
 import type {
     BandFriendlyKey,
     IntersectionSample,
@@ -47,6 +48,8 @@ function getIntersectionRatio(sample: IntersectionSample): number {
 
 export function createUpdateRunningTotals(
     samples: Map<string, Map<BandFriendlyKey, IntersectionSample[]>>,
+    setTargetIdToSamples:
+        React.Dispatch<React.SetStateAction<TargetIdToSamples>>,
 ): () => void {
     const runningTotals = new Map<BandFriendlyKey, RunningTotal>(
         [...BAND_FRIENDLY_KEYS].map(bandKey => {
@@ -85,8 +88,25 @@ export function createUpdateRunningTotals(
                 }
 
                 runningTotal.lastSample = prevSample;
+
+                setTargetIdToSamples(prev => ({
+                    ...prev,
+                    targetId: {
+                        target: runningTotal.lastSample!.target,
+                        runningTotal: {
+                            visibleTimeMilli: Array
+                                .from(runningTotals.values())
+                                .reduce(
+                                    (accumulator, current) =>
+                                        accumulator + current.visibleTimeMilli,
+                                    0
+                                ),
+                            lastSample: runningTotal.lastSample,
+                        },
+                    },
+                }));
                 samples.get(targetId)?.set(bandKey, []);
-                // TODO(dnguyen0304): Add real implementation.
+                // TODO(dnguyen0304): Remove debug logging.
                 console.log(
                     `${targetId}\n`
                     + `| ${bandKey}\n`

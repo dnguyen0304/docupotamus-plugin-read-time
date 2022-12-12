@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
+import { SamplesProvider } from '../contexts/samples';
 import '../styles.css';
 import App from '../theme/components/App';
 
@@ -30,8 +31,10 @@ interface Props {
 export default function Root({ children }: Props): JSX.Element {
     return (
         <ThemeProvider theme={theme}>
-            <App />
-            {children}
+            <SamplesProvider>
+                <App />
+                {children}
+            </SamplesProvider>
         </ThemeProvider>
     );
 };

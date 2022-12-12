@@ -1,6 +1,7 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useSamples } from '../../../contexts/samples';
 import type {
     BandFriendlyKey,
     DocupotamusThemeConfig,
@@ -38,6 +39,7 @@ export default function ReadingBands(): JSX.Element | null {
         .siteConfig
         .themeConfig
         .docupotamusReadTimePlugin as DocupotamusThemeConfig;
+    const { setTargetIdToSamples } = useSamples();
 
     // TODO(dnguyen0304): Investigate migrating from ref to constant.
     // Samples are keyed first for each target then keyed for each band.
@@ -102,7 +104,7 @@ export default function ReadingBands(): JSX.Element | null {
     // Consume intersection samples.
     React.useEffect(() => {
         const intervalId = window.setInterval(
-            createUpdateRunningTotals(samples.current),
+            createUpdateRunningTotals(samples.current, setTargetIdToSamples),
             UPDATE_RUNNING_TOTALS_RATE_MILLI,
         );
         return () => clearInterval(intervalId);
