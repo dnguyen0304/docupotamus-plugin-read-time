@@ -66,24 +66,23 @@ export function createUpdateRunningTotals(
 
                 // Considering the lastSample from the runningTotal as the
                 // previously processed sample takes priority.
-                const prevSample = runningTotal.lastSample || bandSamples[0];
+                let prevSample = runningTotal.lastSample || bandSamples[0];
                 const remainingSamples =
                     (runningTotal.lastSample)
                         ? bandSamples
                         : bandSamples.slice(1);
 
-                let prevTimestampMilli = prevSample.timestampMilli;
-                let prevIntersectionRatio = getIntersectionRatio(prevSample);
-
                 for (const bandSample of remainingSamples) {
+                    const prevTimestampMilli = prevSample.timestampMilli;
+                    const prevIntersectionRatio =
+                        getIntersectionRatio(prevSample);
                     const currVisibleTime =
                         (bandSample.timestampMilli - prevTimestampMilli)
                         * prevIntersectionRatio
                         * bandSample.band.multiplier;
                     runningTotal.visibleTimeMilli += currVisibleTime;
 
-                    prevTimestampMilli = bandSample.timestampMilli;
-                    prevIntersectionRatio = getIntersectionRatio(bandSample);
+                    prevSample = bandSample;
                 }
 
                 samples.get(targetId)?.set(bandKey, []);
