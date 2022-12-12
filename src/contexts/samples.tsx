@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { RunningTotalSample } from '../docusaurus-plugin-read-time';
+import { RunningTotal, Target } from '../docusaurus-plugin-read-time';
 import { ReactContextError } from './errors';
+
+interface RunningTotalSample {
+    readonly target: Target;
+    readonly runningTotal: RunningTotal;
+};
 
 export interface TargetIdToSamples {
     [key: string]: RunningTotalSample;
