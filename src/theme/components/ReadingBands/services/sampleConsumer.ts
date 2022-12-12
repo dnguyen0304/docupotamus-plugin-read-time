@@ -51,16 +51,17 @@ export function createUpdateRunningTotals(
     setTargetIdToSamples:
         React.Dispatch<React.SetStateAction<TargetIdToSamples>>,
 ): () => void {
-    const runningTotals = new Map<BandFriendlyKey, RunningTotal>(
-        [...BAND_FRIENDLY_KEYS].map(bandKey => {
-            return [bandKey, { visibleTimeMilli: 0, lastSample: null }];
-        })
-    );
+    const runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>> =
+        new Map();
 
     return () => {
         for (const [targetId, targetSamples] of samples.entries()) {
             for (const [bandKey, bandSamples] of targetSamples.entries()) {
-                const runningTotal = runningTotals.get(bandKey)!;
+                const runningTotal = getRunningTotal(
+                    runningTotals,
+                    targetId,
+                    bandKey,
+                );
 
                 if (!runningTotal.lastSample && !bandSamples.length) {
                     continue;
@@ -115,4 +116,21 @@ export function createUpdateRunningTotals(
             }
         }
     };
+};
+
+function getRunningTotal(
+    runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>>,
+    targetId: string,
+    bandKey: BandFriendlyKey,
+): RunningTotal {
+    const bandKeyToRunningTotal = runningTotals.get(targetId);
+    if (!bandKeyToRunningTotal) {
+        runningTotals.set(targetId, new Map<BandFriendlyKey, RunningTotal>(
+            [...BAND_FRIENDLY_KEYS].map(bandKey => {
+                return [bandKey, { visibleTimeMilli: 0, lastSample: null }];
+            })
+        ));
+        return runningTotals.get(targetId)!.get(bandKey)!;
+    }
+    return bandKeyToRunningTotal.get(bandKey)!;
 };
