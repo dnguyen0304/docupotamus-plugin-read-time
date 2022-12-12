@@ -64,6 +64,8 @@ export function createUpdateRunningTotals(
                     continue;
                 }
 
+                // Considering the lastSample from the runningTotal as the
+                // previously processed sample takes priority.
                 const prevSample = runningTotal.lastSample || bandSamples[0];
                 const remainingSamples =
                     (runningTotal.lastSample)
