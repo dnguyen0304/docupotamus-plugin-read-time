@@ -45,7 +45,6 @@ function getIntersectionRatio(sample: IntersectionSample): number {
     return intersectionRatio;
 };
 
-// TODO(dnguyen0304): Implement RunningTotal.lastSample.
 export function createUpdateRunningTotals(
     samples: Map<string, Map<BandFriendlyKey, IntersectionSample[]>>,
 ): () => void {
@@ -85,6 +84,7 @@ export function createUpdateRunningTotals(
                     prevSample = bandSample;
                 }
 
+                runningTotal.lastSample = prevSample;
                 samples.get(targetId)?.set(bandKey, []);
                 // TODO(dnguyen0304): Add real implementation.
                 console.log(
