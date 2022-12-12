@@ -36,7 +36,7 @@ const fakeData: CardViewModel[] = [
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
     readonly boxShadowWidth: string;
-}
+};
 
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'workbenchIsOpen' && prop !== 'boxShadowWidth',
