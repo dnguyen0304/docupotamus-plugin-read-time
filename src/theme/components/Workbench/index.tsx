@@ -94,7 +94,7 @@ export default function Workbench(
                             <Card
                                 key={`${KEY_PREFIX}-${i}`}
                                 targetId={truncatedTargetId}
-                                details={sample.target.selectors[0].startContainer}
+                                details={sample.target.snippet}
                                 readTime={{
                                     minute,
                                     second,

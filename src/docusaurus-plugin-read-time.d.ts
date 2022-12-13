@@ -62,6 +62,9 @@ export interface Target {
 
     // Serialized queries for locating a target on a page.
     readonly selectors: Selector[];
+
+    // Short excerpt of text.
+    readonly snippet: string;
 }
 
 export interface Source {

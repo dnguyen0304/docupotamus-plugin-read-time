@@ -11,7 +11,12 @@ import type {
 import { BANDS } from './config';
 // TODO(dnguyen0304): Fix missing module declaration.
 import { RangeAnchor } from './services/annotator/anchoring/types';
-import { getElement, getElementAll, getViewportHeight } from './services/dom';
+import {
+    getElement,
+    getElementAll,
+    getSnippet,
+    getViewportHeight
+} from './services/dom';
 import { createUpdateRunningTotals } from './services/sampleConsumer';
 import { createOnVisibilityChange } from './services/sampleProducer';
 import { observeVisibility } from './services/visibility';
@@ -58,7 +63,8 @@ export default function ReadingBands(): JSX.Element | null {
 
             // TODO(dnguyen0304): Fix code blocks not being included because
             // of "Node cannot be found in the current page." error.
-            const elements = await getElementAll(contentSelector);
+            const elements =
+                await getElementAll(contentSelector) as HTMLElement[];
 
             for (const element of elements) {
                 const range = new Range();
@@ -74,6 +80,7 @@ export default function ReadingBands(): JSX.Element | null {
                     selectors: [
                         new RangeAnchor(rootElement, range).toSelector(),
                     ],
+                    snippet: getSnippet(element),
                 };
 
                 for (const band of BANDS) {
