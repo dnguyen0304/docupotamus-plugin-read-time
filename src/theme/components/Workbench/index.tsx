@@ -32,7 +32,8 @@ const StyledBox = styled(Box, {
     // TODO(dnguyen0304): Add overflow to scroll through cards. However, this
     // breaks the box-shadow.
     // overflow: 'scroll',
-    padding: 'var(--space-xs) var(--space-2xs)',
+    // TODO(dnguyen0304): Add paddingRight for the scrollbar.
+    padding: 'var(--space-xs) var(--space-s)',
     // TODO(dnguyen0304): Investigate refactoring to box-shadow
     // style to reduce complexity.
     '&::before': {
