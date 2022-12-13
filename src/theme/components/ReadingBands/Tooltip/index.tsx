@@ -20,13 +20,13 @@ type SubsetTooltipProps =
     Pick<TooltipProps, 'title'>
     & Required<Pick<TooltipProps, 'placement'>>;
 
-const getTooltipProps = (
+function getTooltipProps(
     {
         index,
         topPx,
         bottomPx,
     }: GetTooltipPropsProps
-): SubsetTooltipProps => {
+): SubsetTooltipProps {
     const friendlyKey = INDEX_TO_FRIENDLY_KEY.get(index);
     if (index < 2) {
         return {
