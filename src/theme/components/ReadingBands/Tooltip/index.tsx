@@ -10,11 +10,11 @@ const INDEX_TO_FRIENDLY_KEY: Map<number, BandFriendlyKey> = new Map(
         .filter(x => x[1] !== 'B0')
 );
 
-type GetTooltipPropsProps = {
+interface GetTooltipPropsProps {
     readonly index: number;
     readonly topPx: number;
     readonly bottomPx: number;
-}
+};
 
 type SubsetTooltipProps =
     Pick<TooltipProps, 'title'>
@@ -40,9 +40,9 @@ const getTooltipProps = (
     };
 };
 
-type Props = {
+interface Props extends GetTooltipPropsProps {
     readonly children: React.ReactElement<any, any>,
-} & GetTooltipPropsProps;
+};
 
 export default function Tooltip(
     {
