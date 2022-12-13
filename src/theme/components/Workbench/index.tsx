@@ -81,6 +81,9 @@ export default function Workbench(
             <StyledOrderedList>
                 {Object.entries(targetIdToSamples).map(
                     ([targetId, sample], i) => {
+                        // TODO(dnguyen0304): Hide targetId and use shortened
+                        // heading as the card symbol.
+                        const truncatedTargetId = targetId.split('-')[0];
                         const minute = Math.floor(
                             sample.runningTotal.visibleTimeMilli
                             / MILLISECOND_TO_MINUTE);
@@ -90,7 +93,7 @@ export default function Workbench(
                         return (
                             <Card
                                 key={`${KEY_PREFIX}-${i}`}
-                                targetId={targetId}
+                                targetId={truncatedTargetId}
                                 details={sample.target.selectors[0].startContainer}
                                 readTime={{
                                     minute,
