@@ -29,7 +29,7 @@ interface Props {
     readonly targetId: string;
     readonly details: string;
     readonly readTimeMilli: number;
-    readonly formatAsSecond: boolean;
+    readonly seeMinute: boolean;
 };
 
 export default function Card(
@@ -37,17 +37,17 @@ export default function Card(
         targetId,
         details,
         readTimeMilli,
-        formatAsSecond,
+        seeMinute,
     }: Props
 ): JSX.Element {
     const getReadTime = (): string => {
-        if (formatAsSecond) {
-            return `${Math.round(readTimeMilli / MILLISECOND_TO_SECOND)}s`;
-        } else {
+        if (seeMinute) {
             const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
             const second =
                 Math.round(readTimeMilli % 60000 / MILLISECOND_TO_SECOND);
             return `${minute}m:${second}s`;
+        } else {
+            return `${Math.round(readTimeMilli / MILLISECOND_TO_SECOND)}s`;
         }
     };
 

@@ -14,28 +14,28 @@ const StyledBox = styled(Box)({
 });
 
 interface Props {
-    readonly formatAsSecond: boolean;
-    readonly setFormatAsSecond: React.Dispatch<React.SetStateAction<boolean>>;
+    readonly seeMinute: boolean;
+    readonly setSeeMinute: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Footer(
     {
-        formatAsSecond,
-        setFormatAsSecond,
+        seeMinute,
+        setSeeMinute,
     }: Props
 ): JSX.Element {
     return (
         <StyledBox>
-            {['Format Seconds'].map(label =>
+            {['See Minutes'].map(label =>
                 <Chip
                     label={label}
                     clickable
-                    onClick={() => setFormatAsSecond(prev => !prev)}
+                    onClick={() => setSeeMinute(prev => !prev)}
                     size='medium'
                     variant='outlined'
                     sx={{
                         backgroundColor:
-                            (formatAsSecond)
+                            (seeMinute)
                                 ? 'rgba(255, 255, 255, 0.4)'
                                 : 'rgba(255, 255, 255, 0.1)',
                         borderRadius: '8px',

@@ -65,7 +65,7 @@ export default function Workbench(
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
 
-    const [formatAsSecond, setFormatAsSecond] = React.useState<boolean>(false);
+    const [seeMinute, setSeeMinute] = React.useState<boolean>(false);
 
     return (
         // TODO(dnguyen0304): Migrate to use MUI List.
@@ -89,14 +89,14 @@ export default function Workbench(
                                     sample
                                         .runningTotal
                                         .visibleTimeMilli}
-                                formatAsSecond={formatAsSecond}
+                                seeMinute={seeMinute}
                             />
                         );
                     })}
             </StyledOrderedList>
             <Footer
-                formatAsSecond={formatAsSecond}
-                setFormatAsSecond={setFormatAsSecond} />
+                seeMinute={seeMinute}
+                setSeeMinute={setSeeMinute} />
         </StyledBox>
     );
 };
