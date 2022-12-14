@@ -4,22 +4,24 @@ import * as React from 'react';
 
 const MILLISECOND_TO_MINUTE: number = 60 * 1000;
 const MILLISECOND_TO_SECOND: number = 1000;
+const BOX_SHADOW_INNER_WIDTH_REM: number = 0.3;
+const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
 
 const StyledList = styled('li')({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
     backgroundColor: 'rgb(48, 56, 70)',
     borderRadius: 'var(--space-2xs)',
     color: 'white',
     fontSize: 'var(--font-size--2)',
+    margin: `${BOX_SHADOW_INNER_WIDTH_REM + BOX_SHADOW_OUTER_WIDTH_REM}rem`,
     padding: 'var(--space-2xs)',
     '&:hover': {
         boxShadow: `
-                white 0 0 0 0.3rem,
-                rgb(100, 255, 218) 0 0 0 0.5rem`,
+                white 0 0 0 ${BOX_SHADOW_INNER_WIDTH_REM}rem,
+                rgb(100, 255, 218) 0 0 0 ${BOX_SHADOW_OUTER_WIDTH_REM}rem`,
     },
 });
 

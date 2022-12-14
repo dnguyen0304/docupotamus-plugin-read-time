@@ -28,9 +28,6 @@ const StyledBox = styled(Box, {
         ${theme.palette.grey[600]} 0%,
         ${theme.palette.grey[700]} 100%)`,
     borderTopLeftRadius: 'var(--space-2xs)',
-    // TODO(dnguyen0304): Add overflow to scroll through cards. However, this
-    // breaks the box-shadow.
-    // overflow: 'scroll',
     // TODO(dnguyen0304): Add paddingRight for the scrollbar.
     padding: 'var(--space-xs) var(--space-s)',
     // TODO(dnguyen0304): Investigate refactoring to box-shadow
@@ -51,14 +48,11 @@ const StyledBox = styled(Box, {
 }));
 
 const StyledOrderedList = styled('ol')({
-    width: '100%',
+    overflow: 'scroll',
     margin: 0,
     padding: 0,
     '& > *': {
         marginBottom: 'var(--space-xs)',
-    },
-    '& > *:last-child': {
-        marginBottom: 0,
     },
 });
 
