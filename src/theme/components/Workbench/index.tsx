@@ -65,7 +65,7 @@ export default function Workbench(
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
 
-    // TODO(dnguyen0304): Consider renaming to "Minutes Format".
+    // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [seeMinute, setSeeMinute] = React.useState<boolean>(false);
 
     return (
