@@ -110,7 +110,7 @@ type Props = {
     readonly onChange: IntersectionObserverCallback;
     readonly debugBorderIsEnabled?: boolean;
     readonly targetId?: string;
-} & IntersectionObserverInit;
+} & Required<IntersectionObserverInit>;
 
 export async function observeVisibility(
     {
