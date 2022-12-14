@@ -54,6 +54,13 @@ export default function Card(
         element?.classList.toggle(styles.target_container__highlight);
     };
 
+    const scrollIntoView = () => {
+        element?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+        });
+    };
+
     const getReadTime = (): string => {
         if (seeMinute) {
             const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
@@ -81,6 +88,7 @@ export default function Card(
 
     return (
         <StyledListItem
+            onClick={scrollIntoView}
             onMouseEnter={toggleHighlight}
             onMouseLeave={toggleHighlight}
         >
