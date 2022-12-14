@@ -1,4 +1,5 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
 import styles from './styles.module.css';
 
@@ -156,7 +157,7 @@ export async function observeVisibility(
             if (resolvedElement instanceof HTMLElement) {
                 // The MDN recommendation is to use the delete keyword, but that
                 // is not compatible with Safari.
-                resolvedElement.removeAttribute('data-target-id');
+                resolvedElement.removeAttribute(DATA_ATTRIBUTE_TARGET_ID);
             }
         });
     }

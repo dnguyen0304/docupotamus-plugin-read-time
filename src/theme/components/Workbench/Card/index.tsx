@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { getElement } from '../../../../services/dom';
 import styles from './styles.module.css';
+import {DATA_ATTRIBUTE_TARGET_ID} from '../../../../constants';
 
 const MILLISECOND_TO_MINUTE: number = 60 * 1000;
 const MILLISECOND_TO_SECOND: number = 1000;
@@ -70,7 +71,7 @@ export default function Card(
                 return;
             }
             const targetElement =
-                await getElement(`[data-target-id="${targetId}"]`);
+                await getElement(`[${DATA_ATTRIBUTE_TARGET_ID}="${targetId}"]`);
             setElement(targetElement);
         })();
         return () => {
