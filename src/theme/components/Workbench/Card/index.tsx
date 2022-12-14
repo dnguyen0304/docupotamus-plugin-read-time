@@ -1,6 +1,9 @@
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { getElement } from '../../../../services/dom';
+import styles from './styles.module.css';
 
 const MILLISECOND_TO_MINUTE: number = 60 * 1000;
 const MILLISECOND_TO_SECOND: number = 1000;
@@ -40,9 +43,15 @@ export default function Card(
         seeMinute,
     }: Props
 ): JSX.Element {
+    const [element, setElement] = React.useState<Element>();
+
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
     const truncatedTargetId = targetId.split('-')[0];
+
+    const toggleHighlight = () => {
+        element?.classList.toggle(styles.target_container__highlight);
+    };
 
     const getReadTime = (): string => {
         if (seeMinute) {
@@ -55,8 +64,22 @@ export default function Card(
         }
     };
 
+    React.useEffect(() => {
+        (async () => {
+            if (!ExecutionEnvironment.canUseDOM) {
+                return;
+            }
+            const targetElement =
+                await getElement(`[data-target-id="${targetId}"]`);
+            setElement(targetElement);
+        })();
+        return () => {
+            element?.classList.remove(styles.target_container__highlight);
+        };
+    }, []);
+
     return (
-        <StyledListItem>
+        <StyledListItem onClick={toggleHighlight}>
             <Box>
                 <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
