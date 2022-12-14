@@ -72,6 +72,7 @@ export default function Card(
         }
     };
 
+    // TODO(dnguyen0304): Investigate extracting into a custom hook.
     React.useEffect(() => {
         (async () => {
             if (!ExecutionEnvironment.canUseDOM) {
