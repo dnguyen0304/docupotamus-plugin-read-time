@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
+// import BottomBar from './BottomBar';
 import Card from './Card';
 
 const KEY_PREFIX: string = 'workbenchCard';
@@ -70,6 +71,8 @@ export default function Workbench(
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
 
+    const [formatAsSecond, setFormatAsSecond] = React.useState<boolean>(false);
+
     return (
         // TODO(dnguyen0304): Migrate to use MUI List.
         //   See: https://mui.com/material-ui/react-list/
@@ -92,10 +95,12 @@ export default function Workbench(
                                     sample
                                         .runningTotal
                                         .visibleTimeMilli}
+                                formatAsSecond={formatAsSecond}
                             />
                         );
                     })}
             </StyledOrderedList>
+            {/* <BottomBar setFormatAsSecond={setFormatAsSecond} /> */}
         </StyledBox>
     );
 };

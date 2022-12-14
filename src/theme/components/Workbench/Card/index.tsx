@@ -27,6 +27,7 @@ interface Props {
     readonly targetId: string;
     readonly details: string;
     readonly readTimeMilli: number;
+    readonly formatAsSecond: boolean;
 };
 
 export default function Card(
@@ -34,10 +35,19 @@ export default function Card(
         targetId,
         details,
         readTimeMilli,
+        formatAsSecond,
     }: Props
 ): JSX.Element {
-    const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
-    const second = Math.round(readTimeMilli % 60000 / MILLISECOND_TO_SECOND);
+    const getReadTime = (): string => {
+        if (formatAsSecond) {
+            return `${Math.round(readTimeMilli / MILLISECOND_TO_SECOND)}s`;
+        } else {
+            const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
+            const second =
+                Math.round(readTimeMilli % 60000 / MILLISECOND_TO_SECOND);
+            return `${minute}m:${second}s`;
+        }
+    };
 
     return (
         <StyledList>
@@ -48,7 +58,7 @@ export default function Card(
                 </Box>
             </Box>
             <Box component='span'>
-                {`${minute}m:${second}s`}
+                {getReadTime()}
             </Box>
         </StyledList>
     );
