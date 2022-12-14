@@ -7,7 +7,7 @@ const MILLISECOND_TO_SECOND: number = 1000;
 const BOX_SHADOW_INNER_WIDTH_REM: number = 0.3;
 const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
 
-const StyledList = styled('li')({
+const StyledListItem = styled('li')({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -52,7 +52,7 @@ export default function Card(
     };
 
     return (
-        <StyledList>
+        <StyledListItem>
             <Box>
                 <Box>{targetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
@@ -62,6 +62,6 @@ export default function Card(
             <Box component='span'>
                 {getReadTime()}
             </Box>
-        </StyledList>
+        </StyledListItem>
     );
 };
