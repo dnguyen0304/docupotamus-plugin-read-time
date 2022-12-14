@@ -3,8 +3,8 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
-import BottomBar from './BottomBar';
 import Card from './Card';
+import Footer from './Footer';
 
 const KEY_PREFIX: string = 'workbenchCard';
 
@@ -100,7 +100,7 @@ export default function Workbench(
                         );
                     })}
             </StyledOrderedList>
-            <BottomBar
+            <Footer
                 formatAsSecond={formatAsSecond}
                 setFormatAsSecond={setFormatAsSecond} />
         </StyledBox>

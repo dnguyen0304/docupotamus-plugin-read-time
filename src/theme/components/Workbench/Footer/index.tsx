@@ -18,7 +18,7 @@ interface Props {
     readonly setFormatAsSecond: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function BottomBar(
+export default function Footer(
     {
         formatAsSecond,
         setFormatAsSecond,
