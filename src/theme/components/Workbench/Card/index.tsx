@@ -20,8 +20,8 @@ const StyledList = styled('li')({
     padding: 'var(--space-2xs)',
     '&:hover': {
         boxShadow: `
-                #fff 0 0 0 ${BOX_SHADOW_INNER_WIDTH_REM}rem,
-                rgb(100, 255, 218) 0 0 0 ${BOX_SHADOW_OUTER_WIDTH_REM}rem`,
+            #fff 0 0 0 ${BOX_SHADOW_INNER_WIDTH_REM}rem,
+            rgb(100, 255, 218) 0 0 0 ${BOX_SHADOW_OUTER_WIDTH_REM}rem`,
     },
 });
 
