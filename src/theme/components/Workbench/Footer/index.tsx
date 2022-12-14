@@ -3,6 +3,8 @@ import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 
+const KEY_PREFIX: string = 'footerChip';
+
 const StyledBox = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
@@ -26,8 +28,9 @@ export default function Footer(
 ): JSX.Element {
     return (
         <StyledBox>
-            {['See Minutes'].map(label =>
+            {['See Minutes'].map((label, i) =>
                 <Chip
+                    key={`${KEY_PREFIX}-${i}`}
                     label={label}
                     clickable
                     onClick={() => setSeeMinute(prev => !prev)}
