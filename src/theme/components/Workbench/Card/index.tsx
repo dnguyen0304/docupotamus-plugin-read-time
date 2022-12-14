@@ -37,7 +37,7 @@ export default function Card(
     }: Props
 ): JSX.Element {
     const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
-    const second = Math.round((readTimeMilli % 60000) / MILLISECOND_TO_SECOND);
+    const second = Math.round(readTimeMilli % 60000 / MILLISECOND_TO_SECOND);
 
     return (
         <StyledList>
