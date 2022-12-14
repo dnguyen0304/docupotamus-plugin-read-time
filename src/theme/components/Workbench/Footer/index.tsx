@@ -5,6 +5,11 @@ import * as React from 'react';
 
 const KEY_PREFIX: string = 'footerChip';
 
+interface ChipData {
+    readonly label: string;
+    readonly onClick: React.MouseEventHandler<HTMLDivElement>;
+};
+
 const StyledBox = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
@@ -26,14 +31,21 @@ export default function Footer(
         setSeeMinute,
     }: Props
 ): JSX.Element {
+    const chips: ChipData[] = [
+        {
+            label: 'See Minutes',
+            onClick: () => setSeeMinute(prev => !prev),
+        },
+    ];
+
     return (
         <StyledBox>
-            {['See Minutes'].map((label, i) =>
+            {chips.map((chip, i) =>
                 <Chip
                     key={`${KEY_PREFIX}-${i}`}
-                    label={label}
+                    label={chip.label}
                     clickable
-                    onClick={() => setSeeMinute(prev => !prev)}
+                    onClick={chip.onClick}
                     size='medium'
                     variant='outlined'
                     sx={{
