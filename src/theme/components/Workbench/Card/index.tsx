@@ -2,9 +2,9 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
 import styles from './styles.module.css';
-import {DATA_ATTRIBUTE_TARGET_ID} from '../../../../constants';
 
 const MILLISECOND_TO_MINUTE: number = 60 * 1000;
 const MILLISECOND_TO_SECOND: number = 1000;
