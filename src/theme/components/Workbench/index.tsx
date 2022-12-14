@@ -6,8 +6,6 @@ import { useToolbar } from '../../../contexts/toolbar';
 import Card from './Card';
 
 const KEY_PREFIX: string = 'workbenchCard';
-const MILLISECOND_TO_MINUTE: number = 60 * 1000;
-const MILLISECOND_TO_SECOND: number = 1000;
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
@@ -85,21 +83,15 @@ export default function Workbench(
                         // TODO(dnguyen0304): Hide targetId and use shortened
                         // heading as the card symbol.
                         const truncatedTargetId = targetId.split('-')[0];
-                        const minute = Math.floor(
-                            sample.runningTotal.visibleTimeMilli
-                            / MILLISECOND_TO_MINUTE);
-                        const second = Math.round(
-                            (sample.runningTotal.visibleTimeMilli % 60000)
-                            / MILLISECOND_TO_SECOND);
                         return (
                             <Card
                                 key={`${KEY_PREFIX}-${i}`}
                                 targetId={truncatedTargetId}
                                 details={sample.target.snippet}
-                                readTime={{
-                                    minute,
-                                    second,
-                                }}
+                                readTimeMilli={
+                                    sample
+                                        .runningTotal
+                                        .visibleTimeMilli}
                             />
                         );
                     })}

@@ -2,6 +2,9 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 
+const MILLISECOND_TO_MINUTE: number = 60 * 1000;
+const MILLISECOND_TO_SECOND: number = 1000;
+
 const StyledList = styled('li')({
     display: 'flex',
     flexDirection: 'row',
@@ -23,19 +26,19 @@ const StyledList = styled('li')({
 interface Props {
     readonly targetId: string;
     readonly details: string;
-    readonly readTime: {
-        readonly minute: number;
-        readonly second: number;
-    };
+    readonly readTimeMilli: number;
 };
 
 export default function Card(
     {
         targetId,
         details,
-        readTime,
+        readTimeMilli,
     }: Props
 ): JSX.Element {
+    const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
+    const second = Math.round((readTimeMilli % 60000) / MILLISECOND_TO_SECOND);
+
     return (
         <StyledList>
             <Box>
@@ -45,7 +48,7 @@ export default function Card(
                 </Box>
             </Box>
             <Box component='span'>
-                {`${readTime.minute}m:${readTime.second}s`}
+                {`${minute}m:${second}s`}
             </Box>
         </StyledList>
     );
