@@ -40,6 +40,10 @@ export default function Card(
         seeMinute,
     }: Props
 ): JSX.Element {
+    // TODO(dnguyen0304): Hide targetId and use shortened
+    // heading as the card symbol.
+    const truncatedTargetId = targetId.split('-')[0];
+
     const getReadTime = (): string => {
         if (seeMinute) {
             const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
@@ -54,7 +58,7 @@ export default function Card(
     return (
         <StyledListItem>
             <Box>
-                <Box>{targetId}</Box>
+                <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
                     {details}
                 </Box>
