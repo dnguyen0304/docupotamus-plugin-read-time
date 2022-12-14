@@ -3,31 +3,6 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 const SNIPPET_LENGTH_IDEAL: number = 30;
 const SNIPPET_TERMINATING_CHARACTERS: Array<string> = ['.', '!', '?', ':'];
 
-// TODO(dnguyen0304): Maybe refactor to reduce duplicated code with
-// getElementAll.
-export async function getElement(selector: string): Promise<Element> {
-    return new Promise(resolve => {
-        const element = document.querySelector(selector);
-        if (element) {
-            return resolve(element);
-        }
-        const observer = new MutationObserver(mutations => {
-            const element = document.querySelector(selector);
-            if (element) {
-                resolve(element);
-                observer.disconnect();
-            }
-        });
-        observer.observe(
-            document.body,
-            {
-                childList: true,
-                subtree: true
-            },
-        );
-    });
-};
-
 // TODO(dnguyen0304): Maybe refactor to reduce duplicated code with getElement.
 export async function getElementAll(selector: string): Promise<Element[]> {
     return new Promise(resolve => {

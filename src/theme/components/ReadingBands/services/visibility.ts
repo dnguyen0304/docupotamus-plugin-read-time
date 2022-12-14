@@ -1,5 +1,5 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import { getElement } from './dom';
+import { getElement } from '../../../../services/dom';
 import styles from './styles.module.css';
 
 // // Mapping from a height range to an intersection observer threshold.

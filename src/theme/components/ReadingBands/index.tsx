@@ -10,9 +10,9 @@ import type {
 } from '../../../docusaurus-plugin-read-time';
 import { BANDS } from './config';
 // TODO(dnguyen0304): Fix missing module declaration.
+import { getElement } from '../../../services/dom';
 import { RangeAnchor } from './services/annotator/anchoring/types';
 import {
-    getElement,
     getElementAll,
     getSnippet,
     getViewportHeight
