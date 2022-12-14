@@ -80,7 +80,10 @@ export default function Card(
     }, []);
 
     return (
-        <StyledListItem onClick={toggleHighlight}>
+        <StyledListItem
+            onMouseEnter={toggleHighlight}
+            onMouseLeave={toggleHighlight}
+        >
             <Box>
                 <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
