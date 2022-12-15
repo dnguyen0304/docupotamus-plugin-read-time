@@ -106,10 +106,10 @@ export default function Workbench(
                 {Object.entries(targetIdToSamples)
                     .sort((a, b) => sort(a, b, isAscending))
                     .map(
-                        ([targetId, sample], i) => {
+                        ([targetId, sample]) => {
                             return (
                                 <Card
-                                    key={`${KEY_PREFIX}-${i}`}
+                                    key={`${KEY_PREFIX}-${targetId}`}
                                     targetId={targetId}
                                     details={sample.target.snippet}
                                     readTimeMilli={
