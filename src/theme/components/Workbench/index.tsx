@@ -65,16 +65,19 @@ export default function Workbench(
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
 
+    const [isDescending, setIsDescending] = React.useState<boolean>(true);
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [seeMinute, setSeeMinute] = React.useState<boolean>(false);
 
-    const sortDescending = (
+    const sort = (
         a: [string, RunningTotalSample],
         b: [string, RunningTotalSample],
+        isDescending: boolean,
     ): number => {
         return (
-            b[1].runningTotal.visibleTimeMilli
-            - a[1].runningTotal.visibleTimeMilli
+            (b[1].runningTotal.visibleTimeMilli
+                - a[1].runningTotal.visibleTimeMilli)
+            * (isDescending ? 1 : -1)
         );
     };
 
@@ -87,7 +90,7 @@ export default function Workbench(
         >
             <StyledOrderedList>
                 {Object.entries(targetIdToSamples)
-                    .sort(sortDescending)
+                    .sort((a, b) => sort(a, b, isDescending))
                     .map(
                         ([targetId, sample], i) => {
                             return (
