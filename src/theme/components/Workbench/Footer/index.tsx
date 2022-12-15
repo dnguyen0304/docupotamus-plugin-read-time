@@ -32,9 +32,9 @@ export default function Footer(
 ): JSX.Element {
     return (
         <StyledBox>
-            {chips.map((chip, i) =>
+            {chips.map((chip) =>
                 <Chip
-                    key={`${KEY_PREFIX}-${i}`}
+                    key={`${KEY_PREFIX}-${chip.label}`}
                     label={chip.label}
                     clickable
                     onClick={chip.onClick}
