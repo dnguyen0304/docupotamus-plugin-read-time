@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import type { RunningTotalSample } from '../../../contexts/samples';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
 import Card from './Card';
@@ -67,6 +68,16 @@ export default function Workbench(
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [seeMinute, setSeeMinute] = React.useState<boolean>(false);
 
+    const sortDescending = (
+        a: [string, RunningTotalSample],
+        b: [string, RunningTotalSample],
+    ): number => {
+        return (
+            b[1].runningTotal.visibleTimeMilli
+            - a[1].runningTotal.visibleTimeMilli
+        );
+    };
+
     return (
         // TODO(dnguyen0304): Migrate to use MUI List.
         //   See: https://mui.com/material-ui/react-list/
@@ -75,21 +86,23 @@ export default function Workbench(
             boxShadowWidth={'var(--space-xs)'}
         >
             <StyledOrderedList>
-                {Object.entries(targetIdToSamples).map(
-                    ([targetId, sample], i) => {
-                        return (
-                            <Card
-                                key={`${KEY_PREFIX}-${i}`}
-                                targetId={targetId}
-                                details={sample.target.snippet}
-                                readTimeMilli={
-                                    sample
-                                        .runningTotal
-                                        .visibleTimeMilli}
-                                seeMinute={seeMinute}
-                            />
-                        );
-                    })}
+                {Object.entries(targetIdToSamples)
+                    .sort(sortDescending)
+                    .map(
+                        ([targetId, sample], i) => {
+                            return (
+                                <Card
+                                    key={`${KEY_PREFIX}-${i}`}
+                                    targetId={targetId}
+                                    details={sample.target.snippet}
+                                    readTimeMilli={
+                                        sample
+                                            .runningTotal
+                                            .visibleTimeMilli}
+                                    seeMinute={seeMinute}
+                                />
+                            );
+                        })}
             </StyledOrderedList>
             <Footer
                 seeMinute={seeMinute}

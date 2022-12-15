@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RunningTotal, Target } from '../docusaurus-plugin-read-time';
 import { ReactContextError } from './errors';
 
-interface RunningTotalSample {
+export interface RunningTotalSample {
     readonly target: Target;
     readonly runningTotal: RunningTotal;
 };
