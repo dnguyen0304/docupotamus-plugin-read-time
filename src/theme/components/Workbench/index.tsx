@@ -5,6 +5,7 @@ import type { RunningTotalSample } from '../../../contexts/samples';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
 import Card from './Card';
+import type { ChipData } from './Footer';
 import Footer from './Footer';
 
 const KEY_PREFIX: string = 'workbenchCard';
@@ -69,6 +70,14 @@ export default function Workbench(
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [seeMinute, setSeeMinute] = React.useState<boolean>(false);
 
+    const chips: ChipData[] = [
+        {
+            label: 'See Minutes',
+            isClicked: seeMinute,
+            onClick: () => setSeeMinute(prev => !prev),
+        },
+    ];
+
     const sort = (
         a: [string, RunningTotalSample],
         b: [string, RunningTotalSample],
@@ -107,9 +116,7 @@ export default function Workbench(
                             );
                         })}
             </StyledOrderedList>
-            <Footer
-                seeMinute={seeMinute}
-                setSeeMinute={setSeeMinute} />
+            <Footer chips={chips} />
         </StyledBox>
     );
 };

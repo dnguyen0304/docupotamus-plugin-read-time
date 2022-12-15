@@ -5,8 +5,9 @@ import * as React from 'react';
 
 const KEY_PREFIX: string = 'footerChip';
 
-interface ChipData {
+export interface ChipData {
     readonly label: string;
+    readonly isClicked: boolean;
     readonly onClick: React.MouseEventHandler<HTMLDivElement>;
 };
 
@@ -21,23 +22,14 @@ const StyledBox = styled(Box)({
 });
 
 interface Props {
-    readonly seeMinute: boolean;
-    readonly setSeeMinute: React.Dispatch<React.SetStateAction<boolean>>;
+    readonly chips: ChipData[];
 };
 
 export default function Footer(
     {
-        seeMinute,
-        setSeeMinute,
+        chips,
     }: Props
 ): JSX.Element {
-    const chips: ChipData[] = [
-        {
-            label: 'See Minutes',
-            onClick: () => setSeeMinute(prev => !prev),
-        },
-    ];
-
     return (
         <StyledBox>
             {chips.map((chip, i) =>
@@ -50,7 +42,7 @@ export default function Footer(
                     variant='outlined'
                     sx={{
                         backgroundColor:
-                            (seeMinute)
+                            (chip.isClicked)
                                 ? 'rgba(255, 255, 255, 0.4)'
                                 : 'rgba(255, 255, 255, 0.1)',
                         borderRadius: '8px',
