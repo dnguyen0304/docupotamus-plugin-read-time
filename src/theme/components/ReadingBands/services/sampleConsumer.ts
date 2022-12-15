@@ -107,12 +107,6 @@ export function createUpdateRunningTotals(
                     },
                 }));
                 samples.get(targetId)?.set(bandKey, []);
-                // TODO(dnguyen0304): Remove debug logging.
-                console.log(
-                    `${targetId}\n`
-                    + `| ${bandKey}\n`
-                    + `| visibleTime\n`
-                    + `| ${runningTotal.visibleTimeMilli / 1000}`);
             }
         }
     };
