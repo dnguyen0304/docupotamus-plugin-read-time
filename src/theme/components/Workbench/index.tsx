@@ -22,7 +22,6 @@ const StyledBox = styled(Box, {
     display: workbenchIsOpen ? 'flex' : 'none',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'center',
     background: `linear-gradient(
         to bottom,
         ${theme.palette.grey[600]} 0%,
