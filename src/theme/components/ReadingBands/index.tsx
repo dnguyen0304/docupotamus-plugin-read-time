@@ -6,6 +6,7 @@ import type {
     BandFriendlyKey,
     DocupotamusThemeConfig,
     IntersectionSample,
+    Selector,
     Target
 } from '../../../docusaurus-plugin-read-time';
 import { BANDS } from './config';
@@ -70,6 +71,22 @@ export default function ReadingBands(): JSX.Element | null {
                 const range = new Range();
                 range.selectNodeContents(element);
 
+                let selectors: Selector[] = [];
+                try {
+                    selectors =
+                        new RangeAnchor(rootElement, range).toSelector();
+                } catch (error) {
+                    if (error instanceof RangeError
+                        && error.message.includes('Offset exceeds text length')
+                    ) {
+                        // TODO(dnguyen0304): Support non-text nodes such as
+                        // images (<p><img><img/></>).
+                        continue;
+                    } else {
+                        throw error;
+                    }
+                }
+
                 const target: Target = {
                     id: uuidv4(),
                     source: {
@@ -77,9 +94,7 @@ export default function ReadingBands(): JSX.Element | null {
                     },
                     selectorRoot:
                         new RangeAnchor(document.body, rootRange).toSelector(),
-                    selectors: [
-                        new RangeAnchor(rootElement, range).toSelector(),
-                    ],
+                    selectors,
                     snippet: getSnippet(element),
                 };
 
