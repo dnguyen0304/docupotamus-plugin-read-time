@@ -88,11 +88,9 @@ export default function Workbench(
         b: [string, RunningTotalSample],
         isAscending: boolean,
     ): number => {
-        return (
-            (b[1].runningTotal.visibleTimeMilli
-                - a[1].runningTotal.visibleTimeMilli)
-            * (isAscending ? -1 : 1)
-        );
+        const visibleTimeA = a[1].runningTotal.visibleTimeMilli;
+        const visibleTimeB = b[1].runningTotal.visibleTimeMilli;
+        return (visibleTimeB - visibleTimeA) * (isAscending ? -1 : 1);
     };
 
     return (
