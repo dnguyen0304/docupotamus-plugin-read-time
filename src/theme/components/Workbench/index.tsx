@@ -105,21 +105,18 @@ export default function Workbench(
             <StyledOrderedList>
                 {Object.entries(targetIdToSamples)
                     .sort((a, b) => sort(a, b, isAscending))
-                    .map(
-                        ([targetId, sample]) => {
-                            return (
-                                <Card
-                                    key={`${KEY_PREFIX}-${targetId}`}
-                                    targetId={targetId}
-                                    details={sample.target.snippet}
-                                    readTimeMilli={
-                                        sample
-                                            .runningTotal
-                                            .visibleTimeMilli}
-                                    seeMinute={seeMinute}
-                                />
-                            );
-                        })}
+                    .map(([targetId, sample]) =>
+                        <Card
+                            key={`${KEY_PREFIX}-${targetId}`}
+                            targetId={targetId}
+                            details={sample.target.snippet}
+                            readTimeMilli={
+                                sample
+                                    .runningTotal
+                                    .visibleTimeMilli}
+                            seeMinute={seeMinute}
+                        />
+                    )}
             </StyledOrderedList>
             <Footer chips={chips} />
         </StyledBox>
