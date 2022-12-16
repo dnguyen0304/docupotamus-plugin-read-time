@@ -90,7 +90,18 @@ export default function Workbench(
     ): number => {
         const visibleTimeA = a[1].runningTotal.visibleTimeMilli;
         const visibleTimeB = b[1].runningTotal.visibleTimeMilli;
-        return (visibleTimeB - visibleTimeA) * (isAscending ? -1 : 1);
+        let criteria = visibleTimeB - visibleTimeA;
+        if (visibleTimeA === visibleTimeB) {
+            // Use all lowercase to ignore casing.
+            const nameA = a[0].toLowerCase();
+            const nameB = b[0].toLowerCase();
+            if (nameA < nameB) {
+                criteria = -1;
+            } else if (nameA > nameB) {
+                criteria = 1;
+            }
+        }
+        return criteria * (isAscending ? -1 : 1);
     };
 
     return (
