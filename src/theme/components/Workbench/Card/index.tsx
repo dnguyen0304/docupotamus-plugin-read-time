@@ -6,8 +6,7 @@ import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
 import styles from './styles.module.css';
 
-const MILLISECOND_TO_MINUTE: number = 60 * 1000;
-const MILLISECOND_TO_SECOND: number = 1000;
+const SECOND_TO_MINUTE: number = 60;
 const BOX_SHADOW_INNER_WIDTH_REM: number = 0.3;
 const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
 
@@ -33,7 +32,7 @@ interface Props {
     readonly targetId: string;
     readonly rank: number;
     readonly details: string;
-    readonly readTimeMilli: number;
+    readonly readTimeSecond: number;
     readonly seeMinute: boolean;
 };
 
@@ -42,7 +41,7 @@ export default function Card(
         targetId,
         rank,
         details,
-        readTimeMilli,
+        readTimeSecond,
         seeMinute,
     }: Props
 ): JSX.Element {
@@ -65,12 +64,11 @@ export default function Card(
 
     const getReadTime = (): string => {
         if (seeMinute) {
-            const minute = Math.floor(readTimeMilli / MILLISECOND_TO_MINUTE);
-            const second =
-                Math.round(readTimeMilli % 60000 / MILLISECOND_TO_SECOND);
+            const minute = Math.floor(readTimeSecond / SECOND_TO_MINUTE);
+            const second = Math.round(readTimeSecond % SECOND_TO_MINUTE);
             return `${minute}m:${second}s`;
         } else {
-            return `${Math.round(readTimeMilli / MILLISECOND_TO_SECOND)}s`;
+            return `${readTimeSecond}s`;
         }
     };
 

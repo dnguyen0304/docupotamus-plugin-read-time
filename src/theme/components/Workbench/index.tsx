@@ -9,6 +9,7 @@ import type { ChipData } from './Footer';
 import Footer from './Footer';
 
 const KEY_PREFIX: string = 'workbenchCard';
+const MILLISECOND_TO_SECOND: number = 1000;
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
@@ -114,19 +115,22 @@ export default function Workbench(
             <StyledOrderedList>
                 {Object.entries(targetIdToSamples)
                     .sort((a, b) => sort(a, b, isAscending))
-                    .map(([targetId, sample], i) =>
-                        <Card
-                            key={`${KEY_PREFIX}-${targetId}`}
-                            targetId={targetId}
-                            rank={i + 1}
-                            details={sample.target.snippet}
-                            readTimeMilli={
-                                sample
-                                    .runningTotal
-                                    .visibleTimeMilli}
-                            seeMinute={seeMinute}
-                        />
-                    )}
+                    .map(([targetId, sample], i) => {
+                        const readTimeSecond = Math.round(
+                            sample.runningTotal.visibleTimeMilli
+                            / MILLISECOND_TO_SECOND
+                        );
+                        return (
+                            <Card
+                                key={`${KEY_PREFIX}-${targetId}`}
+                                targetId={targetId}
+                                rank={i + 1}
+                                details={sample.target.snippet}
+                                readTimeSecond={readTimeSecond}
+                                seeMinute={seeMinute}
+                            />
+                        );
+                    })}
             </StyledOrderedList>
             <Footer chips={chips} />
         </StyledBox>
