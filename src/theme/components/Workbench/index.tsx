@@ -4,12 +4,20 @@ import * as React from 'react';
 import type { RunningTotalSample } from '../../../contexts/samples';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
+import { RunningTotal, Target } from '../../../docusaurus-plugin-read-time';
 import Card from './Card';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
 
 const KEY_PREFIX: string = 'workbenchCard';
 const MILLISECOND_TO_SECOND: number = 1000;
+
+interface Sample {
+    readonly target: Target;
+    readonly runningTotal: {
+        readonly readTimeSecond: number;
+    } & Omit<RunningTotal, 'visibleTimeMilli'>;
+};
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
@@ -84,13 +92,31 @@ export default function Workbench(
         },
     ];
 
+    const convertToSecond = (
+        [targetId, sample]: readonly [string, RunningTotalSample]
+    ): readonly [string, Sample] => {
+        const readTimeSecond = Math.round(
+            sample.runningTotal.visibleTimeMilli / MILLISECOND_TO_SECOND
+        );
+        return [
+            targetId,
+            {
+                target: sample.target,
+                runningTotal: {
+                    readTimeSecond,
+                    lastSample: sample.runningTotal.lastSample,
+                },
+            },
+        ];
+    };
+
     const sort = (
-        a: [string, RunningTotalSample],
-        b: [string, RunningTotalSample],
+        a: [string, Sample],
+        b: [string, Sample],
         isAscending: boolean,
     ): number => {
-        const visibleTimeA = a[1].runningTotal.visibleTimeMilli;
-        const visibleTimeB = b[1].runningTotal.visibleTimeMilli;
+        const visibleTimeA = a[1].runningTotal.readTimeSecond;
+        const visibleTimeB = b[1].runningTotal.readTimeSecond;
         let criteria = visibleTimeB - visibleTimeA;
         if (visibleTimeA === visibleTimeB) {
             // Use all lowercase to ignore casing.
@@ -114,19 +140,20 @@ export default function Workbench(
         >
             <StyledOrderedList>
                 {Object.entries(targetIdToSamples)
+                    .map(convertToSecond)
                     .sort((a, b) => sort(a, b, isAscending))
                     .map(([targetId, sample], i) => {
-                        const readTimeSecond = Math.round(
-                            sample.runningTotal.visibleTimeMilli
-                            / MILLISECOND_TO_SECOND
-                        );
                         return (
                             <Card
                                 key={`${KEY_PREFIX}-${targetId}`}
                                 targetId={targetId}
                                 rank={i + 1}
                                 details={sample.target.snippet}
-                                readTimeSecond={readTimeSecond}
+                                readTimeSecond={
+                                    sample
+                                        .runningTotal
+                                        .readTimeSecond
+                                }
                                 seeMinute={seeMinute}
                             />
                         );
