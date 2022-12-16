@@ -105,10 +105,11 @@ export default function Workbench(
             <StyledOrderedList>
                 {Object.entries(targetIdToSamples)
                     .sort((a, b) => sort(a, b, isAscending))
-                    .map(([targetId, sample]) =>
+                    .map(([targetId, sample], i) =>
                         <Card
                             key={`${KEY_PREFIX}-${targetId}`}
                             targetId={targetId}
+                            rank={i + 1}
                             details={sample.target.snippet}
                             readTimeMilli={
                                 sample

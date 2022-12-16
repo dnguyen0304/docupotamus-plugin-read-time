@@ -31,6 +31,7 @@ const StyledListItem = styled('li')({
 
 interface Props {
     readonly targetId: string;
+    readonly rank: number;
     readonly details: string;
     readonly readTimeMilli: number;
     readonly seeMinute: boolean;
@@ -39,6 +40,7 @@ interface Props {
 export default function Card(
     {
         targetId,
+        rank,
         details,
         readTimeMilli,
         seeMinute,
@@ -93,6 +95,9 @@ export default function Card(
             onMouseEnter={toggleHighlight}
             onMouseLeave={toggleHighlight}
         >
+            <Box component='span'>
+                {rank}
+            </Box>
             <Box>
                 <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
