@@ -22,7 +22,7 @@ const StyledBox = styled(Box)({
 });
 
 interface Props {
-    readonly chips: ChipData[];
+    readonly chips: ReadonlyArray<ChipData>;
 };
 
 export default function Footer(
