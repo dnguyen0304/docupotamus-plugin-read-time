@@ -31,7 +31,7 @@ const StyledListItem = styled('li')({
 
 interface Props {
     readonly targetId: string;
-    readonly rank: number;
+    readonly currRank: number;
     readonly details: string;
     readonly readTimeSecond: number;
     readonly seeMinute: boolean;
@@ -40,7 +40,7 @@ interface Props {
 export default function Card(
     {
         targetId,
-        rank,
+        currRank,
         details,
         readTimeSecond,
         seeMinute,
@@ -99,7 +99,7 @@ export default function Card(
                 justifyContent='center'
                 alignItems='center'
             >
-                {rank}
+                {currRank}
             </Stack>
             <Box>
                 <Box>{truncatedTargetId}</Box>

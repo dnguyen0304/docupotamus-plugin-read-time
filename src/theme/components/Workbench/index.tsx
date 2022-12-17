@@ -147,7 +147,7 @@ export default function Workbench(
                             <Card
                                 key={`${KEY_PREFIX}-${targetId}`}
                                 targetId={targetId}
-                                rank={i + 1}
+                                currRank={i + 1}
                                 details={sample.target.snippet}
                                 readTimeSecond={
                                     sample
