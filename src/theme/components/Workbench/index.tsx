@@ -111,8 +111,8 @@ export default function Workbench(
     };
 
     const sort = (
-        a: [string, Sample],
-        b: [string, Sample],
+        a: readonly [string, Sample],
+        b: readonly [string, Sample],
         isAscending: boolean,
     ): number => {
         const visibleTimeA = a[1].runningTotal.readTimeSecond;
