@@ -2,7 +2,7 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { DATA_ATTRIBUTE_CARD_DELTA, DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
+import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
 import Metric from './Metric';
 import Rank from './Rank';
@@ -27,11 +27,6 @@ const StyledListItem = styled('li')({
             #fff 0 0 0 ${BOX_SHADOW_INNER_WIDTH_REM}rem,
             rgb(100, 255, 218) 0 0 0 ${BOX_SHADOW_OUTER_WIDTH_REM}rem`,
     },
-    '&:after': {
-        content: `attr(${DATA_ATTRIBUTE_CARD_DELTA})`,
-        position: 'absolute',
-        right: '0',
-    },
 });
 
 interface Props {
@@ -54,8 +49,6 @@ export default function Card(
     }: Props
 ): JSX.Element {
     const [element, setElement] = React.useState<Element>();
-    const ref = React.useRef<HTMLLIElement>(null);
-    const readTimeSecondPrev = React.useRef<number>(0);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
@@ -71,17 +64,6 @@ export default function Card(
             block: 'center',
         });
     };
-
-    React.useEffect(() => {
-        if (ref.current) {
-            const delta = readTimeSecond - readTimeSecondPrev.current;
-            ref.current.dataset.cardDelta = `+${delta}`;
-            readTimeSecondPrev.current = readTimeSecond;
-        }
-        return () => {
-            ref.current?.removeAttribute(DATA_ATTRIBUTE_CARD_DELTA);
-        };
-    }, [readTimeSecond]);
 
     // TODO(dnguyen0304): Investigate extracting into a custom hook.
     React.useEffect(() => {
@@ -103,7 +85,6 @@ export default function Card(
             onClick={scrollIntoView}
             onMouseEnter={toggleHighlight}
             onMouseLeave={toggleHighlight}
-            ref={ref}
         >
             <Rank currRank={currRank} prevRank={prevRank} />
             <Box>
