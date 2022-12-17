@@ -38,7 +38,7 @@ interface Props {
     readonly prevRank: number;
     readonly details: string;
     readonly readTimeSecond: number;
-    readonly seeMinute: boolean;
+    readonly showMinute: boolean;
 };
 
 export default function Card(
@@ -48,7 +48,7 @@ export default function Card(
         prevRank,
         details,
         readTimeSecond,
-        seeMinute,
+        showMinute,
     }: Props
 ): JSX.Element {
     const [element, setElement] = React.useState<Element>();
@@ -130,7 +130,7 @@ export default function Card(
                     </Box>
                 </Box>
                 <Box component='span'>
-                    {formatReadTime(readTimeSecond, seeMinute)}
+                    {formatReadTime(readTimeSecond, showMinute)}
                 </Box>
             </StyledListItem>
         </Tooltip>

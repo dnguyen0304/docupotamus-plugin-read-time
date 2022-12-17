@@ -77,7 +77,7 @@ export default function Workbench(
 
     const [isAscending, setIsAscending] = React.useState<boolean>(false);
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
-    const [seeMinute, setSeeMinute] = React.useState<boolean>(false);
+    const [showMinute, setShowMinute] = React.useState<boolean>(false);
 
     const chips: ChipData[] = [
         {
@@ -86,9 +86,9 @@ export default function Workbench(
             onClick: () => setIsAscending(prev => !prev),
         },
         {
-            label: 'See Minutes',
-            isClicked: seeMinute,
-            onClick: () => setSeeMinute(prev => !prev),
+            label: 'Show Minutes',
+            isClicked: showMinute,
+            onClick: () => setShowMinute(prev => !prev),
         },
     ];
 
@@ -155,7 +155,7 @@ export default function Workbench(
                                         .runningTotal
                                         .readTimeSecond
                                 }
-                                seeMinute={seeMinute}
+                                showMinute={showMinute}
                             />
                         );
                     })}
