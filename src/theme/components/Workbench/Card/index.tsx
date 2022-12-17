@@ -81,13 +81,16 @@ export default function Card(
         return <ArrowDropUpIcon sx={{ visibility: 'hidden' }} />;
     };
 
-    const formatReadTime = (): string => {
-        if (seeMinute) {
-            const minute = Math.floor(readTimeSecond / SECOND_TO_MINUTE);
-            const second = Math.round(readTimeSecond % SECOND_TO_MINUTE);
+    const formatReadTime = (
+        totalSeconds: number,
+        showMinute: boolean,
+    ): string => {
+        if (showMinute) {
+            const minute = Math.floor(totalSeconds / SECOND_TO_MINUTE);
+            const second = Math.round(totalSeconds % SECOND_TO_MINUTE);
             return `${minute}m:${second}s`;
         } else {
-            return `${readTimeSecond}s`;
+            return `${totalSeconds}s`;
         }
     };
 
@@ -128,7 +131,7 @@ export default function Card(
                     </Box>
                 </Box>
                 <Box component='span'>
-                    {formatReadTime()}
+                    {formatReadTime(readTimeSecond, seeMinute)}
                 </Box>
             </StyledListItem>
         </Tooltip>
