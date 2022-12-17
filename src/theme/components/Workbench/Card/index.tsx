@@ -56,6 +56,7 @@ export default function Card(
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
     const truncatedTargetId = targetId.split('-')[0];
+    const rankChange = prevRank - currRank;
 
     const toggleHighlight = () => {
         element?.classList.toggle(styles.target_container__highlight);
@@ -68,21 +69,15 @@ export default function Card(
         });
     };
 
-    const getRankChange = (curr: number, prev: number): JSX.Element => {
-        const change = prev - curr;
-        let icon = <ArrowDropUpIcon sx={{ visibility: 'hidden' }} />;
+    const getRankChange = (change: number): JSX.Element => {
         if (change > 0) {
             // TODO(dnguyen0304): Replace temporary stub color.
-            icon = <ArrowDropUpIcon sx={{ color: 'green' }} />;
+            return <ArrowDropUpIcon sx={{ color: 'green' }} />;
         } else if (change < 0) {
             // TODO(dnguyen0304): Replace temporary stub color.
-            icon = <ArrowDropDownIcon sx={{ color: 'red' }} />;
+            return <ArrowDropDownIcon sx={{ color: 'red' }} />;
         }
-        return (
-            <Tooltip title={change}>
-                {icon}
-            </Tooltip>
-        );
+        return <ArrowDropUpIcon sx={{ visibility: 'hidden' }} />;
     };
 
     const getReadTime = (): string => {
@@ -111,28 +106,30 @@ export default function Card(
     }, []);
 
     return (
-        <StyledListItem
-            onClick={scrollIntoView}
-            onMouseEnter={toggleHighlight}
-            onMouseLeave={toggleHighlight}
-        >
-            <Stack
-                direction='column'
-                justifyContent='center'
-                alignItems='center'
+        <Tooltip title={rankChange}>
+            <StyledListItem
+                onClick={scrollIntoView}
+                onMouseEnter={toggleHighlight}
+                onMouseLeave={toggleHighlight}
             >
-                {currRank}
-                {getRankChange(currRank, prevRank)}
-            </Stack>
-            <Box>
-                <Box>{truncatedTargetId}</Box>
-                <Box style={{ fontSize: 'var(--font-size--3)' }}>
-                    {details}
+                <Stack
+                    direction='column'
+                    justifyContent='center'
+                    alignItems='center'
+                >
+                    {currRank}
+                    {getRankChange(rankChange)}
+                </Stack>
+                <Box>
+                    <Box>{truncatedTargetId}</Box>
+                    <Box style={{ fontSize: 'var(--font-size--3)' }}>
+                        {details}
+                    </Box>
                 </Box>
-            </Box>
-            <Box component='span'>
-                {getReadTime()}
-            </Box>
-        </StyledListItem>
+                <Box component='span'>
+                    {getReadTime()}
+                </Box>
+            </StyledListItem>
+        </Tooltip>
     );
 };
