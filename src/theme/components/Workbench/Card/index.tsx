@@ -81,7 +81,7 @@ export default function Card(
         return <ArrowDropUpIcon sx={{ visibility: 'hidden' }} />;
     };
 
-    const getReadTime = (): string => {
+    const formatReadTime = (): string => {
         if (seeMinute) {
             const minute = Math.floor(readTimeSecond / SECOND_TO_MINUTE);
             const second = Math.round(readTimeSecond % SECOND_TO_MINUTE);
@@ -128,7 +128,7 @@ export default function Card(
                     </Box>
                 </Box>
                 <Box component='span'>
-                    {getReadTime()}
+                    {formatReadTime()}
                 </Box>
             </StyledListItem>
         </Tooltip>
