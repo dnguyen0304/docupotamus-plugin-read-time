@@ -75,6 +75,7 @@ export default function Workbench(
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
 
+    const targetIdToPrevRank = React.useRef<Map<string, number>>(new Map());
     const [isAscending, setIsAscending] = React.useState<boolean>(false);
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
@@ -131,6 +132,26 @@ export default function Workbench(
         return criteria * (isAscending ? -1 : 1);
     };
 
+    // TODO(dnguyen0304): Add real implementation for rank tracking.
+    React.useEffect(() => {
+        const existingKeys = Array.from(targetIdToPrevRank.current.keys());
+        const targetIds = Object.keys(targetIdToSamples);
+        if (existingKeys.length === targetIds.length) {
+            return;
+        }
+        for (const targetId of targetIds) {
+            const prevRank = targetIdToPrevRank.current.get(targetId);
+            if (prevRank) {
+                continue;
+            }
+            targetIdToPrevRank.current.set(
+                targetId,
+                // Use 1-indexed instead of 0-indexed ranks.
+                Math.floor(Math.random() * targetIds.length + 1) + 1,
+            );
+        }
+    }, [targetIdToSamples]);
+
     return (
         // TODO(dnguyen0304): Migrate to use MUI List.
         //   See: https://mui.com/material-ui/react-list/
@@ -143,12 +164,18 @@ export default function Workbench(
                     .map(convertToSecond)
                     .sort((a, b) => sort(a, b, isAscending))
                     .map(([targetId, sample], i) => {
+                        // Use 1-indexed instead of 0-indexed ranks.
+                        const currRank = i + 1;
+                        const prevRank =
+                            targetIdToPrevRank
+                                .current
+                                .get(targetId);
                         return (
                             <Card
                                 key={`${KEY_PREFIX}-${targetId}`}
                                 targetId={targetId}
-                                currRank={i + 1}
-                                prevRank={1}
+                                currRank={currRank}
+                                prevRank={prevRank ? prevRank : currRank}
                                 details={sample.target.snippet}
                                 readTimeSecond={
                                     sample
