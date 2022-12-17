@@ -40,6 +40,7 @@ const StyledListItem = styled('li')({
 interface Props {
     readonly targetId: string;
     readonly currRank: number;
+    // TODO(dnguyen0304): Investigate changing to store as Card state.
     readonly prevRank: number;
     readonly details: string;
     readonly readTimeSecond: number;
