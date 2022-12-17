@@ -4,7 +4,6 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-import Tooltip from '@mui/material/Tooltip';
 import * as React from 'react';
 import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
@@ -56,6 +55,7 @@ export default function Card(
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
     const truncatedTargetId = targetId.split('-')[0];
+    // TODO(dnguyen0304): Add tooltip.
     const rankChange = prevRank - currRank;
 
     const toggleHighlight = () => {
@@ -109,30 +109,28 @@ export default function Card(
     }, []);
 
     return (
-        <Tooltip title={rankChange}>
-            <StyledListItem
-                onClick={scrollIntoView}
-                onMouseEnter={toggleHighlight}
-                onMouseLeave={toggleHighlight}
+        <StyledListItem
+            onClick={scrollIntoView}
+            onMouseEnter={toggleHighlight}
+            onMouseLeave={toggleHighlight}
+        >
+            <Stack
+                direction='column'
+                justifyContent='center'
+                alignItems='center'
             >
-                <Stack
-                    direction='column'
-                    justifyContent='center'
-                    alignItems='center'
-                >
-                    {currRank}
-                    {getArrow(rankChange)}
-                </Stack>
-                <Box>
-                    <Box>{truncatedTargetId}</Box>
-                    <Box style={{ fontSize: 'var(--font-size--3)' }}>
-                        {details}
-                    </Box>
+                {currRank}
+                {getArrow(rankChange)}
+            </Stack>
+            <Box>
+                <Box>{truncatedTargetId}</Box>
+                <Box style={{ fontSize: 'var(--font-size--3)' }}>
+                    {details}
                 </Box>
-                <Box component='span'>
-                    {formatReadTime(readTimeSecond, showMinute)}
-                </Box>
-            </StyledListItem>
-        </Tooltip>
+            </Box>
+            <Box component='span'>
+                {formatReadTime(readTimeSecond, showMinute)}
+            </Box>
+        </StyledListItem>
     );
 };
