@@ -1,17 +1,22 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { DATA_ATTRIBUTE_CARD_DELTA } from '../../../../../constants';
 
 const SECOND_TO_MINUTE: number = 60;
 
-const StyledBox = styled(Box)({
+interface StyledBoxProps {
+    readonly delta: number;
+};
+
+const StyledBox = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'delta',
+})<StyledBoxProps>(({ delta }) => ({
     '&:after': {
-        content: `attr(${DATA_ATTRIBUTE_CARD_DELTA})`,
+        content: `"+${delta}"`,
         position: 'absolute',
         right: '0',
     },
-});
+}));
 
 interface Props {
     readonly readTimeSecond: number;
@@ -25,7 +30,7 @@ export default function Metric(
         showMinute,
     }: Props
 ): JSX.Element {
-    const ref = React.useRef<HTMLDivElement>(null);
+    const [delta, setDelta] = React.useState<number>(0);
     const readTimeSecondPrev = React.useRef<number>(0);
 
     const format = (totalSeconds: number, showMinute: boolean): string => {
@@ -38,18 +43,15 @@ export default function Metric(
     };
 
     React.useEffect(() => {
-        if (ref.current) {
-            const delta = readTimeSecond - readTimeSecondPrev.current;
-            ref.current.dataset.cardDelta = `+${delta}`;
-            readTimeSecondPrev.current = readTimeSecond;
-        }
-        return () => {
-            ref.current?.removeAttribute(DATA_ATTRIBUTE_CARD_DELTA);
-        };
+        setDelta(readTimeSecond - readTimeSecondPrev.current);
+        readTimeSecondPrev.current = readTimeSecond;
     }, [readTimeSecond]);
 
     return (
-        <StyledBox component='span' ref={ref}>
+        <StyledBox
+            component='span'
+            delta={delta}
+        >
             {format(readTimeSecond, showMinute)}
         </StyledBox>
     );
