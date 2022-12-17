@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 const SECOND_TO_MINUTE: number = 60;
 const BOX_SHADOW_INNER_WIDTH_REM: number = 0.3;
 const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
+const ICON_WIDTH: string = '24px';
 
 const StyledListItem = styled('li')({
     display: 'flex',
@@ -69,7 +70,7 @@ export default function Card(
         });
     };
 
-    const getArrow = (change: number): JSX.Element => {
+    const getArrow = (change: number): JSX.Element | null => {
         if (change > 0) {
             // TODO(dnguyen0304): Replace temporary stub color.
             return <ArrowDropUpIcon sx={{ color: 'green' }} />;
@@ -78,7 +79,7 @@ export default function Card(
             // TODO(dnguyen0304): Replace temporary stub color.
             return <ArrowDropDownIcon sx={{ color: 'red' }} />;
         }
-        return <ArrowDropUpIcon sx={{ visibility: 'hidden' }} />;
+        return null;
     };
 
     const formatReadTime = (
@@ -118,6 +119,7 @@ export default function Card(
                 direction='column'
                 justifyContent='center'
                 alignItems='center'
+                sx={{ width: ICON_WIDTH }}
             >
                 {currRank}
                 {getArrow(rankChange)}
