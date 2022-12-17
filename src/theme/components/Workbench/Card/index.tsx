@@ -72,9 +72,11 @@ export default function Card(
         const change = prev - curr;
         let icon = <ArrowDropUpIcon sx={{ visibility: 'hidden' }} />;
         if (change > 0) {
-            icon = <ArrowDropUpIcon />;
+            // TODO(dnguyen0304): Replace temporary stub color.
+            icon = <ArrowDropUpIcon sx={{ color: 'green' }} />;
         } else if (change < 0) {
-            icon = <ArrowDropDownIcon />;
+            // TODO(dnguyen0304): Replace temporary stub color.
+            icon = <ArrowDropDownIcon sx={{ color: 'red' }} />;
         }
         return (
             <Tooltip title={change}>
