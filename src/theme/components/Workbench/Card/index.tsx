@@ -69,7 +69,7 @@ export default function Card(
         });
     };
 
-    const getRankChange = (change: number): JSX.Element => {
+    const getArrow = (change: number): JSX.Element => {
         if (change > 0) {
             // TODO(dnguyen0304): Replace temporary stub color.
             return <ArrowDropUpIcon sx={{ color: 'green' }} />;
@@ -118,7 +118,7 @@ export default function Card(
                     alignItems='center'
                 >
                     {currRank}
-                    {getRankChange(rankChange)}
+                    {getArrow(rankChange)}
                 </Stack>
                 <Box>
                     <Box>{truncatedTargetId}</Box>
