@@ -58,6 +58,7 @@ export default function Card(
 ): JSX.Element {
     const [element, setElement] = React.useState<Element>();
     const ref = React.useRef<HTMLLIElement>(null);
+    const readTimeSecondPrev = React.useRef<number>(0);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
@@ -102,13 +103,14 @@ export default function Card(
 
     React.useEffect(() => {
         if (ref.current) {
-            // TODO(dnguyen0304): Add real implementation for card delta.
-            ref.current.dataset.cardDelta = '+3';
+            const delta = readTimeSecond - readTimeSecondPrev.current;
+            ref.current.dataset.cardDelta = `+${delta}`;
+            readTimeSecondPrev.current = readTimeSecond;
         }
         return () => {
             ref.current?.removeAttribute(DATA_ATTRIBUTE_CARD_DELTA);
         };
-    }, []);
+    }, [readTimeSecond]);
 
     // TODO(dnguyen0304): Investigate extracting into a custom hook.
     React.useEffect(() => {
