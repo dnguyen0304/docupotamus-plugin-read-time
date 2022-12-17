@@ -89,9 +89,8 @@ export default function Card(
             const minute = Math.floor(totalSeconds / SECOND_TO_MINUTE);
             const second = Math.round(totalSeconds % SECOND_TO_MINUTE);
             return `${minute}m:${second}s`;
-        } else {
-            return `${totalSeconds}s`;
         }
+        return `${totalSeconds}s`;
     };
 
     // TODO(dnguyen0304): Investigate extracting into a custom hook.
