@@ -1,5 +1,6 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
@@ -93,9 +94,13 @@ export default function Card(
             onMouseEnter={toggleHighlight}
             onMouseLeave={toggleHighlight}
         >
-            <Box component='span'>
+            <Stack
+                direction='column'
+                justifyContent='center'
+                alignItems='center'
+            >
                 {rank}
-            </Box>
+            </Stack>
             <Box>
                 <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
