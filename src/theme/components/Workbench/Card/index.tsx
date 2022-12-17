@@ -4,10 +4,10 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { DATA_ATTRIBUTE_CARD_DELTA, DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
+import Metric from './Metric';
 import Rank from './Rank';
 import styles from './styles.module.css';
 
-const SECOND_TO_MINUTE: number = 60;
 const BOX_SHADOW_INNER_WIDTH_REM: number = 0.3;
 const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
 
@@ -72,18 +72,6 @@ export default function Card(
         });
     };
 
-    const formatReadTime = (
-        totalSeconds: number,
-        showMinute: boolean,
-    ): string => {
-        if (showMinute) {
-            const minute = Math.floor(totalSeconds / SECOND_TO_MINUTE);
-            const second = Math.round(totalSeconds % SECOND_TO_MINUTE);
-            return `${minute}m:${second}s`;
-        }
-        return `${totalSeconds}s`;
-    };
-
     React.useEffect(() => {
         if (ref.current) {
             const delta = readTimeSecond - readTimeSecondPrev.current;
@@ -124,9 +112,7 @@ export default function Card(
                     {details}
                 </Box>
             </Box>
-            <Box component='span'>
-                {formatReadTime(readTimeSecond, showMinute)}
-            </Box>
+            <Metric readTimeSecond={readTimeSecond} showMinute={showMinute} />
         </StyledListItem>
     );
 };
