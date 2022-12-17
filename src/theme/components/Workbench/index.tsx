@@ -79,7 +79,7 @@ export default function Workbench(
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
 
-    const chips: ChipData[] = [
+    const chips: readonly ChipData[] = [
         {
             label: 'Sort Ascending',
             isClicked: isAscending,
