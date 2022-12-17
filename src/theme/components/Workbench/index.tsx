@@ -148,6 +148,7 @@ export default function Workbench(
                                 key={`${KEY_PREFIX}-${targetId}`}
                                 targetId={targetId}
                                 currRank={i + 1}
+                                prevRank={1}
                                 details={sample.target.snippet}
                                 readTimeSecond={
                                     sample

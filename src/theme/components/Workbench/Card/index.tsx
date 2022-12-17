@@ -1,7 +1,10 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import Tooltip from '@mui/material/Tooltip';
 import * as React from 'react';
 import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
@@ -32,6 +35,7 @@ const StyledListItem = styled('li')({
 interface Props {
     readonly targetId: string;
     readonly currRank: number;
+    readonly prevRank: number;
     readonly details: string;
     readonly readTimeSecond: number;
     readonly seeMinute: boolean;
@@ -41,6 +45,7 @@ export default function Card(
     {
         targetId,
         currRank,
+        prevRank,
         details,
         readTimeSecond,
         seeMinute,
@@ -61,6 +66,21 @@ export default function Card(
             behavior: 'smooth',
             block: 'center',
         });
+    };
+
+    const getRankChange = (curr: number, prev: number): JSX.Element => {
+        const change = prev - curr;
+        let icon = <ArrowDropUpIcon sx={{ visibility: 'hidden' }} />;
+        if (change > 0) {
+            icon = <ArrowDropUpIcon />;
+        } else if (change < 0) {
+            icon = <ArrowDropDownIcon />;
+        }
+        return (
+            <Tooltip title={change}>
+                {icon}
+            </Tooltip>
+        );
     };
 
     const getReadTime = (): string => {
@@ -100,6 +120,7 @@ export default function Card(
                 alignItems='center'
             >
                 {currRank}
+                {getRankChange(currRank, prevRank)}
             </Stack>
             <Box>
                 <Box>{truncatedTargetId}</Box>
