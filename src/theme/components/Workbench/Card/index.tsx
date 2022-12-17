@@ -1,18 +1,15 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { DATA_ATTRIBUTE_CARD_DELTA, DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
+import Rank from './Rank';
 import styles from './styles.module.css';
 
 const SECOND_TO_MINUTE: number = 60;
 const BOX_SHADOW_INNER_WIDTH_REM: number = 0.3;
 const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
-const ICON_WIDTH: string = '24px';
 
 const StyledListItem = styled('li')({
     display: 'flex',
@@ -40,7 +37,6 @@ const StyledListItem = styled('li')({
 interface Props {
     readonly targetId: string;
     readonly currRank: number;
-    // TODO(dnguyen0304): Investigate changing to store as Card state.
     readonly prevRank: number;
     readonly details: string;
     readonly readTimeSecond: number;
@@ -64,8 +60,6 @@ export default function Card(
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
     const truncatedTargetId = targetId.split('-')[0];
-    // TODO(dnguyen0304): Add tooltip.
-    const rankChange = prevRank - currRank;
 
     const toggleHighlight = () => {
         element?.classList.toggle(styles.target_container__highlight);
@@ -76,18 +70,6 @@ export default function Card(
             behavior: 'smooth',
             block: 'center',
         });
-    };
-
-    const getArrow = (change: number): JSX.Element | null => {
-        if (change > 0) {
-            // TODO(dnguyen0304): Replace temporary stub color.
-            return <ArrowDropUpIcon sx={{ color: 'green' }} />;
-        }
-        if (change < 0) {
-            // TODO(dnguyen0304): Replace temporary stub color.
-            return <ArrowDropDownIcon sx={{ color: 'red' }} />;
-        }
-        return null;
     };
 
     const formatReadTime = (
@@ -135,15 +117,7 @@ export default function Card(
             onMouseLeave={toggleHighlight}
             ref={ref}
         >
-            <Stack
-                direction='column'
-                justifyContent='center'
-                alignItems='center'
-                sx={{ width: ICON_WIDTH }}
-            >
-                {currRank}
-                {getArrow(rankChange)}
-            </Stack>
+            <Rank currRank={currRank} prevRank={prevRank} />
             <Box>
                 <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
