@@ -73,7 +73,8 @@ export default function Card(
         if (change > 0) {
             // TODO(dnguyen0304): Replace temporary stub color.
             return <ArrowDropUpIcon sx={{ color: 'green' }} />;
-        } else if (change < 0) {
+        }
+        if (change < 0) {
             // TODO(dnguyen0304): Replace temporary stub color.
             return <ArrowDropDownIcon sx={{ color: 'red' }} />;
         }
