@@ -12,17 +12,29 @@ interface StyledBoxProps {
 
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta' && prop !== 'display',
-})<StyledBoxProps>(({ delta, display }) => ({
-    position: 'relative',
-    '&:after': {
-        content: `"+${delta}"`,
-        display,
-        position: 'absolute',
-        bottom: 0,
-        left: '100%',
-        marginLeft: '2px',
-    },
-}));
+})<StyledBoxProps>(({ delta, display }) => {
+    let fontSize: string = 'inherit';
+    if (delta < 2) {
+        fontSize = 'var(--font-size--3)';
+    } else if (delta >= 2 && delta < 4) {
+        fontSize = 'var(--font-size--2)';
+    } else if (delta >= 4) {
+        fontSize = 'var(--font-size--1)';
+    }
+    return {
+        position: 'relative',
+        '&:after': {
+            content: `"+${delta}"`,
+            display,
+            position: 'absolute',
+            bottom: 0,
+            left: '100%',
+            fontSize,
+            lineHeight: fontSize,
+            marginLeft: '2px',
+        },
+    };
+});
 
 interface Props {
     readonly readTimeSecond: number;
