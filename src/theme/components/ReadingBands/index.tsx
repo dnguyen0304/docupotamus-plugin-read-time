@@ -1,6 +1,7 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
 import { useSamples } from '../../../contexts/samples';
 import type {
     BandFriendlyKey,
@@ -26,7 +27,6 @@ import Tooltip from './Tooltip';
 
 const BORDER_COLOR: string = 'var(--ifm-hr-background-color)';
 const BORDER_HEIGHT_PX: number = 3;
-const UPDATE_RUNNING_TOTALS_RATE_MILLI: number = 5 * 1000;
 
 export default function ReadingBands(): JSX.Element | null {
     const {
@@ -127,7 +127,7 @@ export default function ReadingBands(): JSX.Element | null {
     React.useEffect(() => {
         const intervalId = window.setInterval(
             createUpdateRunningTotals(samples.current, setTargetIdToSamples),
-            UPDATE_RUNNING_TOTALS_RATE_MILLI,
+            RUNNING_TOTALS_UPDATE_RATE_MILLI,
         );
         return () => clearInterval(intervalId);
     }, []);
