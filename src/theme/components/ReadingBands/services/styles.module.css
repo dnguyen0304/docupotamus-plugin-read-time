@@ -22,6 +22,7 @@
 
 .visibilityObserver_target::after {
     content: attr(data-target-id);
+    /* TODO(dnguyen0304): Fix parent missing position: relative style. */
     position: absolute;
     top: 0;
     left: calc(100% + 0.25rem);
