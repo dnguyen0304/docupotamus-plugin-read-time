@@ -6,13 +6,16 @@ const SECOND_TO_MINUTE: number = 60;
 
 interface StyledBoxProps {
     readonly delta: number;
+    // TODO(dnguyen0304): Fix not strict typing.
+    readonly display: string;
 };
 
 const StyledBox = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'delta',
-})<StyledBoxProps>(({ delta }) => ({
+    shouldForwardProp: (prop) => prop !== 'delta' && prop !== 'display',
+})<StyledBoxProps>(({ delta, display }) => ({
     '&:after': {
         content: `"+${delta}"`,
+        display,
         position: 'absolute',
         right: '0',
     },
@@ -51,6 +54,7 @@ export default function Metric(
         <StyledBox
             component='span'
             delta={delta}
+            display={delta ? 'block' : 'none'}
         >
             {format(readTimeSecond, showMinute)}
         </StyledBox>
