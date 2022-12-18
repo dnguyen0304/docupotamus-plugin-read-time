@@ -13,11 +13,14 @@ interface StyledBoxProps {
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta' && prop !== 'display',
 })<StyledBoxProps>(({ delta, display }) => ({
+    position: 'relative',
     '&:after': {
         content: `"+${delta}"`,
         display,
         position: 'absolute',
-        right: '0',
+        bottom: 0,
+        left: '100%',
+        marginLeft: '2px',
     },
 }));
 
