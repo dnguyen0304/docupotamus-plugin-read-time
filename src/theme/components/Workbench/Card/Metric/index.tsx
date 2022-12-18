@@ -46,7 +46,18 @@ export default function Metric(
     };
 
     React.useEffect(() => {
-        setDelta(readTimeSecond - readTimeSecondPrev.current);
+        const result = readTimeSecond - readTimeSecondPrev.current;
+        if (result >= 0) {
+            setDelta(result);
+        } else {
+            setDelta(0);
+            // TODO(dnguyen0304): Investigate changing to throwing an error.
+            console.log(
+                `NegativeMetricDeltaError: current read time ${readTimeSecond} `
+                + `is less than previous read time `
+                + `${readTimeSecondPrev.current}`
+            );
+        }
         readTimeSecondPrev.current = readTimeSecond;
     }, [readTimeSecond]);
 
