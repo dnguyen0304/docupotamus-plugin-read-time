@@ -10,6 +10,7 @@ interface StyledBoxProps {
     readonly display: string;
 };
 
+// TODO(dnguyen0304): Fix z-index being lower than Workbench padding.
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta' && prop !== 'display',
 })<StyledBoxProps>(({ delta, display }) => {
