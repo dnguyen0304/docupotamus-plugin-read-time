@@ -35,7 +35,10 @@ export default function Rank(
             direction='column'
             justifyContent='center'
             alignItems='center'
-            sx={{ width: ICON_WIDTH }}
+            sx={{
+                width: ICON_WIDTH,
+                marginRight: '2px',
+            }}
         >
             {currRank}
             {getArrow(prevRank - currRank)}
