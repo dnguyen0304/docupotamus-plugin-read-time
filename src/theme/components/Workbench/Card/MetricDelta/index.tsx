@@ -9,14 +9,11 @@ const CLEAR_BUFFER_MILLI: number = 500;
 
 interface StyledBoxProps {
     readonly delta: number;
-    // TODO(dnguyen0304): Remove from props because it can be passed unread.
-    // TODO(dnguyen0304): Fix not strict typing.
-    readonly display: string;
 };
 
 const StyledBox = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'delta' && prop !== 'display',
-})<StyledBoxProps>(({ delta, display }) => {
+    shouldForwardProp: (prop) => prop !== 'delta',
+})<StyledBoxProps>(({ delta }) => {
     let fontSize: string = 'inherit';
     if (delta < 2) {
         fontSize = 'var(--font-size--3)';
@@ -26,7 +23,6 @@ const StyledBox = styled(Box, {
         fontSize = 'var(--font-size--1)';
     }
     return {
-        display,
         position: 'absolute',
         left: '100%',
         fontSize,
@@ -83,7 +79,9 @@ export default function MetricDelta(
     return (
         <StyledBox
             delta={delta}
-            display={delta ? 'block' : 'none'}
+            sx={{
+                display: delta ? 'block' : 'none'
+            }}
         >
             {`+${delta}`}
         </StyledBox>
