@@ -1,8 +1,12 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../../../constants';
+import { dayjs } from '../../../../../services';
 
 const SECOND_TO_MINUTE: number = 60;
+// How long to wait after the refresh rate before clearing the metric.
+const CLEAR_BUFFER_MILLI: number = 500;
 
 interface StyledBoxProps {
     readonly delta: number;
@@ -10,7 +14,8 @@ interface StyledBoxProps {
     readonly display: string;
 };
 
-// TODO(dnguyen0304): Fix z-index being lower than Workbench padding.
+// TODO(dnguyen0304): Fix z-index being lower than Workbench padding due to
+// stacking context.
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta' && prop !== 'display',
 })<StyledBoxProps>(({ delta, display }) => {
@@ -51,6 +56,8 @@ export default function Metric(
 ): JSX.Element {
     const [delta, setDelta] = React.useState<number>(0);
     const readTimeSecondPrev = React.useRef<number>(0);
+    const updatedAt = React.useRef<dayjs.Dayjs>();
+    const updatedAtTimerId = React.useRef<number>();
 
     const format = (totalSeconds: number, showMinute: boolean): string => {
         if (showMinute) {
@@ -75,6 +82,22 @@ export default function Metric(
             );
         }
         readTimeSecondPrev.current = readTimeSecond;
+
+        // TODO(dnguyen0304): Investigate if @docusaurus/ExecutionEnvironment is
+        // needed.
+        window.clearTimeout(updatedAtTimerId.current);
+        updatedAt.current = dayjs.utc();
+        updatedAtTimerId.current = window.setTimeout(() => {
+            // TODO(dnguyen0304): Investigate if checking staleness is needed.
+            const staleness =
+                dayjs
+                    .utc()
+                    .diff(updatedAtTimerId.current, 'millisecond');
+            if (staleness > RUNNING_TOTALS_UPDATE_RATE_MILLI) {
+                setDelta(0);
+            }
+        }, RUNNING_TOTALS_UPDATE_RATE_MILLI + CLEAR_BUFFER_MILLI);
+        return () => window.clearTimeout(updatedAtTimerId.current);
     }, [readTimeSecond]);
 
     return (

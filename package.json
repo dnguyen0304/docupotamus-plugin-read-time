@@ -11,6 +11,7 @@
         "@mui/icons-material": "^5.8.4",
         "@mui/material": "^5.9.2",
         "approx-string-match": "^2.0.0",
+        "dayjs": "^1.11.7",
         "uuid": "^9.0.0"
     },
     "devDependencies": {
