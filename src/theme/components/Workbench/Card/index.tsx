@@ -21,6 +21,11 @@ const StyledListItem = styled('li')({
     color: '#fff',
     fontSize: 'var(--font-size--2)',
     margin: `${BOX_SHADOW_INNER_WIDTH_REM + BOX_SHADOW_OUTER_WIDTH_REM}rem`,
+    // TODO(dnguyen0304): Increase for the MetricDelta and scrollbar.
+    marginRight: `calc(`
+        + `${BOX_SHADOW_INNER_WIDTH_REM + BOX_SHADOW_OUTER_WIDTH_REM}rem`
+        + ` + `
+        + `var(--space-xs))`,
     padding: 'var(--space-2xs)',
     '&:hover': {
         boxShadow: `

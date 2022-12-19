@@ -38,8 +38,7 @@ const StyledBox = styled(Box, {
         ${theme.palette.grey[600]} 0%,
         ${theme.palette.grey[700]} 100%)`,
     borderTopLeftRadius: 'var(--space-2xs)',
-    // TODO(dnguyen0304): Add paddingRight for the scrollbar.
-    padding: 'var(--space-xs) var(--space-s)',
+    padding: 'var(--space-xs) 0 var(--space-xs) var(--space-s)',
     // TODO(dnguyen0304): Investigate refactoring to box-shadow
     // style to reduce complexity.
     '&::before': {
