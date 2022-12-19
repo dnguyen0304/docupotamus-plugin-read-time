@@ -29,6 +29,7 @@ const StyledBox = styled(Box, {
     }
     return {
         position: 'relative',
+        marginLeft: 'auto',
         '&:after': {
             content: `"+${delta}"`,
             display,

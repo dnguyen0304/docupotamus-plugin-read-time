@@ -14,7 +14,7 @@ const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
 const StyledListItem = styled('li')({
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: 'rgb(48, 56, 70)',
     borderRadius: 'var(--space-2xs)',
