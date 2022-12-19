@@ -5,6 +5,7 @@ import * as React from 'react';
 import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
 import Metric from './Metric';
+import MetricDelta from './MetricDelta';
 import Rank from './Rank';
 import styles from './styles.module.css';
 
@@ -12,6 +13,7 @@ const BOX_SHADOW_INNER_WIDTH_REM: number = 0.3;
 const BOX_SHADOW_OUTER_WIDTH_REM: number = 0.5;
 
 const StyledListItem = styled('li')({
+    position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -99,6 +101,7 @@ export default function Card(
                 </Box>
             </Box>
             <Metric readTimeSecond={readTimeSecond} showMinute={showMinute} />
+            <MetricDelta readTimeSecond={readTimeSecond} />
         </StyledListItem>
     );
 };
