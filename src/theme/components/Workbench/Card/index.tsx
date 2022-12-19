@@ -87,7 +87,7 @@ export default function Card(
             onMouseLeave={toggleHighlight}
         >
             <Rank currRank={currRank} prevRank={prevRank} />
-            <Box>
+            <Box sx={{ margin: '0 6px 0 4px' }}>
                 <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
                     {details}
