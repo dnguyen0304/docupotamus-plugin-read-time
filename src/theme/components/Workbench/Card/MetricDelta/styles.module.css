@@ -4,8 +4,8 @@
     --radial-gradient-color: #ff0081;
     --background-size-xs: 50%;
     --background-size-sm: 75%;
-    --background-size-md: 90%;
-    --background-size-lg: 95%;
+    --background-size-md: 85%;
+    --background-size-lg: 100%;
 
     content: '';
     display: block;
