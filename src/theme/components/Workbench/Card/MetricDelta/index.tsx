@@ -65,7 +65,7 @@ const StyledBox = styled(Box, {
         fontSize,
         marginTop: '6px',
         lineHeight: fontSize,
-        animationDuration: '1.2s',
+        animationDuration: '0.8s',
         animationFillMode: 'forwards',
         animationName: `${getAnimation(translateXPx)}`,
         animationTimingFunction: 'ease-in-out',
