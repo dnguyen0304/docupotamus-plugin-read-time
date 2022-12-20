@@ -1,10 +1,10 @@
 .metricDelta_sparkle__animate:before,
 .metricDelta_sparkle__animate:after {
     --radial-gradient-color: #ff0081;
-    --background-size-xs: 10%;
-    --background-size-sm: 15%;
-    --background-size-md: 18%;
-    --background-size-lg: 20%;
+    --background-size-xs: 50%;
+    --background-size-sm: 75%;
+    --background-size-md: 90%;
+    --background-size-lg: 95%;
 
     content: '';
     display: block;
@@ -36,7 +36,6 @@
         radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
         radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
         radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%);
-    /* TODO(dnguyen0304): Increase background-size. */
     background-size:
         var(--background-size-xs) var(--background-size-xs),
         var(--background-size-lg) var(--background-size-lg),
