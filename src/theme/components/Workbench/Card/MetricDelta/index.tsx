@@ -60,12 +60,11 @@ const StyledBox = styled(Box, {
         fontSize,
         marginTop: '6px',
         lineHeight: fontSize,
-        animation: `${getAnimation(translateXPx)} 2s infinite ease-in-out`,
-        // animationDuration: '2s',
-        // animationFillMode: 'forwards',
-        // // animationFillMode: 'infinite',
-        // animationName: `${getAnimation(translateXPx)}`,
-        // animationTimingFunction: 'ease-in-out',
+        animationDuration: '2s',
+        animationFillMode: 'forwards',
+        // animationFillMode: 'infinite',
+        animationName: `${getAnimation(translateXPx)}`,
+        animationTimingFunction: 'ease-in-out',
     };
 });
 
