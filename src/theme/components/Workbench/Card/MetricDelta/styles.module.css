@@ -28,17 +28,17 @@
 
 .bubblyButton.animate:before {
     display: block;
-    animation: topBubbles ease-in-out 0.75s forwards;
-    animation: topBubbles ease-in-out 0.75s infinite;
+    animation: sparkleTop ease-in-out 0.75s forwards;
+    animation: sparkleTop ease-in-out 0.75s infinite;
 }
 
 .bubblyButton.animate:after {
     display: block;
-    animation: bottomBubbles ease-in-out 0.75s forwards;
-    animation: bottomBubbles ease-in-out 0.75s infinite;
+    animation: sparkleBottom ease-in-out 0.75s forwards;
+    animation: sparkleBottom ease-in-out 0.75s infinite;
 }
 
-@keyframes topBubbles {
+@keyframes sparkleTop {
     0% {
         background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
     }
@@ -51,7 +51,7 @@
     }
 }
 
-@keyframes bottomBubbles {
+@keyframes sparkleBottom {
     0% {
         background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
     }
