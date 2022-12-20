@@ -18,8 +18,10 @@ interface Config {
     readonly leftOffsetPx: number;
     readonly fontSize: string;
     readonly translateXPx: number;
+
+    // Animations
     readonly fadeInDurationSecond: number;
-    readonly hasSparkleAnimation: boolean;
+    readonly sparkleIsEnabled: boolean;
 };
 
 const CONFIG_DEFAULT: Config = {
@@ -27,7 +29,7 @@ const CONFIG_DEFAULT: Config = {
     fontSize: 'inherit',
     translateXPx: 0,
     fadeInDurationSecond: 0.8,
-    hasSparkleAnimation: false,
+    sparkleIsEnabled: false,
 };
 
 const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
@@ -38,7 +40,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
             fontSize: 'var(--font-size--3)',
             translateXPx: 8,
             fadeInDurationSecond: 0.8,
-            hasSparkleAnimation: false,
+            sparkleIsEnabled: false,
         },
     ],
     [
@@ -48,7 +50,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
             fontSize: 'var(--font-size--2)',
             translateXPx: 6,
             fadeInDurationSecond: 0.8,
-            hasSparkleAnimation: false,
+            sparkleIsEnabled: false,
         },
     ],
     [
@@ -58,7 +60,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
             fontSize: 'var(--font-size--1)',
             translateXPx: 2,
             fadeInDurationSecond: 4,
-            hasSparkleAnimation: true,
+            sparkleIsEnabled: true,
         },
     ],
 ]);
@@ -198,7 +200,7 @@ export default function MetricDelta(
     return (
         <StyledBox
             className={
-                getConfig(delta).hasSparkleAnimation
+                getConfig(delta).sparkleIsEnabled
                     ? `${styles.metricDelta_sparkle__animate}`
                     : ''
             }
