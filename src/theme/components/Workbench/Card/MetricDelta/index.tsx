@@ -12,6 +12,52 @@ const HIDE: number = 0;
 // How long to wait after the refresh rate before clearing the metric.
 const CLEAR_BUFFER_MILLI: number = 500;
 
+type DeltaSize = 'sm' | 'md' | 'lg';
+
+interface Config {
+    readonly hasSparkleAnimation: boolean;
+};
+
+const CONFIG_DEFAULT: Config = {
+    hasSparkleAnimation: false,
+};
+const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
+    [
+        'sm',
+        {
+            hasSparkleAnimation: false,
+        },
+    ],
+    [
+        'md',
+        {
+            hasSparkleAnimation: false,
+        },
+    ],
+    [
+        'lg',
+        {
+            hasSparkleAnimation: true,
+        },
+    ],
+]);
+
+function getConfig(delta: number): Config {
+    let config: Config | undefined;
+    // TODO(dnguyen0304): Investigate refactoring to a switch.
+    if (delta < 2) {
+        config = SIZE_TO_CONFIG.get('sm');
+    } else if (delta >= 2 && delta < 4) {
+        config = SIZE_TO_CONFIG.get('md');
+    } else if (delta >= 4) {
+        config = SIZE_TO_CONFIG.get('lg');
+    }
+    if (!config) {
+        return CONFIG_DEFAULT;
+    }
+    return config;
+};
+
 function getAnimation(translateXPx: number): Keyframes {
     return keyframes({
         from: {
