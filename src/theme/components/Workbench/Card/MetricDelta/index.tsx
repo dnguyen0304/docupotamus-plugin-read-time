@@ -108,38 +108,19 @@ interface StyledBoxProps {
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta',
 })<StyledBoxProps>(({ delta }) => {
-    let leftOffsetPx: number = 0;
-    let fontSize: string = 'inherit';
-    let translateXPx: number = 0;
-    let fadeInDurationSecond: number = 0.8;
-
-    if (delta < 2) {
-        leftOffsetPx = 6;
-        fontSize = 'var(--font-size--3)';
-        translateXPx = 8;
-    } else if (delta >= 2 && delta < 4) {
-        leftOffsetPx = 8;
-        fontSize = 'var(--font-size--2)';
-        translateXPx = 6;
-    } else if (delta >= 4) {
-        leftOffsetPx = 10;
-        fontSize = 'var(--font-size--1)';
-        translateXPx = 2;
-        fadeInDurationSecond = 4;
-    }
-
+    const config = getConfig(delta);
     return {
         position: 'absolute',
-        left: `calc(100% - ${leftOffsetPx}px)`,
+        left: `calc(100% - ${config.leftOffsetPx}px)`,
         // TODO(dnguyen0304): Extract to a centralized location to facilitate
         // maintenance.
         color: 'rgb(252, 201, 53)',
-        fontSize,
+        fontSize: config.fontSize,
         marginTop: '6px',
-        lineHeight: fontSize,
-        animationDuration: `${fadeInDurationSecond}s`,
+        lineHeight: config.fontSize,
+        animationDuration: `${config.fadeInDurationSecond}s`,
         animationFillMode: 'forwards',
-        animationName: `${getAnimation(translateXPx)}`,
+        animationName: `${getAnimation(config.translateXPx)}`,
         animationTimingFunction: 'ease-in-out',
     };
 });
