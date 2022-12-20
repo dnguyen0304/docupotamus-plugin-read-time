@@ -20,8 +20,8 @@
         sparkleTop ease-in-out 0.75s forwards,
         sparkleBottom ease-in-out 0.75s forwards;
     animation:
-        sparkleTop ease-in-out 0.75s infinite,
-        sparkleBottom ease-in-out 0.75s infinite;
+        sparkleTop ease-in-out 1.2s infinite,
+        sparkleBottom ease-in-out 1.2s infinite;
 }
 
 .metricDelta_sparkle__animate:before {
