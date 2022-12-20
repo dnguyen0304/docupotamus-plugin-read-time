@@ -97,11 +97,11 @@
             90% 20%;
         /* TODO(dnguyen0304): Investigate the difference between 0 and 0%. */
         background-size:
-            0% 0,
-            0% 0,
-            0% 0,
-            0% 0,
-            0% 0,
+            0% 0%,
+            0% 0%,
+            0% 0%,
+            0% 0%,
+            0% 0%,
             0% 0%;
     }
 }
@@ -126,9 +126,8 @@
             75% 80%,
             95% 70%,
             110% 10%;
-        /* TODO(dnguyen0304): Investigate the difference between 0 and 0%. */
         background-size:
-            0 0%,
+            0% 0%,
             0% 0%,
             0% 0%,
             0% 0%,
