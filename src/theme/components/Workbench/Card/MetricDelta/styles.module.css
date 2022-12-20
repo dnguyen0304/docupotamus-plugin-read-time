@@ -1,5 +1,5 @@
-.metricDelta:before,
-.metricDelta:after {
+.metricDelta_sparkle__animate:before,
+.metricDelta_sparkle__animate:after {
     position: absolute;
     content: '';
     display: block;
@@ -9,33 +9,25 @@
     z-index: -1000;
     transition: all ease-in-out 0.5s;
     background-repeat: no-repeat;
+    animation:
+        sparkleTop ease-in-out 0.75s forwards,
+        sparkleBottom ease-in-out 0.75s forwards;
+    animation:
+        sparkleTop ease-in-out 0.75s infinite,
+        sparkleBottom ease-in-out 0.75s infinite;
 }
 
-.metricDelta:before {
-    display: none;
+.metricDelta_sparkle__animate:before {
     top: -75%;
     background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
     background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
     background-size: 90% 90%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
 }
 
-.metricDelta:after {
-    display: none;
+.metricDelta_sparkle__animate:after {
     bottom: -75%;
     background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
     background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
-}
-
-.metricDelta_sparkle__animate:before {
-    display: block;
-    animation: sparkleTop ease-in-out 0.75s forwards;
-    animation: sparkleTop ease-in-out 0.75s infinite;
-}
-
-.metricDelta_sparkle__animate:after {
-    display: block;
-    animation: sparkleBottom ease-in-out 0.75s forwards;
-    animation: sparkleBottom ease-in-out 0.75s infinite;
 }
 
 @keyframes sparkleTop {
