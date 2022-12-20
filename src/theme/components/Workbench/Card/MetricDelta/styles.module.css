@@ -1,5 +1,6 @@
 .metricDelta_sparkle__animate:before,
 .metricDelta_sparkle__animate:after {
+    /* TODO(dnguyen0304): Investigate changing to a theme color. */
     --radial-gradient-color: #ff0081;
     --background-size-xs: 50%;
     --background-size-sm: 75%;
