@@ -33,23 +33,19 @@ const StyledBox = styled(Box, {
 })<StyledBoxProps>(({ delta }) => {
     let leftOffsetPx: number = 0;
     let fontSize: string = 'inherit';
-    let marginTopPx: number = 0;
     let translateXPx: number = 0;
 
     if (delta < 2) {
         leftOffsetPx = 6;
         fontSize = 'var(--font-size--3)';
-        marginTopPx = 6;
         translateXPx = 8;
     } else if (delta >= 2 && delta < 4) {
         leftOffsetPx = 8;
         fontSize = 'var(--font-size--2)';
-        marginTopPx = 6;
         translateXPx = 6;
     } else if (delta >= 4) {
         leftOffsetPx = 10;
         fontSize = 'var(--font-size--1)';
-        marginTopPx = 6;
         translateXPx = 2;
     }
 
@@ -57,7 +53,7 @@ const StyledBox = styled(Box, {
         position: 'absolute',
         left: `calc(100% - ${leftOffsetPx}px)`,
         fontSize,
-        marginTop: `${marginTopPx}px`,
+        marginTop: '6px',
         lineHeight: fontSize,
         animation: `${getAnimation(translateXPx)} 2s infinite ease-in-out`,
     };
