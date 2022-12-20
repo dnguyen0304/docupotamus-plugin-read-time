@@ -16,8 +16,13 @@ function getAnimation(translateXPx: number): Keyframes {
             scale: '100%',
             translate: 0,
         },
-        to: {
+        '99%': {
             opacity: 1,
+            scale: '200%',
+            translate: `${translateXPx}px -8px`,
+        },
+        to: {
+            opacity: 0,
             scale: '200%',
             translate: `${translateXPx}px -8px`,
         },
@@ -56,6 +61,11 @@ const StyledBox = styled(Box, {
         marginTop: '6px',
         lineHeight: fontSize,
         animation: `${getAnimation(translateXPx)} 2s infinite ease-in-out`,
+        // animationDuration: '2s',
+        // animationFillMode: 'forwards',
+        // // animationFillMode: 'infinite',
+        // animationName: `${getAnimation(translateXPx)}`,
+        // animationTimingFunction: 'ease-in-out',
     };
 });
 
@@ -116,14 +126,14 @@ export default function MetricDelta(
         // setClassNames(styles.metricDelta_animation);
     }, []);
 
-    // const resetAnimation = () => {
-    //     console.log('animation or transition end');
-    // };
+    const resetAnimation = () => {
+        console.log('animation end');
+    };
 
     return (
         <StyledBox
             delta={delta}
-            // onAnimationEnd={resetAnimation}
+            onAnimationEnd={resetAnimation}
             sx={{
                 display: delta ? 'block' : 'none',
             }}
