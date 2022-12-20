@@ -107,22 +107,20 @@ interface StyledBoxProps {
 
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta',
-})<StyledBoxProps>(({ config }) => {
-    return {
-        position: 'absolute',
-        left: `calc(100% - ${config.leftOffsetPx}px)`,
-        // TODO(dnguyen0304): Extract to a centralized location to facilitate
-        // maintenance.
-        color: 'rgb(252, 201, 53)',
-        fontSize: config.fontSize,
-        marginTop: '6px',
-        lineHeight: config.fontSize,
-        animationDuration: `${config.fadeInDurationSecond}s`,
-        animationFillMode: 'forwards',
-        animationName: `${getAnimation(config.translateXPx)}`,
-        animationTimingFunction: 'ease-in-out',
-    };
-});
+})<StyledBoxProps>(({ config }) => ({
+    position: 'absolute',
+    left: `calc(100% - ${config.leftOffsetPx}px)`,
+    // TODO(dnguyen0304): Extract to a centralized location to facilitate
+    // maintenance.
+    color: 'rgb(252, 201, 53)',
+    fontSize: config.fontSize,
+    marginTop: '6px',
+    lineHeight: config.fontSize,
+    animationDuration: `${config.fadeInDurationSecond}s`,
+    animationFillMode: 'forwards',
+    animationName: `${getAnimation(config.translateXPx)}`,
+    animationTimingFunction: 'ease-in-out',
+}));
 
 interface Props {
     readonly readTimeSecond: number;
