@@ -6,6 +6,8 @@ import * as React from 'react';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../../../constants';
 import { dayjs } from '../../../../../services';
 
+// Special value to hide the metric delta.
+const HIDE: number = 0;
 // How long to wait after the refresh rate before clearing the metric.
 const CLEAR_BUFFER_MILLI: number = 500;
 
@@ -80,19 +82,23 @@ export default function MetricDelta(
     }: Props
 ): JSX.Element {
     const [delta, setDelta] = React.useState<number>(0);
+    const ref = React.useRef<HTMLDivElement>();
     const readTimeSecondPrev = React.useRef<number>(0);
     const updatedAt = React.useRef<dayjs.Dayjs>();
     const updatedAtTimerId = React.useRef<number>();
 
-    // const [transform, setTransform] = React.useState<string>('');
-    // const ref = React.useRef<HTMLDivElement>();
+    const resetAnimation = () => {
+        if (ref.current) {
+            setDelta(HIDE);
+        }
+    };
 
     React.useEffect(() => {
         const result = readTimeSecond - readTimeSecondPrev.current;
         if (result >= 0) {
             setDelta(result);
         } else {
-            setDelta(0);
+            setDelta(HIDE);
             // TODO(dnguyen0304): Investigate changing to throwing an error.
             console.log(
                 `NegativeMetricDeltaError: current read time ${readTimeSecond} `
@@ -113,31 +119,18 @@ export default function MetricDelta(
                     .utc()
                     .diff(updatedAtTimerId.current, 'millisecond');
             if (staleness > RUNNING_TOTALS_UPDATE_RATE_MILLI) {
-                setDelta(0);
+                setDelta(HIDE);
             }
         }, RUNNING_TOTALS_UPDATE_RATE_MILLI + CLEAR_BUFFER_MILLI);
         return () => window.clearTimeout(updatedAtTimerId.current);
     }, [readTimeSecond]);
 
-    React.useEffect(() => {
-        // setTransform('scale(200%)')
-        // setClassNames('');
-        // void ref.current?.offsetWidth;
-        // setTimeout(() => { }, 100);
-        // setClassNames(styles.metricDelta_animation);
-    }, []);
-
-    const resetAnimation = () => {
-        console.log('animation end');
-    };
-
     return (
         <StyledBox
             delta={delta}
             onAnimationEnd={resetAnimation}
-            sx={{
-                display: delta ? 'block' : 'none',
-            }}
+            ref={ref}
+            sx={{ display: delta ? 'block' : 'none' }}
         >
             {`+${delta}`}
         </StyledBox>
