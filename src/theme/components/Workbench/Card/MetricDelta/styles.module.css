@@ -26,13 +26,13 @@
     background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
 }
 
-.metricDelta.animate:before {
+.metricDelta_sparkle__animate:before {
     display: block;
     animation: sparkleTop ease-in-out 0.75s forwards;
     animation: sparkleTop ease-in-out 0.75s infinite;
 }
 
-.metricDelta.animate:after {
+.metricDelta_sparkle__animate:after {
     display: block;
     animation: sparkleBottom ease-in-out 0.75s forwards;
     animation: sparkleBottom ease-in-out 0.75s infinite;
