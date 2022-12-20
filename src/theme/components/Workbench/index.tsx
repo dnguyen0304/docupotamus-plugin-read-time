@@ -60,9 +60,6 @@ const StyledOrderedList = styled('ol')({
     overflow: 'scroll',
     margin: 0,
     padding: 0,
-    '& > *': {
-        marginBottom: 'var(--space-xs)',
-    },
 });
 
 interface Props { };
