@@ -1,11 +1,28 @@
+import { Keyframes } from '@emotion/serialize';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import { keyframes } from '@mui/system';
 import * as React from 'react';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../../../constants';
 import { dayjs } from '../../../../../services';
 
 // How long to wait after the refresh rate before clearing the metric.
 const CLEAR_BUFFER_MILLI: number = 500;
+
+function getAnimation(translateXPx: number): Keyframes {
+    return keyframes({
+        from: {
+            opacity: 0,
+            scale: '100%',
+            translate: 0,
+        },
+        to: {
+            opacity: 1,
+            scale: '200%',
+            translate: `${translateXPx}px -8px`,
+        },
+    });
+};
 
 interface StyledBoxProps {
     readonly delta: number;
@@ -14,19 +31,33 @@ interface StyledBoxProps {
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta',
 })<StyledBoxProps>(({ delta }) => {
+    let leftOffsetPx: number = 0;
     let fontSize: string = 'inherit';
+    let marginTopPx: number = 0;
+    let translateXPx: number = 0;
+
     if (delta < 2) {
+        leftOffsetPx = 6;
         fontSize = 'var(--font-size--3)';
+        marginTopPx = 6;
+        translateXPx = 8;
     } else if (delta >= 2 && delta < 4) {
         fontSize = 'var(--font-size--2)';
+        // leftOffsetPx = 4;
+        // marginTopPx = 4;
     } else if (delta >= 4) {
         fontSize = 'var(--font-size--1)';
+        // leftOffsetPx = 10;
+        // translateXPx = 2;
     }
+
     return {
         position: 'absolute',
-        left: '100%',
+        left: `calc(100% - ${leftOffsetPx}px)`,
         fontSize,
+        marginTop: `${marginTopPx}px`,
         lineHeight: fontSize,
+        animation: `${getAnimation(translateXPx)} 2s infinite ease-in-out`,
     };
 });
 
@@ -43,6 +74,9 @@ export default function MetricDelta(
     const readTimeSecondPrev = React.useRef<number>(0);
     const updatedAt = React.useRef<dayjs.Dayjs>();
     const updatedAtTimerId = React.useRef<number>();
+
+    // const [transform, setTransform] = React.useState<string>('');
+    // const ref = React.useRef<HTMLDivElement>();
 
     React.useEffect(() => {
         const result = readTimeSecond - readTimeSecondPrev.current;
@@ -76,11 +110,24 @@ export default function MetricDelta(
         return () => window.clearTimeout(updatedAtTimerId.current);
     }, [readTimeSecond]);
 
+    React.useEffect(() => {
+        // setTransform('scale(200%)')
+        // setClassNames('');
+        // void ref.current?.offsetWidth;
+        // setTimeout(() => { }, 100);
+        // setClassNames(styles.metricDelta_animation);
+    }, []);
+
+    // const resetAnimation = () => {
+    //     console.log('animation or transition end');
+    // };
+
     return (
         <StyledBox
             delta={delta}
+            // onAnimationEnd={resetAnimation}
             sx={{
-                display: delta ? 'block' : 'none'
+                display: delta ? 'block' : 'none',
             }}
         >
             {`+${delta}`}
