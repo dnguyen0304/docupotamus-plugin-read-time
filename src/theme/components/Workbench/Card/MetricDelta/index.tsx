@@ -15,10 +15,19 @@ const HIDE_BUFFER_MILLI: number = 500;
 type DeltaSize = 'sm' | 'md' | 'lg';
 
 interface Config {
+    readonly leftOffsetPx: number;
+    readonly fontSize: string;
+    readonly translateXPx: number;
+    // TODO(dnguyen0304): Fix name collision.
+    readonly animationDurationSecond: number;
     readonly hasSparkleAnimation: boolean;
 };
 
 const CONFIG_DEFAULT: Config = {
+    leftOffsetPx: 0,
+    fontSize: 'inherit',
+    translateXPx: 0,
+    animationDurationSecond: 0.8,
     hasSparkleAnimation: false,
 };
 
@@ -26,18 +35,30 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
     [
         'sm',
         {
+            leftOffsetPx: 6,
+            fontSize: 'var(--font-size--3)',
+            translateXPx: 8,
+            animationDurationSecond: 0.8,
             hasSparkleAnimation: false,
         },
     ],
     [
         'md',
         {
+            leftOffsetPx: 8,
+            fontSize: 'var(--font-size--2)',
+            translateXPx: 6,
+            animationDurationSecond: 0.8,
             hasSparkleAnimation: false,
         },
     ],
     [
         'lg',
         {
+            leftOffsetPx: 10,
+            fontSize: 'var(--font-size--1)',
+            translateXPx: 2,
+            animationDurationSecond: 4,
             hasSparkleAnimation: true,
         },
     ],
