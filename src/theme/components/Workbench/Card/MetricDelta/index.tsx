@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 
 // Special value to hide the metric delta.
 const HIDE: number = 0;
-// How long to wait after the refresh rate before clearing the metric.
-const CLEAR_BUFFER_MILLI: number = 500;
+// How long to wait after the refresh rate before hiding the delta.
+const HIDE_BUFFER_MILLI: number = 500;
 
 type DeltaSize = 'sm' | 'md' | 'lg';
 
@@ -170,7 +170,7 @@ export default function MetricDelta(
             if (staleness > RUNNING_TOTALS_UPDATE_RATE_MILLI) {
                 setDelta(HIDE);
             }
-        }, RUNNING_TOTALS_UPDATE_RATE_MILLI + CLEAR_BUFFER_MILLI);
+        }, RUNNING_TOTALS_UPDATE_RATE_MILLI + HIDE_BUFFER_MILLI);
         return () => window.clearTimeout(updatedAtTimerId.current);
     }, [readTimeSecond]);
 
