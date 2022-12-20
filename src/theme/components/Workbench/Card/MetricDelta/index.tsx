@@ -46,9 +46,10 @@ const StyledBox = styled(Box, {
         // leftOffsetPx = 4;
         // marginTopPx = 4;
     } else if (delta >= 4) {
+        leftOffsetPx = 10;
         fontSize = 'var(--font-size--1)';
-        // leftOffsetPx = 10;
-        // translateXPx = 2;
+        marginTopPx = 6;
+        translateXPx = 2;
     }
 
     return {
