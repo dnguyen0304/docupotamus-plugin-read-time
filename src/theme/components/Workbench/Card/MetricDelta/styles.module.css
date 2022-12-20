@@ -1,6 +1,10 @@
 .metricDelta_sparkle__animate:before,
 .metricDelta_sparkle__animate:after {
     --radial-gradient-color: #ff0081;
+    --background-size-xs: 10%;
+    --background-size-sm: 15%;
+    --background-size-md: 18%;
+    --background-size-lg: 20%;
 
     content: '';
     display: block;
@@ -34,16 +38,25 @@
         radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%);
     /* TODO(dnguyen0304): Increase background-size. */
     background-size:
-        10% 10%,
-        20% 20%,
-        15% 15%,
-        20% 20%,
-        18% 18%,
-        10% 10%,
-        15% 15%,
-        10% 10%,
-        18% 18%;
-    background-size: 90% 90%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+        var(--background-size-xs) var(--background-size-xs),
+        var(--background-size-lg) var(--background-size-lg),
+        var(--background-size-sm) var(--background-size-sm),
+        var(--background-size-lg) var(--background-size-lg),
+        var(--background-size-md) var(--background-size-md),
+        var(--background-size-xs) var(--background-size-xs),
+        var(--background-size-sm) var(--background-size-sm),
+        var(--background-size-xs) var(--background-size-xs),
+        var(--background-size-md) var(--background-size-md);
+    background-size:
+        50% 50%,
+        95% 95%,
+        75% 75%,
+        95% 95%,
+        90% 90%,
+        50% 50%,
+        75% 75%,
+        50% 50%,
+        90% 90%;
 }
 
 .metricDelta_sparkle__animate:after {
@@ -57,13 +70,13 @@
         radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
         radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%);
     background-size:
-        15% 15%,
-        20% 20%,
-        18% 18%,
-        20% 20%,
-        15% 15%,
-        10% 10%,
-        20% 20%;
+        var(--background-size-sm) var(--background-size-sm),
+        var(--background-size-lg) var(--background-size-lg),
+        var(--background-size-md) var(--background-size-md),
+        var(--background-size-lg) var(--background-size-lg),
+        var(--background-size-sm) var(--background-size-sm),
+        var(--background-size-xs) var(--background-size-xs),
+        var(--background-size-lg) var(--background-size-lg);
 }
 
 @keyframes sparkleTop {
