@@ -9,6 +9,7 @@
     background-repeat: no-repeat;
     transition: all ease-in-out 0.5s;
     z-index: -1000;
+    /* TODO(dnguyen0304): Remove duplicated animation. */
     animation:
         sparkleTop ease-in-out 0.75s forwards,
         sparkleBottom ease-in-out 0.75s forwards;
@@ -19,6 +20,7 @@
 
 .metricDelta_sparkle__animate:before {
     top: -75%;
+    /* TODO(dnguyen0304): Extract sparkle color. */
     background-image:
         radial-gradient(circle, #ff0081 20%, transparent 20%),
         radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%),
@@ -29,6 +31,7 @@
         radial-gradient(circle, #ff0081 20%, transparent 20%),
         radial-gradient(circle, #ff0081 20%, transparent 20%),
         radial-gradient(circle, #ff0081 20%, transparent 20%);
+    /* TODO(dnguyen0304): Increase background-size. */
     background-size:
         10% 10%,
         20% 20%,
