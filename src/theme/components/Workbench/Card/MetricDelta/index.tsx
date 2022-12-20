@@ -18,8 +18,7 @@ interface Config {
     readonly leftOffsetPx: number;
     readonly fontSize: string;
     readonly translateXPx: number;
-    // TODO(dnguyen0304): Fix name collision.
-    readonly animationDurationSecond: number;
+    readonly fadeInDurationSecond: number;
     readonly hasSparkleAnimation: boolean;
 };
 
@@ -27,7 +26,7 @@ const CONFIG_DEFAULT: Config = {
     leftOffsetPx: 0,
     fontSize: 'inherit',
     translateXPx: 0,
-    animationDurationSecond: 0.8,
+    fadeInDurationSecond: 0.8,
     hasSparkleAnimation: false,
 };
 
@@ -38,7 +37,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
             leftOffsetPx: 6,
             fontSize: 'var(--font-size--3)',
             translateXPx: 8,
-            animationDurationSecond: 0.8,
+            fadeInDurationSecond: 0.8,
             hasSparkleAnimation: false,
         },
     ],
@@ -48,7 +47,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
             leftOffsetPx: 8,
             fontSize: 'var(--font-size--2)',
             translateXPx: 6,
-            animationDurationSecond: 0.8,
+            fadeInDurationSecond: 0.8,
             hasSparkleAnimation: false,
         },
     ],
@@ -58,7 +57,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
             leftOffsetPx: 10,
             fontSize: 'var(--font-size--1)',
             translateXPx: 2,
-            animationDurationSecond: 4,
+            fadeInDurationSecond: 4,
             hasSparkleAnimation: true,
         },
     ],
@@ -110,7 +109,7 @@ const StyledBox = styled(Box, {
     let leftOffsetPx: number = 0;
     let fontSize: string = 'inherit';
     let translateXPx: number = 0;
-    let animationDurationSecond: number = 0.8;
+    let fadeInDurationSecond: number = 0.8;
 
     if (delta < 2) {
         leftOffsetPx = 6;
@@ -124,7 +123,7 @@ const StyledBox = styled(Box, {
         leftOffsetPx = 10;
         fontSize = 'var(--font-size--1)';
         translateXPx = 2;
-        animationDurationSecond = 4;
+        fadeInDurationSecond = 4;
     }
 
     return {
@@ -136,7 +135,7 @@ const StyledBox = styled(Box, {
         fontSize,
         marginTop: '6px',
         lineHeight: fontSize,
-        animationDuration: `${animationDurationSecond}s`,
+        animationDuration: `${fadeInDurationSecond}s`,
         animationFillMode: 'forwards',
         animationName: `${getAnimation(translateXPx)}`,
         animationTimingFunction: 'ease-in-out',
