@@ -1,14 +1,14 @@
 .metricDelta_sparkle__animate:before,
 .metricDelta_sparkle__animate:after {
-    position: absolute;
     content: '';
     display: block;
+    position: absolute;
+    left: -20%;
     width: 140%;
     height: 100%;
-    left: -20%;
-    z-index: -1000;
-    transition: all ease-in-out 0.5s;
     background-repeat: no-repeat;
+    transition: all ease-in-out 0.5s;
+    z-index: -1000;
     animation:
         sparkleTop ease-in-out 0.75s forwards,
         sparkleBottom ease-in-out 0.75s forwards;
