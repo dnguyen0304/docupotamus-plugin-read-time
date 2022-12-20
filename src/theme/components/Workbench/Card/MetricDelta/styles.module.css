@@ -16,9 +16,11 @@
     background-repeat: no-repeat;
     transition: all ease-in-out 0.5s;
     z-index: -1000;
-    animation:
-        sparkleTop ease-in-out 2.1s infinite,
-        sparkleBottom ease-in-out 2.1s infinite;
+    animation-name: sparkleTop, sparkleBottom;
+    animation-duration: 2.1s;
+    animation-timing-function: ease-in-out;
+    /* TODO(dnguyen0304): Investigate why this is necessary. */
+    animation-iteration-count: infinite;
 }
 
 .metricDelta_sparkle__animate:before {
