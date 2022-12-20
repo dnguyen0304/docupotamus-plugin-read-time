@@ -1,5 +1,7 @@
 .metricDelta_sparkle__animate:before,
 .metricDelta_sparkle__animate:after {
+    --radial-gradient-color: #ff0081;
+
     content: '';
     display: block;
     position: absolute;
@@ -20,17 +22,16 @@
 
 .metricDelta_sparkle__animate:before {
     top: -75%;
-    /* TODO(dnguyen0304): Extract sparkle color. */
     background-image:
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, transparent 20%, #ff0081 20%, transparent 30%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%);
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, transparent 20%, var(--radial-gradient-color) 20%, transparent 30%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, var(--radial-gradient-color) 15%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%);
     /* TODO(dnguyen0304): Increase background-size. */
     background-size:
         10% 10%,
@@ -48,13 +49,13 @@
 .metricDelta_sparkle__animate:after {
     bottom: -75%;
     background-image:
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%),
-        radial-gradient(circle, #ff0081 20%, transparent 20%);
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, var(--radial-gradient-color) 15%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%),
+        radial-gradient(circle, var(--radial-gradient-color) 20%, transparent 20%);
     background-size:
         15% 15%,
         20% 20%,
