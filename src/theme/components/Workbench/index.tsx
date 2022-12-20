@@ -38,7 +38,8 @@ const StyledBox = styled(Box, {
         ${theme.palette.grey[600]} 0%,
         ${theme.palette.grey[700]} 100%)`,
     borderTopLeftRadius: 'var(--space-2xs)',
-    padding: 'var(--space-xs) 0 var(--space-xs) var(--space-s)',
+    padding: 'var(--space-xs)',
+    paddingRight: '0px',
     // TODO(dnguyen0304): Investigate refactoring to box-shadow
     // style to reduce complexity.
     '&::before': {
