@@ -1,3 +1,5 @@
 .target_container__highlight {
+    /* TODO(dnguyen0304): Extract to a centralized location to facilitate
+    maintenance. */
     background-color: rgb(252, 201, 53);
 }

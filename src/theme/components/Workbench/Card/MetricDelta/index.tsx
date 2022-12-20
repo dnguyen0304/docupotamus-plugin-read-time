@@ -57,6 +57,9 @@ const StyledBox = styled(Box, {
     return {
         position: 'absolute',
         left: `calc(100% - ${leftOffsetPx}px)`,
+        // TODO(dnguyen0304): Extract to a centralized location to facilitate
+        // maintenance.
+        color: 'rgb(252, 201, 53)',
         fontSize,
         marginTop: '6px',
         lineHeight: fontSize,
