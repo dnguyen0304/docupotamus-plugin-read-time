@@ -21,6 +21,7 @@ interface Config {
 const CONFIG_DEFAULT: Config = {
     hasSparkleAnimation: false,
 };
+
 const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
     [
         'sm',
@@ -177,7 +178,7 @@ export default function MetricDelta(
     return (
         <StyledBox
             className={
-                delta >= 4
+                getConfig(delta).hasSparkleAnimation
                     ? `${styles.metricDelta_sparkle__animate}`
                     : ''
             }
