@@ -102,13 +102,12 @@ function getAnimation(translateXPx: number): Keyframes {
 };
 
 interface StyledBoxProps {
-    readonly delta: number;
+    readonly config: Config;
 };
 
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'delta',
-})<StyledBoxProps>(({ delta }) => {
-    const config = getConfig(delta);
+})<StyledBoxProps>(({ config }) => {
     return {
         position: 'absolute',
         left: `calc(100% - ${config.leftOffsetPx}px)`,
@@ -185,7 +184,7 @@ export default function MetricDelta(
                     ? `${styles.metricDelta_sparkle__animate}`
                     : ''
             }
-            delta={delta}
+            config={getConfig(delta)}
             onAnimationEnd={resetAnimation}
             ref={ref}
             sx={{ display: delta ? 'block' : 'none' }}
