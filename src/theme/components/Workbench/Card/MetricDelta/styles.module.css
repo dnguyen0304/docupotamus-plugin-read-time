@@ -1,33 +1,3 @@
-/* body {
-    font-size: 16px;
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    text-align: center;
-    background-color: #f8faff;
-} */
-
-/* .bubblyButton {
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    display: inline-block;
-    font-size: 1em;
-    padding: 1em 2em;
-    margin-top: 100px;
-    margin-bottom: 60px;
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: #ff0081;
-    color: #fff;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
-} */
-
-/* .bubblyButton:focus {
-    outline: 0;
-} */
-
 .bubblyButton:before,
 .bubblyButton:after {
     position: absolute;
@@ -55,12 +25,6 @@
     background-image: radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, transparent 10%, #ff0081 15%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%), radial-gradient(circle, #ff0081 20%, transparent 20%);
     background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
 }
-
-/* .bubblyButton:active {
-    transform: scale(0.9);
-    background-color: #e60074;
-    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
-} */
 
 .bubblyButton.animate:before {
     display: block;
