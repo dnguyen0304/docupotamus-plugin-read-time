@@ -5,7 +5,7 @@ import { keyframes } from '@mui/system';
 import * as React from 'react';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../../../constants';
 import { dayjs } from '../../../../../services';
-// import './styles2.css';
+import styles from './styles.module.css';
 
 // Special value to hide the metric delta.
 const HIDE: number = 0;
@@ -130,7 +130,11 @@ export default function MetricDelta(
 
     return (
         <StyledBox
-            // className='bubbly-button animate'
+            className={
+                delta >= 4
+                    ? `${styles.metricDelta_sparkle__animate}`
+                    : ''
+            }
             delta={delta}
             onAnimationEnd={resetAnimation}
             ref={ref}
