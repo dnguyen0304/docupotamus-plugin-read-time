@@ -62,7 +62,6 @@ const StyledBox = styled(Box, {
         lineHeight: fontSize,
         animationDuration: '2s',
         animationFillMode: 'forwards',
-        // animationFillMode: 'infinite',
         animationName: `${getAnimation(translateXPx)}`,
         animationTimingFunction: 'ease-in-out',
     };
