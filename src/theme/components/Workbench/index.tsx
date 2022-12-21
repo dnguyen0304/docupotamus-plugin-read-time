@@ -1,7 +1,10 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import type { RunningTotalSample } from '../../../contexts/samples';
+import type {
+    RunningTotalSample,
+    TargetIdToSamples
+} from '../../../contexts/samples';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
 import { RunningTotal, Target } from '../../../docusaurus-plugin-read-time';
@@ -90,6 +93,13 @@ export default function Workbench(
         },
     ];
 
+    const preprocess = (targetIdToSamples: TargetIdToSamples): (readonly [string, Sample])[] => {
+        const preprocessed = Object.entries(targetIdToSamples)
+            .map(convertToSecond)
+            .sort((a, b) => sort(a, b));
+        return isAscending ? preprocessed.reverse() : preprocessed;
+    };
+
     const convertToSecond = (
         [targetId, sample]: readonly [string, RunningTotalSample]
     ): readonly [string, Sample] => {
@@ -111,7 +121,6 @@ export default function Workbench(
     const sort = (
         a: readonly [string, Sample],
         b: readonly [string, Sample],
-        isAscending: boolean,
     ): number => {
         const visibleTimeA = a[1].runningTotal.readTimeSecond;
         const visibleTimeB = b[1].runningTotal.readTimeSecond;
@@ -126,7 +135,7 @@ export default function Workbench(
                 criteria = 1;
             }
         }
-        return criteria * (isAscending ? -1 : 1);
+        return criteria;
     };
 
     // TODO(dnguyen0304): Add real implementation for rank tracking.
@@ -157,9 +166,7 @@ export default function Workbench(
             boxShadowWidth={'var(--space-xs)'}
         >
             <StyledOrderedList>
-                {Object.entries(targetIdToSamples)
-                    .map(convertToSecond)
-                    .sort((a, b) => sort(a, b, isAscending))
+                {preprocess(targetIdToSamples)
                     .map(([targetId, sample], i) => {
                         // Use 1-indexed instead of 0-indexed ranks.
                         const currRank = i + 1;
