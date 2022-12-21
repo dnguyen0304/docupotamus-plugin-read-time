@@ -2,6 +2,10 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import {
+    BOX_SHADOW_INNER_WIDTH_REM,
+    BOX_SHADOW_OUTER_WIDTH_REM
+} from '../constants';
 
 const KEY_PREFIX: string = 'footerChip';
 
@@ -17,7 +21,8 @@ const StyledBox = styled(Box)({
     // TODO(dnguyen0304): Investigate changing from a wrap to a horizontal
     // scrollbar.
     flexWrap: 'wrap',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
+    marginLeft: `${BOX_SHADOW_INNER_WIDTH_REM + BOX_SHADOW_OUTER_WIDTH_REM}rem`,
     marginTop: 'auto',
 });
 
