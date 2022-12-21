@@ -166,30 +166,22 @@ export default function Workbench(
             boxShadowWidth={'var(--space-xs)'}
         >
             <StyledOrderedList>
-                {preprocess(targetIdToSamples)
-                    .map(([targetId, sample], i) => {
-                        // Use 1-indexed instead of 0-indexed ranks.
-                        const currRank = i + 1;
-                        const prevRank =
-                            targetIdToPrevRank
-                                .current
-                                .get(targetId);
-                        return (
-                            <Card
-                                key={`${KEY_PREFIX}-${targetId}`}
-                                targetId={targetId}
-                                currRank={currRank}
-                                prevRank={prevRank ? prevRank : currRank}
-                                details={sample.target.snippet}
-                                readTimeSecond={
-                                    sample
-                                        .runningTotal
-                                        .readTimeSecond
-                                }
-                                showMinute={showMinute}
-                            />
-                        );
-                    })}
+                {preprocess(targetIdToSamples).map(([targetId, sample], i) => {
+                    // Use 1-indexed instead of 0-indexed ranks.
+                    const currRank = i + 1;
+                    const prevRank = targetIdToPrevRank.current.get(targetId);
+                    return (
+                        <Card
+                            key={`${KEY_PREFIX}-${targetId}`}
+                            targetId={targetId}
+                            currRank={currRank}
+                            prevRank={prevRank ? prevRank : currRank}
+                            details={sample.target.snippet}
+                            readTimeSecond={sample.runningTotal.readTimeSecond}
+                            showMinute={showMinute}
+                        />
+                    );
+                })}
             </StyledOrderedList>
             <Footer chips={chips} />
         </StyledBox>
