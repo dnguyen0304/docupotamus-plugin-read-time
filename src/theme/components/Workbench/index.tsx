@@ -93,11 +93,18 @@ export default function Workbench(
         },
     ];
 
-    const preprocess = (targetIdToSamples: TargetIdToSamples): (readonly [string, Sample])[] => {
-        const preprocessed = Object.entries(targetIdToSamples)
+    const preprocess = (
+        targetIdToSamples: TargetIdToSamples,
+    ): (readonly [string, Sample, number])[] => {
+        const sorted = Object.entries(targetIdToSamples)
             .map(convertToSecond)
             .sort((a, b) => sortDescending(a, b));
-        return isAscending ? preprocessed.reverse() : preprocessed;
+        const sortedAndRanked = rank(sorted);
+        return (
+            isAscending
+                ? sortedAndRanked.slice().reverse()
+                : sortedAndRanked
+        );
     };
 
     const convertToSecond = (
@@ -138,6 +145,40 @@ export default function Workbench(
         return criteria;
     };
 
+    const rank = (
+        keyedSamples: (readonly [string, Sample])[],
+    ): (readonly [string, Sample, number])[] => {
+        if (!keyedSamples.length) {
+            return [];
+        }
+        const ranks: (readonly [string, Sample, number])[] = [];
+        let currRank = 1;  // Use 1-indexed instead of 0-indexed ranks.
+        let prevRankCount = 0;
+        let prevReadTime = keyedSamples[0][1].runningTotal.readTimeSecond;
+        for (let i = 0; i < keyedSamples.length; i++) {
+            const [targetId, sample] = keyedSamples[i];
+            const {
+                runningTotal: {
+                    readTimeSecond: currReadTime,
+                },
+            } = sample;
+            if (prevReadTime === currReadTime) {
+                ++prevRankCount;
+                ranks.push([targetId, sample, currRank]);
+            } else if (prevReadTime > currReadTime) {
+                currRank = currRank + prevRankCount;
+                prevRankCount = 1;
+                prevReadTime = currReadTime;
+                ranks.push([targetId, sample, currRank]);
+            } else if (prevReadTime < currReadTime) {
+                throw new Error(
+                    'expected keyedSamples to be sorted in descending order'
+                );
+            }
+        }
+        return ranks;
+    };
+
     // TODO(dnguyen0304): Add real implementation for rank tracking.
     React.useEffect(() => {
         const existingKeys = Array.from(targetIdToPrevRank.current.keys());
@@ -166,9 +207,8 @@ export default function Workbench(
             boxShadowWidth={'var(--space-xs)'}
         >
             <StyledOrderedList>
-                {preprocess(targetIdToSamples).map(([targetId, sample], i) => {
-                    // Use 1-indexed instead of 0-indexed ranks.
-                    const currRank = i + 1;
+                {preprocess(targetIdToSamples).map((preprocessed) => {
+                    const [targetId, sample, currRank] = preprocessed;
                     const prevRank = targetIdToPrevRank.current.get(targetId);
                     return (
                         <Card
