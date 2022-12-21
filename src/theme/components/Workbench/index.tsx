@@ -96,7 +96,7 @@ export default function Workbench(
     const preprocess = (targetIdToSamples: TargetIdToSamples): (readonly [string, Sample])[] => {
         const preprocessed = Object.entries(targetIdToSamples)
             .map(convertToSecond)
-            .sort((a, b) => sort(a, b));
+            .sort((a, b) => sortDescending(a, b));
         return isAscending ? preprocessed.reverse() : preprocessed;
     };
 
@@ -118,7 +118,7 @@ export default function Workbench(
         ];
     };
 
-    const sort = (
+    const sortDescending = (
         a: readonly [string, Sample],
         b: readonly [string, Sample],
     ): number => {
