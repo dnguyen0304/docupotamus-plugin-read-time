@@ -3,11 +3,13 @@ import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import {
-    BOX_SHADOW_INNER_WIDTH_REM,
-    BOX_SHADOW_OUTER_WIDTH_REM
+    CARD_BOX_SHADOW_INNER_WIDTH_REM,
+    CARD_BOX_SHADOW_OUTER_WIDTH_REM
 } from '../constants';
 
 const KEY_PREFIX: string = 'footerChip';
+const BOX_SHADOW_WIDTH_REM: number =
+    CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
 
 export interface ChipData {
     readonly label: string;
@@ -22,7 +24,7 @@ const StyledBox = styled(Box)({
     // scrollbar.
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    marginLeft: `${BOX_SHADOW_INNER_WIDTH_REM + BOX_SHADOW_OUTER_WIDTH_REM}rem`,
+    marginLeft: `${BOX_SHADOW_WIDTH_REM}rem`,
     marginTop: 'auto',
 });
 

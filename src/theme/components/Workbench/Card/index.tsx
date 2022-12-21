@@ -5,13 +5,16 @@ import * as React from 'react';
 import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
 import {
-    BOX_SHADOW_INNER_WIDTH_REM,
-    BOX_SHADOW_OUTER_WIDTH_REM
+    CARD_BOX_SHADOW_INNER_WIDTH_REM,
+    CARD_BOX_SHADOW_OUTER_WIDTH_REM
 } from '../constants';
 import Metric from './Metric';
 import MetricDelta from './MetricDelta';
 import Rank from './Rank';
 import styles from './styles.module.css';
+
+const BOX_SHADOW_WIDTH_REM: number =
+    CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
 
 const StyledListItem = styled('li')({
     position: 'relative',
@@ -23,18 +26,18 @@ const StyledListItem = styled('li')({
     borderRadius: 'var(--space-2xs)',
     color: '#fff',
     fontSize: 'var(--font-size--2)',
-    margin: `${BOX_SHADOW_INNER_WIDTH_REM + BOX_SHADOW_OUTER_WIDTH_REM}rem`,
+    margin: `${BOX_SHADOW_WIDTH_REM}rem`,
     // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry with
     // Workbench padding-left style.
     marginRight: `calc(`
-        + `${BOX_SHADOW_INNER_WIDTH_REM + BOX_SHADOW_OUTER_WIDTH_REM}rem`
+        + `${BOX_SHADOW_WIDTH_REM}rem`
         + ` + `
         + `var(--space-xs))`,
     padding: 'var(--space-2xs)',
     '&:hover': {
         boxShadow: `
-            #fff 0 0 0 ${BOX_SHADOW_INNER_WIDTH_REM}rem,
-            rgb(100, 255, 218) 0 0 0 ${BOX_SHADOW_OUTER_WIDTH_REM}rem`,
+            #fff 0 0 0 ${CARD_BOX_SHADOW_INNER_WIDTH_REM}rem,
+            rgb(100, 255, 218) 0 0 0 ${CARD_BOX_SHADOW_OUTER_WIDTH_REM}rem`,
     },
 });
 
