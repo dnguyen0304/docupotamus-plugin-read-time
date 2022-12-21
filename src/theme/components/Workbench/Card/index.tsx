@@ -57,6 +57,8 @@ export default function Card(
     }: Props
 ): JSX.Element {
     const [element, setElement] = React.useState<Element>();
+    const [flickerIsEnabled, setFlickerIsEnabled] =
+        React.useState<boolean>(false);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
@@ -66,11 +68,13 @@ export default function Card(
         element?.classList.toggle(styles.target_container__highlight);
     };
 
-    const scrollIntoView = () => {
+    const handleClick = () => {
+        element?.classList.remove(styles.target_container__flicker);
         element?.scrollIntoView({
             behavior: 'smooth',
             block: 'center',
         });
+        setFlickerIsEnabled(true);
     };
 
     // TODO(dnguyen0304): Investigate extracting into a custom hook.
@@ -88,9 +92,18 @@ export default function Card(
         };
     }, []);
 
+    React.useEffect(() => {
+        if (flickerIsEnabled) {
+            element?.classList.add(styles.target_container__flicker);
+        } else {
+            element?.classList.remove(styles.target_container__flicker);
+        }
+    }, [flickerIsEnabled]);
+
     return (
         <StyledListItem
-            onClick={scrollIntoView}
+            onAnimationEnd={() => setFlickerIsEnabled(false)}
+            onClick={handleClick}
             onMouseEnter={toggleHighlight}
             onMouseLeave={toggleHighlight}
         >
