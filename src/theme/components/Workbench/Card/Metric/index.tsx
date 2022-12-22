@@ -3,6 +3,15 @@ import * as React from 'react';
 
 const SECOND_TO_MINUTE: number = 60;
 
+const format = (totalSeconds: number, showMinute: boolean): string => {
+    if (showMinute) {
+        const minute = Math.floor(totalSeconds / SECOND_TO_MINUTE);
+        const second = Math.round(totalSeconds % SECOND_TO_MINUTE);
+        return `${minute}m:${second}s`;
+    }
+    return `${totalSeconds}s`;
+};
+
 interface Props {
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
@@ -15,15 +24,6 @@ export default function Metric(
         showMinute,
     }: Props
 ): JSX.Element {
-    const format = (totalSeconds: number, showMinute: boolean): string => {
-        if (showMinute) {
-            const minute = Math.floor(totalSeconds / SECOND_TO_MINUTE);
-            const second = Math.round(totalSeconds % SECOND_TO_MINUTE);
-            return `${minute}m:${second}s`;
-        }
-        return `${totalSeconds}s`;
-    };
-
     return (
         <Box sx={{ marginLeft: 'auto' }}>
             {format(readTimeSecond, showMinute)}
