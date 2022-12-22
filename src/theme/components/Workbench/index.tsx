@@ -59,6 +59,7 @@ const StyledOrderedList = styled('ol')({
     padding: 0,
 });
 
+// Convert from keyed RunningTotalSample to keyed WorkbenchSample.
 const convertToSecond = (
     [targetId, sample]: readonly [string, RunningTotalSample]
 ): readonly [string, Sample] => {
