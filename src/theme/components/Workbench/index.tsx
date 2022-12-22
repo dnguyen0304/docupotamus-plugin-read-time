@@ -101,8 +101,8 @@ const sortDescending = (
 
 // Rank keyed samples based on readTimeSecond.
 const rank = (
-    keyedSamples: (readonly [string, WorkbenchSample])[],
-): (readonly [string, WorkbenchSample, number])[] => {
+    keyedSamples: ReadonlyArray<readonly [string, WorkbenchSample]>,
+): ReadonlyArray<readonly [string, WorkbenchSample, number]> => {
     if (!keyedSamples.length) {
         return [];
     }
@@ -158,7 +158,7 @@ export default function Workbench(): JSX.Element {
 
     const preprocess = (
         targetIdToSamples: TargetIdToSamples,
-    ): (readonly [string, WorkbenchSample, number])[] => {
+    ): ReadonlyArray<readonly [string, WorkbenchSample, number]> => {
         const sorted = Object.entries(targetIdToSamples)
             .map(convertToWorkbenchSample)
             .sort((a, b) => sortDescending(a, b));
