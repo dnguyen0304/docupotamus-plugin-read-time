@@ -20,11 +20,11 @@ export default function Rank(
 ): JSX.Element {
     const getArrow = (change: number): JSX.Element | null => {
         if (change > 0) {
-            // TODO(dnguyen0304): Replace temporary stub color.
+            // TODO(dnguyen0304): Replace temporary placeholder stub.
             return <ArrowDropUpIcon sx={{ color: 'green' }} />;
         }
         if (change < 0) {
-            // TODO(dnguyen0304): Replace temporary stub color.
+            // TODO(dnguyen0304): Replace temporary placeholder stub.
             return <ArrowDropDownIcon sx={{ color: 'red' }} />;
         }
         return null;
