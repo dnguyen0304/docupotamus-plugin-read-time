@@ -25,11 +25,7 @@ export default function Metric(
     };
 
     return (
-        <Box
-            // TODO(dnguyen0304): Investigate if span component is needed.
-            component='span'
-            sx={{ marginLeft: 'auto' }}
-        >
+        <Box sx={{ marginLeft: 'auto' }}>
             {format(readTimeSecond, showMinute)}
         </Box>
     );
