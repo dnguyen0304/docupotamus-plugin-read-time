@@ -41,7 +41,7 @@ const StyledBox = styled(Box, {
     '&::before': {
         content: '""',
         position: 'absolute',
-        top: '0',
+        top: 0,
         left: `calc(-1 * ${boxShadowWidth})`,
         width: boxShadowWidth,
         height: '100vh',
