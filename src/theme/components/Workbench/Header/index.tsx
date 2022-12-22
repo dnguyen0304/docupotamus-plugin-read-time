@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Card from '../Card';
 import { CARD_KEY_PREFIX } from '../constants';
-import type { Sample } from '../types';
+import type { Sample as WorkbenchSample } from '../types';
 
 const StyledBox = styled(Box)({
     display: 'flex',
@@ -13,7 +13,11 @@ const StyledBox = styled(Box)({
 });
 
 interface Props {
-    readonly keyedSamples: ReadonlyArray<readonly [string, Sample, number]>;
+    readonly keyedSamples: ReadonlyArray<readonly [
+        string,
+        WorkbenchSample,
+        number,
+    ]>;
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
     readonly showMinute: boolean;
 };
