@@ -200,7 +200,7 @@ export default function Workbench(
     }, [targetIdToSamples]);
 
     return (
-        // TODO(dnguyen0304): Migrate to use MUI List.
+        // TODO(dnguyen0304): Investigate migrating to use MUI List.
         //   See: https://mui.com/material-ui/react-list/
         <StyledBox
             workbenchIsOpen={workbenchIsOpen}
