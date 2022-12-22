@@ -43,8 +43,8 @@ const StyledBox = styled(Box, {
     borderTopLeftRadius: 'var(--space-2xs)',
     padding: 'var(--space-xs)',
     paddingRight: '0px',
-    // TODO(dnguyen0304): Investigate refactoring to box-shadow
-    // style to reduce complexity.
+    // TODO(dnguyen0304): Investigate refactoring to box-shadow style to reduce
+    // complexity.
     '&::before': {
         content: '""',
         position: 'absolute',
