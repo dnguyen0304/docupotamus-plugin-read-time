@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import * as React from 'react';
 
 const SECOND_TO_MINUTE: number = 60;
@@ -11,6 +12,10 @@ const format = (totalSeconds: number, showMinute: boolean): string => {
     }
     return `${totalSeconds}s`;
 };
+
+const StyledBox = styled(Box)({
+    marginLeft: 'auto',
+});
 
 interface Props {
     readonly readTimeSecond: number;
@@ -25,8 +30,8 @@ export default function Metric(
     }: Props
 ): JSX.Element {
     return (
-        <Box sx={{ marginLeft: 'auto' }}>
+        <StyledBox>
             {format(readTimeSecond, showMinute)}
-        </Box>
+        </StyledBox>
     );
 };
