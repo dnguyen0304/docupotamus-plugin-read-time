@@ -134,6 +134,21 @@ const rank = (
     return ranks;
 };
 
+const preprocess = (
+    targetIdToSamples: TargetIdToSamples,
+    isAscending: boolean,
+): ReadonlyArray<readonly [string, WorkbenchSample, number]> => {
+    const sorted = Object.entries(targetIdToSamples)
+        .map(convertToWorkbenchSample)
+        .sort((a, b) => sortDescending(a, b));
+    const sortedAndRanked = rank(sorted);
+    return (
+        isAscending
+            ? sortedAndRanked.slice().reverse()
+            : sortedAndRanked
+    );
+};
+
 export default function Workbench(): JSX.Element {
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
@@ -156,22 +171,8 @@ export default function Workbench(): JSX.Element {
         },
     ];
 
-    const preprocess = (
-        targetIdToSamples: TargetIdToSamples,
-    ): ReadonlyArray<readonly [string, WorkbenchSample, number]> => {
-        const sorted = Object.entries(targetIdToSamples)
-            .map(convertToWorkbenchSample)
-            .sort((a, b) => sortDescending(a, b));
-        const sortedAndRanked = rank(sorted);
-        return (
-            isAscending
-                ? sortedAndRanked.slice().reverse()
-                : sortedAndRanked
-        );
-    };
-
     const partitionCards = (): JSX.Element => {
-        const preprocessed = preprocess(targetIdToSamples);
+        const preprocessed = preprocess(targetIdToSamples, isAscending);
         let top: ReadonlyArray<(readonly [
             string,
             WorkbenchSample,
