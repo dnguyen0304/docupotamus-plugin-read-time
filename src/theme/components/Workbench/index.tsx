@@ -34,6 +34,8 @@ const StyledBox = styled(Box, {
         ${theme.palette.grey[600]} 0%,
         ${theme.palette.grey[700]} 100%)`,
     borderTopLeftRadius: 'var(--border-radius)',
+    padding: 'var(--space-xs)',
+    paddingRight: '0px',
     // TODO(dnguyen0304): Investigate refactoring to box-shadow style to reduce
     // complexity.
     '&::before': {
@@ -50,15 +52,6 @@ const StyledBox = styled(Box, {
             rgba(60, 64, 67, 0.4) 100%)`,
     },
 }));
-
-const StyledInnerBox = styled(Box)({
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    flexGrow: 1,
-    padding: 'var(--space-xs)',
-    paddingRight: 0,
-});
 
 const StyledOrderedList = styled('ol')({
     overflow: 'scroll',
@@ -206,26 +199,23 @@ export default function Workbench(): JSX.Element {
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
                 />
-                <StyledInnerBox>
-                    <StyledOrderedList>
-                        {remaining.map((preprocessed) => {
-                            const [targetId, sample, currRank] = preprocessed;
-                            const prevRank = targetIdToPrevRank.current.get(targetId);
-                            return (
-                                <Card
-                                    key={`${CARD_KEY_PREFIX}-${targetId}`}
-                                    targetId={targetId}
-                                    currRank={currRank}
-                                    prevRank={prevRank ? prevRank : currRank}
-                                    details={sample.target.snippet}
-                                    readTimeSecond={sample.runningTotal.readTimeSecond}
-                                    showMinute={showMinute}
-                                />
-                            );
-                        })}
-                    </StyledOrderedList>
-                    <Footer chips={chips} />
-                </StyledInnerBox>
+                <StyledOrderedList>
+                    {remaining.map((preprocessed) => {
+                        const [targetId, sample, currRank] = preprocessed;
+                        const prevRank = targetIdToPrevRank.current.get(targetId);
+                        return (
+                            <Card
+                                key={`${CARD_KEY_PREFIX}-${targetId}`}
+                                targetId={targetId}
+                                currRank={currRank}
+                                prevRank={prevRank ? prevRank : currRank}
+                                details={sample.target.snippet}
+                                readTimeSecond={sample.runningTotal.readTimeSecond}
+                                showMinute={showMinute}
+                            />
+                        );
+                    })}
+                </StyledOrderedList>
             </>
         )
     };
@@ -258,6 +248,7 @@ export default function Workbench(): JSX.Element {
             boxShadowWidth={'var(--space-xs)'}
         >
             {partitionCards()}
+            <Footer chips={chips} />
         </StyledBox>
     );
 };
