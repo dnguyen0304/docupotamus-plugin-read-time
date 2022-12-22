@@ -77,6 +77,27 @@ const convertToSecond = (
     ];
 };
 
+// Sort keyed samples in descending order based on readTimeSecond then targetId.
+const sortDescending = (
+    a: readonly [string, Sample],
+    b: readonly [string, Sample],
+): number => {
+    const visibleTimeA = a[1].runningTotal.readTimeSecond;
+    const visibleTimeB = b[1].runningTotal.readTimeSecond;
+    let criteria = visibleTimeB - visibleTimeA;
+    if (visibleTimeA === visibleTimeB) {
+        // Use all lowercase to ignore casing.
+        const nameA = a[0].toLowerCase();
+        const nameB = b[0].toLowerCase();
+        if (nameA < nameB) {
+            criteria = -1;
+        } else if (nameA > nameB) {
+            criteria = 1;
+        }
+    }
+    return criteria;
+};
+
 export default function Workbench(): JSX.Element {
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
@@ -111,26 +132,6 @@ export default function Workbench(): JSX.Element {
                 ? sortedAndRanked.slice().reverse()
                 : sortedAndRanked
         );
-    };
-
-    const sortDescending = (
-        a: readonly [string, Sample],
-        b: readonly [string, Sample],
-    ): number => {
-        const visibleTimeA = a[1].runningTotal.readTimeSecond;
-        const visibleTimeB = b[1].runningTotal.readTimeSecond;
-        let criteria = visibleTimeB - visibleTimeA;
-        if (visibleTimeA === visibleTimeB) {
-            // Use all lowercase to ignore casing.
-            const nameA = a[0].toLowerCase();
-            const nameB = b[0].toLowerCase();
-            if (nameA < nameB) {
-                criteria = -1;
-            } else if (nameA > nameB) {
-                criteria = 1;
-            }
-        }
-        return criteria;
     };
 
     const rank = (
