@@ -99,6 +99,41 @@ const sortDescending = (
     return criteria;
 };
 
+// Rank keyed samples based on readTimeSecond.
+const rank = (
+    keyedSamples: (readonly [string, WorkbenchSample])[],
+): (readonly [string, WorkbenchSample, number])[] => {
+    if (!keyedSamples.length) {
+        return [];
+    }
+    const ranks: (readonly [string, WorkbenchSample, number])[] = [];
+    let currRank = 1;  // Use 1-indexed instead of 0-indexed ranks.
+    let prevRankCount = 0;
+    let prevReadTime = keyedSamples[0][1].runningTotal.readTimeSecond;
+    for (let i = 0; i < keyedSamples.length; i++) {
+        const [targetId, sample] = keyedSamples[i];
+        const {
+            runningTotal: {
+                readTimeSecond: currReadTime,
+            },
+        } = sample;
+        if (prevReadTime === currReadTime) {
+            ++prevRankCount;
+            ranks.push([targetId, sample, currRank]);
+        } else if (prevReadTime > currReadTime) {
+            currRank = currRank + prevRankCount;
+            prevRankCount = 1;
+            prevReadTime = currReadTime;
+            ranks.push([targetId, sample, currRank]);
+        } else if (prevReadTime < currReadTime) {
+            throw new Error(
+                'expected keyedSamples to be sorted in descending order'
+            );
+        }
+    }
+    return ranks;
+};
+
 export default function Workbench(): JSX.Element {
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
@@ -133,40 +168,6 @@ export default function Workbench(): JSX.Element {
                 ? sortedAndRanked.slice().reverse()
                 : sortedAndRanked
         );
-    };
-
-    const rank = (
-        keyedSamples: (readonly [string, WorkbenchSample])[],
-    ): (readonly [string, WorkbenchSample, number])[] => {
-        if (!keyedSamples.length) {
-            return [];
-        }
-        const ranks: (readonly [string, WorkbenchSample, number])[] = [];
-        let currRank = 1;  // Use 1-indexed instead of 0-indexed ranks.
-        let prevRankCount = 0;
-        let prevReadTime = keyedSamples[0][1].runningTotal.readTimeSecond;
-        for (let i = 0; i < keyedSamples.length; i++) {
-            const [targetId, sample] = keyedSamples[i];
-            const {
-                runningTotal: {
-                    readTimeSecond: currReadTime,
-                },
-            } = sample;
-            if (prevReadTime === currReadTime) {
-                ++prevRankCount;
-                ranks.push([targetId, sample, currRank]);
-            } else if (prevReadTime > currReadTime) {
-                currRank = currRank + prevRankCount;
-                prevRankCount = 1;
-                prevReadTime = currReadTime;
-                ranks.push([targetId, sample, currRank]);
-            } else if (prevReadTime < currReadTime) {
-                throw new Error(
-                    'expected keyedSamples to be sorted in descending order'
-                );
-            }
-        }
-        return ranks;
     };
 
     const partitionCards = (): JSX.Element => {
