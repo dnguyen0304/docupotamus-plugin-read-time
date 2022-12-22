@@ -60,7 +60,7 @@ const StyledOrderedList = styled('ol')({
 });
 
 // Convert from keyed RunningTotalSample to keyed WorkbenchSample.
-const convertToSecond = (
+const convertToWorkbenchSample = (
     [targetId, sample]: readonly [string, RunningTotalSample]
 ): readonly [string, Sample] => {
     const readTimeSecond = Math.round(
@@ -125,7 +125,7 @@ export default function Workbench(): JSX.Element {
         targetIdToSamples: TargetIdToSamples,
     ): (readonly [string, Sample, number])[] => {
         const sorted = Object.entries(targetIdToSamples)
-            .map(convertToSecond)
+            .map(convertToWorkbenchSample)
             .sort((a, b) => sortDescending(a, b));
         const sortedAndRanked = rank(sorted);
         return (
