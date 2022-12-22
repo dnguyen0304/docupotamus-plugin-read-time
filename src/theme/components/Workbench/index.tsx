@@ -59,6 +59,24 @@ const StyledOrderedList = styled('ol')({
     padding: 0,
 });
 
+const convertToSecond = (
+    [targetId, sample]: readonly [string, RunningTotalSample]
+): readonly [string, Sample] => {
+    const readTimeSecond = Math.round(
+        sample.runningTotal.visibleTimeMilli / MILLISECOND_TO_SECOND
+    );
+    return [
+        targetId,
+        {
+            target: sample.target,
+            runningTotal: {
+                readTimeSecond,
+                lastSample: sample.runningTotal.lastSample,
+            },
+        },
+    ];
+};
+
 interface Props { };
 
 export default function Workbench(
@@ -98,24 +116,6 @@ export default function Workbench(
                 ? sortedAndRanked.slice().reverse()
                 : sortedAndRanked
         );
-    };
-
-    const convertToSecond = (
-        [targetId, sample]: readonly [string, RunningTotalSample]
-    ): readonly [string, Sample] => {
-        const readTimeSecond = Math.round(
-            sample.runningTotal.visibleTimeMilli / MILLISECOND_TO_SECOND
-        );
-        return [
-            targetId,
-            {
-                target: sample.target,
-                runningTotal: {
-                    readTimeSecond,
-                    lastSample: sample.runningTotal.lastSample,
-                },
-            },
-        ];
     };
 
     const sortDescending = (
