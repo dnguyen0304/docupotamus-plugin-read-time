@@ -77,12 +77,7 @@ const convertToSecond = (
     ];
 };
 
-interface Props { };
-
-export default function Workbench(
-    {
-    }: Props
-): JSX.Element {
+export default function Workbench(): JSX.Element {
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
 
