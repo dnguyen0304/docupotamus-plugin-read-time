@@ -10,7 +10,7 @@ type Props = {
     readonly targetId?: string;
 } & IntersectionObserverInit;
 
-export async function observeVisibility(
+export const observeVisibility = async (
     {
         element,
         onChange,
@@ -21,7 +21,7 @@ export async function observeVisibility(
         // TODO(dnguyen0304): Fix complex conditional parameters.
         targetId = '',
     }: Props
-): Promise<Array<() => void>> {
+): Promise<Array<() => void>> => {
     const env = ExecutionEnvironment;
     if (!env.canUseDOM || !env.canUseIntersectionObserver) {
         return [];
