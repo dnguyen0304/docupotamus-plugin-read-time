@@ -7,20 +7,13 @@ import type {
 } from '../../../contexts/samples';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
-import { RunningTotal, Target } from '../../../docusaurus-plugin-read-time';
 import Card from './Card';
+import { CARD_KEY_PREFIX } from './constants';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
-
-const KEY_PREFIX: string = 'workbenchCard';
+import Header from './Header';
+import type { Sample } from './types';
 const MILLISECOND_TO_SECOND: number = 1000;
-
-interface Sample {
-    readonly target: Target;
-    readonly runningTotal: {
-        readonly readTimeSecond: number;
-    } & Omit<RunningTotal, 'visibleTimeMilli'>;
-};
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
@@ -179,6 +172,47 @@ export default function Workbench(
         return ranks;
     };
 
+    const partitionCards = (): JSX.Element => {
+        const preprocessed = preprocess(targetIdToSamples);
+        let top: ReadonlyArray<(readonly [string, Sample, number])> = [];
+        let remaining: ReadonlyArray<(readonly [string, Sample, number])> = [];
+
+        if (isAscending) {
+            top = preprocessed.slice(-3);
+            remaining = preprocessed.slice(0, -3);
+        } else {
+            top = preprocessed.slice(0, 3);
+            remaining = preprocessed.slice(3);
+        }
+
+        return (
+            <>
+                <Header
+                    keyedSamples={top}
+                    targetIdToPrevRank={targetIdToPrevRank.current}
+                    showMinute={showMinute}
+                />
+                <StyledOrderedList>
+                    {remaining.map((preprocessed) => {
+                        const [targetId, sample, currRank] = preprocessed;
+                        const prevRank = targetIdToPrevRank.current.get(targetId);
+                        return (
+                            <Card
+                                key={`${CARD_KEY_PREFIX}-${targetId}`}
+                                targetId={targetId}
+                                currRank={currRank}
+                                prevRank={prevRank ? prevRank : currRank}
+                                details={sample.target.snippet}
+                                readTimeSecond={sample.runningTotal.readTimeSecond}
+                                showMinute={showMinute}
+                            />
+                        );
+                    })}
+                </StyledOrderedList>
+            </>
+        )
+    };
+
     // TODO(dnguyen0304): Add real implementation for rank tracking.
     React.useEffect(() => {
         const existingKeys = Array.from(targetIdToPrevRank.current.keys());
@@ -206,23 +240,7 @@ export default function Workbench(
             workbenchIsOpen={workbenchIsOpen}
             boxShadowWidth={'var(--space-xs)'}
         >
-            <StyledOrderedList>
-                {preprocess(targetIdToSamples).map((preprocessed) => {
-                    const [targetId, sample, currRank] = preprocessed;
-                    const prevRank = targetIdToPrevRank.current.get(targetId);
-                    return (
-                        <Card
-                            key={`${KEY_PREFIX}-${targetId}`}
-                            targetId={targetId}
-                            currRank={currRank}
-                            prevRank={prevRank ? prevRank : currRank}
-                            details={sample.target.snippet}
-                            readTimeSecond={sample.runningTotal.readTimeSecond}
-                            showMinute={showMinute}
-                        />
-                    );
-                })}
-            </StyledOrderedList>
+            {partitionCards()}
             <Footer chips={chips} />
         </StyledBox>
     );
