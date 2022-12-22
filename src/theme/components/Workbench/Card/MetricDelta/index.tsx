@@ -67,7 +67,6 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
 
 function getConfig(delta: number): Config {
     let config: Config | undefined;
-    // TODO(dnguyen0304): Investigate refactoring to a switch.
     if (delta < 2) {
         config = SIZE_TO_CONFIG.get('sm');
     } else if (delta >= 2 && delta < 4) {
