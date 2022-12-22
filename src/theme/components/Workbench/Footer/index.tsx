@@ -11,12 +11,6 @@ const KEY_PREFIX: string = 'footerChip';
 const BOX_SHADOW_WIDTH_REM: number =
     CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
 
-export interface ChipData {
-    readonly label: string;
-    readonly isClicked: boolean;
-    readonly onClick: React.MouseEventHandler<HTMLDivElement>;
-};
-
 const StyledBox = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
@@ -27,6 +21,12 @@ const StyledBox = styled(Box)({
     marginLeft: `${BOX_SHADOW_WIDTH_REM}rem`,
     marginTop: 'auto',
 });
+
+export interface ChipData {
+    readonly label: string;
+    readonly isClicked: boolean;
+    readonly onClick: React.MouseEventHandler<HTMLDivElement>;
+};
 
 interface Props {
     readonly chips: ReadonlyArray<ChipData>;
