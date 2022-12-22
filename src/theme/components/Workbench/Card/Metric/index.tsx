@@ -13,15 +13,21 @@ const format = (totalSeconds: number, showMinute: boolean): string => {
     return `${totalSeconds}s`;
 };
 
-const StyledBox = styled(Box)({
+interface StyledBoxProps {
+    readonly hasImproved: boolean;
+};
+
+const StyledBox = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'hasImproved',
+})<StyledBoxProps>(({ hasImproved }) => ({
     // TODO(dnguyen0304): Replace temporary placeholder stub.
-    backgroundColor: 'darkgreen',
+    backgroundColor: hasImproved ? 'darkgreen' : 'transparent',
     borderRadius: '2px',
     // flexBasis: '80px',
     marginLeft: 'auto',
     padding: '0 var(--space-3xs)',
     textAlign: 'right',
-});
+}));
 
 interface Props {
     readonly readTimeSecond: number;
@@ -35,8 +41,10 @@ export default function Metric(
         showMinute,
     }: Props
 ): JSX.Element {
+    const [hasImproved, setHasImproved] = React.useState<boolean>(false);
+
     return (
-        <StyledBox>
+        <StyledBox hasImproved={hasImproved}>
             {format(readTimeSecond, showMinute)}
         </StyledBox>
     );
