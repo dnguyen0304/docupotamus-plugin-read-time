@@ -7,7 +7,6 @@ const ICON_WIDTH: string = '24px';
 
 interface Props {
     readonly currRank: number;
-    // TODO(dnguyen0304): [P2] Change to store as Rank state.
     readonly prevRank: number;
 };
 
