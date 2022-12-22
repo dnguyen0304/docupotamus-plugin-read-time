@@ -52,7 +52,7 @@ export default function Footer(
                             (chip.isClicked)
                                 ? 'rgba(255, 255, 255, 0.4)'
                                 : 'rgba(255, 255, 255, 0.1)',
-                        borderRadius: 'var(--space-2xs)',
+                        borderRadius: 'var(--border-radius)',
                         color: '#fff',
                         margin: '10px 12px 0 0',
                         padding: '0 12px',

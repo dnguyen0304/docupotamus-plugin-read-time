@@ -40,7 +40,7 @@ const StyledBox = styled(Box, {
         to bottom,
         ${theme.palette.grey[600]} 0%,
         ${theme.palette.grey[700]} 100%)`,
-    borderTopLeftRadius: 'var(--space-2xs)',
+    borderTopLeftRadius: 'var(--border-radius)',
     padding: 'var(--space-xs)',
     paddingRight: '0px',
     // TODO(dnguyen0304): Investigate refactoring to box-shadow style to reduce

@@ -23,7 +23,7 @@ const StyledListItem = styled('li')({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: 'rgb(48, 56, 70)',
-    borderRadius: 'var(--space-2xs)',
+    borderRadius: 'var(--border-radius)',
     color: '#fff',
     fontSize: 'var(--font-size--2)',
     margin: `${BOX_SHADOW_WIDTH_REM}rem`,
