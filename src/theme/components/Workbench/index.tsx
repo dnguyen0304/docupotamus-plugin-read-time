@@ -101,8 +101,8 @@ const sortDescending = (
 
 // Rank keyed samples based on readTimeSecond.
 const rank = (
-    keyedSamples: ReadonlyArray<readonly [string, WorkbenchSample]>,
-): ReadonlyArray<readonly [string, WorkbenchSample, number]> => {
+    keyedSamples: readonly (readonly [string, WorkbenchSample])[],
+): readonly (readonly [string, WorkbenchSample, number])[] => {
     if (!keyedSamples.length) {
         return [];
     }
@@ -137,7 +137,7 @@ const rank = (
 const preprocess = (
     targetIdToSamples: TargetIdToSamples,
     isAscending: boolean,
-): ReadonlyArray<readonly [string, WorkbenchSample, number]> => {
+): readonly (readonly [string, WorkbenchSample, number])[] => {
     const sorted = Object.entries(targetIdToSamples)
         .map(convertToWorkbenchSample)
         .sort((a, b) => sortDescending(a, b));
@@ -173,16 +173,16 @@ export default function Workbench(): JSX.Element {
 
     const partitionCards = (): JSX.Element => {
         const preprocessed = preprocess(targetIdToSamples, isAscending);
-        let top: ReadonlyArray<(readonly [
+        let top: readonly (readonly [
             string,
             WorkbenchSample,
             number,
-        ])> = [];
-        let remaining: ReadonlyArray<(readonly [
+        ])[] = [];
+        let remaining: readonly (readonly [
             string,
             WorkbenchSample,
             number,
-        ])> = [];
+        ])[] = [];
 
         if (isAscending) {
             top = preprocessed.slice(-3);
