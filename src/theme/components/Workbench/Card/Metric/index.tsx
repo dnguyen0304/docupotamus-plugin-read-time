@@ -14,7 +14,13 @@ const format = (totalSeconds: number, showMinute: boolean): string => {
 };
 
 const StyledBox = styled(Box)({
+    // TODO(dnguyen0304): Replace temporary placeholder stub.
+    backgroundColor: 'darkgreen',
+    borderRadius: '2px',
+    // flexBasis: '80px',
     marginLeft: 'auto',
+    padding: '0 var(--space-3xs)',
+    textAlign: 'right',
 });
 
 interface Props {
