@@ -171,10 +171,16 @@ export default function Workbench(): JSX.Element {
 
     const partitionCards = (): JSX.Element => {
         const preprocessed = preprocess(targetIdToSamples);
-        let top:
-            ReadonlyArray<(readonly [string, WorkbenchSample, number])> = [];
-        let remaining:
-            ReadonlyArray<(readonly [string, WorkbenchSample, number])> = [];
+        let top: ReadonlyArray<(readonly [
+            string,
+            WorkbenchSample,
+            number,
+        ])> = [];
+        let remaining: ReadonlyArray<(readonly [
+            string,
+            WorkbenchSample,
+            number,
+        ])> = [];
 
         if (isAscending) {
             top = preprocessed.slice(-3);
