@@ -12,7 +12,7 @@ import { CARD_KEY_PREFIX } from './constants';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
 import Header from './Header';
-import type { Sample } from './types';
+import type { Sample as WorkbenchSample } from './types';
 const MILLISECOND_TO_SECOND: number = 1000;
 
 interface StyledBoxProps {
@@ -62,7 +62,7 @@ const StyledOrderedList = styled('ol')({
 // Convert from keyed RunningTotalSample to keyed WorkbenchSample.
 const convertToWorkbenchSample = (
     [targetId, sample]: readonly [string, RunningTotalSample]
-): readonly [string, Sample] => {
+): readonly [string, WorkbenchSample] => {
     const readTimeSecond = Math.round(
         sample.runningTotal.visibleTimeMilli / MILLISECOND_TO_SECOND
     );
@@ -80,8 +80,8 @@ const convertToWorkbenchSample = (
 
 // Sort keyed samples in descending order based on readTimeSecond then targetId.
 const sortDescending = (
-    a: readonly [string, Sample],
-    b: readonly [string, Sample],
+    a: readonly [string, WorkbenchSample],
+    b: readonly [string, WorkbenchSample],
 ): number => {
     const visibleTimeA = a[1].runningTotal.readTimeSecond;
     const visibleTimeB = b[1].runningTotal.readTimeSecond;
@@ -123,7 +123,7 @@ export default function Workbench(): JSX.Element {
 
     const preprocess = (
         targetIdToSamples: TargetIdToSamples,
-    ): (readonly [string, Sample, number])[] => {
+    ): (readonly [string, WorkbenchSample, number])[] => {
         const sorted = Object.entries(targetIdToSamples)
             .map(convertToWorkbenchSample)
             .sort((a, b) => sortDescending(a, b));
@@ -136,12 +136,12 @@ export default function Workbench(): JSX.Element {
     };
 
     const rank = (
-        keyedSamples: (readonly [string, Sample])[],
-    ): (readonly [string, Sample, number])[] => {
+        keyedSamples: (readonly [string, WorkbenchSample])[],
+    ): (readonly [string, WorkbenchSample, number])[] => {
         if (!keyedSamples.length) {
             return [];
         }
-        const ranks: (readonly [string, Sample, number])[] = [];
+        const ranks: (readonly [string, WorkbenchSample, number])[] = [];
         let currRank = 1;  // Use 1-indexed instead of 0-indexed ranks.
         let prevRankCount = 0;
         let prevReadTime = keyedSamples[0][1].runningTotal.readTimeSecond;
@@ -171,8 +171,10 @@ export default function Workbench(): JSX.Element {
 
     const partitionCards = (): JSX.Element => {
         const preprocessed = preprocess(targetIdToSamples);
-        let top: ReadonlyArray<(readonly [string, Sample, number])> = [];
-        let remaining: ReadonlyArray<(readonly [string, Sample, number])> = [];
+        let top:
+            ReadonlyArray<(readonly [string, WorkbenchSample, number])> = [];
+        let remaining:
+            ReadonlyArray<(readonly [string, WorkbenchSample, number])> = [];
 
         if (isAscending) {
             top = preprocessed.slice(-3);
