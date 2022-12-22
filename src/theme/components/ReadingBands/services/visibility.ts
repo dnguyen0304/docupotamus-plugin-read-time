@@ -63,4 +63,4 @@ export async function observeVisibility(
     cleanUp.push(() => observer.unobserve(resolvedElement));
 
     return cleanUp;
-}
+};
