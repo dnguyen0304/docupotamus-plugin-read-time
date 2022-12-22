@@ -49,7 +49,7 @@ export default function Footer(
                     variant='outlined'
                     sx={{
                         backgroundColor:
-                            (chip.isClicked)
+                            chip.isClicked
                                 ? 'rgba(255, 255, 255, 0.4)'
                                 : 'rgba(255, 255, 255, 0.1)',
                         borderRadius: 'var(--border-radius)',
