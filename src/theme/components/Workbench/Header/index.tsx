@@ -13,11 +13,11 @@ const StyledBox = styled(Box)({
 });
 
 interface Props {
-    readonly keyedSamples: ReadonlyArray<readonly [
+    readonly keyedSamples: readonly (readonly [
         string,
         WorkbenchSample,
         number,
-    ]>;
+    ])[];
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
     readonly showMinute: boolean;
 };

@@ -29,7 +29,7 @@ export interface ChipData {
 };
 
 interface Props {
-    readonly chips: ReadonlyArray<ChipData>;
+    readonly chips: readonly ChipData[];
 };
 
 export default function Footer(
