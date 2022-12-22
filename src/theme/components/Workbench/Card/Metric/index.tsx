@@ -41,7 +41,17 @@ export default function Metric(
         showMinute,
     }: Props
 ): JSX.Element {
+    const [originalReadTimeSecond, setOriginalReadTimeSecond] =
+        React.useState<number>();
     const [hasImproved, setHasImproved] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+        if (originalReadTimeSecond === undefined) {
+            setOriginalReadTimeSecond(readTimeSecond);
+        } else {
+            setHasImproved(readTimeSecond > originalReadTimeSecond);
+        }
+    }, [readTimeSecond]);
 
     return (
         <StyledBox hasImproved={hasImproved}>
