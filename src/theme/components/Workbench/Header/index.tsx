@@ -9,7 +9,9 @@ const StyledBox = styled(Box)({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    borderRadius: 'var(--border-radius)',
+    borderRadius: 'var(--border-radius) 0 var(--space-s) var(--space-s)',
+    // backgroundColor: 'white'
+    // padding: 'var(--space-xs)',
 });
 
 interface Props {
