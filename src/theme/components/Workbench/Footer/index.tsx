@@ -19,7 +19,6 @@ const StyledBox = styled(Box)({
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     marginLeft: `${BOX_SHADOW_WIDTH_REM}rem`,
-    marginTop: 'auto',
 });
 
 export interface ChipData {
