@@ -17,13 +17,13 @@ interface StyledBoxProps {
     readonly hasImproved: boolean;
 };
 
+// TODO(dnguyen0304): Investigate adding fixed width style.
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'hasImproved',
 })<StyledBoxProps>(({ hasImproved }) => ({
     // TODO(dnguyen0304): Replace temporary placeholder stub.
     backgroundColor: hasImproved ? 'darkgreen' : 'transparent',
     borderRadius: '2px',
-    // flexBasis: '80px',
     marginLeft: 'auto',
     padding: '0 var(--space-3xs)',
     textAlign: 'right',
