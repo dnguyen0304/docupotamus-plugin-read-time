@@ -14,12 +14,6 @@ export default styled('li')({
     color: '#fff',
     fontSize: 'var(--font-size--2)',
     margin: `${BOX_SHADOW_WIDTH_REM}rem`,
-    // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry with
-    // Workbench padding-left style.
-    marginRight: `calc(`
-        + `${BOX_SHADOW_WIDTH_REM}rem`
-        + ` + `
-        + `var(--space-xs))`,
     padding: 'var(--space-2xs)',
     '&:hover': {
         boxShadow: `
