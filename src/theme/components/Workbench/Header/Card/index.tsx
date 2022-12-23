@@ -3,6 +3,8 @@ import * as React from 'react';
 import Metric from '../../Card/Metric';
 import MetricDelta from '../../Card/MetricDelta';
 import Rank from '../../Card/Rank';
+import useFlicker from '../../hooks/useFlicker';
+import useHighlight from '../../hooks/useHighlight';
 import StyledListItem from '../../StyledListItem';
 import type { CardProps } from '../../types';
 
@@ -16,12 +18,20 @@ export default function Card(
         showMinute,
     }: CardProps
 ): JSX.Element {
+    const [, setFlicker] = useFlicker(targetId);
+    const [, setHighlight] = useHighlight(targetId);
+
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
     const truncatedTargetId = targetId.split('-')[0];
 
     return (
-        <StyledListItem>
+        <StyledListItem
+            onAnimationEnd={() => setFlicker(false)}
+            onClick={() => setFlicker(true)}
+            onMouseEnter={() => setHighlight(true)}
+            onMouseLeave={() => setHighlight(false)}
+        >
             <Rank currRank={currRank} prevRank={prevRank} />
             <Box sx={{ margin: '0 6px 0 4px' }}>
                 <Box>{truncatedTargetId}</Box>
