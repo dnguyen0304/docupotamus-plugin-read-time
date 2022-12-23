@@ -7,6 +7,7 @@ import {
 } from '../constants';
 import useFlicker from '../hooks/useFlicker';
 import useHighlight from '../hooks/useHighlight';
+import Layout from './Layout';
 import Metric from './Metric';
 import MetricDelta from './MetricDelta';
 import Rank from './Rank';
@@ -16,10 +17,6 @@ const BOX_SHADOW_WIDTH_REM: number =
 
 const StyledListItem = styled('li')({
     position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     backgroundColor: 'rgb(48, 56, 70)',
     borderRadius: 'var(--border-radius)',
     color: '#fff',
@@ -75,15 +72,17 @@ export default function Card(
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
         >
-            <Rank currRank={currRank} prevRank={prevRank} />
-            <Box sx={{ margin: '0 6px 0 4px' }}>
-                <Box>{truncatedTargetId}</Box>
-                <Box style={{ fontSize: 'var(--font-size--3)' }}>
-                    {details}
+            <Layout>
+                <Rank currRank={currRank} prevRank={prevRank} />
+                <Box sx={{ margin: '0 6px 0 4px' }}>
+                    <Box>{truncatedTargetId}</Box>
+                    <Box style={{ fontSize: 'var(--font-size--3)' }}>
+                        {details}
+                    </Box>
                 </Box>
-            </Box>
-            <Metric readTimeSecond={readTimeSecond} showMinute={showMinute} />
-            <MetricDelta readTimeSecond={readTimeSecond} />
+                <Metric readTimeSecond={readTimeSecond} showMinute={showMinute} />
+                <MetricDelta readTimeSecond={readTimeSecond} />
+            </Layout>
         </StyledListItem>
     );
 };
