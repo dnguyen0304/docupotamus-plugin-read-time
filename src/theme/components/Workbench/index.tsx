@@ -209,14 +209,15 @@ export default function Workbench(): JSX.Element {
                 <StyledInnerBox>
                     <StyledOrderedList>
                         {remaining.map((preprocessed) => {
-                            const [targetId, sample, currRank] = preprocessed;
-                            const prevRank = targetIdToPrevRank.current.get(targetId);
+                            const [targetId, sample, rankCurr] = preprocessed;
+                            const rankPrev =
+                                targetIdToPrevRank.current.get(targetId);
                             return (
                                 <Card
                                     key={`${CARD_KEY_PREFIX}-${targetId}`}
                                     targetId={targetId}
-                                    currRank={currRank}
-                                    prevRank={prevRank ? prevRank : currRank}
+                                    rankCurr={rankCurr}
+                                    rankPrev={rankPrev ? rankPrev : rankCurr}
                                     details={sample.target.snippet}
                                     readTimeSecond={sample.runningTotal.readTimeSecond}
                                     showMinute={showMinute}
