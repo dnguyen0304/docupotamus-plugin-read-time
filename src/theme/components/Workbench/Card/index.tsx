@@ -1,17 +1,15 @@
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
-import { getElement } from '../../../../services/dom';
 import {
     CARD_BOX_SHADOW_INNER_WIDTH_REM,
     CARD_BOX_SHADOW_OUTER_WIDTH_REM
 } from '../constants';
+import useFlicker from '../hooks/useFlicker';
+import useHighlight from '../hooks/useHighlight';
 import Metric from './Metric';
 import MetricDelta from './MetricDelta';
 import Rank from './Rank';
-import styles from './styles.module.css';
 
 const BOX_SHADOW_WIDTH_REM: number =
     CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
@@ -62,57 +60,20 @@ export default function Card(
         showMinute,
     }: Props
 ): JSX.Element {
-    const [element, setElement] = React.useState<Element>();
-    const [flickerIsEnabled, setFlickerIsEnabled] =
-        React.useState<boolean>(false);
+    const [, setFlicker] = useFlicker(targetId);
+    const [, setHighlight] = useHighlight(targetId);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
     const truncatedTargetId = targetId.split('-')[0];
 
-    const toggleHighlight = () => {
-        element?.classList.toggle(styles.target_container__highlight);
-    };
-
-    const handleClick = () => {
-        element?.classList.remove(styles.target_container__flicker);
-        element?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-        });
-        setFlickerIsEnabled(true);
-    };
-
-    // TODO(dnguyen0304): Investigate extracting into a custom hook.
-    React.useEffect(() => {
-        (async () => {
-            if (!ExecutionEnvironment.canUseDOM) {
-                return;
-            }
-            const targetElement =
-                await getElement(`[${DATA_ATTRIBUTE_TARGET_ID}="${targetId}"]`);
-            setElement(targetElement);
-        })();
-        return () => {
-            element?.classList.remove(styles.target_container__highlight);
-        };
-    }, []);
-
-    React.useEffect(() => {
-        if (flickerIsEnabled) {
-            element?.classList.add(styles.target_container__flicker);
-        } else {
-            element?.classList.remove(styles.target_container__flicker);
-        }
-    }, [flickerIsEnabled]);
-
     return (
         <StyledListItem
             className={className}
-            onAnimationEnd={() => setFlickerIsEnabled(false)}
-            onClick={handleClick}
-            onMouseEnter={toggleHighlight}
-            onMouseLeave={toggleHighlight}
+            onAnimationEnd={() => setFlicker(false)}
+            onClick={() => setFlicker(true)}
+            onMouseEnter={() => setHighlight(true)}
+            onMouseLeave={() => setHighlight(false)}
         >
             <Rank currRank={currRank} prevRank={prevRank} />
             <Box sx={{ margin: '0 6px 0 4px' }}>
