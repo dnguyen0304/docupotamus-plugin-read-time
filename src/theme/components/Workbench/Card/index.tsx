@@ -42,6 +42,7 @@ const StyledListItem = styled('li')({
 });
 
 interface Props {
+    readonly className?: string;
     readonly targetId: string;
     readonly currRank: number;
     readonly prevRank: number;
@@ -52,6 +53,7 @@ interface Props {
 
 export default function Card(
     {
+        className,
         targetId,
         currRank,
         prevRank,
@@ -106,6 +108,7 @@ export default function Card(
 
     return (
         <StyledListItem
+            className={className}
             onAnimationEnd={() => setFlickerIsEnabled(false)}
             onClick={handleClick}
             onMouseEnter={toggleHighlight}
