@@ -9,10 +9,6 @@ const BOX_SHADOW_WIDTH_REM: number =
 
 export default styled('li')({
     position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     backgroundColor: 'rgb(48, 56, 70)',
     borderRadius: 'var(--border-radius)',
     color: '#fff',

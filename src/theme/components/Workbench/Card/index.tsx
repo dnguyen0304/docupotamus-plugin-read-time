@@ -1,8 +1,9 @@
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import useFlicker from '../hooks/useFlicker';
 import useHighlight from '../hooks/useHighlight';
-import StyledListItem from '../StyledListItem';
+import BaseStyledListItem from '../StyledListItem';
 import Metric from './Metric';
 import MetricDelta from './MetricDelta';
 import Rank from './Rank';
@@ -16,6 +17,13 @@ interface Props {
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
 };
+
+const StyledListItem = styled(BaseStyledListItem)({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+});
 
 export default function Card(
     {
