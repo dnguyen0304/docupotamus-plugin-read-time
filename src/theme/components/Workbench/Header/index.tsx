@@ -42,6 +42,7 @@ export default function Header(
                         targetId={targetId}
                         currRank={currRank}
                         prevRank={prevRank ? prevRank : currRank}
+                        rankColor='4px solid gold'
                         details={sample.target.snippet}
                         readTimeSecond={sample.runningTotal.readTimeSecond}
                         showMinute={showMinute}

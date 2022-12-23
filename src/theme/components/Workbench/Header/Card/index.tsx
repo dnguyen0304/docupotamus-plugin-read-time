@@ -8,15 +8,20 @@ import useHighlight from '../../hooks/useHighlight';
 import StyledListItem from '../../StyledListItem';
 import type { CardProps } from '../../types';
 
+interface Props extends CardProps {
+    rankColor: string;
+};
+
 export default function Card(
     {
         targetId,
         currRank,
         prevRank,
+        rankColor,
         details,
         readTimeSecond,
         showMinute,
-    }: CardProps
+    }: Props
 ): JSX.Element {
     const [, setFlicker] = useFlicker(targetId);
     const [, setHighlight] = useHighlight(targetId);
@@ -31,6 +36,7 @@ export default function Card(
             onClick={() => setFlicker(true)}
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
+            sx={{ borderTop: rankColor }}
         >
             <Box sx={{ margin: '0 6px 0 4px' }}>
                 <Box>{truncatedTargetId}</Box>
