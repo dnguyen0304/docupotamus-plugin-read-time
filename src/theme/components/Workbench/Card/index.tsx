@@ -20,8 +20,8 @@ export default function Card(
     {
         className,
         targetId,
-        currRank,
-        prevRank,
+        rankCurr,
+        rankPrev,
         details,
         readTimeSecond,
         showMinute,
@@ -43,8 +43,8 @@ export default function Card(
             onMouseLeave={() => setHighlight(false)}
         >
             <Rank
-                currRank={currRank}
-                prevRank={prevRank}
+                currRank={rankCurr}
+                prevRank={rankPrev}
                 arrowPosition='bottom'
             />
             <Box sx={{ margin: '0 6px 0 4px' }}>

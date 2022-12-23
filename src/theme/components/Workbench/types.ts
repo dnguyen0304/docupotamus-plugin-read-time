@@ -13,8 +13,8 @@ export interface Sample {
 export interface CardProps {
     readonly className?: string;
     readonly targetId: string;
-    readonly currRank: number;
-    readonly prevRank: number;
+    readonly rankCurr: number;
+    readonly rankPrev: number;
     readonly details: string;
     readonly readTimeSecond: number;
     readonly showMinute: boolean;

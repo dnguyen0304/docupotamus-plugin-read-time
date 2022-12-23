@@ -15,8 +15,8 @@ interface Props extends CardProps {
 export default function Card(
     {
         targetId,
-        currRank,
-        prevRank,
+        rankCurr,
+        rankPrev,
         rankColor,
         details,
         readTimeSecond,
@@ -45,8 +45,8 @@ export default function Card(
                 </Box>
             </Box>
             <Rank
-                currRank={currRank}
-                prevRank={prevRank}
+                currRank={rankCurr}
+                prevRank={rankPrev}
                 arrowPosition='left'
             />
             <Metric
