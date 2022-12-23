@@ -4,19 +4,10 @@ import * as React from 'react';
 import useFlicker from '../hooks/useFlicker';
 import useHighlight from '../hooks/useHighlight';
 import BaseStyledListItem from '../StyledListItem';
+import { CardProps } from '../types';
 import Metric from './Metric';
 import MetricDelta from './MetricDelta';
 import Rank from './Rank';
-
-interface Props {
-    readonly className?: string;
-    readonly targetId: string;
-    readonly currRank: number;
-    readonly prevRank: number;
-    readonly details: string;
-    readonly readTimeSecond: number;
-    readonly showMinute: boolean;
-};
 
 const StyledListItem = styled(BaseStyledListItem)({
     display: 'flex',
@@ -34,7 +25,7 @@ export default function Card(
         details,
         readTimeSecond,
         showMinute,
-    }: Props
+    }: CardProps
 ): JSX.Element {
     const [, setFlicker] = useFlicker(targetId);
     const [, setHighlight] = useHighlight(targetId);

@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import Card from '../Card';
 import { CARD_KEY_PREFIX } from '../constants';
 import type { Sample as WorkbenchSample } from '../types';
+import Card from './Card';
 
 const StyledBox = styled(Box)({
     display: 'flex',

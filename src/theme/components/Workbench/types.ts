@@ -9,3 +9,13 @@ export interface Sample {
         readonly readTimeSecond: number;
     } & Omit<RunningTotal, 'visibleTimeMilli'>;
 };
+
+export interface CardProps {
+    readonly className?: string;
+    readonly targetId: string;
+    readonly currRank: number;
+    readonly prevRank: number;
+    readonly details: string;
+    readonly readTimeSecond: number;
+    readonly showMinute: boolean;
+};
