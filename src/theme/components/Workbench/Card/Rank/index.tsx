@@ -1,13 +1,32 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import type { StackProps } from '@mui/material/Stack';
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
 
 const ICON_WIDTH: string = '24px';
 
+type ArrowPosition = 'top' | 'right' | 'bottom' | 'left';
+
+const getDirection = (
+    arrowPosition: ArrowPosition,
+): StackProps['direction'] => {
+    switch (arrowPosition) {
+        case 'top':
+            return 'column-reverse';
+        case 'right':
+            return 'row';
+        case 'bottom':
+            return 'column';
+        case 'left':
+            return 'row-reverse';
+    }
+};
+
 interface Props {
     readonly currRank: number;
     readonly prevRank: number;
+    readonly arrowPosition: ArrowPosition;
 };
 
 // TODO(dnguyen0304): Add tooltip for rank change.
@@ -15,6 +34,7 @@ export default function Rank(
     {
         currRank,
         prevRank,
+        arrowPosition,
     }: Props
 ): JSX.Element {
     const getArrow = (change: number): JSX.Element | null => {
@@ -31,7 +51,7 @@ export default function Rank(
 
     return (
         <Stack
-            direction='column'
+            direction={getDirection(arrowPosition)}
             justifyContent='center'
             alignItems='center'
             sx={{ width: ICON_WIDTH }}

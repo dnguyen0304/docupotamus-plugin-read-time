@@ -42,7 +42,11 @@ export default function Card(
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
         >
-            <Rank currRank={currRank} prevRank={prevRank} />
+            <Rank
+                currRank={currRank}
+                prevRank={prevRank}
+                arrowPosition='bottom'
+            />
             <Box sx={{ margin: '0 6px 0 4px' }}>
                 <Box>{truncatedTargetId}</Box>
                 <Box style={{ fontSize: 'var(--font-size--3)' }}>
