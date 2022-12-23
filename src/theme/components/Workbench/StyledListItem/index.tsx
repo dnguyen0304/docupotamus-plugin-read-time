@@ -4,16 +4,12 @@ import {
     CARD_BOX_SHADOW_OUTER_WIDTH_REM
 } from '../constants';
 
-const BOX_SHADOW_WIDTH_REM: number =
-    CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
-
 export default styled('li')({
     position: 'relative',
     backgroundColor: 'rgb(48, 56, 70)',
     borderRadius: 'var(--border-radius)',
     color: '#fff',
     fontSize: 'var(--font-size--2)',
-    margin: `${BOX_SHADOW_WIDTH_REM}rem`,
     padding: 'var(--space-2xs)',
     '&:hover': {
         boxShadow: `

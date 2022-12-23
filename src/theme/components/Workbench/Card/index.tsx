@@ -21,6 +21,7 @@ const StyledListItem = styled(BaseStyledListItem)({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    margin: `${BOX_SHADOW_WIDTH_REM}rem`,
     // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry with
     // Workbench padding-left style.
     marginRight: `calc(`
