@@ -56,9 +56,7 @@ export default function Card(
             <Metric
                 readTimeSecond={readTimeSecond}
                 showMinute={showMinute}
-                sx={{
-                    textAlign: 'right',
-                }}
+                sx={{ textAlign: 'right' }}
             />
             <MetricDelta readTimeSecond={readTimeSecond} />
         </StyledListItem>
