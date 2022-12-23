@@ -45,8 +45,8 @@ export default function Card(
                 </Box>
             </Box>
             <Rank
-                currRank={rankCurr}
-                prevRank={rankPrev}
+                curr={rankCurr}
+                prev={rankPrev}
                 arrowPosition='left'
             />
             <Metric

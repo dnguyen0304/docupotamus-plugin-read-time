@@ -43,8 +43,8 @@ export default function Card(
             onMouseLeave={() => setHighlight(false)}
         >
             <Rank
-                currRank={rankCurr}
-                prevRank={rankPrev}
+                curr={rankCurr}
+                prev={rankPrev}
                 arrowPosition='bottom'
             />
             <Box sx={{ margin: '0 6px 0 4px' }}>

@@ -24,16 +24,16 @@ const getDirection = (
 };
 
 interface Props {
-    readonly currRank: number;
-    readonly prevRank: number;
+    readonly curr: number;
+    readonly prev: number;
     readonly arrowPosition: ArrowPosition;
 };
 
 // TODO(dnguyen0304): Add tooltip for rank change.
 export default function Rank(
     {
-        currRank,
-        prevRank,
+        curr,
+        prev,
         arrowPosition,
     }: Props
 ): JSX.Element {
@@ -56,8 +56,8 @@ export default function Rank(
             alignItems='center'
             sx={{ width: ICON_WIDTH }}
         >
-            {currRank}
-            {getArrow(prevRank - currRank)}
+            {curr}
+            {getArrow(prev - curr)}
         </Stack>
     );
 };

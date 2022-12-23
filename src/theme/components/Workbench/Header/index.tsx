@@ -34,14 +34,14 @@ export default function Header(
     return (
         <StyledBox>
             {keyedSamples.map((keyedSample) => {
-                const [targetId, sample, currRank] = keyedSample;
-                const prevRank = targetIdToPrevRank.get(targetId);
+                const [targetId, sample, rankCurr] = keyedSample;
+                const rankPrev = targetIdToPrevRank.get(targetId);
                 return (
                     <Card
                         key={`${CARD_KEY_PREFIX}-${targetId}`}
                         targetId={targetId}
-                        currRank={currRank}
-                        prevRank={prevRank ? prevRank : currRank}
+                        rankCurr={rankCurr}
+                        rankPrev={rankPrev ? rankPrev : rankCurr}
                         rankColor='4px solid gold'
                         details={sample.target.snippet}
                         readTimeSecond={sample.runningTotal.readTimeSecond}
