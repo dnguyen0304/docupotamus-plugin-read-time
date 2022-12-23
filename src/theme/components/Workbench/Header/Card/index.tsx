@@ -43,7 +43,13 @@ export default function Card(
                 prevRank={prevRank}
                 arrowPosition='left'
             />
-            <Metric readTimeSecond={readTimeSecond} showMinute={showMinute} />
+            <Metric
+                readTimeSecond={readTimeSecond}
+                showMinute={showMinute}
+                sx={{
+                    textAlign: 'center',
+                }}
+            />
             <MetricDelta readTimeSecond={readTimeSecond} />
         </StyledListItem>
     );

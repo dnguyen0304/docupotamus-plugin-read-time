@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { styled, SxProps, Theme } from '@mui/material/styles';
 import * as React from 'react';
 
 const SECOND_TO_MINUTE: number = 60;
@@ -32,6 +32,7 @@ const StyledBox = styled(Box, {
 interface Props {
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
+    readonly sx?: SxProps<Theme>;
 };
 
 // TODO(dnguyen0304): Add tooltip for rank change.
@@ -39,6 +40,7 @@ export default function Metric(
     {
         readTimeSecond,
         showMinute,
+        sx,
     }: Props
 ): JSX.Element {
     const [originalReadTimeSecond, setOriginalReadTimeSecond] =
@@ -54,7 +56,7 @@ export default function Metric(
     }, [readTimeSecond]);
 
     return (
-        <StyledBox hasImproved={hasImproved}>
+        <StyledBox hasImproved={hasImproved} sx={sx}>
             {format(readTimeSecond, showMinute)}
         </StyledBox>
     );
