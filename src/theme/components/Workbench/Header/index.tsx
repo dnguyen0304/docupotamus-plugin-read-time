@@ -14,6 +14,19 @@ const StyledBox = styled(Box)({
     // backgroundColor: 'white',
 });
 
+const getColor = (index: number): string => {
+    switch (index) {
+        case 0:
+            return 'gold';
+        case 1:
+            return 'silver';
+        case 2:
+            return 'sandybrown';
+        default:
+            return 'transparent';
+    }
+};
+
 interface Props {
     readonly keyedSamples: readonly (readonly [
         string,
@@ -33,7 +46,7 @@ export default function Header(
 ): JSX.Element {
     return (
         <StyledBox>
-            {keyedSamples.map((keyedSample) => {
+            {keyedSamples.map((keyedSample, i) => {
                 const [targetId, sample, rankCurr] = keyedSample;
                 const rankPrev = targetIdToPrevRank.get(targetId);
                 return (
@@ -42,7 +55,7 @@ export default function Header(
                         targetId={targetId}
                         rankCurr={rankCurr}
                         rankPrev={rankPrev ? rankPrev : rankCurr}
-                        rankColor='4px solid gold'
+                        rankColor={`var(--space-3xs) solid ${getColor(i)}`}
                         details={sample.target.snippet}
                         readTimeSecond={sample.runningTotal.readTimeSecond}
                         showMinute={showMinute}
