@@ -4,6 +4,7 @@ import * as React from 'react';
 import { CARD_KEY_PREFIX } from '../constants';
 import type { Sample as WorkbenchSample } from '../types';
 import Card from './Card';
+import styles from './styles.module.css';
 
 const StyledBox = styled(Box)({
     display: 'flex',
@@ -51,6 +52,7 @@ export default function Header(
                 const rankPrev = targetIdToPrevRank.get(targetId);
                 return (
                     <Card
+                        className={styles.header_card}
                         key={`${CARD_KEY_PREFIX}-${targetId}`}
                         targetId={targetId}
                         rankCurr={rankCurr}

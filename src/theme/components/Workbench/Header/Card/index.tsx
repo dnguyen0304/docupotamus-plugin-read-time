@@ -14,6 +14,7 @@ interface Props extends CardProps {
 
 export default function Card(
     {
+        className,
         targetId,
         rankCurr,
         rankPrev,
@@ -32,6 +33,7 @@ export default function Card(
 
     return (
         <StyledListItem
+            className={className}
             onAnimationEnd={() => setFlicker(false)}
             onClick={() => setFlicker(true)}
             onMouseEnter={() => setHighlight(true)}
