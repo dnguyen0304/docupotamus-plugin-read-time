@@ -26,7 +26,6 @@ const StyledBox = styled(Box, {
     borderRadius: '2px',
     marginLeft: 'auto',
     padding: '0 var(--space-3xs)',
-    textAlign: 'right',
 }));
 
 interface Props {
