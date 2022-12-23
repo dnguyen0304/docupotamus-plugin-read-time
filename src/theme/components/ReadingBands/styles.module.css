@@ -1,5 +1,6 @@
 .readingBands {
     position: fixed;
+    /* TODO(dnguyen0304): Investigate changing to 100vw. */
     width: 100%;
     pointer-events: none;
     z-index: calc(var(--ifm-z-index-fixed) + 1);
