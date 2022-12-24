@@ -7,7 +7,7 @@ import {
 } from '../constants';
 import useFlicker from '../hooks/useFlicker';
 import useHighlight from '../hooks/useHighlight';
-import BaseStyledListItem from '../StyledListItem';
+import BaseStyledListItem from '../ListItem';
 import { CardProps } from '../types';
 import Metric from './Metric';
 import MetricDelta from './MetricDelta';

@@ -5,7 +5,7 @@ import MetricDelta from '../../Card/MetricDelta';
 import Rank from '../../Card/Rank';
 import useFlicker from '../../hooks/useFlicker';
 import useHighlight from '../../hooks/useHighlight';
-import StyledListItem from '../../StyledListItem';
+import StyledListItem from '../../ListItem';
 import type { CardProps } from '../../types';
 
 interface Props extends CardProps {
