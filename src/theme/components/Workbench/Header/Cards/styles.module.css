@@ -2,11 +2,9 @@
     position: absolute;
     left: 0;
     right: 0;
+    width: 60%;
     margin: auto;
     transition: transform 0.4s ease;
-
-    width: 60%;
-    height: 100%;
 }
 
 .card__clicked {
