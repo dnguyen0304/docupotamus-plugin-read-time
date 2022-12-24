@@ -216,9 +216,9 @@ export default function Workbench(): JSX.Element {
                                 <Card
                                     key={`${CARD_KEY_PREFIX}-${targetId}`}
                                     targetId={targetId}
+                                    details={sample.target.snippet}
                                     rankCurr={rankCurr}
                                     rankPrev={rankPrev ? rankPrev : rankCurr}
-                                    details={sample.target.snippet}
                                     readTimeSecond={sample.runningTotal.readTimeSecond}
                                     showMinute={showMinute}
                                 />

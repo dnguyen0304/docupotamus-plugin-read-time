@@ -52,10 +52,10 @@ export default function Cards(
                         className={styles.header_card}
                         key={`${CARD_KEY_PREFIX}-${targetId}`}
                         targetId={targetId}
+                        details={sample.target.snippet}
                         rankCurr={rankCurr}
                         rankPrev={rankPrev ? rankPrev : rankCurr}
                         rankColor={`var(--space-3xs) solid ${getColor(i)}`}
-                        details={sample.target.snippet}
                         readTimeSecond={sample.runningTotal.readTimeSecond}
                         showMinute={showMinute}
                     />

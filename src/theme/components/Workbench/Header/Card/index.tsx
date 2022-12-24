@@ -33,8 +33,8 @@ export default function Card(
     {
         className,
         targetId,
-        rankColor,
         details,
+        rankColor,
         onClick = () => { },
     }: Props
 ): JSX.Element {

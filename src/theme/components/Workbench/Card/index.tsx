@@ -34,9 +34,9 @@ export default function Card(
     {
         className,
         targetId,
+        details,
         rankCurr,
         rankPrev,
-        details,
         readTimeSecond,
         showMinute,
     }: CardProps
