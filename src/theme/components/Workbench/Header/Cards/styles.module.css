@@ -7,6 +7,10 @@
     transition: transform 0.4s ease;
 }
 
+.card:hover {
+    opacity: 1;
+}
+
 .card__clicked {
     opacity: 1;
     transform: translateX(0) scale(1);
