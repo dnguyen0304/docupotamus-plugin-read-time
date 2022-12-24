@@ -1,32 +1,17 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { CARD_KEY_PREFIX } from '../constants';
 import type { Sample as WorkbenchSample } from '../types';
-import Card from './Card';
-import styles from './styles.module.css';
+import Cards from './Cards';
 
 const StyledBox = styled(Box)({
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: 'column',
+    justifyContent: 'center',
     borderRadius: 'var(--border-radius) 0 var(--space-s) var(--space-s)',
     padding: 'var(--space-xs)',
     // backgroundColor: 'white',
 });
-
-const getColor = (index: number): string => {
-    switch (index) {
-        case 0:
-            return 'gold';
-        case 1:
-            return 'silver';
-        case 2:
-            return 'sandybrown';
-        default:
-            return 'transparent';
-    }
-};
 
 interface Props {
     readonly keyedSamples: readonly (readonly [
@@ -47,23 +32,13 @@ export default function Header(
 ): JSX.Element {
     return (
         <StyledBox>
-            {keyedSamples.map((keyedSample, i) => {
-                const [targetId, sample, rankCurr] = keyedSample;
-                const rankPrev = targetIdToPrevRank.get(targetId);
-                return (
-                    <Card
-                        className={styles.header_card}
-                        key={`${CARD_KEY_PREFIX}-${targetId}`}
-                        targetId={targetId}
-                        rankCurr={rankCurr}
-                        rankPrev={rankPrev ? rankPrev : rankCurr}
-                        rankColor={`var(--space-3xs) solid ${getColor(i)}`}
-                        details={sample.target.snippet}
-                        readTimeSecond={sample.runningTotal.readTimeSecond}
-                        showMinute={showMinute}
-                    />
-                );
-            })}
+            <Cards
+                keyedSamples={keyedSamples}
+                targetIdToPrevRank={targetIdToPrevRank}
+                showMinute={showMinute}
+            />
+            {/* TODO(dnguyen0304): Add real implementation for ActiveInfo. */}
+            <div />
         </StyledBox>
     );
 };

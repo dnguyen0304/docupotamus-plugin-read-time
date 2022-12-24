@@ -1,12 +1,28 @@
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import Metric from '../../Card/Metric';
-import MetricDelta from '../../Card/MetricDelta';
-import Rank from '../../Card/Rank';
+import {
+    CARD_BOX_SHADOW_INNER_WIDTH_REM,
+    CARD_BOX_SHADOW_OUTER_WIDTH_REM
+} from '../../constants';
 import useFlicker from '../../hooks/useFlicker';
 import useHighlight from '../../hooks/useHighlight';
-import ListItem from '../../ListItem';
 import type { CardProps } from '../../types';
+
+// TODO(dnguyen0304): Fix duplication with Workbench/ListItem component.
+const StyledBox = styled(Box)({
+    backgroundColor: 'rgb(48, 56, 70)',
+    borderRadius: 'var(--border-radius)',
+    color: '#fff',
+    cursor: 'pointer',
+    fontSize: 'var(--font-size--2)',
+    padding: 'var(--space-2xs)',
+    '&:hover': {
+        boxShadow: `
+            #fff 0 0 0 ${CARD_BOX_SHADOW_INNER_WIDTH_REM}rem,
+            rgb(100, 255, 218) 0 0 0 ${CARD_BOX_SHADOW_OUTER_WIDTH_REM}rem`,
+    },
+});
 
 interface Props extends CardProps {
     rankColor: string;
@@ -16,12 +32,8 @@ export default function Card(
     {
         className,
         targetId,
-        rankCurr,
-        rankPrev,
         rankColor,
         details,
-        readTimeSecond,
-        showMinute,
     }: Props
 ): JSX.Element {
     const [, setFlicker] = useFlicker(targetId);
@@ -32,7 +44,7 @@ export default function Card(
     const truncatedTargetId = targetId.split('-')[0];
 
     return (
-        <ListItem
+        <StyledBox
             className={className}
             onAnimationEnd={() => setFlicker(false)}
             onClick={() => setFlicker(true)}
@@ -46,17 +58,6 @@ export default function Card(
                     {details}
                 </Box>
             </Box>
-            <Rank
-                curr={rankCurr}
-                prev={rankPrev}
-                arrowPosition='left'
-            />
-            <Metric
-                readTimeSecond={readTimeSecond}
-                showMinute={showMinute}
-                sx={{ textAlign: 'center' }}
-            />
-            <MetricDelta readTimeSecond={readTimeSecond} />
-        </ListItem>
+        </StyledBox>
     );
 };
