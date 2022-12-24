@@ -4,12 +4,45 @@ import * as React from 'react';
 import { CARD_KEY_PREFIX } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
 import Card from '../Card';
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
 // TODO(dnguyen0304): Add margin-bottom style.
 const StyledBox = styled(Box)({
     position: 'relative',
 });
+
+type PositionIndex = 0 | 1 | 2;
+
+const GOLD: PositionIndex = 0;
+const SILVER: PositionIndex = 1;
+const BRONZE: PositionIndex = 2;
+
+const CURRENT_TO_CLICKED_TO_CLASS: ReadonlyMap<
+    PositionIndex,
+    ReadonlyMap<PositionIndex, string>
+> = new Map([
+    [GOLD, new Map([
+        [SILVER, styles.card__notClickedLeft],
+        [GOLD, styles.card__clicked],
+        [BRONZE, styles.card__notClickedRight],
+    ])],
+    [SILVER, new Map([
+        [BRONZE, styles.card__notClickedLeft],
+        [SILVER, styles.card__clicked],
+        [GOLD, styles.card__notClickedRight],
+    ])],
+    [BRONZE, new Map([
+        [GOLD, styles.card__notClickedLeft],
+        [BRONZE, styles.card__clicked],
+        [SILVER, styles.card__notClickedRight],
+    ])],
+]);
+
+const getClickedClass = (current: number, clicked: number): string => {
+    // TODO(dnguyen0304): Fix missing PositionIndex type assertion.
+    const className = CURRENT_TO_CLICKED_TO_CLASS.get(current)?.get(clicked);
+    return className ? className : '';
+}
 
 // TODO(dnguyen0304): Add real implementation for border-top color.
 const getColor = (index: number): string => {
@@ -48,10 +81,11 @@ export default function Cards(
         <StyledBox>
             {keyedSamples.map((keyedSample, i) => {
                 const [targetId, sample, rankCurr] = keyedSample;
+                const clickedClass = getClickedClass(i, clickedIndex);
                 const rankPrev = targetIdToPrevRank.get(targetId);
                 return (
                     <Card
-                        // className={`${clickedIndex} ${styles.header_card} ${getClickClass(i, clickedIndex)}`}
+                        className={`${styles.card} ${clickedClass}`}
                         key={`${CARD_KEY_PREFIX}-${targetId}`}
                         targetId={targetId}
                         details={sample.target.snippet}
