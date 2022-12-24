@@ -25,7 +25,7 @@ const StyledBox = styled(Box)({
 });
 
 interface Props extends CardProps {
-    rankColor: string;
+    rankColor: React.CSSProperties['color'];
 };
 
 export default function Card(
