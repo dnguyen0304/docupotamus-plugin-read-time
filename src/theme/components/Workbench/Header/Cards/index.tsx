@@ -4,11 +4,13 @@ import * as React from 'react';
 import { CARD_KEY_PREFIX } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
 import Card from '../Card';
-import styles from '../styles.module.css';
 
 // TODO(dnguyen0304): Add margin-bottom style.
 const StyledBox = styled(Box)({
-    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
 });
 
 // TODO(dnguyen0304): Add real implementation for border-top color.
@@ -49,7 +51,6 @@ export default function Cards(
                 const rankPrev = targetIdToPrevRank.get(targetId);
                 return (
                     <Card
-                        className={styles.header_card}
                         key={`${CARD_KEY_PREFIX}-${targetId}`}
                         targetId={targetId}
                         rankCurr={rankCurr}
