@@ -66,6 +66,8 @@ interface Props {
     ])[];
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
     readonly showMinute: boolean;
+    readonly clickedIndex: number;
+    readonly setClickedIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function Cards(
@@ -73,10 +75,10 @@ export default function Cards(
         keyedSamples,
         targetIdToPrevRank,
         showMinute,
+        clickedIndex,
+        setClickedIndex,
     }: Props
 ): JSX.Element {
-    const [clickedIndex, setClickedIndex] = React.useState<number>(0);
-
     return (
         <StyledBox>
             {keyedSamples.map((keyedSample, i) => {

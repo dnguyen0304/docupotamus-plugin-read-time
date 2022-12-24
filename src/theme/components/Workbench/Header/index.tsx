@@ -12,19 +12,28 @@ const StyledBox = styled(Box)({
     // backgroundColor: 'white',
 });
 
+interface Props extends Omit<
+    React.ComponentProps<typeof Cards>,
+    'clickedIndex' | 'setClickedIndex'
+> { };
+
 export default function Header(
     {
         keyedSamples,
         targetIdToPrevRank,
         showMinute,
-    }: React.ComponentProps<typeof Cards>
+    }: Props
 ): JSX.Element {
+    const [clickedIndex, setClickedIndex] = React.useState<number>(0);
+
     return (
         <StyledBox>
             <Cards
                 keyedSamples={keyedSamples}
                 targetIdToPrevRank={targetIdToPrevRank}
                 showMinute={showMinute}
+                clickedIndex={clickedIndex}
+                setClickedIndex={setClickedIndex}
             />
             {/* TODO(dnguyen0304): Add real implementation for ActiveInfo. */}
             <div />
