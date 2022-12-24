@@ -4,7 +4,7 @@ import * as React from 'react';
 import { CARD_KEY_PREFIX } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
 import Card from '../Card';
-import styles from '../styles.module.css';
+// import styles from './styles.module.css';
 
 // TODO(dnguyen0304): Add margin-bottom style.
 const StyledBox = styled(Box)({
@@ -42,6 +42,8 @@ export default function Cards(
         showMinute,
     }: Props
 ): JSX.Element {
+    const [clickedIndex, setClickedIndex] = React.useState<number>(0);
+
     return (
         <StyledBox>
             {keyedSamples.map((keyedSample, i) => {
@@ -49,10 +51,11 @@ export default function Cards(
                 const rankPrev = targetIdToPrevRank.get(targetId);
                 return (
                     <Card
-                        className={styles.header_card}
+                        // className={`${clickedIndex} ${styles.header_card} ${getClickClass(i, clickedIndex)}`}
                         key={`${CARD_KEY_PREFIX}-${targetId}`}
                         targetId={targetId}
                         details={sample.target.snippet}
+                        onClick={() => setClickedIndex(i)}
                         rankCurr={rankCurr}
                         rankPrev={rankPrev ? rankPrev : rankCurr}
                         rankColor={`var(--space-3xs) solid ${getColor(i)}`}
