@@ -25,6 +25,7 @@ const StyledBox = styled(Box)({
 });
 
 interface Props extends CardProps {
+    onClick: () => void;
     rankColor: React.CSSProperties['color'];
 };
 
@@ -34,6 +35,7 @@ export default function Card(
         targetId,
         rankColor,
         details,
+        onClick = () => { },
     }: Props
 ): JSX.Element {
     const [, setFlicker] = useFlicker(targetId);
@@ -43,11 +45,16 @@ export default function Card(
     // heading as the card symbol.
     const truncatedTargetId = targetId.split('-')[0];
 
+    const handleClick = () => {
+        onClick();
+        setFlicker(true);
+    };
+
     return (
         <StyledBox
             className={className}
             onAnimationEnd={() => setFlicker(false)}
-            onClick={() => setFlicker(true)}
+            onClick={handleClick}
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
             sx={{ borderTop: rankColor }}
