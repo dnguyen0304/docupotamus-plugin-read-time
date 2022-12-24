@@ -4,7 +4,7 @@ import type { StackProps } from '@mui/material/Stack';
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
 
-const ICON_WIDTH: string = '24px';
+const ICON_WIDTH: React.CSSProperties['width'] = '24px';
 
 type ArrowPosition = 'top' | 'right' | 'bottom' | 'left';
 

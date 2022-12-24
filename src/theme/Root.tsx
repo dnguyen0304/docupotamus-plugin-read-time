@@ -5,7 +5,7 @@ import '../styles.css';
 import App from '../theme/components/App';
 
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
-const COLOR_ACCENT_GREEN: string = '#64ffda';
+const COLOR_ACCENT_GREEN: React.CSSProperties['color'] = '#64ffda';
 
 const theme = createTheme({
     breakpoints: {

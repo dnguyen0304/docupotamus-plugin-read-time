@@ -16,7 +16,7 @@ type DeltaSize = 'sm' | 'md' | 'lg';
 
 interface Config {
     readonly leftOffsetPx: number;
-    readonly fontSize: string;
+    readonly fontSize: React.CSSProperties['fontSize'];
     readonly translateXPx: number;
 
     // Animations

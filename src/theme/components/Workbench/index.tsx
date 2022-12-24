@@ -17,7 +17,7 @@ const MILLISECOND_TO_SECOND: number = 1000;
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
-    readonly boxShadowWidth: string;
+    readonly boxShadowWidth: React.CSSProperties['width'];
 };
 
 const StyledBox = styled(Box, {
