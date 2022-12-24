@@ -15,12 +15,12 @@
 
 .card__notClickedLeft {
     opacity: 0.4;
-    transform: translateX(-40%) scale(0.8);
+    transform: translate(-40%, 8px) scale(0.8);
     z-index: 0;
 }
 
 .card__notClickedRight {
     opacity: 0.4;
-    transform: translateX(40%) scale(0.8);
+    transform: translate(40%, 8px) scale(0.8);
     z-index: 0;
 }
