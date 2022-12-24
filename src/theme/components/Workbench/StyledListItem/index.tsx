@@ -9,6 +9,7 @@ export default styled('li')({
     backgroundColor: 'rgb(48, 56, 70)',
     borderRadius: 'var(--border-radius)',
     color: '#fff',
+    cursor: 'pointer',
     fontSize: 'var(--font-size--2)',
     padding: 'var(--space-2xs)',
     '&:hover': {
