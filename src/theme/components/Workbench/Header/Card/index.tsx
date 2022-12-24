@@ -5,7 +5,7 @@ import MetricDelta from '../../Card/MetricDelta';
 import Rank from '../../Card/Rank';
 import useFlicker from '../../hooks/useFlicker';
 import useHighlight from '../../hooks/useHighlight';
-import StyledListItem from '../../ListItem';
+import ListItem from '../../ListItem';
 import type { CardProps } from '../../types';
 
 interface Props extends CardProps {
@@ -32,7 +32,7 @@ export default function Card(
     const truncatedTargetId = targetId.split('-')[0];
 
     return (
-        <StyledListItem
+        <ListItem
             className={className}
             onAnimationEnd={() => setFlicker(false)}
             onClick={() => setFlicker(true)}
@@ -57,6 +57,6 @@ export default function Card(
                 sx={{ textAlign: 'center' }}
             />
             <MetricDelta readTimeSecond={readTimeSecond} />
-        </StyledListItem>
+        </ListItem>
     );
 };
