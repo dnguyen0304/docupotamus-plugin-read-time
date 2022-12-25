@@ -39,8 +39,19 @@ const CURRENT_TO_CLICKED_TO_CLASS: ReadonlyMap<
 ]);
 
 const getClickedClass = (current: number, clicked: number): string => {
-    // TODO(dnguyen0304): Fix missing PositionIndex type assertion.
-    const className = CURRENT_TO_CLICKED_TO_CLASS.get(current)?.get(clicked);
+    if (current > BRONZE
+        || clicked > BRONZE
+        || current < GOLD
+        || clicked < GOLD
+    ) {
+        throw new Error(
+            `position must be between ${GOLD} and ${BRONZE}, inclusive`
+        );
+    }
+    const className =
+        CURRENT_TO_CLICKED_TO_CLASS
+            .get(current as PositionIndex)
+            ?.get(clicked as PositionIndex);
     return className ? className : '';
 }
 
