@@ -24,7 +24,11 @@ const StyledBox = styled(Box)({
     },
 });
 
-interface Props extends CardProps {
+interface Props extends Pick<CardProps,
+    'className' |
+    'targetId' |
+    'details'
+> {
     onClick: () => void;
     rankColor: React.CSSProperties['color'];
 };

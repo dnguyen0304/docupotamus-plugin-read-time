@@ -82,9 +82,8 @@ export default function Cards(
     return (
         <StyledBox>
             {keyedSamples.map((keyedSample, i) => {
-                const [targetId, sample, rankCurr] = keyedSample;
+                const [targetId, sample] = keyedSample;
                 const clickedClass = getClickedClass(i, clickedIndex);
-                const rankPrev = targetIdToPrevRank.get(targetId);
                 return (
                     <Card
                         className={`${styles.card} ${clickedClass}`}
@@ -92,11 +91,7 @@ export default function Cards(
                         targetId={targetId}
                         details={sample.target.snippet}
                         onClick={() => setClickedIndex(i)}
-                        rankCurr={rankCurr}
-                        rankPrev={rankPrev ? rankPrev : rankCurr}
                         rankColor={`var(--space-3xs) solid ${getColor(i)}`}
-                        readTimeSecond={sample.runningTotal.readTimeSecond}
-                        showMinute={showMinute}
                     />
                 );
             })}
