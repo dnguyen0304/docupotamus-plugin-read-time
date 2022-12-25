@@ -218,7 +218,7 @@ export default function Workbench(): JSX.Element {
                                     targetId={targetId}
                                     details={sample.target.snippet}
                                     rankCurr={rankCurr}
-                                    rankPrev={rankPrev ? rankPrev : rankCurr}
+                                    rankPrev={rankPrev}
                                     readTimeSecond={sample.runningTotal.readTimeSecond}
                                     showMinute={showMinute}
                                 />
