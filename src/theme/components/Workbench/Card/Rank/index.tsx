@@ -3,8 +3,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import type { StackProps } from '@mui/material/Stack';
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
-
-const ICON_WIDTH: React.CSSProperties['width'] = '24px';
+import { RANK_ICON_WIDTH } from '../../constants';
 
 type ArrowPosition = 'top' | 'right' | 'bottom' | 'left';
 
@@ -59,7 +58,7 @@ export default function Rank(
             sx={{
                 width:
                     arrowPosition === 'top' || arrowPosition === 'bottom'
-                        ? ICON_WIDTH
+                        ? RANK_ICON_WIDTH
                         : 'auto',
             }}
         >

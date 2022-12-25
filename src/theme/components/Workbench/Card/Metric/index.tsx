@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled, SxProps, Theme } from '@mui/material/styles';
 import * as React from 'react';
+import { RANK_ICON_WIDTH } from '../../constants';
 
 const SECOND_TO_MINUTE: number = 60;
 
@@ -24,6 +25,7 @@ const StyledBox = styled(Box, {
     // TODO(dnguyen0304): Replace temporary placeholder stub.
     backgroundColor: hasImproved ? 'darkgreen' : 'transparent',
     borderRadius: '2px',
+    lineHeight: RANK_ICON_WIDTH,
     marginLeft: 'auto',
     padding: '0 var(--space-3xs)',
 }));
