@@ -56,8 +56,8 @@ const StyledInnerBox = styled(Box)({
     flexDirection: 'column',
     justifyContent: 'space-between',
     flexGrow: 1,
-    padding: 'var(--space-xs)',
-    paddingRight: 0,
+    paddingBottom: 'var(--space-xs)',
+    paddingLeft: 'var(--space-xs)',
 });
 
 const StyledOrderedList = styled('ol')({
