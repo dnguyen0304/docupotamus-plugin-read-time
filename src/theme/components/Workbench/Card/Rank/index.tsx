@@ -39,7 +39,10 @@ export default function Rank(
     const resolvedPrev = (prev !== undefined) ? prev : curr;
     const isVertical = arrowPosition === 'top' || arrowPosition === 'bottom';
 
-    const getArrow = (change: number): JSX.Element | null => {
+    const getArrow = (
+        change: number,
+        isVertical: boolean,
+    ): JSX.Element | null => {
         if (change > 0) {
             // TODO(dnguyen0304): Replace temporary placeholder stub.
             return <ArrowDropUpIcon sx={{ color: 'green' }} />;
@@ -48,7 +51,11 @@ export default function Rank(
             // TODO(dnguyen0304): Replace temporary placeholder stub.
             return <ArrowDropDownIcon sx={{ color: 'red' }} />;
         }
-        return null;
+        return (
+            isVertical
+                ? null
+                : <ArrowDropDownIcon sx={{ visibility: 'hidden' }} />
+        );
     };
 
     return (
@@ -59,7 +66,7 @@ export default function Rank(
             sx={{ width: isVertical ? RANK_ICON_WIDTH : 'auto' }}
         >
             {curr}
-            {getArrow(resolvedPrev - curr)}
+            {getArrow(resolvedPrev - curr, isVertical)}
         </Stack>
     );
 };
