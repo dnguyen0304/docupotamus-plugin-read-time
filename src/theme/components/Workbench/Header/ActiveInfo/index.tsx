@@ -1,47 +1,52 @@
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import Metric from '../../Card/Metric';
-import MetricDelta from '../../Card/MetricDelta';
-import Rank from '../../Card/Rank';
-import type { CardProps } from '../../types';
+import type { Sample as WorkbenchSample } from '../../types';
+import Item from './Item';
 
-const StyledBox = styled(Box)({
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-});
-
-interface Props extends Pick<
-    CardProps,
-    'rankCurr' | 'rankPrev' | 'readTimeSecond' | 'showMinute'
-> { };
+interface Props {
+    readonly keyedSamples: readonly (readonly [
+        string,
+        WorkbenchSample,
+        number,
+    ])[];
+    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
+    readonly showMinute: boolean;
+    readonly clickedIndex: number;
+};
 
 export default function ActiveInfo(
     {
-        rankCurr,
-        rankPrev,
-        readTimeSecond,
+        keyedSamples,
+        targetIdToPrevRank,
         showMinute,
+        clickedIndex,
     }: Props
-): JSX.Element {
+): JSX.Element | null {
+    if (keyedSamples.length <= clickedIndex) {
+        return null;
+    }
+
     return (
-        <StyledBox>
-            <Rank
-                curr={rankCurr}
-                prev={rankPrev}
-                arrowPosition='left'
-            />
-            <Metric
-                readTimeSecond={readTimeSecond}
-                showMinute={showMinute}
-                sx={{
-                    marginLeft: 0,
-                    textAlign: 'center',
-                }}
-            />
-            <MetricDelta readTimeSecond={readTimeSecond} />
-        </StyledBox>
+        <div style={{
+            height: '25px',
+            overflow: 'hidden',
+        }}>
+            <div style={{
+                transition: 'translate 0.4s ease-in',
+                translate: `0  -${(clickedIndex ? clickedIndex : 0) * 25}px`,
+            }}>
+                {keyedSamples.map((keyedSample) => {
+                    const [targetId, sample, rankCurr] = keyedSample;
+                    const rankPrev = targetIdToPrevRank.get(targetId);
+                    return (
+                        <Item
+                            rankCurr={rankCurr}
+                            rankPrev={rankPrev}
+                            readTimeSecond={sample.runningTotal.readTimeSecond}
+                            showMinute={showMinute}
+                        />
+                    );
+                })}
+            </div>
+        </div>
     );
 };

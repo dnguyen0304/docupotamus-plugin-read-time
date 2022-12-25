@@ -35,22 +35,6 @@ export default function Header(
 ): JSX.Element {
     const [clickedIndex, setClickedIndex] = React.useState<number>(0);
 
-    const getActiveInfo = (): JSX.Element | null => {
-        if (keyedSamples.length <= clickedIndex) {
-            return null;
-        }
-        const [targetId, sample, rankCurr] = keyedSamples[clickedIndex];
-        const rankPrev = targetIdToPrevRank.get(targetId);
-        return (
-            <ActiveInfo
-                rankCurr={rankCurr}
-                rankPrev={rankPrev}
-                readTimeSecond={sample.runningTotal.readTimeSecond}
-                showMinute={showMinute}
-            />
-        );
-    };
-
     return (
         <StyledBox>
             <Cards
@@ -58,7 +42,12 @@ export default function Header(
                 clickedIndex={clickedIndex}
                 setClickedIndex={setClickedIndex}
             />
-            {getActiveInfo()}
+            <ActiveInfo
+                keyedSamples={keyedSamples}
+                targetIdToPrevRank={targetIdToPrevRank}
+                showMinute={showMinute}
+                clickedIndex={clickedIndex}
+            />
         </StyledBox>
     );
 };
