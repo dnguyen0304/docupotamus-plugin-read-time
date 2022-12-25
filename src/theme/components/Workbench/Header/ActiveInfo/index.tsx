@@ -3,6 +3,8 @@ import * as React from 'react';
 import type { Sample as WorkbenchSample } from '../../types';
 import Item from './Item';
 
+const KEY_PREFIX: string = 'activeInfoItem';
+
 interface Props {
     readonly keyedSamples: readonly (readonly [
         string,
@@ -40,6 +42,7 @@ export default function ActiveInfo(
                     const rankPrev = targetIdToPrevRank.get(targetId);
                     return (
                         <Item
+                            key={`${KEY_PREFIX}-${targetId}`}
                             rankCurr={rankCurr}
                             rankPrev={rankPrev}
                             readTimeSecond={sample.runningTotal.readTimeSecond}
