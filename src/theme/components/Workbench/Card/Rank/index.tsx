@@ -37,6 +37,7 @@ export default function Rank(
     }: Props
 ): JSX.Element {
     const resolvedPrev = (prev !== undefined) ? prev : curr;
+    const isVertical = arrowPosition === 'top' || arrowPosition === 'bottom';
 
     const getArrow = (change: number): JSX.Element | null => {
         if (change > 0) {
@@ -55,12 +56,7 @@ export default function Rank(
             direction={getDirection(arrowPosition)}
             justifyContent='center'
             alignItems='center'
-            sx={{
-                width:
-                    arrowPosition === 'top' || arrowPosition === 'bottom'
-                        ? RANK_ICON_WIDTH
-                        : 'auto',
-            }}
+            sx={{ width: isVertical ? RANK_ICON_WIDTH : 'auto' }}
         >
             {curr}
             {getArrow(resolvedPrev - curr)}
