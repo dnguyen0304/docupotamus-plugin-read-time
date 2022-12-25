@@ -25,7 +25,7 @@ const getDirection = (
 
 interface Props {
     readonly curr: number;
-    readonly prev?: number;
+    readonly prev: number | undefined;
     readonly arrowPosition: ArrowPosition;
 };
 

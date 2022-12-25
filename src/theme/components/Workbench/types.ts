@@ -15,7 +15,7 @@ export interface CardProps {
     readonly targetId: string;
     readonly details: string;
     readonly rankCurr: number;
-    readonly rankPrev: number;
+    readonly rankPrev: number | undefined;
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
 };
