@@ -23,6 +23,7 @@ const getDirection = (
 };
 
 interface Props {
+    readonly className?: string;
     readonly curr: number;
     readonly prev: number | undefined;
     readonly arrowPosition: ArrowPosition;
@@ -31,6 +32,7 @@ interface Props {
 // TODO(dnguyen0304): Add tooltip for rank change.
 export default function Rank(
     {
+        className,
         curr,
         prev,
         arrowPosition,
@@ -52,6 +54,7 @@ export default function Rank(
 
     return (
         <Stack
+            className={className}
             direction={getDirection(arrowPosition)}
             justifyContent='center'
             alignItems='center'
