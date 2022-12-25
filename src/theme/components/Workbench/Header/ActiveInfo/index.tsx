@@ -7,6 +7,10 @@ import Rank from '../../Card/Rank';
 import type { CardProps } from '../../types';
 
 const StyledBox = styled(Box)({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
 });
 
 interface Props extends Pick<
@@ -32,7 +36,10 @@ export default function ActiveInfo(
             <Metric
                 readTimeSecond={readTimeSecond}
                 showMinute={showMinute}
-                sx={{ textAlign: 'center' }}
+                sx={{
+                    marginLeft: 0,
+                    textAlign: 'center',
+                }}
             />
             <MetricDelta readTimeSecond={readTimeSecond} />
         </StyledBox>
