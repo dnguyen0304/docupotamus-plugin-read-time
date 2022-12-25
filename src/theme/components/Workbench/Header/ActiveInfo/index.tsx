@@ -32,7 +32,7 @@ export default function ActiveInfo(
         }}>
             <div style={{
                 transition: 'translate 0.4s ease-in',
-                translate: `0  -${(clickedIndex ? clickedIndex : 0) * 25}px`,
+                translate: `0 -${(clickedIndex ? clickedIndex : 0) * 25}px`,
             }}>
                 {keyedSamples.map((keyedSample) => {
                     const [targetId, sample, rankCurr] = keyedSample;
