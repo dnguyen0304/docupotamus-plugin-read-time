@@ -7,7 +7,7 @@ import {
 } from '../constants';
 import useFlicker from '../hooks/useFlicker';
 import useHighlight from '../hooks/useHighlight';
-import BaseListItem from '../ListItem';
+import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
 import Metric from './Metric';
 import MetricDelta from './MetricDelta';
@@ -16,7 +16,9 @@ import Rank from './Rank';
 const BOX_SHADOW_WIDTH_REM: number =
     CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
 
-const StyledListItem = styled(BaseListItem)({
+const StyledListItem = styled('li')({
+    ...CardStyles,
+    position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
