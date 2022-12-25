@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import * as React from 'react';
 import type { Sample as WorkbenchSample } from '../../types';
 import Item from './Item';
@@ -26,11 +27,11 @@ export default function ActiveInfo(
     }
 
     return (
-        <div style={{
+        <Box sx={{
             height: '25px',
             overflow: 'hidden',
         }}>
-            <div style={{
+            <Box sx={{
                 transition: 'translate 0.4s ease-in',
                 translate: `0 -${(clickedIndex ? clickedIndex : 0) * 25}px`,
             }}>
@@ -46,7 +47,7 @@ export default function ActiveInfo(
                         />
                     );
                 })}
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 };
