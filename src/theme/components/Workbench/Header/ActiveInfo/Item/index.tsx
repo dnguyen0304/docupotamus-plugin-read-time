@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Metric from '../../../Card/Metric';
@@ -6,7 +5,7 @@ import MetricDelta from '../../../Card/MetricDelta';
 import Rank from '../../../Card/Rank';
 import type { CardProps } from '../../../types';
 
-const StyledBox = styled(Box)({
+const StyledListItem = styled('li')({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -27,7 +26,7 @@ export default function Item(
     }: Props
 ): JSX.Element {
     return (
-        <StyledBox>
+        <StyledListItem>
             <Rank
                 curr={rankCurr}
                 prev={rankPrev}
@@ -42,6 +41,6 @@ export default function Item(
                 }}
             />
             <MetricDelta readTimeSecond={readTimeSecond} />
-        </StyledBox>
+        </StyledListItem>
     );
 };

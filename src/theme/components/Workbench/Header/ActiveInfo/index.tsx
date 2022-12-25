@@ -33,7 +33,7 @@ export default function ActiveInfo(
             height: '25px',
             overflow: 'hidden',
         }}>
-            <Box sx={{
+            <ol style={{
                 transition: 'translate 0.4s ease-in',
                 translate: `0 -${(clickedIndex ? clickedIndex : 0) * 25}px`,
             }}>
@@ -50,7 +50,7 @@ export default function ActiveInfo(
                         />
                     );
                 })}
-            </Box>
+            </ol>
         </Box>
     );
 };
