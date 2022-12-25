@@ -56,7 +56,12 @@ export default function Rank(
             direction={getDirection(arrowPosition)}
             justifyContent='center'
             alignItems='center'
-            sx={{ width: ICON_WIDTH }}
+            sx={{
+                width:
+                    arrowPosition === 'top' || arrowPosition === 'bottom'
+                        ? ICON_WIDTH
+                        : 'auto',
+            }}
         >
             {curr}
             {getArrow(resolvedPrev - curr)}
