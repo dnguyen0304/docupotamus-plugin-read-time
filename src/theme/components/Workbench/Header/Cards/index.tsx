@@ -64,8 +64,6 @@ interface Props {
         WorkbenchSample,
         number,
     ])[];
-    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
-    readonly showMinute: boolean;
     readonly clickedIndex: number;
     readonly setClickedIndex: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -73,8 +71,6 @@ interface Props {
 export default function Cards(
     {
         keyedSamples,
-        targetIdToPrevRank,
-        showMinute,
         clickedIndex,
         setClickedIndex,
     }: Props
