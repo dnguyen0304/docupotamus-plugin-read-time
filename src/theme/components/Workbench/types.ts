@@ -11,7 +11,6 @@ export interface Sample {
 };
 
 export interface CardProps {
-    // TODO(dnguyen0304): Investigate removing optional.
     readonly className?: string;
     readonly targetId: string;
     readonly details: string;
