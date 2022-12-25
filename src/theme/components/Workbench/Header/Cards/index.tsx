@@ -87,7 +87,7 @@ export default function Cards(
                         targetId={targetId}
                         details={sample.target.snippet}
                         onClick={() => setClickedIndex(i)}
-                        rankColor={`var(--space-3xs) solid ${getColor(i)}`}
+                        rankColor={getColor(i)}
                     />
                 );
             })}
