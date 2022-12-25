@@ -11,6 +11,7 @@ export interface Sample {
 };
 
 export interface CardProps {
+    // TODO(dnguyen0304): Investigate extracting to CommonProps similar to @mui.
     readonly className?: string;
     readonly targetId: string;
     readonly details: string;
