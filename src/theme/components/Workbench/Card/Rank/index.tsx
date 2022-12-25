@@ -25,7 +25,7 @@ const getDirection = (
 
 interface Props {
     readonly curr: number;
-    readonly prev: number;
+    readonly prev?: number;
     readonly arrowPosition: ArrowPosition;
 };
 
@@ -37,6 +37,8 @@ export default function Rank(
         arrowPosition,
     }: Props
 ): JSX.Element {
+    const resolvedPrev = (prev !== undefined) ? prev : curr;
+
     const getArrow = (change: number): JSX.Element | null => {
         if (change > 0) {
             // TODO(dnguyen0304): Replace temporary placeholder stub.
@@ -57,7 +59,7 @@ export default function Rank(
             sx={{ width: ICON_WIDTH }}
         >
             {curr}
-            {getArrow(prev - curr)}
+            {getArrow(resolvedPrev - curr)}
         </Stack>
     );
 };
