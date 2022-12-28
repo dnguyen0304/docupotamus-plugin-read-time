@@ -38,6 +38,7 @@ export default function ActiveInfo(
     return (
         <Box sx={{
             height: RANK_ICON_WIDTH,
+            marginTop: 'auto',
             overflow: 'hidden',
         }}>
             <ol style={{

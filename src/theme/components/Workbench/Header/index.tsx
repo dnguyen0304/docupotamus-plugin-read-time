@@ -13,7 +13,6 @@ const StyledBox = styled(Box)({
     height: HEIGHT,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     borderRadius: 'var(--border-radius) 0 var(--space-s) var(--space-s)',
     padding: 'var(--space-xs)',
     // backgroundColor: 'white',
