@@ -43,6 +43,7 @@ interface Props {
     readonly marginLeftFactor?: number,
     readonly minWidthFactor?: number,
     readonly sx?: SxProps<Theme>;
+    readonly withDelta?: boolean;
 };
 
 // TODO(dnguyen0304): Add tooltip for rank change.
@@ -53,6 +54,7 @@ export default function Metric(
         marginLeftFactor = 1,
         minWidthFactor = 1,
         sx,
+        withDelta = false,
     }: Props
 ): JSX.Element {
     const [originalReadTimeSecond, setOriginalReadTimeSecond] =
@@ -80,7 +82,7 @@ export default function Metric(
             >
                 {format(readTimeSecond, showMinute)}
             </StyledBox>
-            <Delta readTimeSecond={readTimeSecond} />
+            {withDelta ? <Delta readTimeSecond={readTimeSecond} /> : null}
         </Box>
     );
 };

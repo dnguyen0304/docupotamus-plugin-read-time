@@ -75,6 +75,7 @@ export default function Card(
                 readTimeSecond={readTimeSecond}
                 showMinute={showMinute}
                 sx={{ textAlign: 'right' }}
+                withDelta
             />
         </StyledListItem>
     );
