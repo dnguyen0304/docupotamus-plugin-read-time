@@ -55,7 +55,6 @@ const StyledInnerBox = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    flexGrow: 1,
     paddingBottom: 'var(--space-xs)',
     paddingLeft: 'var(--space-xs)',
 });
