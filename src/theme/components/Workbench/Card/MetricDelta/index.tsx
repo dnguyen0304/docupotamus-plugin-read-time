@@ -12,7 +12,7 @@ const HIDE: number = 0;
 // How long to wait after the refresh rate before hiding the delta.
 const HIDE_BUFFER_MILLI: number = 500;
 
-type DeltaSize = 'sm' | 'md' | 'lg';
+type DeltaSize = 's' | 'm' | 'l';
 
 interface Config {
     readonly leftOffsetPx: number;
@@ -36,7 +36,7 @@ const CONFIG_DEFAULT: Config = {
 // font-size.
 const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
     [
-        'sm',
+        's',
         {
             leftOffsetPx: 6,
             fontSize: 'var(--font-size--3)',
@@ -46,7 +46,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
         },
     ],
     [
-        'md',
+        'm',
         {
             leftOffsetPx: 8,
             fontSize: 'var(--font-size--2)',
@@ -56,7 +56,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
         },
     ],
     [
-        'lg',
+        'l',
         {
             leftOffsetPx: 10,
             fontSize: 'var(--font-size--1)',
@@ -70,11 +70,11 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
 const getConfig = (delta: number): Config => {
     let config: Config | undefined;
     if (delta < 2) {
-        config = SIZE_TO_CONFIG.get('sm');
+        config = SIZE_TO_CONFIG.get('s');
     } else if (delta >= 2 && delta < 4) {
-        config = SIZE_TO_CONFIG.get('md');
+        config = SIZE_TO_CONFIG.get('m');
     } else if (delta >= 4) {
-        config = SIZE_TO_CONFIG.get('lg');
+        config = SIZE_TO_CONFIG.get('l');
     }
     if (!config) {
         return CONFIG_DEFAULT;

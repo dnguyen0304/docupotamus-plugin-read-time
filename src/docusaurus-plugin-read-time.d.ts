@@ -13,9 +13,9 @@ declare module '@docusaurus/types' {
 declare module '@mui/material/styles' {
     interface BreakpointOverrides {
         xs: false;
-        sm: false;
-        md: false;
-        lg: false;
+        s: false;
+        m: false;
+        l: false;
         xl: false;
         mobile: true;
     }
