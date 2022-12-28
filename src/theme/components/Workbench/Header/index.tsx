@@ -16,8 +16,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
     flexDirection: 'column',
     background: `linear-gradient(
         to bottom,
-        ${theme.palette.grey[600]} 0%,
-        ${Color(theme.palette.grey[800]).fade(0.3)} 50%)`,
+        ${theme.palette.grey[700]} 0%,
+        ${Color(theme.palette.grey[800]).fade(0.5)} 30%)`,
     borderRadius: 'var(--border-radius) 0 var(--space-s) var(--space-s)',
     padding: 'var(--space-l) var(--space-xs)',
 }));
