@@ -36,6 +36,7 @@ const StyledBox = styled(Box, {
 interface Props {
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
+    readonly marginLeftFactor?: number,
     readonly minWidthFactor?: number,
     readonly sx?: SxProps<Theme>;
 };
@@ -45,6 +46,7 @@ export default function Metric(
     {
         readTimeSecond,
         showMinute,
+        marginLeftFactor = 1,
         minWidthFactor = 1,
         sx,
     }: Props
@@ -64,7 +66,7 @@ export default function Metric(
     return (
         <Box sx={{
             flexGrow: 1,
-            marginLeft: 'var(--space-3xs)',
+            marginLeft: `calc(${marginLeftFactor} * var(--space-3xs))`,
         }}>
             <StyledBox
                 hasImproved={hasImproved}
