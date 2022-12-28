@@ -21,7 +21,7 @@ interface ContextValue {
 
 const Context = React.createContext<ContextValue | undefined>(undefined);
 
-function useContextValue(): ContextValue {
+const useContextValue = (): ContextValue => {
     const [targetIdToSamples, setTargetIdToSamples] =
         React.useState<TargetIdToSamples>({});
 
@@ -41,7 +41,7 @@ interface Props {
     readonly children: React.ReactNode;
 };
 
-export function SamplesProvider({ children }: Props): JSX.Element {
+export const SamplesProvider = ({ children }: Props): JSX.Element => {
     const value = useContextValue();
 
     return (
@@ -51,7 +51,7 @@ export function SamplesProvider({ children }: Props): JSX.Element {
     );
 };
 
-export function useSamples(): ContextValue {
+export const useSamples = (): ContextValue => {
     const context = React.useContext(Context);
     if (context === undefined) {
         throw new ReactContextError('SamplesProvider');
