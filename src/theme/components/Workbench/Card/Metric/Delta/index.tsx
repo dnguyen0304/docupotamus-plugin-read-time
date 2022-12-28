@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import { keyframes } from '@mui/system';
 import * as React from 'react';
-import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../../../constants';
-import { dayjs } from '../../../../../services';
+import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../../../../constants';
+import { dayjs } from '../../../../../../services';
 import styles from './styles.module.css';
 
 // Special value to hide the metric delta.
@@ -127,7 +127,7 @@ interface Props {
     readonly readTimeSecond: number;
 };
 
-export default function MetricDelta(
+export default function Delta(
     {
         readTimeSecond,
     }: Props

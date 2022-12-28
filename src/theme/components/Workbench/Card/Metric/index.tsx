@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { styled, SxProps, Theme } from '@mui/material/styles';
 import * as React from 'react';
 import { METRIC_BORDER_WIDTH, RANK_ICON_WIDTH } from '../../constants';
-import MetricDelta from '../MetricDelta';
+import Delta from './Delta';
 
 const SECOND_TO_MINUTE: number = 60;
 
@@ -80,7 +80,7 @@ export default function Metric(
             >
                 {format(readTimeSecond, showMinute)}
             </StyledBox>
-            <MetricDelta readTimeSecond={readTimeSecond} />
+            <Delta readTimeSecond={readTimeSecond} />
         </Box>
     );
 };
