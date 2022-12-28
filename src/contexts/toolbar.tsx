@@ -9,7 +9,7 @@ interface ContextValue {
 
 const Context = React.createContext<ContextValue | undefined>(undefined);
 
-function useContextValue(): ContextValue {
+const useContextValue = (): ContextValue => {
     const {
         docupotamusReadTimePlugin: {
             workbenchIsOpen: workbenchIsOpenDefault,
@@ -35,7 +35,7 @@ interface Props {
     readonly children: React.ReactNode;
 };
 
-export function ToolbarProvider({ children }: Props): JSX.Element {
+export const ToolbarProvider = ({ children }: Props): JSX.Element => {
     const value = useContextValue();
 
     return (
@@ -45,7 +45,7 @@ export function ToolbarProvider({ children }: Props): JSX.Element {
     );
 };
 
-export function useToolbar(): ContextValue {
+export const useToolbar = (): ContextValue => {
     const context = React.useContext(Context);
     if (context === undefined) {
         throw new ReactContextError('ToolbarProvider');
