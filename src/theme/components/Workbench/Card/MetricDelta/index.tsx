@@ -32,6 +32,8 @@ const CONFIG_DEFAULT: Config = {
     sparkleIsEnabled: false,
 };
 
+// TODO(dnguyen0304): Investigate migrating from px to em units to scale with
+// font-size.
 const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
     [
         'sm',
