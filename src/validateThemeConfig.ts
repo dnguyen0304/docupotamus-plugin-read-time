@@ -78,9 +78,9 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
         .default(DEFAULT_THEME_CONFIG),
 });
 
-export function validateThemeConfig({
+export const validateThemeConfig = ({
     validate,
     themeConfig,
-}: ThemeConfigValidationContext<ThemeConfig>): ThemeConfig {
+}: ThemeConfigValidationContext<ThemeConfig>): ThemeConfig => {
     return validate(ThemeConfigSchema, themeConfig);
 };
