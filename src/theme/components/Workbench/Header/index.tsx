@@ -15,6 +15,7 @@ const StyledBox = styled(Box)({
     flexDirection: 'column',
     borderRadius: 'var(--border-radius) 0 var(--space-s) var(--space-s)',
     padding: 'var(--space-xs)',
+    paddingTop: 'var(--space-l)',
     // backgroundColor: 'white',
 });
 
