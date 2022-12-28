@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { ACTIVE_INFO_ITEM_HEIGHT } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
@@ -11,6 +12,12 @@ const INFIMA_OVERRIDE_OL = {
     marginBottom: 0,
     paddingLeft: 0,
 };
+
+const StyledBox = styled(Box)({
+    height: ACTIVE_INFO_ITEM_HEIGHT,
+    marginTop: 'auto',
+    overflow: 'hidden',
+});
 
 interface Props {
     readonly keyedSamples: readonly (readonly [
@@ -36,11 +43,7 @@ export default function ActiveInfo(
     }
 
     return (
-        <Box sx={{
-            height: ACTIVE_INFO_ITEM_HEIGHT,
-            marginTop: 'auto',
-            overflow: 'hidden',
-        }}>
+        <StyledBox>
             <ol style={{
                 ...INFIMA_OVERRIDE_OL,
                 transition: 'translate 0.4s ease-in',
@@ -63,6 +66,6 @@ export default function ActiveInfo(
                     );
                 })}
             </ol>
-        </Box>
+        </StyledBox>
     );
 };
