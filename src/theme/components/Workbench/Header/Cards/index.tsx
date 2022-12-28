@@ -1,14 +1,9 @@
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { CARD_KEY_PREFIX } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
 import Card from '../Card';
 import styles from './styles.module.css';
-
-const StyledBox = styled(Box)({
-    position: 'relative',
-});
 
 type PositionIndex = 0 | 1 | 2;
 
@@ -86,7 +81,7 @@ export default function Cards(
     }: Props
 ): JSX.Element {
     return (
-        <StyledBox>
+        <Box sx={{ position: 'relative' }}>
             {keyedSamples.map((keyedSample, i) => {
                 const [targetId, sample] = keyedSample;
                 const clickedClass = getClickedClass(i, clickedIndex);
@@ -101,6 +96,6 @@ export default function Cards(
                     />
                 );
             })}
-        </StyledBox>
+        </Box>
     );
 };
