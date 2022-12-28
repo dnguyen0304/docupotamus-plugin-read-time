@@ -6,7 +6,6 @@ import type { Sample as WorkbenchSample } from '../../types';
 import Card from '../Card';
 import styles from './styles.module.css';
 
-// TODO(dnguyen0304): Add margin-bottom style.
 const StyledBox = styled(Box)({
     position: 'relative',
 });
