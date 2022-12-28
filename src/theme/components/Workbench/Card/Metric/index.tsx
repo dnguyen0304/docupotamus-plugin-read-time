@@ -22,6 +22,8 @@ interface StyledBoxProps {
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'hasImproved',
 })<StyledBoxProps>(({ hasImproved }) => ({
+    width: 'fit-content',
+    minWidth: 'min(50px, 100%)',
     // TODO(dnguyen0304): Replace temporary placeholder stub.
     backgroundColor: hasImproved ? 'darkgreen' : 'transparent',
     borderRadius: '2px',
@@ -57,8 +59,10 @@ export default function Metric(
     }, [readTimeSecond]);
 
     return (
-        <StyledBox hasImproved={hasImproved} sx={sx}>
-            {format(readTimeSecond, showMinute)}
-        </StyledBox>
+        <Box sx={{ flexGrow: 1 }}>
+            <StyledBox hasImproved={hasImproved} sx={sx}>
+                {format(readTimeSecond, showMinute)}
+            </StyledBox>
+        </Box>
     );
 };
