@@ -10,7 +10,6 @@ import useHighlight from '../hooks/useHighlight';
 import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
 import Metric from './Metric';
-import MetricDelta from './MetricDelta';
 import Rank from './Rank';
 
 const BOX_SHADOW_WIDTH_REM: number =
@@ -77,7 +76,6 @@ export default function Card(
                 showMinute={showMinute}
                 sx={{ textAlign: 'right' }}
             />
-            <MetricDelta readTimeSecond={readTimeSecond} />
         </StyledListItem>
     );
 };
