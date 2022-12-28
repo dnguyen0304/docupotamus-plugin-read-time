@@ -1,7 +1,6 @@
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Metric from '../../../Card/Metric';
-import Delta from '../../../Card/Metric/Delta';
 import Rank from '../../../Card/Rank';
 import type { CardProps } from '../../../types';
 
@@ -42,7 +41,6 @@ export default function Item(
                 minWidthFactor={1.5}
                 sx={{ textAlign: 'center' }}
             />
-            <Delta readTimeSecond={readTimeSecond} />
         </StyledListItem>
     );
 };
