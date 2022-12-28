@@ -6,10 +6,13 @@ import Rank from '../../../Card/Rank';
 import type { CardProps } from '../../../types';
 
 const StyledListItem = styled('li')({
+    width: 'fit-content',
+    minWidth: '40%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    margin: '0 auto',
 });
 
 interface Props extends Pick<
@@ -35,10 +38,9 @@ export default function Item(
             <Metric
                 readTimeSecond={readTimeSecond}
                 showMinute={showMinute}
-                sx={{
-                    marginLeft: 0,
-                    textAlign: 'center',
-                }}
+                marginLeftFactor={2}
+                minWidthFactor={1.5}
+                sx={{ textAlign: 'center' }}
             />
             <MetricDelta readTimeSecond={readTimeSecond} />
         </StyledListItem>
