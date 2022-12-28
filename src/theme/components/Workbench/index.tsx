@@ -11,9 +11,11 @@ import Card from './Card';
 import { CARD_KEY_PREFIX } from './constants';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
-import Header from './Header';
+import Header, { HEIGHT as HEADER_HEIGHT } from './Header';
 import type { Sample as WorkbenchSample } from './types';
 const MILLISECOND_TO_SECOND: number = 1000;
+
+const HEIGHT: React.CSSProperties['height'] = '100vh';
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
@@ -25,7 +27,7 @@ const StyledBox = styled(Box, {
 })<StyledBoxProps>(({ theme, workbenchIsOpen, boxShadowWidth }) => ({
     position: 'sticky',
     top: 0,
-    height: '100vh',
+    height: HEIGHT,
     display: workbenchIsOpen ? 'flex' : 'none',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -52,10 +54,12 @@ const StyledBox = styled(Box, {
 }));
 
 const StyledInnerBox = styled(Box)({
+    // TODO(dnguyen0304): Investigate if intrinsic sizing based on content for
+    // the header is possible to support responsive design.
+    height: `calc(${HEIGHT} - ${HEADER_HEIGHT})`,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    flexGrow: 1,
     paddingBottom: 'var(--space-xs)',
     paddingLeft: 'var(--space-xs)',
 });
