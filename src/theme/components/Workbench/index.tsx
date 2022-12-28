@@ -256,7 +256,7 @@ export default function Workbench(): JSX.Element {
         //   See: https://mui.com/material-ui/react-list/
         <StyledBox
             workbenchIsOpen={workbenchIsOpen}
-            boxShadowWidth={'var(--space-xs)'}
+            boxShadowWidth='var(--space-xs)'
         >
             {partitionCards()}
         </StyledBox>
