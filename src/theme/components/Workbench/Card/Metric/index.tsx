@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled, SxProps, Theme } from '@mui/material/styles';
 import * as React from 'react';
-import { RANK_ICON_WIDTH } from '../../constants';
+import { METRIC_BORDER_WIDTH, RANK_ICON_WIDTH } from '../../constants';
 
 const SECOND_TO_MINUTE: number = 60;
 
@@ -27,7 +27,10 @@ const StyledBox = styled(Box, {
     minWidth: `min(calc(${minWidthFactor} * 50px), 100%)`,
     // TODO(dnguyen0304): Replace temporary placeholder stub.
     backgroundColor: hasImproved ? 'darkgreen' : 'transparent',
+    borderColor: hasImproved ? 'transparent' : 'rgba(255, 255, 255, 0.8)',
     borderRadius: '2px',
+    borderStyle: 'solid',
+    borderWidth: METRIC_BORDER_WIDTH,
     lineHeight: RANK_ICON_WIDTH,
     marginLeft: 'auto',
     padding: '0 var(--space-3xs)',

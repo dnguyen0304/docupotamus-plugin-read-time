@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import * as React from 'react';
-import { RANK_ICON_WIDTH } from '../../constants';
+import { ACTIVE_INFO_ITEM_HEIGHT } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
 import Item from './Item';
 
@@ -37,7 +37,7 @@ export default function ActiveInfo(
 
     return (
         <Box sx={{
-            height: RANK_ICON_WIDTH,
+            height: ACTIVE_INFO_ITEM_HEIGHT,
             marginTop: 'auto',
             overflow: 'hidden',
         }}>
@@ -46,7 +46,8 @@ export default function ActiveInfo(
                 transition: 'translate 0.4s ease-in',
                 // Keep the -1 factor separate to code defensively against the
                 // unpredictable CSS width property.
-                translate: `0 calc(-1 * ${clickedIndex} * ${RANK_ICON_WIDTH})`,
+                translate:
+                    `0 calc(-1 * ${clickedIndex} * ${ACTIVE_INFO_ITEM_HEIGHT})`,
             }}>
                 {keyedSamples.map((keyedSample) => {
                     const [targetId, sample, rankCurr] = keyedSample;
