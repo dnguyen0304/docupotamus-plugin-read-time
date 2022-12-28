@@ -19,6 +19,20 @@ const StyledBox = styled(Box)({
     overflow: 'hidden',
 });
 
+interface StyledOrderedListProps {
+    readonly clickedIndex: number;
+};
+
+const StyledOrderedList = styled('ol', {
+    shouldForwardProp: (prop) => prop !== 'clickedIndex',
+})<StyledOrderedListProps>(({ clickedIndex }) => ({
+    ...INFIMA_OVERRIDE_OL,
+    transition: 'translate 0.4s ease-in',
+    // Keep the -1 factor separate to code defensively against the
+    // unpredictable CSS width property.
+    translate: `0 calc(-1 * ${clickedIndex} * ${ACTIVE_INFO_ITEM_HEIGHT})`,
+}));
+
 interface Props {
     readonly keyedSamples: readonly (readonly [
         string,
@@ -44,14 +58,7 @@ export default function ActiveInfo(
 
     return (
         <StyledBox>
-            <ol style={{
-                ...INFIMA_OVERRIDE_OL,
-                transition: 'translate 0.4s ease-in',
-                // Keep the -1 factor separate to code defensively against the
-                // unpredictable CSS width property.
-                translate:
-                    `0 calc(-1 * ${clickedIndex} * ${ACTIVE_INFO_ITEM_HEIGHT})`,
-            }}>
+            <StyledOrderedList clickedIndex={clickedIndex}>
                 {keyedSamples.map((keyedSample) => {
                     const [targetId, sample, rankCurr] = keyedSample;
                     const rankPrev = targetIdToPrevRank.get(targetId);
@@ -65,7 +72,7 @@ export default function ActiveInfo(
                         />
                     );
                 })}
-            </ol>
+            </StyledOrderedList>
         </StyledBox>
     );
 };
