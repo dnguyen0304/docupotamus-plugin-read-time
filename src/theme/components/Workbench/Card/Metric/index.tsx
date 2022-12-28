@@ -16,14 +16,15 @@ const format = (totalSeconds: number, showMinute: boolean): string => {
 
 interface StyledBoxProps {
     readonly hasImproved: boolean;
+    readonly minWidth: React.CSSProperties['width'],
 };
 
 // TODO(dnguyen0304): Investigate adding fixed width style.
 const StyledBox = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'hasImproved',
-})<StyledBoxProps>(({ hasImproved }) => ({
+    shouldForwardProp: (prop) => prop !== 'hasImproved' && prop !== 'minWidth',
+})<StyledBoxProps>(({ hasImproved, minWidth }) => ({
     width: 'fit-content',
-    minWidth: 'min(50px, 100%)',
+    minWidth: `min(${minWidth}, 100%)`,
     // TODO(dnguyen0304): Replace temporary placeholder stub.
     backgroundColor: hasImproved ? 'darkgreen' : 'transparent',
     borderRadius: '2px',
@@ -35,6 +36,7 @@ const StyledBox = styled(Box, {
 interface Props {
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
+    readonly minWidth?: React.CSSProperties['width'],
     readonly sx?: SxProps<Theme>;
 };
 
@@ -43,6 +45,7 @@ export default function Metric(
     {
         readTimeSecond,
         showMinute,
+        minWidth = '50px',
         sx,
     }: Props
 ): JSX.Element {
@@ -60,7 +63,11 @@ export default function Metric(
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <StyledBox hasImproved={hasImproved} sx={sx}>
+            <StyledBox
+                hasImproved={hasImproved}
+                minWidth={minWidth}
+                sx={sx}
+            >
                 {format(readTimeSecond, showMinute)}
             </StyledBox>
         </Box>
