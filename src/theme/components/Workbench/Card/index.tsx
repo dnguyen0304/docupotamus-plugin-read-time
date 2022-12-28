@@ -64,7 +64,7 @@ export default function Card(
                 arrowPosition='bottom'
             />
             <Box sx={{
-                width: '80%',
+                width: '65%',
                 margin: '0 6px 0 4px',
             }}>
                 <Box>{truncatedTargetId}</Box>
