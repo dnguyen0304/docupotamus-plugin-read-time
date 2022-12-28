@@ -65,7 +65,10 @@ export default function Card(
         >
             <Box sx={{ margin: '0 6px 0 4px' }}>
                 <Box>{truncatedTargetId}</Box>
-                <Box style={{ fontSize: 'var(--font-size--2)' }}>
+                <Box sx={{
+                    fontSize: 'var(--font-size--3)',
+                    fontStyle: 'italic',
+                }}>
                     {details}
                 </Box>
             </Box>

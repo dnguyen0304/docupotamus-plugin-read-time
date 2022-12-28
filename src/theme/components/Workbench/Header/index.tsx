@@ -19,7 +19,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
         ${theme.palette.grey[600]} 0%,
         ${Color(theme.palette.grey[800]).fade(0.3)} 50%)`,
     borderRadius: 'var(--border-radius) 0 var(--space-s) var(--space-s)',
-    padding: 'var(--space-l) var(--space-xs) var(--space-m)',
+    padding: 'var(--space-l) var(--space-xs)',
 }));
 
 interface Props {
