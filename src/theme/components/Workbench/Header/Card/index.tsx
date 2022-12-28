@@ -16,6 +16,7 @@ const StyledBox = styled(Box, {
 })<StyledBoxProps>(({ borderTopColor }) => ({
     ...CardStyles,
     borderTop: `var(--space-3xs) solid ${borderTopColor}`,
+    fontSize: 'var(--font-size--1)',
     transition: 'border-top-color 0.5s ease-in',
 }));
 
@@ -64,7 +65,7 @@ export default function Card(
         >
             <Box sx={{ margin: '0 6px 0 4px' }}>
                 <Box>{truncatedTargetId}</Box>
-                <Box style={{ fontSize: 'var(--font-size--3)' }}>
+                <Box style={{ fontSize: 'var(--font-size--2)' }}>
                     {details}
                 </Box>
             </Box>
