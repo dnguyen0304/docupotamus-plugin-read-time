@@ -65,7 +65,7 @@ const SIZE_TO_CONFIG: Map<DeltaSize, Config> = new Map([
     ],
 ]);
 
-function getConfig(delta: number): Config {
+const getConfig = (delta: number): Config => {
     let config: Config | undefined;
     if (delta < 2) {
         config = SIZE_TO_CONFIG.get('sm');
@@ -80,7 +80,7 @@ function getConfig(delta: number): Config {
     return config;
 };
 
-function getAnimation(translateXPx: number): Keyframes {
+const getAnimation = (translateXPx: number): Keyframes => {
     return keyframes({
         from: {
             opacity: 0,
