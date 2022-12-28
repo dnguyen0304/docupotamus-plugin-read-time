@@ -7,7 +7,7 @@ import type { Sample as WorkbenchSample } from '../types';
 import ActiveInfo from './ActiveInfo';
 import Cards from './Cards';
 
-export const HEIGHT: React.CSSProperties['height'] = '30%';
+export const HEIGHT: React.CSSProperties['height'] = '25%';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     ...CardTextStyles,
@@ -20,8 +20,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
         ${Color(theme.palette.grey[800]).fade(0.3)} 50%)`,
     borderRadius: 'var(--border-radius) 0 var(--space-s) var(--space-s)',
     padding: 'var(--space-xs)',
-    paddingTop: 'var(--space-l)',
-    // backgroundColor: 'white',
+    paddingTop: 'var(--space-xl)',
 }));
 
 interface Props {
