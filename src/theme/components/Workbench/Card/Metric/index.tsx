@@ -62,7 +62,10 @@ export default function Metric(
     }, [readTimeSecond]);
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{
+            flexGrow: 1,
+            marginLeft: 'var(--space-3xs)',
+        }}>
             <StyledBox
                 hasImproved={hasImproved}
                 minWidth={minWidth}
