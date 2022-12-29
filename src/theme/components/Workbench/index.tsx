@@ -53,17 +53,10 @@ const StyledBox = styled(Box, {
     },
 }));
 
-const ContentBox = styled(Box)({
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    paddingBottom: 'var(--space-xs)',
-    paddingLeft: 'var(--space-xs)',
-});
-
 const StyledOrderedList = styled('ol')({
     overflow: 'scroll',
     margin: 0,
+    marginLeft: 'var(--space-xs)',
     padding: 0,
 });
 
@@ -207,27 +200,25 @@ export default function Workbench(): JSX.Element {
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
                 />
-                <ContentBox>
-                    <StyledOrderedList>
-                        {remaining.map((preprocessed) => {
-                            const [targetId, sample, rankCurr] = preprocessed;
-                            const rankPrev =
-                                targetIdToPrevRank.current.get(targetId);
-                            return (
-                                <Card
-                                    key={`${CARD_KEY_PREFIX}-${targetId}`}
-                                    targetId={targetId}
-                                    details={sample.target.snippet}
-                                    rankCurr={rankCurr}
-                                    rankPrev={rankPrev}
-                                    readTimeSecond={sample.runningTotal.readTimeSecond}
-                                    showMinute={showMinute}
-                                />
-                            );
-                        })}
-                    </StyledOrderedList>
-                    <Footer chips={chips} />
-                </ContentBox>
+                <StyledOrderedList>
+                    {remaining.map((preprocessed) => {
+                        const [targetId, sample, rankCurr] = preprocessed;
+                        const rankPrev =
+                            targetIdToPrevRank.current.get(targetId);
+                        return (
+                            <Card
+                                key={`${CARD_KEY_PREFIX}-${targetId}`}
+                                targetId={targetId}
+                                details={sample.target.snippet}
+                                rankCurr={rankCurr}
+                                rankPrev={rankPrev}
+                                readTimeSecond={sample.runningTotal.readTimeSecond}
+                                showMinute={showMinute}
+                            />
+                        );
+                    })}
+                </StyledOrderedList>
+                <Footer chips={chips} />
             </>
         )
     };
