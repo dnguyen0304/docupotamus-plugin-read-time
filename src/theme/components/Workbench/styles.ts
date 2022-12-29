@@ -3,12 +3,22 @@ import {
     CARD_BOX_SHADOW_OUTER_WIDTH_REM
 } from './constants';
 
+const BOX_SHADOW_WIDTH_REM: number =
+    CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
+
 export const CardText = {
     color: '#fff',
     fontSize: 'var(--font-size--2)',
 };
 
 const CardBoxShadow = {
+    margin: `${BOX_SHADOW_WIDTH_REM}rem`,
+    // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry with
+    // Workbench padding-left style.
+    marginRight: `calc(`
+        + `${BOX_SHADOW_WIDTH_REM}rem`
+        + ` + `
+        + `var(--space-xs))`,
     '&:hover': {
         boxShadow: `
             #fff 0 0 0 ${CARD_BOX_SHADOW_INNER_WIDTH_REM}rem,

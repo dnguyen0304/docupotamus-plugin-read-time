@@ -1,19 +1,12 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import {
-    CARD_BOX_SHADOW_INNER_WIDTH_REM,
-    CARD_BOX_SHADOW_OUTER_WIDTH_REM
-} from '../constants';
 import useFlicker from '../hooks/useFlicker';
 import useHighlight from '../hooks/useHighlight';
 import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
 import Metric from './Metric';
 import Rank from './Rank';
-
-const BOX_SHADOW_WIDTH_REM: number =
-    CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
 
 const StyledListItem = styled('li')({
     ...CardStyles,
@@ -22,13 +15,6 @@ const StyledListItem = styled('li')({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    margin: `${BOX_SHADOW_WIDTH_REM}rem`,
-    // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry with
-    // Workbench padding-left style.
-    marginRight: `calc(`
-        + `${BOX_SHADOW_WIDTH_REM}rem`
-        + ` + `
-        + `var(--space-xs))`,
 });
 
 export default function Card(
