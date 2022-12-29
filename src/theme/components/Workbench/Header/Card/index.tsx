@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import Color from 'color';
 import * as React from 'react';
 import useFlicker from '../../hooks/useFlicker';
 import useHighlight from '../../hooks/useHighlight';
@@ -13,8 +14,9 @@ interface StyledBoxProps {
 
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'borderTopColor',
-})<StyledBoxProps>(({ borderTopColor }) => ({
+})<StyledBoxProps>(({ theme, borderTopColor }) => ({
     ...CardStyles,
+    backgroundColor: theme.palette.grey[600],
     borderTop: `var(--space-3xs) solid ${borderTopColor}`,
     fontSize: 'var(--font-size--1)',
     margin: 0,
