@@ -12,7 +12,10 @@ import { CARD_KEY_PREFIX, CONTENT_MARGIN_LEFT } from './constants';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
 import Header from './Header';
+import Loading from './Loading';
+import styles from './styles.module.css';
 import type { Sample as WorkbenchSample } from './types';
+
 const MILLISECOND_TO_SECOND: number = 1000;
 
 interface StyledBoxProps {
@@ -154,6 +157,7 @@ export default function Workbench(): JSX.Element {
     const { targetIdToSamples } = useSamples();
 
     const targetIdToPrevRank = React.useRef<Map<string, number>>(new Map());
+    const [isLoading, setIsLoading] = React.useState<boolean>(true);
     const [isAscending, setIsAscending] = React.useState<boolean>(false);
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
@@ -249,10 +253,15 @@ export default function Workbench(): JSX.Element {
         // TODO(dnguyen0304): Investigate migrating to use MUI List.
         //   See: https://mui.com/material-ui/react-list/
         <StyledBox
+            className={isLoading ? styles.workbench_container__load : ''}
             workbenchIsOpen={workbenchIsOpen}
             boxShadowWidth='var(--space-xs)'
         >
-            {partitionCards()}
+            {
+                isLoading
+                    ? <Loading setIsLoading={setIsLoading} />
+                    : partitionCards()
+            }
         </StyledBox>
     );
 };
