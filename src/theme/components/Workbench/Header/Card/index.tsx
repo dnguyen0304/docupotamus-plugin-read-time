@@ -17,6 +17,7 @@ const StyledBox = styled(Box, {
     ...CardStyles,
     borderTop: `var(--space-3xs) solid ${borderTopColor}`,
     fontSize: 'var(--font-size--1)',
+    margin: 0,
     transition: 'border-top-color 0.5s ease-in',
 }));
 
