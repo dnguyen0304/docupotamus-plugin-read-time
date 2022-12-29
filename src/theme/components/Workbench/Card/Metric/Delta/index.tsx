@@ -134,7 +134,7 @@ export default function Delta(
 ): JSX.Element {
     const [delta, setDelta] = React.useState<number>(0);
     const ref = React.useRef<HTMLDivElement>();
-    const readTimeSecondPrev = React.useRef<number>(0);
+    const readTimeSecondPrev = React.useRef<number>(readTimeSecond);
     const updatedAt = React.useRef<dayjs.Dayjs>();
     const updatedAtTimerId = React.useRef<number>();
 
