@@ -56,7 +56,6 @@ const StyledOrderedList = styled('ol')({
     overflow: 'scroll',
     margin: 0,
     marginBottom: 'var(--space-2xs)',
-    marginLeft: CONTENT_MARGIN_LEFT,
     padding: 0,
 });
 
