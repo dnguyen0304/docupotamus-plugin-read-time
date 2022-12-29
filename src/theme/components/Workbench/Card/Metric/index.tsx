@@ -20,7 +20,6 @@ interface StyledBoxProps {
     readonly minWidthFactor: number,
 };
 
-// TODO(dnguyen0304): Investigate adding fixed width style.
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'hasImproved' && prop !== 'minWidthFactor',
 })<StyledBoxProps>(({ hasImproved, minWidthFactor }) => ({
