@@ -32,8 +32,10 @@
     height: 100%;
     border-radius: 4px;
     box-shadow: 0 0 5px rgba(0, 0, 0, .2);
-    animation: load 5s 1;
+    animation-name: load;
+    animation-duration: 5s;
     animation-fill-mode: forwards;
+    animation-iteration-count: 1;
 }
 
 @keyframes load {
