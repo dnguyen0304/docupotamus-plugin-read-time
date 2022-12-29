@@ -8,15 +8,28 @@ import { CardProps } from '../types';
 import Metric from './Metric';
 import Rank from './Rank';
 
+const HighlightStyles = {
+    // Set the margin-right style on the children li instead of the parent ol to
+    // avoid overflow clipping the Delta.
+    margin: '0 var(--space-2xs)',
+    padding: 'var(--space-xs)',
+    paddingRight: 'var(--space-s)',
+    '&:hover': {
+        // TODO(dnguyen0304): Extract to a centralized location to facilitate
+        // maintenance.
+        backgroundColor: 'rgb(252, 201, 53)',
+        color: 'black',
+    },
+}
+
 const StyledListItem = styled('li')({
     ...CardStyles,
+    ...HighlightStyles,
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    // Set the margin-right style on the children li instead of the parent ol to
-    // avoid overflow clipping the Delta.
 });
 
 export default function Card(
