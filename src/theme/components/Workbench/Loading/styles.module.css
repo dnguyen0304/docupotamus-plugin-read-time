@@ -41,6 +41,7 @@
 @keyframes load {
     0% {
         width: 0%;
+        /* TODO(dnguyen0304): Investigate changing to rgb(39, 60, 85). */
         background: rgb(46, 69, 97);
     }
     20% {
