@@ -9,7 +9,6 @@ export const CardText = {
 // TODO(dnguyen0304): Investigate why position: relative is a type error.
 export const Card = {
     ...CardText,
-    backgroundColor: 'rgb(48, 56, 70)',
     borderRadius: 'var(--border-radius)',
     cursor: 'pointer',
     padding: 'var(--space-2xs)',

@@ -15,6 +15,7 @@ const theme = createTheme({
         },
     },
     palette: {
+        // TODO(dnguyen0304): Add rgb(48, 56, 70).
         grey: {
             400: 'rgb(137, 150, 165)',  // #8996a5
             600: 'rgb(46, 69, 97)',     // #2e4561  GRADIENT_STOP_TOP      blueish
