@@ -18,6 +18,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
         ${theme.palette.grey[700]} 0%,
         ${Color(theme.palette.grey[800]).fade(0.5)} 30%)`,
     borderRadius: 'var(--border-radius) 0 var(--space-xl) var(--space-xl)',
+    marginBottom: 'var(--space-xs)',
     padding: 'var(--space-l) var(--space-xs) var(--space-m)',
 }));
 
