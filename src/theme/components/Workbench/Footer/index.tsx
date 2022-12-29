@@ -12,6 +12,7 @@ const StyledBox = styled(Box)({
     // scrollbar.
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
+    marginTop: 'auto',
 });
 
 export interface ChipData {
