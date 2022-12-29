@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import Delta from '../../Card/Metric/Delta';
 import { ACTIVE_INFO_ITEM_HEIGHT } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
 import Item from './Item';
@@ -14,8 +15,14 @@ const INFIMA_OVERRIDE_OL = {
 };
 
 const StyledBox = styled(Box)({
+    // Create a context for Delta.
+    position: 'relative',
+    width: 'fit-content',
+    minWidth: '40%',
+});
+
+const ClippingBox = styled(Box)({
     height: ACTIVE_INFO_ITEM_HEIGHT,
-    marginTop: 'auto',
     overflow: 'hidden',
 });
 
@@ -58,21 +65,30 @@ export default function ActiveInfo(
 
     return (
         <StyledBox>
-            <StyledOrderedList clickedIndex={clickedIndex}>
-                {keyedSamples.map((keyedSample) => {
-                    const [targetId, sample, rankCurr] = keyedSample;
-                    const rankPrev = targetIdToPrevRank.get(targetId);
-                    return (
-                        <Item
-                            key={`${KEY_PREFIX}-${targetId}`}
-                            rankCurr={rankCurr}
-                            rankPrev={rankPrev}
-                            readTimeSecond={sample.runningTotal.readTimeSecond}
-                            showMinute={showMinute}
-                        />
-                    );
-                })}
-            </StyledOrderedList>
+            <ClippingBox>
+                <StyledOrderedList clickedIndex={clickedIndex}>
+                    {keyedSamples.map((keyedSample) => {
+                        const [targetId, sample, rankCurr] = keyedSample;
+                        const rankPrev = targetIdToPrevRank.get(targetId);
+                        return (
+                            <Item
+                                key={`${KEY_PREFIX}-${targetId}`}
+                                rankCurr={rankCurr}
+                                rankPrev={rankPrev}
+                                readTimeSecond={sample.runningTotal.readTimeSecond}
+                                showMinute={showMinute}
+                            />
+                        );
+                    })}
+                </StyledOrderedList>
+            </ClippingBox>
+            <Delta
+                readTimeSecond={
+                    keyedSamples[clickedIndex][1]
+                        .runningTotal
+                        .readTimeSecond
+                }
+            />
         </StyledBox>
     );
 };

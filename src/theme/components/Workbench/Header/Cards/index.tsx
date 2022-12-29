@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { CARD_KEY_PREFIX } from '../../constants';
 import type { Sample as WorkbenchSample } from '../../types';
@@ -31,6 +32,13 @@ const CURRENT_TO_CLICKED_TO_CLASS: ReadonlyMap<
         [SILVER, styles.card__notClickedRight],
     ])],
 ]);
+
+const StyledBox = styled(Box)({
+    position: 'relative',
+    // This is needed because a parent uses display: flex with
+    // flex-direction: column.
+    width: '100%',
+});
 
 const getClickedClass = (current: number, clicked: number): string => {
     if (current > BRONZE
@@ -81,7 +89,7 @@ export default function Cards(
     }: Props
 ): JSX.Element {
     return (
-        <Box sx={{ position: 'relative' }}>
+        <StyledBox>
             {keyedSamples.map((keyedSample, i) => {
                 const [targetId, sample] = keyedSample;
                 const clickedClass = getClickedClass(i, clickedIndex);
@@ -96,6 +104,6 @@ export default function Cards(
                     />
                 );
             })}
-        </Box>
+        </StyledBox>
     );
 };

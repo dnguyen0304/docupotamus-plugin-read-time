@@ -5,13 +5,10 @@ import Rank from '../../../Card/Rank';
 import type { CardProps } from '../../../types';
 
 const StyledListItem = styled('li')({
-    width: 'fit-content',
-    minWidth: '40%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: '0 auto',
 });
 
 interface Props extends Pick<

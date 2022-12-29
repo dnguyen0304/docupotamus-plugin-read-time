@@ -14,6 +14,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
     height: HEIGHT,
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     background: `linear-gradient(
         to bottom,
         ${theme.palette.grey[700]} 0%,
