@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import Color from 'color';
 import * as React from 'react';
 import useFlicker from '../../hooks/useFlicker';
 import useHighlight from '../../hooks/useHighlight';
