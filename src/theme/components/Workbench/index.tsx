@@ -8,14 +8,12 @@ import type {
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
 import Card from './Card';
-import { CARD_KEY_PREFIX } from './constants';
+import { CARD_KEY_PREFIX, CONTENT_MARGIN_LEFT } from './constants';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
 import Header from './Header';
 import type { Sample as WorkbenchSample } from './types';
 const MILLISECOND_TO_SECOND: number = 1000;
-
-const CONTENT_MARGIN_LEFT: string = 'var(--space-xs)';
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
