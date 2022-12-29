@@ -20,6 +20,9 @@ interface StyledBoxProps {
     readonly minWidthFactor: number,
 };
 
+// TODO(dnguyen0304): [P2] Investigate refactoring the parent-to-child container
+// styles relationship.
+// TODO(dnguyen0304): Fix styles not updating on hover.
 const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'hasImproved' && prop !== 'minWidthFactor',
 })<StyledBoxProps>(({ hasImproved, minWidthFactor }) => ({
