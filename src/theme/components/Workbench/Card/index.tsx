@@ -1,6 +1,11 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import {
+    CARD_BOX_SHADOW_INNER_WIDTH_REM,
+    CARD_BOX_SHADOW_OUTER_WIDTH_REM,
+    CONTENT_MARGIN_LEFT
+} from '../constants';
 import useFlicker from '../hooks/useFlicker';
 import useHighlight from '../hooks/useHighlight';
 import { Card as CardStyles } from '../styles';
@@ -15,6 +20,14 @@ const StyledListItem = styled('li')({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry with
+    // the parent ol margin-left style.
+    // Set the margin-right style on the children li instead of the parent ol to
+    // avoid overflow clipping the Delta.
+    marginRight: `calc(`
+        + `${CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM}rem`
+        + ` + `
+        + `${CONTENT_MARGIN_LEFT})`,
 });
 
 export default function Card(

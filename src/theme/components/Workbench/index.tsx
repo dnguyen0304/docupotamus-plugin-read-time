@@ -8,12 +8,7 @@ import type {
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
 import Card from './Card';
-import {
-    CARD_BOX_SHADOW_INNER_WIDTH_REM,
-    CARD_BOX_SHADOW_OUTER_WIDTH_REM,
-    CARD_KEY_PREFIX,
-    CONTENT_MARGIN_LEFT
-} from './constants';
+import { CARD_KEY_PREFIX, CONTENT_MARGIN_LEFT } from './constants';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
 import Header from './Header';
@@ -62,11 +57,6 @@ const StyledOrderedList = styled('ol')({
     margin: 0,
     marginBottom: 'var(--space-2xs)',
     marginLeft: CONTENT_MARGIN_LEFT,
-    // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry.
-    marginRight: `calc(`
-        + `${CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM}rem`
-        + ` + `
-        + `${CONTENT_MARGIN_LEFT})`,
     padding: 0,
 });
 
