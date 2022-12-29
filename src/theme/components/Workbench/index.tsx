@@ -15,7 +15,6 @@ import Header from './Header';
 import type { Sample as WorkbenchSample } from './types';
 const MILLISECOND_TO_SECOND: number = 1000;
 
-const HEIGHT: React.CSSProperties['height'] = '100vh';
 const CONTENT_MARGIN_LEFT: string = 'var(--space-xs)';
 
 interface StyledBoxProps {
@@ -28,7 +27,7 @@ const StyledBox = styled(Box, {
 })<StyledBoxProps>(({ theme, workbenchIsOpen, boxShadowWidth }) => ({
     position: 'sticky',
     top: 0,
-    height: HEIGHT,
+    height: '100vh',
     display: workbenchIsOpen ? 'flex' : 'none',
     flexDirection: 'column',
     justifyContent: 'flex-start',
