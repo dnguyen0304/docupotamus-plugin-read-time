@@ -2,14 +2,8 @@ import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import {
-    CARD_BOX_SHADOW_INNER_WIDTH_REM,
-    CARD_BOX_SHADOW_OUTER_WIDTH_REM
-} from '../constants';
 
 const KEY_PREFIX: string = 'footerChip';
-const BOX_SHADOW_WIDTH_REM: number =
-    CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
 
 const StyledBox = styled(Box)({
     display: 'flex',
@@ -18,8 +12,6 @@ const StyledBox = styled(Box)({
     // scrollbar.
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    marginLeft: `${BOX_SHADOW_WIDTH_REM}rem`,
-    // marginLeft: `var(--space-xs)`,
 });
 
 export interface ChipData {
@@ -30,15 +22,18 @@ export interface ChipData {
 
 interface Props {
     readonly chips: readonly ChipData[];
+    // TODO(dnguyen0304): Investigate a more extensible way to pass styles.
+    readonly marginLeft?: string;
 };
 
 export default function Footer(
     {
         chips,
+        marginLeft,
     }: Props
 ): JSX.Element {
     return (
-        <StyledBox>
+        <StyledBox sx={{ marginLeft }}>
             {chips.map((chip) =>
                 <Chip
                     key={`${KEY_PREFIX}-${chip.label}`}

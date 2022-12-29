@@ -16,6 +16,7 @@ import type { Sample as WorkbenchSample } from './types';
 const MILLISECOND_TO_SECOND: number = 1000;
 
 const HEIGHT: React.CSSProperties['height'] = '100vh';
+const CONTENT_MARGIN_LEFT: string = 'var(--space-xs)';
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
@@ -57,7 +58,7 @@ const StyledBox = styled(Box, {
 const StyledOrderedList = styled('ol')({
     overflow: 'scroll',
     margin: 0,
-    marginLeft: 'var(--space-xs)',
+    marginLeft: CONTENT_MARGIN_LEFT,
     padding: 0,
 });
 
@@ -219,7 +220,10 @@ export default function Workbench(): JSX.Element {
                         );
                     })}
                 </StyledOrderedList>
-                <Footer chips={chips} />
+                <Footer
+                    chips={chips}
+                    marginLeft={CONTENT_MARGIN_LEFT}
+                />
             </>
         )
     };
