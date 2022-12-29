@@ -34,10 +34,12 @@ const CURRENT_TO_CLICKED_TO_CLASS: ReadonlyMap<
 ]);
 
 const StyledBox = styled(Box)({
-    position: 'relative',
     // This is needed because a parent uses display: flex with
     // flex-direction: column.
     width: '100%',
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    placeItems: 'center',
 });
 
 const getClickedClass = (current: number, clicked: number): string => {

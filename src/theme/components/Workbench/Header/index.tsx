@@ -7,11 +7,8 @@ import type { Sample as WorkbenchSample } from '../types';
 import ActiveInfo from './ActiveInfo';
 import Cards from './Cards';
 
-export const HEIGHT: React.CSSProperties['height'] = '25%';
-
 const StyledBox = styled(Box)(({ theme }) => ({
     ...CardTextStyles,
-    height: HEIGHT,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
