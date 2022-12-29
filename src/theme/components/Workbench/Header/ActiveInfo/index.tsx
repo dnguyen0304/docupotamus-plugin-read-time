@@ -15,8 +15,7 @@ const INFIMA_OVERRIDE_OL = {
 };
 
 const StyledBox = styled(Box)({
-    // Create a context for Delta.
-    position: 'relative',
+    position: 'relative',  // Create a context for Delta.
     width: 'fit-content',
     minWidth: '40%',
 });
