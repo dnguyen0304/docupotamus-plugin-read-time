@@ -53,7 +53,7 @@ const StyledBox = styled(Box, {
     },
 }));
 
-const StyledInnerBox = styled(Box)({
+const ContentBox = styled(Box)({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -207,7 +207,7 @@ export default function Workbench(): JSX.Element {
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
                 />
-                <StyledInnerBox>
+                <ContentBox>
                     <StyledOrderedList>
                         {remaining.map((preprocessed) => {
                             const [targetId, sample, rankCurr] = preprocessed;
@@ -227,7 +227,7 @@ export default function Workbench(): JSX.Element {
                         })}
                     </StyledOrderedList>
                     <Footer chips={chips} />
-                </StyledInnerBox>
+                </ContentBox>
             </>
         )
     };
