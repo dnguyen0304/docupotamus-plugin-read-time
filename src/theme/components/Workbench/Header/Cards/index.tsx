@@ -40,7 +40,7 @@ const StyledBox = styled(Box)({
     display: 'grid',
     gridTemplateColumns: '1fr',
     placeItems: 'center',
-    marginBottom: 'var(--space-s)',
+    marginBottom: 'var(--space-l)',
 });
 
 const getClickedClass = (current: number, clicked: number): string => {

@@ -17,13 +17,13 @@
 
 .card__notClickedLeft {
     opacity: 0.4;
-    transform: translate(-40%, 8px) scale(0.7);
+    transform: translate(-40%, 30%) scale(0.7);
     z-index: 0;
 }
 
 .card__notClickedRight {
     opacity: 0.4;
-    transform: translate(40%, 8px) scale(0.7);
+    transform: translate(40%, 30%) scale(0.7);
     z-index: 0;
 
     text-align: right;
