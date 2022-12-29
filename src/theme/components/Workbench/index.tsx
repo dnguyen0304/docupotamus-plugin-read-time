@@ -59,14 +59,14 @@ const StyledBox = styled(Box, {
 
 const StyledOrderedList = styled('ol')({
     overflow: 'scroll',
-    margin: 0,
-    marginBottom: 'var(--space-2xs)',
-    marginLeft: CONTENT_MARGIN_LEFT,
-    // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry.
-    marginRight: `calc(`
-        + `${CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM}rem`
-        + ` + `
-        + `${CONTENT_MARGIN_LEFT})`,
+    // TODO(dnguyen0304): Investigate decreasing margin-right to have vertical
+    // symmetry.
+    margin: `
+        0
+        calc(${CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM}rem + ${CONTENT_MARGIN_LEFT})
+        var(--space-2xs)
+        ${CONTENT_MARGIN_LEFT}
+    `,
     padding: 0,
 });
 
