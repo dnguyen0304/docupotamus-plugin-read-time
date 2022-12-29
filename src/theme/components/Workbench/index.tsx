@@ -55,6 +55,8 @@ const StyledBox = styled(Box, {
     },
 }));
 
+// TODO(dnguyen0304): Investigate migrating to use MUI List.
+//   See: https://mui.com/material-ui/react-list/
 const StyledOrderedList = styled('ol')({
     overflow: 'scroll',
     margin: 0,
@@ -250,8 +252,6 @@ export default function Workbench(): JSX.Element {
     }, [targetIdToSamples]);
 
     return (
-        // TODO(dnguyen0304): Investigate migrating to use MUI List.
-        //   See: https://mui.com/material-ui/react-list/
         <StyledBox
             className={isLoading ? styles.workbench_container__load : ''}
             workbenchIsOpen={workbenchIsOpen}
