@@ -1,11 +1,7 @@
 import {
     CARD_BOX_SHADOW_INNER_WIDTH_REM,
-    CARD_BOX_SHADOW_OUTER_WIDTH_REM,
-    CONTENT_MARGIN_LEFT
+    CARD_BOX_SHADOW_OUTER_WIDTH_REM
 } from './constants';
-
-const BOX_SHADOW_WIDTH_REM: number =
-    CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM;
 
 export const CardText = {
     color: '#fff',
@@ -13,12 +9,7 @@ export const CardText = {
 };
 
 const CardBoxShadow = {
-    margin: `${BOX_SHADOW_WIDTH_REM}rem`,
-    // TODO(dnguyen0304): Investigate decreasing to have vertical symmetry.
-    marginRight: `calc(`
-        + `${BOX_SHADOW_WIDTH_REM}rem`
-        + ` + `
-        + CONTENT_MARGIN_LEFT,
+    margin: `${CARD_BOX_SHADOW_INNER_WIDTH_REM + CARD_BOX_SHADOW_OUTER_WIDTH_REM}rem`,
     '&:hover': {
         boxShadow: `
             #fff 0 0 0 ${CARD_BOX_SHADOW_INNER_WIDTH_REM}rem,
