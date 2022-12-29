@@ -20,7 +20,6 @@ const StyledBox = styled(Box)({
     justifyContent: 'flex-start',
     marginLeft: `${BOX_SHADOW_WIDTH_REM}rem`,
     // marginLeft: `var(--space-xs)`,
-    paddingBottom: 'var(--space-xs)',
 });
 
 export interface ChipData {
