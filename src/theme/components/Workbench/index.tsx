@@ -30,9 +30,9 @@ const StyledBox = styled(Box, {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     background: `linear-gradient(
-        to bottom,
+        to right,
         ${theme.palette.grey[600]} 0%,
-        ${theme.palette.grey[700]} 100%)`,
+        ${theme.palette.grey[700]} 80%)`,
     borderTopLeftRadius: 'var(--border-radius)',
     paddingBottom: 'var(--space-xs)',
     // TODO(dnguyen0304): Investigate refactoring to box-shadow style to reduce
