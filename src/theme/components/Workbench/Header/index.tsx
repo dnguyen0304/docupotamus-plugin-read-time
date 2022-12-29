@@ -14,10 +14,11 @@ const StyledBox = styled(Box)(({ theme }) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     background: `linear-gradient(
-        to bottom,
-        ${theme.palette.grey[700]} 0%,
-        ${Color(theme.palette.grey[800]).fade(0.5)} 30%)`,
-    borderRadius: 'var(--border-radius) 0 var(--space-xl) var(--space-xl)',
+        355deg,
+        ${theme.palette.grey[600]} 0%,
+        ${theme.palette.grey[700]} 30%,
+        ${Color(theme.palette.grey[800]).fade(0.6)} 100%)`,
+    borderRadius: 'var(--border-radius) 0 var(--space-xl) 0',
     marginBottom: 'var(--space-xs)',
     padding: 'var(--space-l) var(--space-xs) var(--space-m)',
 }));
