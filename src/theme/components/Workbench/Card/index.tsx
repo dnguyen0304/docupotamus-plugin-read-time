@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import useFlicker from '../hooks/useFlicker';
+import usePulse from '../hooks/usePulse';
 import useHighlight from '../hooks/useHighlight';
 import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
@@ -43,7 +43,7 @@ export default function Card(
         showMinute,
     }: CardProps
 ): JSX.Element {
-    const [, setFlicker] = useFlicker(targetId);
+    const [, setFlicker] = usePulse(targetId);
     const [, setHighlight] = useHighlight(targetId);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
