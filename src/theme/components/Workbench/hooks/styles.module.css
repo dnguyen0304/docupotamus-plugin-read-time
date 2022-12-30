@@ -1,5 +1,5 @@
-.target_container__flicker {
-    animation-name: flicker;
+.target_container__pulse {
+    animation-name: pulse;
     animation-delay: 0.5s;
     animation-duration: 2s;
 }
@@ -10,7 +10,7 @@
     background-color: rgb(252, 201, 53);
 }
 
-@keyframes flicker {
+@keyframes pulse {
     0%, 40%, 80% {
         background-color: transparent;
     }

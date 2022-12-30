@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import usePulse from '../hooks/usePulse';
 import useHighlight from '../hooks/useHighlight';
+import usePulse from '../hooks/usePulse';
 import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
 import Metric from './Metric';
@@ -43,7 +43,7 @@ export default function Card(
         showMinute,
     }: CardProps
 ): JSX.Element {
-    const [, setFlicker] = usePulse(targetId);
+    const [, setPulse] = usePulse(targetId);
     const [, setHighlight] = useHighlight(targetId);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
@@ -53,8 +53,8 @@ export default function Card(
     return (
         <StyledListItem
             className={className}
-            onAnimationEnd={() => setFlicker(false)}
-            onClick={() => setFlicker(true)}
+            onAnimationEnd={() => setPulse(false)}
+            onClick={() => setPulse(true)}
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
         >

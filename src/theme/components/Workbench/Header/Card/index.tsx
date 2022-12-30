@@ -40,7 +40,7 @@ export default function Card(
         onClick = () => { },
     }: Props
 ): JSX.Element {
-    const [, setFlicker] = usePulse(targetId);
+    const [, setPulse] = usePulse(targetId);
     const [, setHighlight] = useHighlight(targetId);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
@@ -49,7 +49,7 @@ export default function Card(
 
     const handleClick = () => {
         onClick();
-        setFlicker(true);
+        setPulse(true);
     };
 
     return (
@@ -60,7 +60,7 @@ export default function Card(
                     ? rankColor
                     : 'transparent'
             }
-            onAnimationEnd={() => setFlicker(false)}
+            onAnimationEnd={() => setPulse(false)}
             onClick={handleClick}
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
