@@ -64,8 +64,8 @@ export default function Card(
                 arrowPosition='bottom'
             />
             <Box sx={{
-                // TODO(dnguyen0304): Investigate preferring grid layout instead
-                // of percentages.
+                // TODO(dnguyen0304): Investigate changing percentages to grid
+                // layout for responsive design.
                 width: '65%',
                 margin: '0 6px 0 4px',
             }}>
