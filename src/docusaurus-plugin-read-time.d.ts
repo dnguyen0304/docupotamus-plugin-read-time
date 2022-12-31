@@ -45,6 +45,9 @@ export interface DocupotamusThemeConfig {
         readonly border: {
             readonly isEnabled: boolean;
         };
+        readonly loading: {
+            readonly isEnabled: boolean;
+        };
     };
 }
 

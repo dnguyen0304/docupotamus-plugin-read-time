@@ -29,6 +29,9 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
         border: {
             isEnabled: false,
         },
+        loading: {
+            isEnabled: true,
+        },
     },
 };
 
@@ -71,6 +74,12 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                     .default(DEFAULT_THEME_CONFIG.debug.border.isEnabled),
             })
                 .default(DEFAULT_THEME_CONFIG.debug.border),
+            loading: Joi.object({
+                isEnabled: Joi
+                    .boolean()
+                    .default(DEFAULT_THEME_CONFIG.debug.loading.isEnabled),
+            })
+                .default(DEFAULT_THEME_CONFIG.debug.loading),
         })
             .default(DEFAULT_THEME_CONFIG.debug),
     })
