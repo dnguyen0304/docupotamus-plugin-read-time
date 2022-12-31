@@ -1,5 +1,6 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import RemoveIcon from '@mui/icons-material/Remove';
 import type { StackProps } from '@mui/material/Stack';
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
@@ -39,10 +40,7 @@ export default function Rank(
     const resolvedPrev = (prev !== undefined) ? prev : curr;
     const isVertical = arrowPosition === 'top' || arrowPosition === 'bottom';
 
-    const getArrow = (
-        change: number,
-        isVertical: boolean,
-    ): JSX.Element | null => {
+    const getIcon = (change: number): JSX.Element => {
         if (change > 0) {
             // TODO(dnguyen0304): Replace temporary placeholder stub.
             return <ArrowDropUpIcon sx={{ color: 'green' }} />;
@@ -51,11 +49,7 @@ export default function Rank(
             // TODO(dnguyen0304): Replace temporary placeholder stub.
             return <ArrowDropDownIcon sx={{ color: 'red' }} />;
         }
-        return (
-            isVertical
-                ? null
-                : <ArrowDropDownIcon sx={{ visibility: 'hidden' }} />
-        );
+        return <RemoveIcon viewBox='-12 -12 48 48' />;
     };
 
     return (
@@ -66,7 +60,7 @@ export default function Rank(
             sx={{ width: isVertical ? RANK_ICON_WIDTH : 'auto' }}
         >
             {curr}
-            {getArrow(resolvedPrev - curr, isVertical)}
+            {getIcon(resolvedPrev - curr)}
         </Stack>
     );
 };
