@@ -62,7 +62,7 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                     .when(
                         'isEnabled',
                         {
-                            is: Joi.boolean().valid(true),
+                            is: Joi.boolean().valid(false),
                             // TODO(dnguyen0304): Improve error messaging.
                             then: Joi.forbidden(),
                         },
