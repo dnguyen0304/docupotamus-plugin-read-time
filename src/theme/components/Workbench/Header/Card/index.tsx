@@ -1,3 +1,4 @@
+import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
@@ -15,6 +16,7 @@ const StyledBox = styled(Box, {
     shouldForwardProp: (prop) => prop !== 'borderTopColor',
 })<StyledBoxProps>(({ theme, borderTopColor }) => ({
     ...CardStyles,
+    position: 'relative',  // Create a positioning context for icon.
     backgroundColor: theme.palette.grey[600],
     borderTop: `var(--space-3xs) solid ${borderTopColor}`,
     fontSize: 'var(--font-size--1)',
@@ -74,6 +76,13 @@ export default function Card(
                     {details}
                 </Box>
             </Box>
+            <WorkspacePremiumOutlinedIcon sx={{
+                position: 'absolute',
+                bottom: 0,
+                left: '50%',
+                color: rankColor,
+                translate: '-50% 50%',
+            }} />
         </StyledBox>
     );
 };
