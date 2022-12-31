@@ -29,7 +29,7 @@ const StyledListItem = styled('li')({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',
 });
 
 export default function Card(

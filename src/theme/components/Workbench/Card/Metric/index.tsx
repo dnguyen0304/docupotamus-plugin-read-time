@@ -74,6 +74,7 @@ export default function Metric(
     return (
         <Box sx={{
             position: 'relative',
+            alignSelf: 'center',
             flexGrow: 1,
             marginLeft: `calc(${marginLeftFactor} * var(--space-3xs))`,
         }}>
