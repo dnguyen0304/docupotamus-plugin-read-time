@@ -1,11 +1,12 @@
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import type {
+    DocupotamusThemeConfig
+} from '../../../../docusaurus-plugin-read-time';
 import Logo from './Logo';
 import styles from './styles.module.css';
-
-// TODO(dnguyen0304): Fix missing cohesion with styles.
-const ANIMATION_DURATION_MILLI = 5 * 1000;
 
 const Layout = styled(Box)({
     height: '50%',
@@ -25,12 +26,23 @@ export default function Loading(
         setIsLoading,
     }: Props
 ): JSX.Element {
+    const {
+        debug: {
+            loading: {
+                durationMilli,
+            },
+        },
+    } = useDocusaurusContext()
+        .siteConfig
+        .themeConfig
+        .docupotamusReadTimePlugin as DocupotamusThemeConfig;
+
     const timerId = React.useRef<number>();
 
     React.useEffect(() => {
         timerId.current = window.setTimeout(() => {
             setIsLoading(false);
-        }, ANIMATION_DURATION_MILLI);
+        }, durationMilli);
         return () => window.clearTimeout(timerId.current);
     }, []);
 
