@@ -7,6 +7,8 @@ import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import { RANK_ICON_WIDTH } from '../../constants';
 
+const ARROW_VIEW_BOX: string = '0 3 24 24';
+
 type ArrowPosition = 'top' | 'right' | 'bottom' | 'left';
 
 const getDirection = (
@@ -41,14 +43,27 @@ export default function Rank(
     const resolvedPrev = (prev !== undefined) ? prev : curr;
     const isVertical = arrowPosition === 'top' || arrowPosition === 'bottom';
 
-    const getIcon = (change: number): JSX.Element => {
+    const getIcon = (
+        change: number,
+        isVertical: boolean,
+    ): JSX.Element => {
         if (change > 0) {
-            // TODO(dnguyen0304): Replace temporary placeholder stub.
-            return <ArrowDropUpIcon sx={{ color: 'green' }} />;
+            return (
+                <ArrowDropUpIcon
+                    // TODO(dnguyen0304): Replace temporary placeholder stub.
+                    sx={{ color: 'green' }}
+                    viewBox={isVertical ? ARROW_VIEW_BOX : undefined}
+                />
+            );
         }
         if (change < 0) {
-            // TODO(dnguyen0304): Replace temporary placeholder stub.
-            return <ArrowDropDownIcon sx={{ color: 'red' }} />;
+            return (
+                <ArrowDropDownIcon
+                    // TODO(dnguyen0304): Replace temporary placeholder stub.
+                    sx={{ color: 'red' }}
+                    viewBox={isVertical ? ARROW_VIEW_BOX : undefined}
+                />
+            );
         }
         return <RemoveIcon viewBox='-12 -12 48 48' />;
     };
@@ -61,7 +76,7 @@ export default function Rank(
             sx={{ width: isVertical ? RANK_ICON_WIDTH : 'auto' }}
         >
             <Box>{curr}</Box>
-            {getIcon(resolvedPrev - curr)}
+            {getIcon(resolvedPrev - curr, isVertical)}
         </Stack>
     );
 };
