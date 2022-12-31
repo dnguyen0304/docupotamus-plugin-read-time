@@ -31,6 +31,7 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
         },
         loading: {
             isEnabled: true,
+            durationMilli: 5 * 1000,
         },
     },
 };
@@ -78,6 +79,17 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                 isEnabled: Joi
                     .boolean()
                     .default(DEFAULT_THEME_CONFIG.debug.loading.isEnabled),
+                durationMilli: Joi
+                    .number()
+                    .default(DEFAULT_THEME_CONFIG.debug.loading.durationMilli)
+                    .when(
+                        'isEnabled',
+                        {
+                            is: Joi.boolean().valid(false),
+                            // TODO(dnguyen0304): Improve error messaging.
+                            then: Joi.forbidden(),
+                        },
+                    ),
             })
                 .default(DEFAULT_THEME_CONFIG.debug.loading),
         })

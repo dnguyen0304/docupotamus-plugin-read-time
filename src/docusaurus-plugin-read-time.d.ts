@@ -47,6 +47,7 @@ export interface DocupotamusThemeConfig {
         };
         readonly loading: {
             readonly isEnabled: boolean;
+            readonly durationMilli: number;
         };
     };
 }
