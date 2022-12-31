@@ -28,7 +28,7 @@ export default function Loading(
         <>
             <Logo
                 fill='#fff'
-                viewBox={'100 700 1600 600'}
+                viewBox='100 700 1600 600'
             />
             <Box className={styles.loading_container}>
                 <Box className={styles.loading_bar} />
