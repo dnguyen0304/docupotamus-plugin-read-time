@@ -40,7 +40,7 @@ export interface DocupotamusThemeConfig {
     readonly debug: {
         readonly band: {
             readonly isEnabled: boolean;
-            readonly colors: string[];
+            readonly colors: readonly string[];
         };
         readonly border: {
             readonly isEnabled: boolean;
