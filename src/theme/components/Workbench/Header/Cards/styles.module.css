@@ -17,12 +17,16 @@
 
 .card__notClickedLeft {
     opacity: 0.4;
+    /* TODO(dnguyen0304): Investigate increasing translateX to create space for
+    the medal icon. */
     transform: translate(-40%, 30%) scale(0.7);
     z-index: 0;
 }
 
 .card__notClickedRight {
     opacity: 0.4;
+    /* TODO(dnguyen0304): Investigate increasing translateX to create space for
+    the medal icon. */
     transform: translate(40%, 30%) scale(0.7);
     z-index: 0;
 
