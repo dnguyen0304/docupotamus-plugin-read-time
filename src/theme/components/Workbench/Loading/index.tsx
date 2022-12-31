@@ -9,12 +9,12 @@ import Logo from './Logo';
 import styles from './styles.module.css';
 
 const Layout = styled(Box)({
-    height: '50%',
+    height: '55%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    rowGap: 'var(--space-l)',
+    rowGap: 'var(--space-xl)',
 });
 
 interface Props {
