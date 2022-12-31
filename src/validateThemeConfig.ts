@@ -31,6 +31,7 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
         },
         loading: {
             isEnabled: true,
+            // TODO(dnguyen0304): Fix missing cohesion with styles.
             durationMilli: 5 * 1000,
         },
     },
