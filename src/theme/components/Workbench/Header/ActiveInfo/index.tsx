@@ -50,6 +50,7 @@ interface Props {
     readonly clickedIndex: number;
 };
 
+// TODO(dnguyen0304): Fix hiding important information for rank 2 and 3 cards.
 export default function ActiveInfo(
     {
         keyedSamples,
