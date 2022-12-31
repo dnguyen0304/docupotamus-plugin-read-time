@@ -1,3 +1,4 @@
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
@@ -7,6 +8,9 @@ import type {
 } from '../../../contexts/samples';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
+import type {
+    DocupotamusThemeConfig
+} from '../../../docusaurus-plugin-read-time';
 import Card from './Card';
 import { CARD_KEY_PREFIX, CONTENT_MARGIN_LEFT } from './constants';
 import type { ChipData } from './Footer';
@@ -155,11 +159,22 @@ const preprocess = (
 };
 
 export default function Workbench(): JSX.Element {
+    const {
+        debug: {
+            loading: {
+                isEnabled: loadingIsEnabled,
+            },
+        },
+    } = useDocusaurusContext()
+        .siteConfig
+        .themeConfig
+        .docupotamusReadTimePlugin as DocupotamusThemeConfig;
+
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
 
     const targetIdToPrevRank = React.useRef<Map<string, number>>(new Map());
-    const [isLoading, setIsLoading] = React.useState<boolean>(true);
+    const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
     const [isAscending, setIsAscending] = React.useState<boolean>(false);
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
