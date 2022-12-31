@@ -18,7 +18,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
         ${theme.palette.grey[600]} 0%,
         ${theme.palette.grey[700]} 30%,
         ${Color(theme.palette.grey[800]).fade(0.6)} 100%)`,
-    borderRadius: 'var(--border-radius) 0 var(--space-xl) 0',
+    borderTopLeftRadius: 'inherit',
+    borderBottomRightRadius: 'var(--space-xl)',
     marginBottom: 'var(--space-xs)',
     padding: 'var(--space-l) var(--space-xs) var(--space-m)',
 }));
