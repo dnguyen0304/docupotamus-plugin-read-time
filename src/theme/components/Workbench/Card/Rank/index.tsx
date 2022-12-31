@@ -1,6 +1,7 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import RemoveIcon from '@mui/icons-material/Remove';
+import Box from '@mui/material/Box';
 import type { StackProps } from '@mui/material/Stack';
 import Stack from '@mui/material/Stack';
 import * as React from 'react';
@@ -59,7 +60,7 @@ export default function Rank(
             alignItems='center'
             sx={{ width: isVertical ? RANK_ICON_WIDTH : 'auto' }}
         >
-            {curr}
+            <Box>{curr}</Box>
             {getIcon(resolvedPrev - curr)}
         </Stack>
     );
