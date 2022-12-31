@@ -67,7 +67,10 @@ export default function Card(
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
         >
-            <Box sx={{ margin: '0 6px 0 4px' }}>
+            <Box sx={{
+                margin: '0 6px 0 4px',
+                paddingBottom: 'var(--space-2xs-xs)',
+            }}>
                 <Box>{truncatedTargetId}</Box>
                 <Box sx={{
                     fontSize: 'var(--font-size--3)',
@@ -81,6 +84,7 @@ export default function Card(
                 bottom: 0,
                 left: '50%',
                 color: rankColor,
+                fontSize: 'var(--step-1)',
                 translate: '-50% 50%',
             }} />
         </StyledBox>
