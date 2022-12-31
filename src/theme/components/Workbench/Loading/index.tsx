@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import * as React from 'react';
+import Logo from './Logo';
 import styles from './styles.module.css';
 
 // TODO(dnguyen0304): Fix missing cohesion with styles.
@@ -24,8 +25,14 @@ export default function Loading(
     }, []);
 
     return (
-        <Box className={styles.loading_container}>
-            <Box className={styles.loading_bar} />
-        </Box>
+        <>
+            <Logo
+                fill='#fff'
+                viewBox={'100 700 1600 600'}
+            />
+            <Box className={styles.loading_container}>
+                <Box className={styles.loading_bar} />
+            </Box>
+        </>
     );
 };
