@@ -3,12 +3,12 @@ import { DATA_ATTRIBUTE_TARGET_ID } from '../../../../constants';
 import { getElement } from '../../../../services/dom';
 import styles from './styles.module.css';
 
-type Props = {
+interface Props extends IntersectionObserverInit {
     readonly element: Element | string;
     readonly onChange: IntersectionObserverCallback;
     readonly debugBorderIsEnabled?: boolean;
     readonly targetId?: string;
-} & IntersectionObserverInit;
+};
 
 export const observeVisibility = async (
     {
