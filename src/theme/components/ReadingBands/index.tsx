@@ -68,6 +68,12 @@ export default function ReadingBands(): JSX.Element | null {
                 await getElementAll(contentSelector) as HTMLElement[];
 
             for (const element of elements) {
+                const targetId = uuidv4();
+
+                // TODO(dnguyen0304): Investigate if a clean up removing the
+                // data-attribute is needed.
+                element.dataset.targetId = targetId;
+
                 const range = new Range();
                 range.selectNodeContents(element);
 
@@ -88,7 +94,7 @@ export default function ReadingBands(): JSX.Element | null {
                 }
 
                 const target: Target = {
-                    id: uuidv4(),
+                    id: targetId,
                     source: {
                         href: document.location.href,
                     },
@@ -114,7 +120,6 @@ export default function ReadingBands(): JSX.Element | null {
                         ),
                         rootMargin,
                         debugBorderIsEnabled,
-                        targetId: target.id,
                     });
                 }
             }
