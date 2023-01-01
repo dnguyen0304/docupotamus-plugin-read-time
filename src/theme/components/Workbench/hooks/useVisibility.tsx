@@ -1,22 +1,29 @@
-// import * as React from 'react';
-// import styles from './styles.module.css';
-// import useElement from './useElement';
+import * as React from 'react';
+import { observeVisibility } from '../../../../services/visibility';
+import useElement from './useElement';
 
 export default function useVisibility(targetId: string): boolean {
-    return false;
+    const element = useElement(targetId);
 
-    // const element = useElement(
-    //     targetId,
-    //     () => element?.classList.remove(styles.target_container__highlight),
-    // );
-    // const [isEnabled, setIsEnabled] = React.useState<boolean>(false);
+    const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
-    // React.useEffect(() => {
-    //     element?.classList.remove(styles.target_container__highlight);
-    //     if (isEnabled) {
-    //         element?.classList.add(styles.target_container__highlight);
-    //     }
-    // }, [isEnabled]);
+    const onChange: IntersectionObserverCallback = (entries) => {
+        for (const entry of entries) {
+            setIsVisible(entry.isIntersecting);
+        }
+    }
 
-    // return [isEnabled, setIsEnabled];
+    React.useEffect(() => {
+        (async () => {
+            if (element === undefined) {
+                return;
+            }
+            await observeVisibility({
+                element,
+                onChange,
+            });
+        })();
+    }, [element]);
+
+    return isVisible;
 };
