@@ -11,8 +11,8 @@ import { useToolbar } from '../../../contexts/toolbar';
 import type {
     DocupotamusThemeConfig
 } from '../../../docusaurus-plugin-read-time';
-import Card from './Card';
-import { CARD_KEY_PREFIX, CONTENT_MARGIN_LEFT } from './constants';
+import { CONTENT_MARGIN_LEFT } from './constants';
+import Content from './Content';
 import type { ChipData } from './Footer';
 import Footer from './Footer';
 import Header from './Header';
@@ -58,15 +58,6 @@ const StyledBox = styled(Box, {
             rgba(60, 64, 67, 0.4) 100%)`,
     },
 }));
-
-// TODO(dnguyen0304): Investigate migrating to use MUI List.
-//   See: https://mui.com/material-ui/react-list/
-const StyledOrderedList = styled('ol')({
-    overflow: 'scroll',
-    margin: 0,
-    marginBottom: 'var(--space-2xs)',
-    padding: 0,
-});
 
 // Convert from keyed RunningTotalSample to keyed WorkbenchSample.
 const convertToWorkbenchSample = (
@@ -223,24 +214,11 @@ export default function Workbench(): JSX.Element {
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
                 />
-                <StyledOrderedList>
-                    {remaining.map((preprocessed) => {
-                        const [targetId, sample, rankCurr] = preprocessed;
-                        const rankPrev =
-                            targetIdToPrevRank.current.get(targetId);
-                        return (
-                            <Card
-                                key={`${CARD_KEY_PREFIX}-${targetId}`}
-                                targetId={targetId}
-                                details={sample.target.snippet}
-                                rankCurr={rankCurr}
-                                rankPrev={rankPrev}
-                                readTimeSecond={sample.runningTotal.readTimeSecond}
-                                showMinute={showMinute}
-                            />
-                        );
-                    })}
-                </StyledOrderedList>
+                <Content
+                    keyedSamples={remaining}
+                    targetIdToPrevRank={targetIdToPrevRank.current}
+                    showMinute={showMinute}
+                />
                 <Footer
                     chips={chips}
                     marginLeft={CONTENT_MARGIN_LEFT}
