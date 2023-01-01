@@ -110,6 +110,7 @@ export default function ReadingBands(): JSX.Element | null {
                         + `0px `
                         + `-${viewportHeight - band.bottomVh * viewportHeight}px`;
 
+                    // TODO(dnguyen0304): Fix unused return value.
                     await observeVisibility({
                         element,
                         onChange: createOnVisibilityChange(
