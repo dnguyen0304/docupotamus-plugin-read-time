@@ -37,6 +37,8 @@ export const observeVisibility = async (
         },
     );
 
+    // TODO(dnguyen0304): Investigate extracting because it adds another
+    //   responsibility.
     // TODO(dnguyen0304): Add tooltip with visibility.
     if (debugBorderIsEnabled
         && !resolvedElement.classList.contains(styles.visibilityObserver_target)
