@@ -20,6 +20,7 @@ const HighlightStyles = {
         // maintenance.
         backgroundColor: 'rgb(252, 201, 53)',
         color: 'black',
+        opacity: 1,
     },
 }
 
