@@ -146,7 +146,7 @@ export interface DeviceInfo {
     readonly viewportHeightPx: number;
 }
 
-interface RunningTotal {
+export interface RunningTotal {
     // Total visible time, in milliseconds.
     visibleTimeMilli: number;
 
