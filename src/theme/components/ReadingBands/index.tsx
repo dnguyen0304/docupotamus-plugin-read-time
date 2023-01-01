@@ -13,6 +13,7 @@ import type {
 import { BANDS } from './config';
 // TODO(dnguyen0304): Fix missing module declaration.
 import { getElement } from '../../../services/dom';
+import { observeVisibility } from '../../../services/visibility';
 import { RangeAnchor } from './services/annotator/anchoring/types';
 import {
     getElementAll,
@@ -21,7 +22,6 @@ import {
 } from './services/dom';
 import { createUpdateRunningTotals } from './services/sampleConsumer';
 import { createOnVisibilityChange } from './services/sampleProducer';
-import { observeVisibility } from './services/visibility';
 import styles from './styles.module.css';
 import Tooltip from './Tooltip';
 

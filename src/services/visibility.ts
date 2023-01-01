@@ -1,5 +1,5 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
-import { getElement } from '../../../../services/dom';
+import { getElement } from './dom';
 import styles from './styles.module.css';
 
 interface Props extends IntersectionObserverInit {
