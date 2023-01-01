@@ -4,17 +4,19 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import useHighlight from '../../hooks/useHighlight';
 import usePulse from '../../hooks/usePulse';
+import useVisibility from '../../hooks/useVisibility';
 import { Card as CardStyles } from '../../styles';
 import type { CardProps } from '../../types';
 import styles from '../Cards/styles.module.css';
 
 interface StyledBoxProps {
     readonly borderTopColor: React.CSSProperties['borderTopColor'];
+    readonly targetIsVisible: boolean;
 };
 
 const StyledBox = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'borderTopColor',
-})<StyledBoxProps>(({ theme, borderTopColor }) => ({
+    shouldForwardProp: (prop) => prop !== 'borderTopColor' && prop !== 'targetIsVisible',
+})<StyledBoxProps>(({ theme, borderTopColor, targetIsVisible }) => ({
     ...CardStyles,
     position: 'relative',  // Create a positioning context for icon.
     backgroundColor: theme.palette.grey[600],
@@ -22,6 +24,11 @@ const StyledBox = styled(Box, {
     fontSize: 'var(--font-size--1)',
     margin: 0,
     transition: 'border-top-color 0.5s ease-in',
+    ...(targetIsVisible && {
+        // TODO(dnguyen0304): Extract to a centralized location to facilitate
+        // maintenance.
+        // backgroundColor: 'rgba(252, 201, 53, 0.2)',
+    }),
 }));
 
 interface Props extends Pick<CardProps,
@@ -44,6 +51,7 @@ export default function Card(
 ): JSX.Element {
     const [, setPulse] = usePulse(targetId);
     const [, setHighlight] = useHighlight(targetId);
+    const targetIsVisible = useVisibility(targetId);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
@@ -66,6 +74,7 @@ export default function Card(
             onClick={handleClick}
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
+            targetIsVisible={targetIsVisible}
         >
             <Box sx={{
                 margin: '0 6px 0 4px',
