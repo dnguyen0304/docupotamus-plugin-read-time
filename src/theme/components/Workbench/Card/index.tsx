@@ -37,6 +37,10 @@ const StyledListItem = styled('li', {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    backgroundColor:
+        targetIsVisible
+            ? 'rgba(252, 201, 53, 0.08)'
+            : 'transparent',
     opacity: targetIsVisible ? 'inherit' : 0.6,
 }));
 
