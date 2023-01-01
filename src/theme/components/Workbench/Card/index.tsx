@@ -37,11 +37,13 @@ const StyledListItem = styled('li', {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    backgroundColor:
-        targetIsVisible
-            ? 'rgba(252, 201, 53, 0.08)'
-            : 'transparent',
-    opacity: targetIsVisible ? 'inherit' : 0.6,
+    opacity: 0.6,
+    ...(targetIsVisible && {
+        // TODO(dnguyen0304): Extract to a centralized location to facilitate
+        // maintenance.
+        backgroundColor: 'rgba(252, 201, 53, 0.08)',
+        opacity: 1,
+    }),
 }));
 
 export default function Card(
