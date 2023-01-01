@@ -27,7 +27,7 @@ const StyledBox = styled(Box, {
     ...(targetIsVisible && {
         // TODO(dnguyen0304): Extract to a centralized location to facilitate
         // maintenance.
-        // backgroundColor: 'rgba(252, 201, 53, 0.2)',
+        backgroundColor: 'rgba(252, 201, 53, 0.2)',
     }),
 }));
 
