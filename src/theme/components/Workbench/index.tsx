@@ -143,6 +143,8 @@ const rank = (
     return ranks;
 };
 
+// TODO(dnguyen0304): [medium] Investigate moving rank to WorkbenchSample as
+// Metadata.rankCurr for scalability.
 const preprocess = (
     targetIdToSamples: TargetIdToSamples,
     isAscending: boolean,
