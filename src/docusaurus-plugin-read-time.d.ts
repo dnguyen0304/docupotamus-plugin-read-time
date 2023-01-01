@@ -64,6 +64,7 @@ export interface Target {
     // Root to reference for relative selector paths.
     readonly selectorRoot: RangeSelector;
 
+    // TODO(dnguyen0304): Investigate if ReadonlyArray is needed.
     // Serialized queries for locating a target on a page.
     readonly selectors: Selector[];
 
