@@ -69,11 +69,11 @@ export default function Card(
     return (
         <StyledListItem
             className={className}
-            targetIsVisible={targetIsVisible}
             onAnimationEnd={() => setPulse(false)}
             onClick={() => setPulse(true)}
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
+            targetIsVisible={targetIsVisible}
         >
             <Rank
                 curr={rankCurr}
