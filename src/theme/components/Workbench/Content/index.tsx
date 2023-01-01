@@ -27,32 +27,38 @@ interface Props {
     readonly showMinute: boolean;
 };
 
-export default function Content(
+const partition = (
     {
         keyedSamples,
         targetIdToPrevRank,
         showMinute,
     }: Props
-): JSX.Element {
+): JSX.Element => {
+    return (
+        <StyledOrderedList>
+            {keyedSamples.map((preprocessed) => {
+                const [targetId, sample, rankCurr] = preprocessed;
+                const rankPrev = targetIdToPrevRank.get(targetId);
+                return (
+                    <Card
+                        key={`${CARD_KEY_PREFIX}-${targetId}`}
+                        targetId={targetId}
+                        details={sample.target.snippet}
+                        rankCurr={rankCurr}
+                        rankPrev={rankPrev}
+                        readTimeSecond={sample.runningTotal.readTimeSecond}
+                        showMinute={showMinute}
+                    />
+                );
+            })}
+        </StyledOrderedList>
+    );
+};
+
+export default function Content(props: Props): JSX.Element {
     return (
         <StyledBox>
-            <StyledOrderedList>
-                {keyedSamples.map((preprocessed) => {
-                    const [targetId, sample, rankCurr] = preprocessed;
-                    const rankPrev = targetIdToPrevRank.get(targetId);
-                    return (
-                        <Card
-                            key={`${CARD_KEY_PREFIX}-${targetId}`}
-                            targetId={targetId}
-                            details={sample.target.snippet}
-                            rankCurr={rankCurr}
-                            rankPrev={rankPrev}
-                            readTimeSecond={sample.runningTotal.readTimeSecond}
-                            showMinute={showMinute}
-                        />
-                    );
-                })}
-            </StyledOrderedList>
+            {partition(props)}
         </StyledBox>
     );
 };
