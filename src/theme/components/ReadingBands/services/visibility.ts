@@ -4,7 +4,7 @@ import { getElement } from '../../../../services/dom';
 import styles from './styles.module.css';
 
 type Props = {
-    readonly element: string | Element;
+    readonly element: Element | string;
     readonly onChange: IntersectionObserverCallback;
     readonly debugBorderIsEnabled?: boolean;
     readonly targetId?: string;
