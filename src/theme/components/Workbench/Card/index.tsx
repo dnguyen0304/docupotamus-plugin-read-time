@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import useHighlight from '../hooks/useHighlight';
 import usePulse from '../hooks/usePulse';
+import useVisibility from '../hooks/useVisibility';
 import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
 import Metric from './Metric';
@@ -22,7 +23,13 @@ const HighlightStyles = {
     },
 }
 
-const StyledListItem = styled('li')({
+interface StyledListItemProps {
+    readonly targetIsVisible: boolean;
+};
+
+const StyledListItem = styled('li', {
+    shouldForwardProp: (prop) => prop !== 'targetIsVisible',
+})<StyledListItemProps>(({ targetIsVisible }) => ({
     ...CardStyles,
     ...HighlightStyles,
     position: 'relative',
@@ -30,7 +37,8 @@ const StyledListItem = styled('li')({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-});
+    opacity: targetIsVisible ? 'inherit' : 0.7,
+}));
 
 export default function Card(
     {
@@ -45,6 +53,7 @@ export default function Card(
 ): JSX.Element {
     const [, setPulse] = usePulse(targetId);
     const [, setHighlight] = useHighlight(targetId);
+    const targetIsVisible = useVisibility(targetId);
 
     // TODO(dnguyen0304): Hide targetId and use shortened
     // heading as the card symbol.
@@ -53,6 +62,7 @@ export default function Card(
     return (
         <StyledListItem
             className={className}
+            targetIsVisible={targetIsVisible}
             onAnimationEnd={() => setPulse(false)}
             onClick={() => setPulse(true)}
             onMouseEnter={() => setHighlight(true)}
