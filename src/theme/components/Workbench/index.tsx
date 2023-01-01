@@ -186,7 +186,7 @@ export default function Workbench(): JSX.Element {
         },
     ];
 
-    const partitionHeader = (): JSX.Element => {
+    const partitionSamples = (): JSX.Element => {
         const preprocessed = preprocess(targetIdToSamples, isAscending);
         let top: readonly (readonly [
             string,
@@ -256,7 +256,7 @@ export default function Workbench(): JSX.Element {
             {
                 isLoading
                     ? <Loading setIsLoading={setIsLoading} />
-                    : partitionHeader()
+                    : partitionSamples()
             }
         </StyledBox>
     );
