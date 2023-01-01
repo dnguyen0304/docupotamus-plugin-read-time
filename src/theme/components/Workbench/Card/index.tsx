@@ -37,7 +37,7 @@ const StyledListItem = styled('li', {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    opacity: targetIsVisible ? 'inherit' : 0.7,
+    opacity: targetIsVisible ? 'inherit' : 0.6,
 }));
 
 export default function Card(
