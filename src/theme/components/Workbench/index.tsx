@@ -147,9 +147,10 @@ const preprocess = (
     targetIdToSamples: TargetIdToSamples,
     isAscending: boolean,
 ): readonly (readonly [string, WorkbenchSample, number])[] => {
-    const sorted = Object.entries(targetIdToSamples)
-        .map(convertToWorkbenchSample)
-        .sort((a, b) => sortDescending(a, b));
+    const sorted =
+        Object.entries(targetIdToSamples)
+            .map(convertToWorkbenchSample)
+            .sort((a, b) => sortDescending(a, b));
     const sortedAndRanked = rank(sorted);
     return (
         isAscending
