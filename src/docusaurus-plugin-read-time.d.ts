@@ -7,17 +7,6 @@ declare module '@docusaurus/types' {
     }
 }
 
-declare module '@mui/material/styles' {
-    interface BreakpointOverrides {
-        xs: false;
-        s: false;
-        m: false;
-        l: false;
-        xl: false;
-        mobile: true;
-    }
-}
-
 export interface DocupotamusThemeConfig {
     readonly contentRootSelector: string;
     readonly contentSelector: string;
