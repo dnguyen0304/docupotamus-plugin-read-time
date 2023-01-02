@@ -17,6 +17,14 @@ const StyledOrderedList = styled('ol')({
     padding: 0,
 });
 
+interface SummaryStatistics {
+    readonly mean: number;
+    readonly standardDeviation: number;
+    readonly sigma1: number;
+    readonly sigma2: number;
+    readonly sigma3: number;
+}
+
 interface Props {
     readonly keyedSamples: readonly (readonly [
         string,
@@ -28,9 +36,11 @@ interface Props {
 };
 
 // See: https://stackoverflow.com/a/53577159
-const getStandardDeviation = (values: ReadonlyArray<number>): number => {
+const getSummaryStatistics = (
+    values: ReadonlyArray<number>,
+): SummaryStatistics | undefined => {
     if (values.length === 0) {
-        return 0;
+        return;
     }
     const populationCount = values.length;
     const mean = values.reduce((a, b) => a + b) / populationCount;
@@ -39,7 +49,14 @@ const getStandardDeviation = (values: ReadonlyArray<number>): number => {
             .map((value) => Math.pow(value - mean, 2))
             .reduce((a, b) => a + b);
     const variance = sumOfSquares / populationCount;
-    return Math.sqrt(variance);
+    const standardDeviation = Math.sqrt(variance);
+    return {
+        mean,
+        standardDeviation,
+        sigma1: mean + standardDeviation * 1,
+        sigma2: mean + standardDeviation * 2,
+        sigma3: mean + standardDeviation * 3,
+    };
 };
 
 const partition = (
