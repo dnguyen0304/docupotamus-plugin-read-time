@@ -27,6 +27,21 @@ interface Props {
     readonly showMinute: boolean;
 };
 
+// See: https://stackoverflow.com/a/53577159
+const getStandardDeviation = (values: ReadonlyArray<number>): number => {
+    if (values.length === 0) {
+        return 0;
+    }
+    const populationCount = values.length;
+    const mean = values.reduce((a, b) => a + b) / populationCount;
+    const sumOfSquares =
+        values
+            .map((value) => Math.pow(value - mean, 2))
+            .reduce((a, b) => a + b);
+    const variance = sumOfSquares / populationCount;
+    return Math.sqrt(variance);
+};
+
 const partition = (
     {
         keyedSamples,
