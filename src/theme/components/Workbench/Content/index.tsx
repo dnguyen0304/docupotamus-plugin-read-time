@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Card from '../Card';
 import { CARD_KEY_PREFIX } from '../constants';
-import type { Sample as WorkbenchSample } from '../types';
+import type { Sample as WorkbenchSample, SummaryStatistics } from '../types';
 
 const StyledBox = styled(Box)({
     overflow: 'scroll',
@@ -22,6 +22,7 @@ const partition = (
         keyedSamples,
         targetIdToPrevRank,
         showMinute,
+        summaryStatistics,
     }: Props
 ): JSX.Element => {
     return (
@@ -53,6 +54,7 @@ interface Props {
     ])[];
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
     readonly showMinute: boolean;
+    readonly summaryStatistics: SummaryStatistics;
 };
 
 export default function Content(props: Props): JSX.Element {

@@ -216,6 +216,12 @@ export default function Workbench(): JSX.Element {
 
     const partitionSamples = (): JSX.Element => {
         const preprocessed = preprocess(targetIdToSamples, isAscending);
+        const summaryStatistics = getSummaryStatistics(
+            preprocessed.map(
+                ([, sample,]) => sample.runningTotal.readTimeSecond
+            )
+        );
+
         let top: readonly (readonly [
             string,
             WorkbenchSample,
@@ -246,6 +252,7 @@ export default function Workbench(): JSX.Element {
                     keyedSamples={remaining}
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
+                    summaryStatistics={summaryStatistics}
                 />
                 <Footer
                     chips={chips}
