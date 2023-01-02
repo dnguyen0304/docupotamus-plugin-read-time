@@ -7,7 +7,7 @@ const B0_MULTIPLIER: number = 1.0;
 const B1_MULTIPLIER: number = 0.8;
 const B2_MULTIPLIER: number = 0.4;
 
-export const BANDS: Band[] = [
+export const BANDS: readonly Band[] = [
     {
         friendlyKey: 'B2-top',
         topVh: 0,
