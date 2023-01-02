@@ -1,10 +1,8 @@
+import type { DocupotamusThemeConfig } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import type {
-    DocupotamusThemeConfig
-} from '../../../../docusaurus-plugin-read-time';
 import Logo from './Logo';
 import styles from './styles.module.css';
 

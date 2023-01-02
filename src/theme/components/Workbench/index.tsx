@@ -1,3 +1,4 @@
+import type { DocupotamusThemeConfig } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -8,9 +9,6 @@ import type {
 } from '../../../contexts/samples';
 import { useSamples } from '../../../contexts/samples';
 import { useToolbar } from '../../../contexts/toolbar';
-import type {
-    DocupotamusThemeConfig
-} from '../../../docusaurus-plugin-read-time';
 import { CONTENT_MARGIN_LEFT } from './constants';
 import Content from './Content';
 import type { ChipData } from './Footer';

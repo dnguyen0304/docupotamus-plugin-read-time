@@ -1,7 +1,4 @@
-import type {
-    RunningTotal,
-    Target
-} from '../../../docusaurus-plugin-read-time';
+import type { RunningTotal, Target } from '@docusaurus/plugin-read-time';
 
 export interface Sample {
     readonly target: Target;

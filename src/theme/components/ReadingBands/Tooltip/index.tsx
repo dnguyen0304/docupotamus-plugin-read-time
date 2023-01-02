@@ -1,7 +1,7 @@
+import { BandFriendlyKey } from '@docusaurus/plugin-read-time';
 import type { TooltipProps } from '@mui/material/Tooltip';
 import MuiTooltip from '@mui/material/Tooltip';
 import * as React from 'react';
-import { BandFriendlyKey } from '../../../../docusaurus-plugin-read-time';
 import { BANDS } from '../config';
 
 const INDEX_TO_FRIENDLY_KEY: Map<number, BandFriendlyKey> = new Map(

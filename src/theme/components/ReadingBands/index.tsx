@@ -1,15 +1,15 @@
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import * as React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
-import { useSamples } from '../../../contexts/samples';
 import type {
     BandFriendlyKey,
     DocupotamusThemeConfig,
     IntersectionSample,
     Selector,
     Target
-} from '../../../docusaurus-plugin-read-time';
+} from '@docusaurus/plugin-read-time';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import * as React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
+import { useSamples } from '../../../contexts/samples';
 import { BANDS } from './config';
 // TODO(dnguyen0304): Fix missing module declaration.
 import { getElement } from '../../../services/dom';

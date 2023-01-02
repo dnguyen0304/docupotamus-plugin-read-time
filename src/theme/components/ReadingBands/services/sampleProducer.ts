@@ -5,7 +5,7 @@ import type {
     StartIntersectionSample,
     StopIntersectionSample,
     Target
-} from '../../../../docusaurus-plugin-read-time';
+} from '@docusaurus/plugin-read-time';
 import { BAND_FRIENDLY_KEYS } from '../config';
 import { getViewportHeight } from './dom';
 

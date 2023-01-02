@@ -1,10 +1,10 @@
-import type { TargetIdToSamples } from '../../../../contexts/samples';
 import type {
     BandFriendlyKey,
     IntersectionSample,
     RunningTotal,
     StartIntersectionSample
-} from '../../../../docusaurus-plugin-read-time';
+} from '@docusaurus/plugin-read-time';
+import type { TargetIdToSamples } from '../../../../contexts/samples';
 import { BAND_FRIENDLY_KEYS } from '../config';
 
 // stale closure can't use entry

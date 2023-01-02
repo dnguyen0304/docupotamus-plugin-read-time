@@ -1,9 +1,9 @@
+import type { DocupotamusThemeConfig } from '@docusaurus/plugin-read-time';
 import type {
     ThemeConfig,
     ThemeConfigValidationContext
 } from '@docusaurus/types';
 import { Joi } from '@docusaurus/utils-validation';
-import type { DocupotamusThemeConfig } from './docusaurus-plugin-read-time';
 
 declare module '@docusaurus/types' {
     interface ThemeConfig {

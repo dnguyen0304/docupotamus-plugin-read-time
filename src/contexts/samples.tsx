@@ -1,5 +1,5 @@
+import { RunningTotal, Target } from '@docusaurus/plugin-read-time';
 import * as React from 'react';
-import { RunningTotal, Target } from '../docusaurus-plugin-read-time';
 import { ReactContextError } from './errors';
 
 export interface RunningTotalSample {
