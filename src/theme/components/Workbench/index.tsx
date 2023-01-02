@@ -19,6 +19,14 @@ import type { Sample as WorkbenchSample } from './types';
 
 const MILLISECOND_TO_SECOND: number = 1000;
 
+interface SummaryStatistics {
+    readonly mean: number;
+    readonly standardDeviation: number;
+    readonly sigma1: number;
+    readonly sigma2: number;
+    readonly sigma3: number;
+}
+
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
     readonly boxShadowWidth: React.CSSProperties['width'];
@@ -55,6 +63,30 @@ const StyledBox = styled(Box, {
             rgba(60, 64, 67, 0.4) 100%)`,
     },
 }));
+
+// See: https://stackoverflow.com/a/53577159
+const getSummaryStatistics = (
+    values: ReadonlyArray<number>,
+): SummaryStatistics | undefined => {
+    if (values.length === 0) {
+        return;
+    }
+    const populationCount = values.length;
+    const mean = values.reduce((a, b) => a + b) / populationCount;
+    const sumOfSquares =
+        values
+            .map((value) => Math.pow(value - mean, 2))
+            .reduce((a, b) => a + b);
+    const variance = sumOfSquares / populationCount;
+    const standardDeviation = Math.sqrt(variance);
+    return {
+        mean,
+        standardDeviation,
+        sigma1: mean + standardDeviation * 1,
+        sigma2: mean + standardDeviation * 2,
+        sigma3: mean + standardDeviation * 3,
+    };
+};
 
 // Convert from keyed RunningTotalSample to keyed WorkbenchSample.
 const convertToWorkbenchSample = (
