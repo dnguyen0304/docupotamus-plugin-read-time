@@ -13,7 +13,7 @@ declare module '@mui/material/styles' {
         xl: false;
         mobile: true;
     }
-}
+};
 
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
 const COLOR_ACCENT_GREEN: React.CSSProperties['color'] = '#64ffda';
