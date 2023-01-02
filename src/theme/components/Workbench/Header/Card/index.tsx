@@ -10,17 +10,17 @@ import type { CardProps } from '../../types';
 import styles from '../Cards/styles.module.css';
 
 interface StyledBoxProps {
-    readonly borderTopColor: React.CSSProperties['borderTopColor'];
+    readonly rankColor: React.CSSProperties['color'];
     readonly targetIsVisible: boolean;
 };
 
 const StyledBox = styled(Box, {
-    shouldForwardProp: (prop) => prop !== 'borderTopColor' && prop !== 'targetIsVisible',
-})<StyledBoxProps>(({ theme, borderTopColor, targetIsVisible }) => ({
+    shouldForwardProp: (prop) => prop !== 'rankColor' && prop !== 'targetIsVisible',
+})<StyledBoxProps>(({ theme, rankColor, targetIsVisible }) => ({
     ...CardStyles,
     position: 'relative',  // Create a positioning context for icon.
     backgroundColor: theme.palette.grey[600],
-    borderTop: `var(--space-3xs) solid ${borderTopColor}`,
+    borderTop: 'var(--space-3xs) solid transparent',
     fontSize: 'var(--font-size--1)',
     margin: 0,
     transition: 'border-top-color 0.5s ease-in',
@@ -29,6 +29,9 @@ const StyledBox = styled(Box, {
         // maintenance.
         backgroundColor: 'rgba(252, 201, 53, 0.2)',
     }),
+    '&:hover': {
+        borderTopColor: rankColor,
+    },
     // TODO(dnguyen0304): Investigate a less awkward transition.
     [`&.${styles.card__clicked}:hover`]: {
         backgroundColor: theme.palette.grey[600],
@@ -69,15 +72,11 @@ export default function Card(
     return (
         <StyledBox
             className={className}
-            borderTopColor={
-                className?.includes(styles.card__clicked)
-                    ? rankColor
-                    : 'transparent'
-            }
             onAnimationEnd={() => setPulse(false)}
             onClick={handleClick}
             onMouseEnter={() => setHighlight(true)}
             onMouseLeave={() => setHighlight(false)}
+            rankColor={rankColor}
             targetIsVisible={targetIsVisible}
         >
             <Box sx={{
