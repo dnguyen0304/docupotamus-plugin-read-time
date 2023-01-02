@@ -1,7 +1,6 @@
 // TODO(dnguyen0304): Investigate referencing @docusaurus/module-type-aliases.
 /// <reference types="@docusaurus/theme-classic" />
 
-import type { Props as DocPageLayoutMainProps } from '@theme/DocPage/Layout/Main';
 import type { Props as LayoutProviderProps } from '@theme/Layout/Provider';
 
 declare module '@docusaurus/types' {
@@ -22,8 +21,10 @@ declare module '@mui/material/styles' {
 }
 
 declare module '@theme-init/DocPage/Layout/Main' {
+    type Props = import('@theme/DocPage/Layout/Main').Props;
+
     interface DocPageLayoutMain {
-        (props: DocPageLayoutMainProps): JSX.Element;
+        (props: Props): JSX.Element;
     }
 }
 
