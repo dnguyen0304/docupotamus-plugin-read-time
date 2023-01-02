@@ -55,7 +55,7 @@ declare module '@docusaurus/plugin-read-time' {
     }
 
     // Serialized queries for locating a target on a page.
-    type Selector = RangeSelector;
+    interface Selector extends RangeSelector { }
 
     type BandFriendlyKey =
         | 'B2-top'
