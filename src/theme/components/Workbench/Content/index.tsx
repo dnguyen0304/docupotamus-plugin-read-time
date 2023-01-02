@@ -25,16 +25,6 @@ interface SummaryStatistics {
     readonly sigma3: number;
 }
 
-interface Props {
-    readonly keyedSamples: readonly (readonly [
-        string,
-        WorkbenchSample,
-        number,
-    ])[];
-    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
-    readonly showMinute: boolean;
-};
-
 // See: https://stackoverflow.com/a/53577159
 const getSummaryStatistics = (
     values: ReadonlyArray<number>,
@@ -85,6 +75,16 @@ const partition = (
             })}
         </StyledOrderedList>
     );
+};
+
+interface Props {
+    readonly keyedSamples: readonly (readonly [
+        string,
+        WorkbenchSample,
+        number,
+    ])[];
+    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
+    readonly showMinute: boolean;
 };
 
 export default function Content(props: Props): JSX.Element {
