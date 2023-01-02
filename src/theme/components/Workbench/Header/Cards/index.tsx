@@ -12,6 +12,7 @@ const GOLD: PositionIndex = 0;
 const SILVER: PositionIndex = 1;
 const BRONZE: PositionIndex = 2;
 
+// TODO(dnguyen0304): Rename from clicked to active.
 const CURRENT_TO_CLICKED_TO_CLASS: ReadonlyMap<
     PositionIndex,
     ReadonlyMap<PositionIndex, string>
