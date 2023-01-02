@@ -29,6 +29,10 @@ const StyledBox = styled(Box, {
         // maintenance.
         backgroundColor: 'rgba(252, 201, 53, 0.2)',
     }),
+    // TODO(dnguyen0304): Investigate a less awkward transition.
+    [`&.${styles.card__clicked}:hover`]: {
+        backgroundColor: theme.palette.grey[600],
+    },
 }));
 
 interface Props extends Pick<CardProps,
