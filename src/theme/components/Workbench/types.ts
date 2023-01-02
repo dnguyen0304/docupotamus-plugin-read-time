@@ -17,3 +17,11 @@ export interface CardProps {
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
 };
+
+export interface SummaryStatistics {
+    readonly mean: number;
+    readonly standardDeviation: number;
+    readonly sigma1: number;
+    readonly sigma2: number;
+    readonly sigma3: number;
+}

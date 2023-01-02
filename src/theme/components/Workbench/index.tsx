@@ -15,17 +15,9 @@ import Footer from './Footer';
 import Header from './Header';
 import Loading from './Loading';
 import styles from './styles.module.css';
-import type { Sample as WorkbenchSample } from './types';
+import type { Sample as WorkbenchSample, SummaryStatistics } from './types';
 
 const MILLISECOND_TO_SECOND: number = 1000;
-
-interface SummaryStatistics {
-    readonly mean: number;
-    readonly standardDeviation: number;
-    readonly sigma1: number;
-    readonly sigma2: number;
-    readonly sigma3: number;
-}
 
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
