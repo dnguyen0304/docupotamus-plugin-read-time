@@ -100,13 +100,13 @@ declare module '@docusaurus/plugin-read-time' {
         readonly deviceInfo: DeviceInfo;
     }
 
-    type StopIntersectionSample = Pick<
+    interface StopIntersectionSample extends Pick<
         StartIntersectionSample,
         | 'timestampMilli'
         | 'target'
         | 'band'
         | 'isIntersecting'
-    >;
+    > { }
 
     type IntersectionSample =
         StartIntersectionSample | StopIntersectionSample;
