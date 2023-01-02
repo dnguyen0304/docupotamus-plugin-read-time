@@ -18,10 +18,10 @@ export interface CardProps {
     readonly showMinute: boolean;
 };
 
-export interface SummaryStatistics {
-    readonly mean: number;
-    readonly standardDeviation: number;
-    readonly sigma1: number;
-    readonly sigma2: number;
-    readonly sigma3: number;
+export interface Percentile {
+    // Human-readable description.
+    readonly label: string;
+
+    // Upper bound. This range endpoint is exclusive: [lower, upper).
+    readonly boundUpper: number;
 }

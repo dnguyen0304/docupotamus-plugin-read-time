@@ -13,6 +13,7 @@
         "approx-string-match": "^2.0.0",
         "color": "^4.2.3",
         "dayjs": "^1.11.7",
+        "percentile": "^1.6.0",
         "uuid": "^9.0.0"
     },
     "devDependencies": {

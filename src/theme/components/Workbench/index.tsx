@@ -1,6 +1,7 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import getPercentile from 'percentile';
 import * as React from 'react';
 import type {
     RunningTotalSample,
@@ -15,7 +16,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Loading from './Loading';
 import styles from './styles.module.css';
-import type { Sample as WorkbenchSample, SummaryStatistics } from './types';
+import type { Percentile, Sample as WorkbenchSample } from './types';
 
 const MILLISECOND_TO_SECOND: number = 1000;
 
@@ -56,34 +57,15 @@ const StyledBox = styled(Box, {
     },
 }));
 
-// See: https://stackoverflow.com/a/53577159
-const getSummaryStatistics = (
-    values: ReadonlyArray<number>,
-): SummaryStatistics => {
-    if (values.length === 0) {
-        return {
-            mean: 0,
-            standardDeviation: 0,
-            sigma1: 0,
-            sigma2: 0,
-            sigma3: 0,
-        };
-    }
-    const populationCount = values.length;
-    const mean = values.reduce((a, b) => a + b) / populationCount;
-    const sumOfSquares =
-        values
-            .map((value) => Math.pow(value - mean, 2))
-            .reduce((a, b) => a + b);
-    const variance = sumOfSquares / populationCount;
-    const standardDeviation = Math.sqrt(variance);
-    return {
-        mean,
-        standardDeviation,
-        sigma1: mean + standardDeviation * 1,
-        sigma2: mean + standardDeviation * 2,
-        sigma3: mean + standardDeviation * 3,
-    };
+const getPercentiles = (
+    ranks: number[],
+    values: number[],
+): readonly Percentile[] => {
+    const percentiles = getPercentile(ranks, values) as number[];
+    return percentiles.map((percentile, i) => ({
+        label: `${ranks[i]}th`,
+        boundUpper: percentile,
+    }));
 };
 
 // Convert from keyed RunningTotalSample to keyed WorkbenchSample.
@@ -216,10 +198,12 @@ export default function Workbench(): JSX.Element {
 
     const partitionSamples = (): JSX.Element => {
         const preprocessed = preprocess(targetIdToSamples, isAscending);
-        const summaryStatistics = getSummaryStatistics(
+        const percentiles = getPercentiles(
+            // TODO(dnguyen0304): Extract percentiles setting for theme config.
+            [50, 75],
             preprocessed.map(
                 ([, sample,]) => sample.runningTotal.readTimeSecond
-            )
+            ),
         );
 
         let top: readonly (readonly [
@@ -252,7 +236,7 @@ export default function Workbench(): JSX.Element {
                     keyedSamples={remaining}
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
-                    summaryStatistics={summaryStatistics}
+                    percentiles={percentiles}
                 />
                 <Footer
                     chips={chips}
