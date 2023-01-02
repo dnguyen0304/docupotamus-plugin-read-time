@@ -1,6 +1,5 @@
 import type {
     BandFriendlyKey,
-    DocupotamusThemeConfig,
     IntersectionSample,
     Selector,
     Target
@@ -44,7 +43,7 @@ export default function ReadingBands(): JSX.Element | null {
     } = useDocusaurusContext()
         .siteConfig
         .themeConfig
-        .docupotamusReadTimePlugin as DocupotamusThemeConfig;
+            .docupotamusReadTimePlugin;
     const { setTargetIdToSamples } = useSamples();
 
     // TODO(dnguyen0304): Investigate migrating from ref to constant.

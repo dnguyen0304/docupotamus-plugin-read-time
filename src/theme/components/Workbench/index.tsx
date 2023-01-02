@@ -1,4 +1,3 @@
-import type { DocupotamusThemeConfig } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -138,6 +137,7 @@ const preprocess = (
     targetIdToSamples: TargetIdToSamples,
     isAscending: boolean,
 ): readonly (readonly [string, WorkbenchSample, number])[] => {
+
     const sorted =
         Object.entries(targetIdToSamples)
             .map(convertToWorkbenchSample)
@@ -160,7 +160,7 @@ export default function Workbench(): JSX.Element {
     } = useDocusaurusContext()
         .siteConfig
         .themeConfig
-        .docupotamusReadTimePlugin as DocupotamusThemeConfig;
+            .docupotamusReadTimePlugin;
 
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();

@@ -1,4 +1,3 @@
-import type { DocupotamusThemeConfig } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -33,7 +32,7 @@ export default function Loading(
     } = useDocusaurusContext()
         .siteConfig
         .themeConfig
-        .docupotamusReadTimePlugin as DocupotamusThemeConfig;
+            .docupotamusReadTimePlugin;
 
     const timerId = React.useRef<number>();
 
