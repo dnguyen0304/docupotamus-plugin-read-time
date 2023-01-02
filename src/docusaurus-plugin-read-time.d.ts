@@ -1,8 +1,6 @@
 // TODO(dnguyen0304): Investigate referencing @docusaurus/module-type-aliases.
 /// <reference types="@docusaurus/theme-classic" />
 
-import type { Props as LayoutProviderProps } from '@theme/Layout/Provider';
-
 declare module '@docusaurus/types' {
     interface ThemeConfig {
         docupotamusReadTimePlugin: DocupotamusThemeConfig;
@@ -17,20 +15,6 @@ declare module '@mui/material/styles' {
         l: false;
         xl: false;
         mobile: true;
-    }
-}
-
-declare module '@theme-init/DocPage/Layout/Main' {
-    type Props = import('@theme/DocPage/Layout/Main').Props;
-
-    interface DocPageLayoutMain {
-        (props: Props): JSX.Element;
-    }
-}
-
-declare module '@theme-init/Layout/Provider' {
-    interface LayoutProvider {
-        (props: LayoutProviderProps): JSX.Element;
     }
 }
 
