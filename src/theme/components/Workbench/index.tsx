@@ -59,9 +59,15 @@ const StyledBox = styled(Box, {
 // See: https://stackoverflow.com/a/53577159
 const getSummaryStatistics = (
     values: ReadonlyArray<number>,
-): SummaryStatistics | undefined => {
+): SummaryStatistics => {
     if (values.length === 0) {
-        return;
+        return {
+            mean: 0,
+            standardDeviation: 0,
+            sigma1: 0,
+            sigma2: 0,
+            sigma3: 0,
+        };
     }
     const populationCount = values.length;
     const mean = values.reduce((a, b) => a + b) / populationCount;
