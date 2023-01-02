@@ -5,6 +5,12 @@ import type {
 import { Joi } from '@docusaurus/utils-validation';
 import type { DocupotamusThemeConfig } from './docusaurus-plugin-read-time';
 
+declare module '@docusaurus/types' {
+    interface ThemeConfig {
+        docupotamusReadTimePlugin: DocupotamusThemeConfig;
+    }
+};
+
 const CONTENT_ROOT_SELECTOR: string =
     'main[class*="docMainContainer"] article div.markdown';
 
