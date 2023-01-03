@@ -211,6 +211,8 @@ const preprocess = (
     let remaining: readonly KeyedSample[] = [];
     let percentileRanks = [...getPercentileRanks()];
 
+    // Warning: Using isAscending anywhere else is strongly discouraged because
+    // doing so adds significant maintenance costs.
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
