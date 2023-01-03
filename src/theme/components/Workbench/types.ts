@@ -29,9 +29,9 @@ export interface Percentile {
     // Human-readable description. This always references the upper bound.
     readonly label: string;
 
-    // Lower bound. This range endpoint is inclusive: [lower, upper).
+    // Lower bound. This range endpoint is exclusive: (lower, upper].
     readonly scoreLower: number;
 
-    // Upper bound. This range endpoint is exclusive: [lower, upper).
+    // Upper bound. This range endpoint is inclusive: (lower, upper].
     readonly scoreUpper: number;
 };
