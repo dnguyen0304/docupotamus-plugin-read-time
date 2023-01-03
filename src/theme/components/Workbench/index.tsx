@@ -222,7 +222,7 @@ const preprocess = (
     setMinRank(percentileRanks[0].upper);
     setMinScore(
         (sorted.length !== 0)
-            ? sorted[-1][1].runningTotal.readTimeSecond
+            ? sorted[sorted.length - 1][1].runningTotal.readTimeSecond
             : 0
     );
 
