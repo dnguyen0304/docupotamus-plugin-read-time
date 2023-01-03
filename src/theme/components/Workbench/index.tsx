@@ -171,11 +171,14 @@ const preprocess = (
     let preprocessed: readonly KeyedSample[] = [];
     let top: readonly KeyedSample[] = [];
     let remaining: readonly KeyedSample[] = [];
+    // TODO(dnguyen0304): Extract percentiles setting for theme config.
+    let percentileRanks: number[] = [50, 75];
 
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
         remaining = preprocessed.slice(0, -3);
+        percentileRanks.reverse();
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
@@ -183,8 +186,7 @@ const preprocess = (
     }
 
     const percentiles = getPercentiles(
-        // TODO(dnguyen0304): Extract percentiles setting for theme config.
-        [50, 75],
+        percentileRanks,
         preprocessed.map(
             ([, sample,]) => sample.runningTotal.readTimeSecond
         ),
