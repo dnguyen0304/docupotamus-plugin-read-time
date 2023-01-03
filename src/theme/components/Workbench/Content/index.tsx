@@ -9,6 +9,12 @@ import type { KeyedSample, Percentile } from '../types';
 const PARTITION_KEY_PREFIX = 'contentPartition';
 const LARGEST_PERCENTILE_RANK = 100;
 
+type PercentileRankStyle =
+    | 'p'
+    | 'th'
+    | 'full-lower'
+    | 'full-upper';
+
 // TODO(dnguyen0304): Investigate if position is needed.
 interface Partition {
     readonly label: string;
@@ -43,8 +49,23 @@ interface Props {
     readonly percentiles: readonly Percentile[];
 };
 
-const formatPercentileRank = (rank: number): string => {
-    return `p${rank}`;
+const formatPercentileRank = (
+    rank: number,
+    style: PercentileRankStyle,
+): string => {
+    if (style === 'p') {
+        return `p${rank}`;
+    }
+    if (style === 'th') {
+        return `${rank}th`;
+    }
+    if (style === 'full-lower') {
+        return `${rank}th percentile`;
+    }
+    if (style === 'full-upper') {
+        return `${rank}th Percentile`;
+    }
+    return '';
 };
 
 const partition = (
@@ -55,6 +76,8 @@ const partition = (
         percentiles,
     }: Props
 ): JSX.Element => {
+    const percentileRankStyle = 'p';
+
     const partitions: Partition[] = percentiles.map((percentile) => {
         const { rank, scoreLower, scoreUpper } = percentile;
         let partitionedSamples: KeyedSample[] = [];
@@ -70,14 +93,17 @@ const partition = (
             }
         }
         return {
-            label: formatPercentileRank(rank),
+            label: formatPercentileRank(rank, percentileRankStyle),
             keyedSamples: partitionedSamples,
         };
     });
 
     // Hide the divider for the 100th percentile because it creates a separation
     // between the header and content cards.
-    const excludedLabel = formatPercentileRank(LARGEST_PERCENTILE_RANK);
+    const excludedLabel = formatPercentileRank(
+        LARGEST_PERCENTILE_RANK,
+        percentileRankStyle,
+    );
 
     return (
         <>
