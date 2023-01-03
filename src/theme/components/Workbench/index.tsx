@@ -99,12 +99,19 @@ const getPercentiles = (
     boundedRanks: readonly BoundedPercentileRank[],
     values: readonly number[],
 ): readonly Percentile[] => {
-    const ranks = boundedRanks.map(boundedRank => boundedRank.upper);
-    const percentiles = getPercentile([...ranks], [...values]) as number[];
-    return percentiles.map((percentile, i) => ({
-        label: `${ranks[i]}th`,
-        boundUpper: percentile,
-    }));
+    return boundedRanks.map((boundedRank) => {
+        const {
+            lower: rankLower,
+            upper: rankUpper,
+        } = boundedRank;
+        const [scoreLower, scoreUpper] =
+            getPercentile([rankLower, rankUpper], [...values]) as number[];
+        return {
+            label: `${rankUpper}th`,
+            boundLower: scoreLower,
+            boundUpper: scoreUpper,
+        };
+    });
 };
 
 // Convert from keyed RunningTotalSample to keyed WorkbenchSample.
