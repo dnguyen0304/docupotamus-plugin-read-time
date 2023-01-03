@@ -1,4 +1,5 @@
 import type { PercentileRankStyle } from '@docusaurus/plugin-read-time';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
@@ -71,7 +72,11 @@ const partition = (
         percentiles,
     }: Props
 ): JSX.Element => {
-    const percentileRankStyle = 'p';
+    const { percentileRankStyle } =
+        useDocusaurusContext()
+            .siteConfig
+            .themeConfig
+            .docupotamusReadTimePlugin;
 
     const partitions: Partition[] = percentiles.map((percentile) => {
         const { rank, scoreLower, scoreUpper } = percentile;
