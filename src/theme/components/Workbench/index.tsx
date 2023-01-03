@@ -57,13 +57,18 @@ const StyledBox = styled(Box, {
     },
 }));
 
+// TODO(dnguyen0304): Add error handling.
 const getPercentiles = (
     ranks: number[],
     values: number[],
 ): readonly Percentile[] => {
-    const percentiles = getPercentile(ranks, values) as number[];
+    const sorted = [...ranks].sort();
+    if (sorted[-1] !== 100) {
+        sorted.push(100);
+    }
+    const percentiles = getPercentile(sorted, values) as number[];
     return percentiles.map((percentile, i) => ({
-        label: `${ranks[i]}th`,
+        label: `${sorted[i]}th`,
         boundUpper: percentile,
     }));
 };
