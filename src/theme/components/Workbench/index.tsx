@@ -62,10 +62,10 @@ const StyledBox = styled(Box, {
 
 // TODO(dnguyen0304): Add error handling.
 const getPercentiles = (
-    ranks: number[],
-    values: number[],
+    ranks: readonly number[],
+    values: readonly number[],
 ): readonly Percentile[] => {
-    const percentiles = getPercentile(ranks, values) as number[];
+    const percentiles = getPercentile([...ranks], [...values]) as number[];
     return percentiles.map((percentile, i) => ({
         label: `${ranks[i]}th`,
         boundUpper: percentile,
