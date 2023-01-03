@@ -168,8 +168,12 @@ const preprocess = (
     let top: readonly KeyedSample[] = [];
     let remaining: readonly KeyedSample[] = [];
     // TODO(dnguyen0304): Extract percentiles setting for theme config.
+    // TODO(dnguyen0304): Use set for unique items.
     let percentileRanks: number[] = [50, 75];
 
+    if (!percentileRanks.includes(0)) {
+        percentileRanks.push(0);
+    }
     if (!percentileRanks.includes(100)) {
         percentileRanks.push(100);
     }
