@@ -60,6 +60,22 @@ const StyledBox = styled(Box, {
     },
 }));
 
+const getPercentileRanks = (): readonly number[] => {
+    // TODO(dnguyen0304): Extract percentiles setting for theme config.
+    // TODO(dnguyen0304): Use set for unique items.
+    let ranks = [50, 75];
+    if (!ranks.includes(0)) {
+        // Include the smallest possible rank.
+        ranks.push(0);
+    }
+    if (!ranks.includes(100)) {
+        // Include the largest possible rank.
+        ranks.push(100);
+    }
+    ranks.sort();
+    return ranks;
+};
+
 // TODO(dnguyen0304): Add error handling.
 const getPercentiles = (
     ranks: readonly number[],
@@ -167,17 +183,7 @@ const preprocess = (
     let preprocessed: readonly KeyedSample[] = [];
     let top: readonly KeyedSample[] = [];
     let remaining: readonly KeyedSample[] = [];
-    // TODO(dnguyen0304): Extract percentiles setting for theme config.
-    // TODO(dnguyen0304): Use set for unique items.
-    let percentileRanks: number[] = [50, 75];
-
-    if (!percentileRanks.includes(0)) {
-        percentileRanks.push(0);
-    }
-    if (!percentileRanks.includes(100)) {
-        percentileRanks.push(100);
-    }
-    percentileRanks.sort();
+    let percentileRanks: number[] = [...getPercentileRanks()];
 
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
