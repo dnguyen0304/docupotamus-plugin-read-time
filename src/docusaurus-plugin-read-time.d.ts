@@ -8,8 +8,8 @@ declare module '@docusaurus/plugin-read-time' {
         readonly workbenchIsOpen: boolean;
         readonly percentile: {
             readonly ranks: readonly number[];
+            readonly style: PercentileRankStyle;
         };
-        readonly percentileRankStyle: PercentileRankStyle;
         readonly debug: {
             readonly band: {
                 readonly isEnabled: boolean;
