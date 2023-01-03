@@ -23,6 +23,14 @@ import type {
 
 const MILLISECOND_TO_SECOND: number = 1000;
 
+interface BoundedPercentileRank {
+    // Lower bound. This range endpoint is inclusive: [lower, upper).
+    readonly lower: number;
+
+    // Upper bound. This range endpoint is exclusive: [lower, upper).
+    readonly upper: number;
+}
+
 interface StyledBoxProps {
     readonly workbenchIsOpen: boolean;
     readonly boxShadowWidth: React.CSSProperties['width'];
@@ -60,7 +68,7 @@ const StyledBox = styled(Box, {
     },
 }));
 
-const getPercentileRanks = (): readonly number[] => {
+const getPercentileRanks = (): readonly BoundedPercentileRank[] => {
     // TODO(dnguyen0304): Extract percentiles setting for theme config.
     // TODO(dnguyen0304): Use set for unique items.
     let ranks = [50, 75];
@@ -73,14 +81,25 @@ const getPercentileRanks = (): readonly number[] => {
         ranks.push(100);
     }
     ranks.sort();
-    return ranks;
+
+    // It is safe to start the iteration at index 1. There are _always_ at least
+    // 2 items, that being the smallest and largest possible ranks.
+    let boundedRanks: BoundedPercentileRank[] = [];
+    for (let i = 1; i < ranks.length; ++i) {
+        boundedRanks.push({
+            lower: ranks[i - 1],
+            upper: ranks[i],
+        })
+    }
+    return boundedRanks;
 };
 
 // TODO(dnguyen0304): Add error handling.
 const getPercentiles = (
-    ranks: readonly number[],
+    boundedRanks: readonly BoundedPercentileRank[],
     values: readonly number[],
 ): readonly Percentile[] => {
+    const ranks = boundedRanks.map(boundedRank => boundedRank.upper);
     const percentiles = getPercentile([...ranks], [...values]) as number[];
     return percentiles.map((percentile, i) => ({
         label: `${ranks[i]}th`,
@@ -183,7 +202,7 @@ const preprocess = (
     let preprocessed: readonly KeyedSample[] = [];
     let top: readonly KeyedSample[] = [];
     let remaining: readonly KeyedSample[] = [];
-    let percentileRanks: number[] = [...getPercentileRanks()];
+    let percentileRanks = [...getPercentileRanks()];
 
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
