@@ -98,6 +98,7 @@ const getPercentileRanks = (): readonly BoundedPercentileRank[] => {
 // TODO(dnguyen0304): Add error handling.
 const getPercentileScores = (
     boundedRanks: readonly BoundedPercentileRank[],
+    // TODO(dnguyen0304): Fix not accounting for empty arrays.
     values: readonly number[],
 ): readonly Percentile[] => {
     return boundedRanks.map((boundedRank) => {
