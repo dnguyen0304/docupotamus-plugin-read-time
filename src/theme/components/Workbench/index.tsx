@@ -70,30 +70,31 @@ const StyledBox = styled(Box, {
 }));
 
 // TODO(dnguyen0304): Fix not accounting for 0 samples.
-const getPercentileRanks = (): readonly BoundedPercentileRank[] => {
-    // TODO(dnguyen0304): Extract percentiles setting for theme config.
-    // TODO(dnguyen0304): Use set for unique items.
-    let ranks = [50, 75];
-    if (!ranks.includes(0)) {
+// TODO(dnguyen0304): Use set for unique items.
+const convertToBoundedRanks = (
+    ranks: readonly number[],
+): readonly BoundedPercentileRank[] => {
+    let unbounded = [...ranks];
+    if (!unbounded.includes(0)) {
         // Include the smallest possible rank.
-        ranks.push(0);
+        unbounded.push(0);
     }
-    if (!ranks.includes(100)) {
+    if (!unbounded.includes(100)) {
         // Include the largest possible rank.
-        ranks.push(100);
+        unbounded.push(100);
     }
-    ranks.sort((a, b) => a - b);
+    unbounded.sort((a, b) => a - b);
 
     // It is safe to start the iteration at index 1. There are _always_ at least
     // 2 items, that being the smallest and largest possible ranks.
-    let boundedRanks: BoundedPercentileRank[] = [];
-    for (let i = 1; i < ranks.length; ++i) {
-        boundedRanks.push({
-            lower: ranks[i - 1],
-            upper: ranks[i],
+    let bounded: BoundedPercentileRank[] = [];
+    for (let i = 1; i < unbounded.length; ++i) {
+        bounded.push({
+            lower: unbounded[i - 1],
+            upper: unbounded[i],
         })
     }
-    return boundedRanks;
+    return bounded;
 };
 
 // TODO(dnguyen0304): Add error handling.
@@ -196,6 +197,7 @@ const rank = (
 // Metadata.rankCurr for scalability.
 const preprocess = (
     targetIdToSamples: TargetIdToSamples,
+    unboundedPercentileRanks: readonly number[],
     isAscending: boolean,
 ): {
     // TODO(dnguyen0304): Investigate is readonly on both sides is needed.
@@ -212,7 +214,7 @@ const preprocess = (
     let preprocessed: readonly KeyedSample[] = [];
     let top: readonly KeyedSample[] = [];
     let remaining: readonly KeyedSample[] = [];
-    let percentileRanks = [...getPercentileRanks()];
+    let percentileRanks = [...convertToBoundedRanks(unboundedPercentileRanks)];
 
     // TODO(dnguyen0304): Fix confusing ascending vs. descending convention.
     // Warning: Using isAscending anywhere else is strongly discouraged because
@@ -244,6 +246,9 @@ const preprocess = (
 
 export default function Workbench(): JSX.Element {
     const {
+        percentile: {
+            ranks: unboundedRanks,
+        },
         debug: {
             loading: {
                 isEnabled: loadingIsEnabled,
@@ -281,7 +286,7 @@ export default function Workbench(): JSX.Element {
             percentiles,
             top,
             remaining,
-        } = preprocess(targetIdToSamples, isAscending);
+        } = preprocess(targetIdToSamples, unboundedRanks, isAscending);
 
         return (
             <>
