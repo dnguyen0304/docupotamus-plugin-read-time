@@ -61,7 +61,7 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                 .default(DEFAULT_THEME_CONFIG.percentile.ranks),
             style: Joi
                 .string()
-                .default(DEFAULT_THEME_CONFIG.style),
+                .default(DEFAULT_THEME_CONFIG.percentile.style),
         })
             .default(DEFAULT_THEME_CONFIG.percentile),
         debug: Joi.object({
