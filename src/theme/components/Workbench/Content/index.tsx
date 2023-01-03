@@ -94,11 +94,11 @@ export default function Content(
             const [targetId, sample] = current;
             const score = sample.runningTotal.readTimeSecond;
             const isInside = score > scoreLower && score <= scoreUpper;
-            const isZero = rank === minRank && score === minScore;
+            const isMin = rank === minRank && score === minScore;
             if (seen.has(targetId)) {
                 continue;
             }
-            if (!isInside && !isZero) {
+            if (!isInside && !isMin) {
                 continue;
             }
             partitionedSamples.push(current);
