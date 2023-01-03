@@ -72,7 +72,11 @@ export default function Content(
         percentiles,
     }: Props
 ): JSX.Element {
-    const { percentileRankStyle } =
+    const {
+        percentile: {
+            style: percentileRankStyle,
+        },
+    } =
         useDocusaurusContext()
             .siteConfig
             .themeConfig
