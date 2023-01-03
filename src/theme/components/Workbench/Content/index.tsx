@@ -89,11 +89,11 @@ export default function Content(
         // TODO(dnguyen0304): Fix unnecessary iteration passes.
         for (const current of keyedSamples) {
             const [targetId, sample] = current;
+            const score = sample.runningTotal.readTimeSecond;
+            const isInside = score > scoreLower && score <= scoreUpper;
             if (seen.has(targetId)) {
                 continue;
             }
-            const score = sample.runningTotal.readTimeSecond;
-            const isInside = score > scoreLower && score <= scoreUpper;
             if (!isInside) {
                 continue;
             }
