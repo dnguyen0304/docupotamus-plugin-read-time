@@ -316,6 +316,7 @@ export default function Workbench(): JSX.Element {
                     keyedSamples={remaining}
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
+                    hideUnread={false}
                     percentiles={percentiles}
                 />
                 <Footer

@@ -62,6 +62,7 @@ interface Props {
     readonly keyedSamples: readonly KeyedSample[];
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
     readonly showMinute: boolean;
+    readonly hideUnread: boolean;
     readonly percentiles: readonly Percentile[];
 };
 
@@ -70,6 +71,7 @@ export default function Content(
         keyedSamples,
         targetIdToPrevRank,
         showMinute,
+        hideUnread,
         percentiles,
     }: Props
 ): JSX.Element {
@@ -96,6 +98,9 @@ export default function Content(
             const isInside = score > scoreLower && score <= scoreUpper;
             const isMin = rank === minRank && score === minScore;
             if (seen.has(targetId)) {
+                continue;
+            }
+            if (hideUnread && score === 0) {
                 continue;
             }
             if (!isInside && !isMin) {
