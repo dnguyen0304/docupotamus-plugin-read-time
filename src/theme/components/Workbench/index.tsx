@@ -68,6 +68,7 @@ const StyledBox = styled(Box, {
     },
 }));
 
+// TODO(dnguyen0304): Fix not accounting for 0 samples.
 const getPercentileRanks = (): readonly BoundedPercentileRank[] => {
     // TODO(dnguyen0304): Extract percentiles setting for theme config.
     // TODO(dnguyen0304): Use set for unique items.
