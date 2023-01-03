@@ -109,7 +109,7 @@ const getPercentileScores = (
         const [scoreLower, scoreUpper] =
             getPercentile([rankLower, rankUpper], [...values]) as number[];
         return {
-            label: `${rankUpper}th`,
+            label: `p${rankUpper}`,
             scoreLower,
             scoreUpper,
         };
