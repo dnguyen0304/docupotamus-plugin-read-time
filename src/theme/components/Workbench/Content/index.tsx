@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { usePercentile } from '../../../../contexts/percentile';
 import Card from '../Card';
 import { CARD_KEY_PREFIX } from '../constants';
 import type { KeyedSample, Percentile } from '../types';
@@ -82,6 +83,8 @@ export default function Content(
             .themeConfig
             .docupotamusReadTimePlugin;
 
+    const { minRank, minScore } = usePercentile();
+
     const seen = new Set<string>();
     const partitions: Partition[] = percentiles.map((percentile) => {
         const { rank, scoreLower, scoreUpper } = percentile;
@@ -91,10 +94,11 @@ export default function Content(
             const [targetId, sample] = current;
             const score = sample.runningTotal.readTimeSecond;
             const isInside = score > scoreLower && score <= scoreUpper;
+            const isZero = rank === minRank && score === minScore;
             if (seen.has(targetId)) {
                 continue;
             }
-            if (!isInside) {
+            if (!isInside && !isZero) {
                 continue;
             }
             partitionedSamples.push(current);
