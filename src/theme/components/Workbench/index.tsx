@@ -167,11 +167,20 @@ const preprocess = (
             .map(convertToWorkbenchSample)
             .sort((a, b) => sortDescending(a, b));
     const sortedAndRanked = rank(sorted);
-    const preprocessed = (
-        isAscending
-            ? sortedAndRanked.slice().reverse()
-            : sortedAndRanked
-    );
+
+    let preprocessed: readonly KeyedSample[] = [];
+    let top: readonly KeyedSample[] = [];
+    let remaining: readonly KeyedSample[] = [];
+
+    if (isAscending) {
+        preprocessed = sortedAndRanked.slice().reverse();
+        top = preprocessed.slice(-3);
+        remaining = preprocessed.slice(0, -3);
+    } else {
+        preprocessed = sortedAndRanked;
+        top = preprocessed.slice(0, 3);
+        remaining = preprocessed.slice(3);
+    }
 
     const percentiles = getPercentiles(
         // TODO(dnguyen0304): Extract percentiles setting for theme config.
@@ -180,17 +189,6 @@ const preprocess = (
             ([, sample,]) => sample.runningTotal.readTimeSecond
         ),
     );
-
-    let top: readonly KeyedSample[] = [];
-    let remaining: readonly KeyedSample[] = [];
-
-    if (isAscending) {
-        top = preprocessed.slice(-3);
-        remaining = preprocessed.slice(0, -3);
-    } else {
-        top = preprocessed.slice(0, 3);
-        remaining = preprocessed.slice(3);
-    }
 
     return {
         percentiles,
