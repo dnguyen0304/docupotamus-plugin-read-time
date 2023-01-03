@@ -82,15 +82,21 @@ export default function Content(
             .themeConfig
             .docupotamusReadTimePlugin;
 
+    const seen = new Set<string>();
     const partitions: Partition[] = percentiles.map((percentile) => {
         const { rank, scoreLower, scoreUpper } = percentile;
         let partitionedSamples: KeyedSample[] = [];
         // TODO(dnguyen0304): Fix unnecessary iteration passes.
         for (const current of keyedSamples) {
-            const score = current[1].runningTotal.readTimeSecond;
+            const [targetId, sample] = current;
+            if (seen.has(targetId)) {
+                continue;
+            }
+            const score = sample.runningTotal.readTimeSecond;
             const isInside = score > scoreLower && score <= scoreUpper;
             if (isInside) {
                 partitionedSamples.push(current);
+                seen.add(targetId);
             }
         }
         return {
