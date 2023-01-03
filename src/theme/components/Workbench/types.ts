@@ -26,7 +26,17 @@ export interface CardProps {
 };
 
 export interface Percentile {
-    // Human-readable description. This always references the upper bound.
+    // Human-readable description. This always references the upper bound. In
+    // other words:
+    //
+    //   [0, 1, 2, 3, 100, 999, 999, 999, 999]
+    //
+    //   {
+    //       label: 'p50',
+    //       scoreUpper: 100,
+    //   }
+    //
+    // is interpreted as "50% of scores fall below a value of 100".
     readonly label: string;
 
     // Lower bound. This range endpoint is exclusive: (lower, upper].
