@@ -84,11 +84,8 @@ export default function Content(
         // TODO(dnguyen0304): Fix unnecessary iteration passes (for example, by
         //   using the Array.values iterator).
         for (const current of keyedSamples) {
-            const readTimeSecond = current[1].runningTotal.readTimeSecond;
-            // if (readTimeSecond === 0 && scoreLower === 0) {
-            //     partitionedSamples.push(current);
-            // }
-            if (readTimeSecond > scoreLower && readTimeSecond <= scoreUpper) {
+            const score = current[1].runningTotal.readTimeSecond;
+            if (score > scoreLower && score <= scoreUpper) {
                 partitionedSamples.push(current);
             }
         }
