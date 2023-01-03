@@ -12,6 +12,9 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
     contentRootSelector: CONTENT_ROOT_SELECTOR,
     contentSelector: `${CONTENT_ROOT_SELECTOR} > *`,
     workbenchIsOpen: true,
+    percentile: {
+        ranks: [50, 75],
+    },
     percentileRankStyle: 'full-lower',
     debug: {
         band: {
@@ -51,6 +54,13 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
         workbenchIsOpen: Joi
             .boolean()
             .default(DEFAULT_THEME_CONFIG.workbenchIsOpen),
+        percentile: Joi.object({
+            ranks: Joi
+                .array()
+                .items(Joi.number())
+                .default(DEFAULT_THEME_CONFIG.percentile.ranks),
+        })
+            .default(DEFAULT_THEME_CONFIG.percentile),
         percentileRankStyle: Joi
             .string()
             .default(DEFAULT_THEME_CONFIG.percentileRankStyle),

@@ -6,6 +6,9 @@ declare module '@docusaurus/plugin-read-time' {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
         readonly workbenchIsOpen: boolean;
+        readonly percentile: {
+            readonly ranks: readonly number[];
+        };
         readonly percentileRankStyle: PercentileRankStyle;
         readonly debug: {
             readonly band: {
