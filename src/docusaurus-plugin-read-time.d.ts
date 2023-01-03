@@ -126,6 +126,7 @@ declare module '@docusaurus/plugin-read-time' {
         lastSample: IntersectionSample | null;
     }
 
+    // TODO(dnguyen0304): Investigate adding a "top X%" style.
     type PercentileRankStyle =
         // For example, "p95".
         | 'p'
