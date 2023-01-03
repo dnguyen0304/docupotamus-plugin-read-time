@@ -95,7 +95,7 @@ const getPercentileRanks = (): readonly BoundedPercentileRank[] => {
 };
 
 // TODO(dnguyen0304): Add error handling.
-const getPercentiles = (
+const getPercentileScores = (
     boundedRanks: readonly BoundedPercentileRank[],
     values: readonly number[],
 ): readonly Percentile[] => {
@@ -222,7 +222,7 @@ const preprocess = (
         remaining = preprocessed.slice(3);
     }
 
-    const percentiles = getPercentiles(
+    const percentiles = getPercentileScores(
         percentileRanks,
         preprocessed.map(
             ([, sample,]) => sample.runningTotal.readTimeSecond
