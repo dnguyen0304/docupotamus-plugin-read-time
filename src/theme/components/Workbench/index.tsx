@@ -178,13 +178,12 @@ const preprocess = (
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
         remaining = preprocessed.slice(0, -3);
-        percentileRanks.reverse();
-        // percentileRanks.sort().reverse();
+        percentileRanks.sort().reverse();
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
         remaining = preprocessed.slice(3);
-        // percentileRanks.sort();
+        percentileRanks.sort();
     }
 
     const percentiles = getPercentiles(
