@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import getPercentile from 'percentile';
 import * as React from 'react';
+import { usePercentile } from '../../../contexts/percentile';
 import type {
     RunningTotalSample,
     TargetIdToSamples
@@ -199,6 +200,8 @@ const preprocess = (
     targetIdToSamples: TargetIdToSamples,
     unboundedPercentileRanks: readonly number[],
     isAscending: boolean,
+    setMinRank: React.Dispatch<React.SetStateAction<number>>,
+    setMinScore: React.Dispatch<React.SetStateAction<number>>,
 ): {
     // TODO(dnguyen0304): Investigate is readonly on both sides is needed.
     readonly percentiles: readonly Percentile[];
@@ -215,6 +218,13 @@ const preprocess = (
     let top: readonly KeyedSample[] = [];
     let remaining: readonly KeyedSample[] = [];
     let percentileRanks = [...convertToBoundedRanks(unboundedPercentileRanks)];
+
+    setMinRank(percentileRanks[0].upper);
+    setMinScore(
+        (sorted.length !== 0)
+            ? sorted[-1][1].runningTotal.readTimeSecond
+            : 0
+    );
 
     // TODO(dnguyen0304): Fix confusing ascending vs. descending convention.
     // Warning: Using isAscending anywhere else is strongly discouraged because
@@ -261,6 +271,7 @@ export default function Workbench(): JSX.Element {
 
     const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
+    const { setMinRank, setMinScore } = usePercentile();
 
     const targetIdToPrevRank = React.useRef<Map<string, number>>(new Map());
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
@@ -286,7 +297,13 @@ export default function Workbench(): JSX.Element {
             percentiles,
             top,
             remaining,
-        } = preprocess(targetIdToSamples, unboundedRanks, isAscending);
+        } = preprocess(
+            targetIdToSamples,
+            unboundedRanks,
+            isAscending,
+            setMinRank,
+            setMinScore,
+        );
 
         return (
             <>
