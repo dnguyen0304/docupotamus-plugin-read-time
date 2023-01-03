@@ -25,7 +25,7 @@ const StyledBox = styled(Box)({
 const StyledDivider = styled(Divider)({
     color: 'rgba(255, 255, 255, 0.7)',
     fontSize: 'var(--font-size--2)',
-    margin: '0 var(--space-xs)',
+    margin: '0 var(--space-m)',
     '&::before, &::after': {
         borderColor: '#fff',
     },
