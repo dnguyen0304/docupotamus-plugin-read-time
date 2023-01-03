@@ -94,10 +94,11 @@ export default function Content(
             }
             const score = sample.runningTotal.readTimeSecond;
             const isInside = score > scoreLower && score <= scoreUpper;
-            if (isInside) {
-                partitionedSamples.push(current);
-                seen.add(targetId);
+            if (!isInside) {
+                continue;
             }
+            partitionedSamples.push(current);
+            seen.add(targetId);
         }
         return {
             label: formatPercentileRank(rank, percentileRankStyle),
