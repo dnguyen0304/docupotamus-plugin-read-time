@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Delta from '../../Card/Metric/Delta';
 import { ACTIVE_INFO_ITEM_HEIGHT } from '../../constants';
-import type { Sample as WorkbenchSample } from '../../types';
+import type { KeyedSample } from '../../types';
 import Item from './Item';
 
 const KEY_PREFIX: string = 'activeInfoItem';
@@ -40,11 +40,7 @@ const StyledOrderedList = styled('ol', {
 }));
 
 interface Props {
-    readonly keyedSamples: readonly (readonly [
-        string,
-        WorkbenchSample,
-        number,
-    ])[];
+    readonly keyedSamples: readonly KeyedSample[];
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
     readonly showMinute: boolean;
     readonly clickedIndex: number;

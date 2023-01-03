@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Card from '../Card';
 import { CARD_KEY_PREFIX } from '../constants';
-import type { Percentile, Sample as WorkbenchSample } from '../types';
+import type { KeyedSample, Percentile } from '../types';
 
 const StyledBox = styled(Box)({
     overflow: 'scroll',
@@ -47,11 +47,7 @@ const partition = (
 };
 
 interface Props {
-    readonly keyedSamples: readonly (readonly [
-        string,
-        WorkbenchSample,
-        number,
-    ])[];
+    readonly keyedSamples: readonly KeyedSample[];
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
     readonly showMinute: boolean;
     readonly percentiles: readonly Percentile[];

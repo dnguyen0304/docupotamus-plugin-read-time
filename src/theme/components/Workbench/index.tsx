@@ -16,7 +16,10 @@ import Footer from './Footer';
 import Header from './Header';
 import Loading from './Loading';
 import styles from './styles.module.css';
-import type { Percentile, Sample as WorkbenchSample } from './types';
+import type {
+    KeyedSample,
+    Percentile, Sample as WorkbenchSample
+} from './types';
 
 const MILLISECOND_TO_SECOND: number = 1000;
 
@@ -116,11 +119,11 @@ const sortDescending = (
 // Rank keyed samples based on readTimeSecond.
 const rank = (
     keyedSamples: readonly (readonly [string, WorkbenchSample])[],
-): readonly (readonly [string, WorkbenchSample, number])[] => {
+): readonly KeyedSample[] => {
     if (!keyedSamples.length) {
         return [];
     }
-    const ranks: (readonly [string, WorkbenchSample, number])[] = [];
+    const ranks: KeyedSample[] = [];
     let currRank = 1;  // Use 1-indexed instead of 0-indexed ranks.
     let prevRankCount = 0;
     let prevReadTime = keyedSamples[0][1].runningTotal.readTimeSecond;
@@ -153,8 +156,7 @@ const rank = (
 const preprocess = (
     targetIdToSamples: TargetIdToSamples,
     isAscending: boolean,
-): readonly (readonly [string, WorkbenchSample, number])[] => {
-
+): readonly KeyedSample[] => {
     const sorted =
         Object.entries(targetIdToSamples)
             .map(convertToWorkbenchSample)
@@ -211,16 +213,8 @@ export default function Workbench(): JSX.Element {
             ),
         );
 
-        let top: readonly (readonly [
-            string,
-            WorkbenchSample,
-            number,
-        ])[] = [];
-        let remaining: readonly (readonly [
-            string,
-            WorkbenchSample,
-            number,
-        ])[] = [];
+        let top: readonly KeyedSample[] = [];
+        let remaining: readonly KeyedSample[] = [];
 
         if (isAscending) {
             top = preprocessed.slice(-3);

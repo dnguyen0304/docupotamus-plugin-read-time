@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { CARD_KEY_PREFIX } from '../../constants';
-import type { Sample as WorkbenchSample } from '../../types';
+import type { KeyedSample } from '../../types';
 import Card from '../Card';
 import styles from './styles.module.css';
 
@@ -76,11 +76,7 @@ const getColor = (index: number): string => {
 };
 
 interface Props {
-    readonly keyedSamples: readonly (readonly [
-        string,
-        WorkbenchSample,
-        number,
-    ])[];
+    readonly keyedSamples: readonly KeyedSample[];
     readonly clickedIndex: number;
     readonly setClickedIndex: React.Dispatch<React.SetStateAction<number>>;
 };

@@ -7,6 +7,13 @@ export interface Sample {
     } & Omit<RunningTotal, 'visibleTimeMilli'>;
 };
 
+// TODO(dnguyen0304): Investigate changing to an object for self-documentation.
+export type KeyedSample = readonly [
+    string,  // targetId
+    Sample,
+    number,  // rankCurr
+];
+
 export interface CardProps {
     // TODO(dnguyen0304): Investigate extracting to CommonProps similar to @mui.
     readonly className?: string;
