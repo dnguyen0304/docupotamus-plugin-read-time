@@ -108,8 +108,8 @@ const getPercentiles = (
             getPercentile([rankLower, rankUpper], [...values]) as number[];
         return {
             label: `${rankUpper}th`,
-            boundLower: scoreLower,
-            boundUpper: scoreUpper,
+            scoreLower,
+            scoreUpper,
         };
     });
 };
