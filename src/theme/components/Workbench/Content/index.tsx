@@ -1,3 +1,4 @@
+import type { PercentileRankStyle } from '@docusaurus/plugin-read-time';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
@@ -8,12 +9,6 @@ import type { KeyedSample, Percentile } from '../types';
 
 const PARTITION_KEY_PREFIX = 'contentPartition';
 const LARGEST_PERCENTILE_RANK = 100;
-
-type PercentileRankStyle =
-    | 'p'
-    | 'th'
-    | 'full-lower'
-    | 'full-upper';
 
 // TODO(dnguyen0304): Investigate if position is needed.
 interface Partition {

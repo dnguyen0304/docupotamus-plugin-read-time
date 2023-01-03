@@ -6,6 +6,7 @@ declare module '@docusaurus/plugin-read-time' {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
         readonly workbenchIsOpen: boolean;
+        readonly percentileRankStyle: PercentileRankStyle;
         readonly debug: {
             readonly band: {
                 readonly isEnabled: boolean;
@@ -124,4 +125,14 @@ declare module '@docusaurus/plugin-read-time' {
         // Last sample included in the calculation.
         lastSample: IntersectionSample | null;
     }
+
+    type PercentileRankStyle =
+        // For example, "p95".
+        | 'p'
+        // For example, "95th".
+        | 'th'
+        // For example, "95th percentile".
+        | 'full-lower'
+        // For example, "95th Percentile".
+        | 'full-upper';
 }
