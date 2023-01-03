@@ -34,4 +34,4 @@ export interface Percentile {
 
     // Upper bound. This range endpoint is exclusive: [lower, upper).
     readonly scoreUpper: number;
-}
+};
