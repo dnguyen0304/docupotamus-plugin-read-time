@@ -85,11 +85,11 @@ export default function Content(
     const partitions: Partition[] = percentiles.map((percentile) => {
         const { rank, scoreLower, scoreUpper } = percentile;
         let partitionedSamples: KeyedSample[] = [];
-        // TODO(dnguyen0304): Fix unnecessary iteration passes (for example, by
-        //   using the Array.values iterator).
+        // TODO(dnguyen0304): Fix unnecessary iteration passes.
         for (const current of keyedSamples) {
             const score = current[1].runningTotal.readTimeSecond;
-            if (score > scoreLower && score <= scoreUpper) {
+            const isInside = score > scoreLower && score <= scoreUpper;
+            if (isInside) {
                 partitionedSamples.push(current);
             }
         }
