@@ -278,6 +278,7 @@ export default function Workbench(): JSX.Element {
     const [isAscending, setIsAscending] = React.useState<boolean>(false);
     // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
+    const [hideUnread, setHideUnread] = React.useState<boolean>(false);
 
     const chips: readonly ChipData[] = [
         {
@@ -289,6 +290,11 @@ export default function Workbench(): JSX.Element {
             label: 'Show Minutes',
             isClicked: showMinute,
             onClick: () => setShowMinute(prev => !prev),
+        },
+        {
+            label: 'Hide Unread',
+            isClicked: hideUnread,
+            onClick: () => setHideUnread(prev => !prev),
         },
     ];
 
@@ -316,7 +322,7 @@ export default function Workbench(): JSX.Element {
                     keyedSamples={remaining}
                     targetIdToPrevRank={targetIdToPrevRank.current}
                     showMinute={showMinute}
-                    hideUnread={false}
+                    hideUnread={hideUnread}
                     percentiles={percentiles}
                 />
                 <Footer
