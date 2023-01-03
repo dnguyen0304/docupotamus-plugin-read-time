@@ -213,17 +213,18 @@ const preprocess = (
     let remaining: readonly KeyedSample[] = [];
     let percentileRanks = [...getPercentileRanks()];
 
+    // TODO(dnguyen0304): Fix confusing ascending vs. descending convention.
     // Warning: Using isAscending anywhere else is strongly discouraged because
     // doing so adds significant maintenance costs.
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
         remaining = preprocessed.slice(0, -3);
-        percentileRanks.reverse();
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
         remaining = preprocessed.slice(3);
+        percentileRanks.reverse();
     }
 
     const percentiles = getPercentileScores(
