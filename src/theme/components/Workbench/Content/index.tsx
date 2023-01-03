@@ -38,13 +38,6 @@ const StyledOrderedList = styled('ol')({
     padding: 0,
 });
 
-interface Props {
-    readonly keyedSamples: readonly KeyedSample[];
-    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
-    readonly showMinute: boolean;
-    readonly percentiles: readonly Percentile[];
-};
-
 const formatPercentileRank = (
     rank: number,
     style: PercentileRankStyle,
@@ -64,14 +57,21 @@ const formatPercentileRank = (
     return '';
 };
 
-const partition = (
+interface Props {
+    readonly keyedSamples: readonly KeyedSample[];
+    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
+    readonly showMinute: boolean;
+    readonly percentiles: readonly Percentile[];
+};
+
+export default function Content(
     {
         keyedSamples,
         targetIdToPrevRank,
         showMinute,
         percentiles,
     }: Props
-): JSX.Element => {
+): JSX.Element {
     const { percentileRankStyle } =
         useDocusaurusContext()
             .siteConfig
@@ -106,7 +106,7 @@ const partition = (
     );
 
     return (
-        <>
+        <StyledBox>
             {partitions.map((partition) => {
                 const {
                     label,
@@ -150,14 +150,6 @@ const partition = (
                     </Box>
                 );
             })}
-        </ >
-    );
-};
-
-export default function Content(props: Props): JSX.Element {
-    return (
-        <StyledBox>
-            {partition(props)}
         </StyledBox>
     );
 };
