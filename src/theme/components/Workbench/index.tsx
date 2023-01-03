@@ -177,17 +177,17 @@ const preprocess = (
     if (!percentileRanks.includes(100)) {
         percentileRanks.push(100);
     }
+    percentileRanks.sort();
 
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
         remaining = preprocessed.slice(0, -3);
-        percentileRanks.sort().reverse();
+        percentileRanks.reverse();
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
         remaining = preprocessed.slice(3);
-        percentileRanks.sort();
     }
 
     const percentiles = getPercentiles(
