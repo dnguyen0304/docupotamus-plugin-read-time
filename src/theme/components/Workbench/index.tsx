@@ -65,13 +65,9 @@ const getPercentiles = (
     ranks: number[],
     values: number[],
 ): readonly Percentile[] => {
-    const sorted = [...ranks].sort();
-    if (sorted[-1] !== 100) {
-        sorted.push(100);
-    }
-    const percentiles = getPercentile(sorted, values) as number[];
+    const percentiles = getPercentile(ranks, values) as number[];
     return percentiles.map((percentile, i) => ({
-        label: `${sorted[i]}th`,
+        label: `${ranks[i]}th`,
         boundUpper: percentile,
     }));
 };
@@ -174,15 +170,21 @@ const preprocess = (
     // TODO(dnguyen0304): Extract percentiles setting for theme config.
     let percentileRanks: number[] = [50, 75];
 
+    if (!percentileRanks.includes(100)) {
+        percentileRanks.push(100);
+    }
+
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
         remaining = preprocessed.slice(0, -3);
         percentileRanks.reverse();
+        // percentileRanks.sort().reverse();
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
         remaining = preprocessed.slice(3);
+        // percentileRanks.sort();
     }
 
     const percentiles = getPercentiles(
