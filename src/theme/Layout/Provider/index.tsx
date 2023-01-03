@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import LayoutProvider from '@theme-init/Layout/Provider';
 import type LayoutProviderType from '@theme/Layout/Provider';
 import * as React from 'react';
+import { PercentileProvider } from '../../../contexts/percentile';
 import { ToolbarProvider } from '../../../contexts/toolbar';
 import Workbench from '../../components/Workbench';
 
@@ -25,15 +26,17 @@ type Props = Readonly<WrapperProps<typeof LayoutProviderType>>;
 export default function LayoutProviderWrapper(props: Props): JSX.Element {
     return (
         <ToolbarProvider>
-            <StyledLayout>
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}>
-                    <LayoutProvider {...props} />
-                </Box>
-                <Workbench />
-            </StyledLayout>
+            <PercentileProvider>
+                <StyledLayout>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}>
+                        <LayoutProvider {...props} />
+                    </Box>
+                    <Workbench />
+                </StyledLayout>
+            </PercentileProvider>
         </ToolbarProvider>
     );
 };
