@@ -18,7 +18,8 @@ import Loading from './Loading';
 import styles from './styles.module.css';
 import type {
     KeyedSample,
-    Percentile, Sample as WorkbenchSample
+    Percentile,
+    Sample as WorkbenchSample
 } from './types';
 
 const MILLISECOND_TO_SECOND: number = 1000;
@@ -109,7 +110,7 @@ const getPercentileScores = (
         const [scoreLower, scoreUpper] =
             getPercentile([rankLower, rankUpper], [...values]) as number[];
         return {
-            label: `p${rankUpper}`,
+            rank: rankUpper,
             scoreLower,
             scoreUpper,
         };

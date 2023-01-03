@@ -32,12 +32,12 @@ export interface Percentile {
     //   [0, 1, 2, 3, 100, 999, 999, 999, 999]
     //
     //   {
-    //       label: 'p50',
+    //       rank: 50,
     //       scoreUpper: 100,
     //   }
     //
     // is interpreted as "50% of scores fall below a value of 100".
-    readonly label: string;
+    readonly rank: number;
 
     // Lower bound. This range endpoint is exclusive: (lower, upper].
     readonly scoreLower: number;
