@@ -81,7 +81,7 @@ const getPercentileRanks = (): readonly BoundedPercentileRank[] => {
         // Include the largest possible rank.
         ranks.push(100);
     }
-    ranks.sort();
+    ranks.sort((a, b) => a - b);
 
     // It is safe to start the iteration at index 1. There are _always_ at least
     // 2 items, that being the smallest and largest possible ranks.
