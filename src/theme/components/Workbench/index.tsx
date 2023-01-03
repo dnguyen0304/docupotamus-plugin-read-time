@@ -156,17 +156,47 @@ const rank = (
 const preprocess = (
     targetIdToSamples: TargetIdToSamples,
     isAscending: boolean,
-): readonly KeyedSample[] => {
+): {
+    // TODO(dnguyen0304): Investigate is readonly on both sides is needed.
+    readonly percentiles: readonly Percentile[];
+    readonly top: readonly KeyedSample[];
+    readonly remaining: readonly KeyedSample[];
+} => {
     const sorted =
         Object.entries(targetIdToSamples)
             .map(convertToWorkbenchSample)
             .sort((a, b) => sortDescending(a, b));
     const sortedAndRanked = rank(sorted);
-    return (
+    const preprocessed = (
         isAscending
             ? sortedAndRanked.slice().reverse()
             : sortedAndRanked
     );
+
+    const percentiles = getPercentiles(
+        // TODO(dnguyen0304): Extract percentiles setting for theme config.
+        [50, 75],
+        preprocessed.map(
+            ([, sample,]) => sample.runningTotal.readTimeSecond
+        ),
+    );
+
+    let top: readonly KeyedSample[] = [];
+    let remaining: readonly KeyedSample[] = [];
+
+    if (isAscending) {
+        top = preprocessed.slice(-3);
+        remaining = preprocessed.slice(0, -3);
+    } else {
+        top = preprocessed.slice(0, 3);
+        remaining = preprocessed.slice(3);
+    }
+
+    return {
+        percentiles,
+        top,
+        remaining,
+    };
 };
 
 export default function Workbench(): JSX.Element {
@@ -204,25 +234,11 @@ export default function Workbench(): JSX.Element {
     ];
 
     const partitionSamples = (): JSX.Element => {
-        const preprocessed = preprocess(targetIdToSamples, isAscending);
-        const percentiles = getPercentiles(
-            // TODO(dnguyen0304): Extract percentiles setting for theme config.
-            [50, 75],
-            preprocessed.map(
-                ([, sample,]) => sample.runningTotal.readTimeSecond
-            ),
-        );
-
-        let top: readonly KeyedSample[] = [];
-        let remaining: readonly KeyedSample[] = [];
-
-        if (isAscending) {
-            top = preprocessed.slice(-3);
-            remaining = preprocessed.slice(0, -3);
-        } else {
-            top = preprocessed.slice(0, 3);
-            remaining = preprocessed.slice(3);
-        }
+        const {
+            percentiles,
+            top,
+            remaining,
+        } = preprocess(targetIdToSamples, isAscending);
 
         return (
             <>
