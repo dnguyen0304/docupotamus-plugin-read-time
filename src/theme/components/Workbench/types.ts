@@ -26,7 +26,7 @@ export interface CardProps {
 };
 
 export interface Percentile {
-    // Human-readable description.
+    // Human-readable description. This always references the upper bound.
     readonly label: string;
 
     // Lower bound. This range endpoint is inclusive: [lower, upper).
