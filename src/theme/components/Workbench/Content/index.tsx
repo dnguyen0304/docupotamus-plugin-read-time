@@ -17,6 +17,13 @@ const StyledOrderedList = styled('ol')({
     padding: 0,
 });
 
+interface Props {
+    readonly keyedSamples: readonly KeyedSample[];
+    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
+    readonly showMinute: boolean;
+    readonly percentiles: readonly Percentile[];
+};
+
 const partition = (
     {
         keyedSamples,
@@ -44,13 +51,6 @@ const partition = (
             })}
         </StyledOrderedList>
     );
-};
-
-interface Props {
-    readonly keyedSamples: readonly KeyedSample[];
-    readonly targetIdToPrevRank: ReadonlyMap<string, number>;
-    readonly showMinute: boolean;
-    readonly percentiles: readonly Percentile[];
 };
 
 export default function Content(props: Props): JSX.Element {
