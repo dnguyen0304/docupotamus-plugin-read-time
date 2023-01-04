@@ -59,6 +59,7 @@ export default function Metric(
         withDelta = false,
     }: Props
 ): JSX.Element {
+    // TODO(dnguyen0304): [P2] Refactor into useHasImproved hook.
     const [originalReadTimeSecond, setOriginalReadTimeSecond] =
         React.useState<number>();
     const [hasImproved, setHasImproved] = React.useState<boolean>(false);
