@@ -60,16 +60,11 @@ export default function Metric(
     }: Props
 ): JSX.Element {
     // TODO(dnguyen0304): [P2] Refactor into useHasImproved hook.
-    const [originalReadTimeSecond, setOriginalReadTimeSecond] =
-        React.useState<number>();
+    const originalReadTimeSecond = React.useRef<number>(readTimeSecond);
     const [hasImproved, setHasImproved] = React.useState<boolean>(false);
 
     React.useEffect(() => {
-        if (originalReadTimeSecond === undefined) {
-            setOriginalReadTimeSecond(readTimeSecond);
-        } else {
-            setHasImproved(readTimeSecond > originalReadTimeSecond);
-        }
+        setHasImproved(readTimeSecond > originalReadTimeSecond.current);
     }, [readTimeSecond]);
 
     return (
