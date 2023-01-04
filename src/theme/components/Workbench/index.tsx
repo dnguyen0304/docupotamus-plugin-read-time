@@ -198,7 +198,6 @@ const preprocess = (
     setMinRank: React.Dispatch<React.SetStateAction<number>>,
     setMinScore: React.Dispatch<React.SetStateAction<number>>,
 ): {
-    // TODO(dnguyen0304): Investigate is readonly on both sides is needed.
     readonly percentiles: readonly Percentile[];
     readonly top: readonly KeyedSample[];
     readonly remaining: readonly KeyedSample[];
