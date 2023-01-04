@@ -1,3 +1,4 @@
+import { useLocation } from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -356,8 +357,16 @@ export default function Workbench(): JSX.Element {
         .themeConfig
             .docupotamusReadTimePlugin;
 
+    const location = useLocation();
     const { workbenchIsOpen } = useToolbar();
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
+
+    React.useEffect(() => {
+        if (!loadingIsEnabled) {
+            return;
+        }
+        setIsLoading(true);
+    }, [location]);
 
     return (
         <StyledBox
