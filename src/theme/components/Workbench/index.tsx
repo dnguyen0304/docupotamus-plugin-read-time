@@ -70,7 +70,6 @@ const StyledBox = styled(Box, {
     },
 }));
 
-// TODO(dnguyen0304): Fix not accounting for 0 samples.
 // TODO(dnguyen0304): Use set for unique items.
 const convertToBoundedRanks = (
     ranks: readonly number[],
