@@ -70,28 +70,23 @@ const StyledBox = styled(Box, {
     },
 }));
 
-// TODO(dnguyen0304): Use set for unique items.
 const convertToBoundedRanks = (
     ranks: readonly number[],
 ): readonly BoundedPercentileRank[] => {
-    let unbounded = [...ranks];
-    if (!unbounded.includes(0)) {
-        // Include the smallest possible rank.
-        unbounded.push(0);
-    }
-    if (!unbounded.includes(100)) {
-        // Include the largest possible rank.
-        unbounded.push(100);
-    }
-    unbounded.sort((a, b) => a - b);
+    // Include the smallest and largest possible ranks.
+    const unique = new Set<number>(ranks);
+    unique.add(0);
+    unique.add(100);
+
+    const sorted = [...unique].sort((a, b) => a - b);
 
     // It is safe to start the iteration at index 1. There are _always_ at least
     // 2 items, that being the smallest and largest possible ranks.
     let bounded: BoundedPercentileRank[] = [];
-    for (let i = 1; i < unbounded.length; ++i) {
+    for (let i = 1; i < sorted.length; ++i) {
         bounded.push({
-            lower: unbounded[i - 1],
-            upper: unbounded[i],
+            lower: sorted[i - 1],
+            upper: sorted[i],
         })
     }
     return bounded;
