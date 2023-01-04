@@ -42,8 +42,8 @@ const StyledBox = styled(Box, {
 interface Props {
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
-    readonly marginLeftFactor?: number,
-    readonly minWidthFactor?: number,
+    readonly marginLeftFactor?: number;
+    readonly minWidthFactor?: number;
     readonly sx?: SxProps<Theme>;
     readonly withDelta?: boolean;
 };
