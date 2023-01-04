@@ -248,27 +248,20 @@ const preprocess = (
     };
 };
 
-export default function Workbench(): JSX.Element {
+const Partitioned = (): JSX.Element => {
     const {
         percentile: {
             ranks: unboundedRanks,
-        },
-        debug: {
-            loading: {
-                isEnabled: loadingIsEnabled,
-            },
         },
     } = useDocusaurusContext()
         .siteConfig
         .themeConfig
             .docupotamusReadTimePlugin;
 
-    const { workbenchIsOpen } = useToolbar();
     const { targetIdToSamples } = useSamples();
     const { setMinRank, setMinScore } = usePercentile();
 
     const targetIdToPrevRank = React.useRef<Map<string, number>>(new Map());
-    const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
     const [isAscending, setIsAscending] = React.useState<boolean>(false);
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
     const [hideUnread, setHideUnread] = React.useState<boolean>(false);
@@ -292,40 +285,17 @@ export default function Workbench(): JSX.Element {
         },
     ], []);
 
-    const partitionSamples = (): JSX.Element => {
-        const {
-            percentiles,
-            top,
-            remaining,
-        } = preprocess(
-            targetIdToSamples,
-            unboundedRanks,
-            isAscending,
-            setMinRank,
-            setMinScore,
-        );
-
-        return (
-            <>
-                <Header
-                    keyedSamples={top}
-                    targetIdToPrevRank={targetIdToPrevRank.current}
-                    showMinute={showMinute}
-                />
-                <Content
-                    keyedSamples={remaining}
-                    targetIdToPrevRank={targetIdToPrevRank.current}
-                    showMinute={showMinute}
-                    hideUnread={hideUnread}
-                    percentiles={percentiles}
-                />
-                <Footer
-                    chips={chips}
-                    marginLeft={CONTENT_MARGIN_LEFT}
-                />
-            </>
-        )
-    };
+    const {
+        percentiles,
+        top,
+        remaining,
+    } = preprocess(
+        targetIdToSamples,
+        unboundedRanks,
+        isAscending,
+        setMinRank,
+        setMinScore,
+    );
 
     // TODO(dnguyen0304): Add real implementation for rank tracking.
     React.useEffect(() => {
@@ -348,6 +318,43 @@ export default function Workbench(): JSX.Element {
     }, [targetIdToSamples]);
 
     return (
+        <>
+            <Header
+                keyedSamples={top}
+                targetIdToPrevRank={targetIdToPrevRank.current}
+                showMinute={showMinute}
+            />
+            <Content
+                keyedSamples={remaining}
+                targetIdToPrevRank={targetIdToPrevRank.current}
+                showMinute={showMinute}
+                hideUnread={hideUnread}
+                percentiles={percentiles}
+            />
+            <Footer
+                chips={chips}
+                marginLeft={CONTENT_MARGIN_LEFT}
+            />
+        </>
+    );
+};
+
+export default function Workbench(): JSX.Element {
+    const {
+        debug: {
+            loading: {
+                isEnabled: loadingIsEnabled,
+            },
+        },
+    } = useDocusaurusContext()
+        .siteConfig
+        .themeConfig
+            .docupotamusReadTimePlugin;
+
+    const { workbenchIsOpen } = useToolbar();
+    const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
+
+    return (
         <StyledBox
             className={isLoading ? styles.workbench_container__load : ''}
             workbenchIsOpen={workbenchIsOpen}
@@ -356,7 +363,7 @@ export default function Workbench(): JSX.Element {
             {
                 isLoading
                     ? <Loading setIsLoading={setIsLoading} />
-                    : partitionSamples()
+                    : <Partitioned />
             }
         </StyledBox>
     );
