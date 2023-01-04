@@ -17,7 +17,7 @@ const format = (totalSeconds: number, showMinute: boolean): string => {
 
 interface StyledBoxProps {
     readonly hasImproved: boolean;
-    readonly minWidthFactor: number,
+    readonly minWidthFactor: number;
 };
 
 // TODO(dnguyen0304): [P2] Investigate refactoring the parent-to-child container
