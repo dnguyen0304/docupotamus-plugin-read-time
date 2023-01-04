@@ -270,17 +270,17 @@ export default function Workbench(): JSX.Element {
     const targetIdToPrevRank = React.useRef<Map<string, number>>(new Map());
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
     const [isAscending, setIsAscending] = React.useState<boolean>(false);
-    // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
     const [hideUnread, setHideUnread] = React.useState<boolean>(false);
 
-    const chips: readonly ChipData[] = [
+    const chips: readonly ChipData[] = React.useMemo(() => [
         {
             label: 'Sort Ascending',
             isClicked: isAscending,
             onClick: () => setIsAscending(prev => !prev),
         },
         {
+            // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
             label: 'Show Minutes',
             isClicked: showMinute,
             onClick: () => setShowMinute(prev => !prev),
@@ -290,7 +290,7 @@ export default function Workbench(): JSX.Element {
             isClicked: hideUnread,
             onClick: () => setHideUnread(prev => !prev),
         },
-    ];
+    ], []);
 
     const partitionSamples = (): JSX.Element => {
         const {
