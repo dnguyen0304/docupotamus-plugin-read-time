@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
 import { useSamples } from '../../../contexts/samples';
 import { BANDS } from './config';
-import useLocationDelayed from './useLocationDelayed';
+// import useLocationDelayed from './useLocationDelayed';
 // TODO(dnguyen0304): Fix missing module declaration.
 import { getElement } from '../../../services/dom';
 import { observeVisibility } from '../../../services/visibility';
@@ -38,7 +38,7 @@ import Tooltip from './Tooltip';
 //
 // Warning, this is unconfirmed. Therefore, include a buffer to delay calling
 // the useEffect hook.
-const CONTENT_ROOT_MOUNT_BUFFER_MILLI: number = 3 * 1000;
+// const CONTENT_ROOT_MOUNT_BUFFER_MILLI: number = 3 * 1000;
 const BORDER_COLOR: string = 'var(--ifm-hr-background-color)';
 const BORDER_HEIGHT_PX: number = 3;
 
@@ -60,7 +60,7 @@ export default function ReadingBands(): JSX.Element | null {
         .themeConfig
             .docupotamusReadTimePlugin;
 
-    const location = useLocationDelayed(CONTENT_ROOT_MOUNT_BUFFER_MILLI);
+    // const location = useLocationDelayed(CONTENT_ROOT_MOUNT_BUFFER_MILLI);
     const { setTargetIdToSamples } = useSamples();
 
     // TODO(dnguyen0304): Investigate migrating from ref to constant.
@@ -143,7 +143,8 @@ export default function ReadingBands(): JSX.Element | null {
         })();
         // TODO(dnguyen0304): Add real implemention for observer.disconnect().
         return () => { };
-    }, [location]);
+        // }, [location]);
+    }, []);
 
     // Consume intersection samples.
     React.useEffect(() => {
