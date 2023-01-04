@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
 import { useSamples } from '../../../contexts/samples';
 import { BANDS } from './config';
+import useLocationDelayed from './useLocationDelayed';
 // TODO(dnguyen0304): Fix missing module declaration.
 import { getElement } from '../../../services/dom';
 import { observeVisibility } from '../../../services/visibility';
@@ -24,6 +25,20 @@ import { createOnVisibilityChange } from './services/sampleProducer';
 import styles from './styles.module.css';
 import Tooltip from './Tooltip';
 
+// There is a race condition:
+//   (1) The user navigates to a new page.
+//   (2) The useLocation hook is called.
+//   (3) The useEffect hook with the location dependency is called.
+//   (4) getElement is called and finds the content root element of the
+//       _previous_ page.
+//   (5) The content root element of the previous page is unmounted.
+//   (6) The content root element of the new page is mounted.
+//   (7) The useEffect hook fails when matching the previous content root
+//       element to the new content elements.
+//
+// Warning, this is unconfirmed. Therefore, include a buffer to delay calling
+// the useEffect hook.
+const CONTENT_ROOT_MOUNT_BUFFER_MILLI: number = 3 * 1000;
 const BORDER_COLOR: string = 'var(--ifm-hr-background-color)';
 const BORDER_HEIGHT_PX: number = 3;
 
@@ -44,6 +59,8 @@ export default function ReadingBands(): JSX.Element | null {
         .siteConfig
         .themeConfig
             .docupotamusReadTimePlugin;
+
+    const location = useLocationDelayed(CONTENT_ROOT_MOUNT_BUFFER_MILLI);
     const { setTargetIdToSamples } = useSamples();
 
     // TODO(dnguyen0304): Investigate migrating from ref to constant.
@@ -126,7 +143,7 @@ export default function ReadingBands(): JSX.Element | null {
         })();
         // TODO(dnguyen0304): Add real implemention for observer.disconnect().
         return () => { };
-    }, []);
+    }, [location]);
 
     // Consume intersection samples.
     React.useEffect(() => {
