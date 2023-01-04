@@ -6,6 +6,15 @@ import Delta from './Delta';
 
 const SECOND_TO_MINUTE: number = 60;
 
+const format = (totalSeconds: number, showMinute: boolean): string => {
+    if (showMinute) {
+        const minute = Math.floor(totalSeconds / SECOND_TO_MINUTE);
+        const second = Math.round(totalSeconds % SECOND_TO_MINUTE);
+        return `${minute}m:${second}s`;
+    }
+    return `${totalSeconds}s`;
+};
+
 interface StyledBoxProps {
     readonly hasImproved: boolean;
     readonly minWidthFactor: number;
@@ -80,13 +89,4 @@ export default function Metric(
             {withDelta ? <Delta readTimeSecond={readTimeSecond} /> : null}
         </Box>
     );
-};
-
-function format(totalSeconds: number, showMinute: boolean): string {
-    if (showMinute) {
-        const minute = Math.floor(totalSeconds / SECOND_TO_MINUTE);
-        const second = Math.round(totalSeconds % SECOND_TO_MINUTE);
-        return `${minute}m:${second}s`;
-    }
-    return `${totalSeconds}s`;
 };
