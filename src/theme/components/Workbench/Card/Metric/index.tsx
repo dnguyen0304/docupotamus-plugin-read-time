@@ -3,6 +3,7 @@ import { styled, SxProps, Theme } from '@mui/material/styles';
 import * as React from 'react';
 import { METRIC_BORDER_WIDTH, RANK_ICON_WIDTH } from '../../constants';
 import Delta from './Delta';
+import useHasImproved from './useHasImproved';
 
 const SECOND_TO_MINUTE: number = 60;
 
@@ -59,13 +60,7 @@ export default function Metric(
         withDelta = false,
     }: Props
 ): JSX.Element {
-    // TODO(dnguyen0304): [P2] Refactor into useHasImproved hook.
-    const originalReadTimeSecond = React.useRef<number>(readTimeSecond);
-    const [hasImproved, setHasImproved] = React.useState<boolean>(false);
-
-    React.useEffect(() => {
-        setHasImproved(readTimeSecond > originalReadTimeSecond.current);
-    }, [readTimeSecond]);
+    const hasImproved = useHasImproved(readTimeSecond);
 
     return (
         <Box sx={{
