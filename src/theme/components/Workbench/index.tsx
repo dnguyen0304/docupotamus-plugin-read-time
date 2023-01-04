@@ -92,12 +92,13 @@ const convertToBoundedRanks = (
     return bounded;
 };
 
-// TODO(dnguyen0304): Add error handling.
 const getPercentileScores = (
     boundedRanks: readonly BoundedPercentileRank[],
-    // TODO(dnguyen0304): Fix not accounting for empty arrays.
     values: readonly number[],
 ): readonly Percentile[] => {
+    if (values.length === 0) {
+        return [];
+    }
     return boundedRanks.map((boundedRank) => {
         const {
             lower: rankLower,
