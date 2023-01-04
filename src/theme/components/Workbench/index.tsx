@@ -266,6 +266,10 @@ const Partitioned = (): JSX.Element => {
     const [showMinute, setShowMinute] = React.useState<boolean>(false);
     const [hideUnread, setHideUnread] = React.useState<boolean>(false);
 
+    const [percentiles, setPercentiles] = React.useState<Percentile[]>([]);
+    const [top, setTop] = React.useState<KeyedSample[]>([]);
+    const [remaining, setRemaining] = React.useState<KeyedSample[]>([]);
+
     const chips: readonly ChipData[] = React.useMemo(() => [
         {
             label: 'Sort Ascending',
@@ -285,17 +289,18 @@ const Partitioned = (): JSX.Element => {
         },
     ], []);
 
-    const {
-        percentiles,
-        top,
-        remaining,
-    } = preprocess(
-        targetIdToSamples,
-        unboundedRanks,
-        isAscending,
-        setMinRank,
-        setMinScore,
-    );
+    React.useEffect(() => {
+        const { percentiles, top, remaining } = preprocess(
+            targetIdToSamples,
+            unboundedRanks,
+            isAscending,
+            setMinRank,
+            setMinScore,
+        );
+        setPercentiles([...percentiles]);
+        setTop([...top]);
+        setRemaining([...remaining]);
+    }, [targetIdToSamples]);
 
     // TODO(dnguyen0304): Add real implementation for rank tracking.
     React.useEffect(() => {
