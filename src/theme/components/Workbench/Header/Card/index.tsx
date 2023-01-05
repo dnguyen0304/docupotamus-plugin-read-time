@@ -2,6 +2,7 @@ import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOu
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import Symbol from '../../Card/Symbol';
 import useHighlight from '../../hooks/useHighlight';
 import usePulse from '../../hooks/usePulse';
 import useVisibility from '../../hooks/useVisibility';
@@ -60,10 +61,6 @@ export default function Card(
     const [, setHighlight] = useHighlight(targetId);
     const targetIsVisible = useVisibility(targetId);
 
-    // TODO(dnguyen0304): Hide targetId and use shortened
-    // heading as the card symbol.
-    const truncatedTargetId = targetId.split('-')[0];
-
     const handleClick = () => {
         onClick();
         setPulse(true);
@@ -83,7 +80,7 @@ export default function Card(
                 margin: '0 6px 0 4px',
                 paddingBottom: 'var(--space-2xs-xs)',
             }}>
-                <Box>{truncatedTargetId}</Box>
+                <Symbol />
                 <Box sx={{
                     fontSize: 'var(--font-size--3)',
                     fontStyle: 'italic',

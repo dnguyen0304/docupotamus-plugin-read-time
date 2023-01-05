@@ -8,6 +8,7 @@ import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
 import Metric from './Metric';
 import Rank from './Rank';
+import Symbol from './Symbol';
 
 const HighlightStyles = {
     // Set the margin-right style on the children li instead of the parent ol to
@@ -62,10 +63,6 @@ export default function Card(
     const [, setHighlight] = useHighlight(targetId);
     const targetIsVisible = useVisibility(targetId);
 
-    // TODO(dnguyen0304): Hide targetId and use shortened
-    // heading as the card symbol.
-    const truncatedTargetId = targetId.split('-')[0];
-
     return (
         <StyledListItem
             className={className}
@@ -86,7 +83,7 @@ export default function Card(
                 width: '65%',
                 margin: '0 6px 0 4px',
             }}>
-                <Box>{truncatedTargetId}</Box>
+                <Symbol />
                 <Box sx={{ fontSize: 'var(--font-size--3)' }}>
                     {details}
                 </Box>
