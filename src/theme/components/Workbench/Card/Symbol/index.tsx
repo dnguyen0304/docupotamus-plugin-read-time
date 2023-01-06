@@ -16,7 +16,11 @@ const getSymbol = (length: number): string => {
 };
 
 export default function Symbol(): JSX.Element {
-    const symbol = React.useRef<string>(getSymbol(SYMBOL_LENGTH));
+    const [symbol, setSymbol] = React.useState<string>('');
 
-    return <Box>{symbol.current}</Box>;
+    React.useEffect(() => {
+        setSymbol(getSymbol(SYMBOL_LENGTH));
+    }, []);
+
+    return <Box>{symbol}</Box>;
 };
