@@ -27,16 +27,17 @@ const HighlightStyles = {
 }
 
 interface StyledListItemProps {
+    readonly isHidden: boolean;
     readonly targetIsVisible: boolean;
 };
 
 const StyledListItem = styled('li', {
-    shouldForwardProp: (prop) => prop !== 'targetIsVisible',
-})<StyledListItemProps>(({ targetIsVisible }) => ({
+    shouldForwardProp: (prop) => prop !== 'isHidden' && prop !== 'targetIsVisible',
+})<StyledListItemProps>(({ isHidden, targetIsVisible }) => ({
     ...CardStyles,
     ...HighlightStyles,
     position: 'relative',
-    display: 'flex',
+    display: isHidden ? 'none' : 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
@@ -58,6 +59,7 @@ export default function Card(
         rankPrev,
         readTimeSecond,
         showMinute,
+        isHidden,
     }: CardProps
 ): JSX.Element {
     const element = useElement(targetId);
@@ -68,6 +70,7 @@ export default function Card(
     return (
         <StyledListItem
             className={className}
+            isHidden={isHidden}
             onAnimationEnd={() => setPulse(false)}
             onClick={() => setPulse(true)}
             onMouseEnter={() => setHighlight(true)}

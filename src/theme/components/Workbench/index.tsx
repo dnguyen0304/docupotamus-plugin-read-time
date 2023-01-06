@@ -25,6 +25,7 @@ import type {
 } from './types';
 
 const MILLISECOND_TO_SECOND: number = 1000;
+const HEADER_CARD_COUNT: number = 3;
 
 interface BoundedPercentileRank {
     // Lower bound. This range endpoint is inclusive: [lower, upper).
@@ -130,6 +131,7 @@ const convertToWorkbenchSample = (
                 readTimeSecond,
                 lastSample: sample.runningTotal.lastSample,
             },
+            isHidden: false,
         },
     ];
 };
@@ -200,6 +202,7 @@ const preprocess = (
     setMinScore: React.Dispatch<React.SetStateAction<number>>,
 ): {
     readonly percentiles: readonly Percentile[];
+    readonly keyedSamples: readonly KeyedSample[];
     readonly top: readonly KeyedSample[];
     readonly remaining: readonly KeyedSample[];
 } => {
@@ -228,11 +231,17 @@ const preprocess = (
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
         remaining = preprocessed.slice(0, -3);
+        for (let i = Math.max(0, preprocessed.length - HEADER_CARD_COUNT); i < preprocessed.length; ++i) {
+            preprocessed[i][1].isHidden = true;
+        }
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
         remaining = preprocessed.slice(3);
         percentileRanks.reverse();
+        for (let i = 0; i < Math.min(HEADER_CARD_COUNT, preprocessed.length); ++i) {
+            preprocessed[i][1].isHidden = true;
+        }
     }
 
     const percentiles = getPercentileScores(
@@ -244,6 +253,7 @@ const preprocess = (
 
     return {
         percentiles,
+        keyedSamples: preprocessed,
         top,
         remaining,
     };
@@ -268,6 +278,7 @@ const Partitioned = (): JSX.Element => {
     const [hideUnread, setHideUnread] = React.useState<boolean>(false);
 
     const [percentiles, setPercentiles] = React.useState<Percentile[]>([]);
+    const [keyedSamples, setKeyedSamples] = React.useState<KeyedSample[]>([]);
     const [top, setTop] = React.useState<KeyedSample[]>([]);
     const [remaining, setRemaining] = React.useState<KeyedSample[]>([]);
 
@@ -291,7 +302,7 @@ const Partitioned = (): JSX.Element => {
     ], []);
 
     React.useEffect(() => {
-        const { percentiles, top, remaining } = preprocess(
+        const { percentiles, keyedSamples, top, remaining } = preprocess(
             targetIdToSamples,
             unboundedRanks,
             isAscending,
@@ -299,6 +310,7 @@ const Partitioned = (): JSX.Element => {
             setMinScore,
         );
         setPercentiles([...percentiles]);
+        setKeyedSamples([...keyedSamples]);
         setTop([...top]);
         setRemaining([...remaining]);
     }, [targetIdToSamples]);
@@ -331,7 +343,7 @@ const Partitioned = (): JSX.Element => {
                 showMinute={showMinute}
             />
             <Content
-                keyedSamples={remaining}
+                keyedSamples={keyedSamples}
                 targetIdToPrevRank={targetIdToPrevRank.current}
                 showMinute={showMinute}
                 hideUnread={hideUnread}

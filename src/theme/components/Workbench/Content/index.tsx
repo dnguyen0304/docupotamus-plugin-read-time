@@ -167,6 +167,7 @@ export default function Content(
                                             sample.runningTotal.readTimeSecond
                                         }
                                         showMinute={showMinute}
+                                        isHidden={sample.isHidden}
                                     />
                                 );
                             })}

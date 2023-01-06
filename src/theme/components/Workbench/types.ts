@@ -5,6 +5,8 @@ export interface Sample {
     readonly runningTotal: {
         readonly readTimeSecond: number;
     } & Omit<RunningTotal, 'visibleTimeMilli'>;
+    // TODO(dnguyen0304): Investigate changing to readonly.
+    isHidden: boolean;
 };
 
 // TODO(dnguyen0304): Investigate changing to an object for self-documentation.
@@ -23,6 +25,7 @@ export interface CardProps {
     readonly rankPrev: number | undefined;
     readonly readTimeSecond: number;
     readonly showMinute: boolean;
+    readonly isHidden: boolean;
 };
 
 export interface Percentile {
