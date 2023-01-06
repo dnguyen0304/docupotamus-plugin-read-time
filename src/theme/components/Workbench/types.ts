@@ -18,6 +18,7 @@ export type KeyedSample = readonly [
 
 export interface CardProps {
     // TODO(dnguyen0304): Investigate extracting to CommonProps similar to @mui.
+    readonly children?: React.ReactNode;
     readonly className?: string;
     readonly targetId: string;
     readonly details: string;

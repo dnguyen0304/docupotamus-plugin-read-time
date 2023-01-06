@@ -137,42 +137,42 @@ export default function Content(
                     keyedSamples: partitionedSamples,
                 } = partition;
                 return (
-                    <Box key={`${PARTITION_KEY_PREFIX}-${label}`}>
-                        {
-                            (label !== excludedLabel)
-                                ? (
-                                    <StyledDivider textAlign='right'>
-                                        {label}
-                                    </StyledDivider>
-                                )
-                                : null
-                        }
-                        <StyledOrderedList>
-                            {partitionedSamples.map((keyedSample) => {
-                                const [
-                                    targetId,
-                                    sample,
-                                    rankCurr,
-                                ] = keyedSample;
-                                const rankPrev =
-                                    targetIdToPrevRank.get(targetId);
-                                return (
-                                    <Card
-                                        key={`${CARD_KEY_PREFIX}-${targetId}`}
-                                        targetId={targetId}
-                                        details={sample.target.snippet}
-                                        rankCurr={rankCurr}
-                                        rankPrev={rankPrev}
-                                        readTimeSecond={
-                                            sample.runningTotal.readTimeSecond
-                                        }
-                                        showMinute={showMinute}
-                                        isHidden={sample.isHidden}
-                                    />
-                                );
-                            })}
-                        </StyledOrderedList>
-                    </Box>
+                    <StyledOrderedList>
+                        {partitionedSamples.map((keyedSample, i) => {
+                            const [
+                                targetId,
+                                sample,
+                                rankCurr,
+                            ] = keyedSample;
+                            const rankPrev =
+                                targetIdToPrevRank.get(targetId);
+                            return (
+                                <Card
+                                    key={`${CARD_KEY_PREFIX}-${targetId}`}
+                                    targetId={targetId}
+                                    details={sample.target.snippet}
+                                    rankCurr={rankCurr}
+                                    rankPrev={rankPrev}
+                                    readTimeSecond={
+                                        sample.runningTotal.readTimeSecond
+                                    }
+                                    showMinute={showMinute}
+                                    isHidden={sample.isHidden}
+                                >
+                                    {
+                                        // TODO(dnguyen0304): Fix not showing first percentile divider.
+                                        (label !== excludedLabel && i === 0)
+                                            ? (
+                                                <StyledDivider key={`${PARTITION_KEY_PREFIX}-${label}`} textAlign='right'>
+                                                    {label}
+                                                </StyledDivider>
+                                            )
+                                            : null
+                                    }
+                                </Card>
+                            );
+                        })}
+                    </StyledOrderedList>
                 );
             })}
         </StyledBox>
