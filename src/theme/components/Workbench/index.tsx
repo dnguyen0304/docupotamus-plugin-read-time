@@ -222,7 +222,6 @@ const preprocess = (
     readonly percentiles: readonly Percentile[];
     readonly keyedSamples: readonly KeyedSample[];
     readonly top: readonly KeyedSample[];
-    readonly remaining: readonly KeyedSample[];
 } => {
     const sorted =
         Object.entries(targetIdToSamples)
@@ -232,7 +231,6 @@ const preprocess = (
 
     let preprocessed: readonly KeyedSample[] = [];
     let top: readonly KeyedSample[] = [];
-    let remaining: readonly KeyedSample[] = [];
     let percentileRanks = [...convertToBoundedRanks(unboundedPercentileRanks)];
 
     setMinRank(percentileRanks[0].upper);
@@ -248,12 +246,10 @@ const preprocess = (
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
-        remaining = preprocessed.slice(0, -3);
         hideLastN(preprocessed);
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
-        remaining = preprocessed.slice(3);
         percentileRanks.reverse();
         hideFirstN(preprocessed);
     }
@@ -269,7 +265,6 @@ const preprocess = (
         percentiles,
         keyedSamples: preprocessed,
         top,
-        remaining,
     };
 };
 
@@ -294,7 +289,6 @@ const Partitioned = (): JSX.Element => {
     const [percentiles, setPercentiles] = React.useState<Percentile[]>([]);
     const [keyedSamples, setKeyedSamples] = React.useState<KeyedSample[]>([]);
     const [top, setTop] = React.useState<KeyedSample[]>([]);
-    const [remaining, setRemaining] = React.useState<KeyedSample[]>([]);
 
     const chips: readonly ChipData[] = React.useMemo(() => [
         {
@@ -316,7 +310,7 @@ const Partitioned = (): JSX.Element => {
     ], []);
 
     React.useEffect(() => {
-        const { percentiles, keyedSamples, top, remaining } = preprocess(
+        const { percentiles, keyedSamples, top } = preprocess(
             targetIdToSamples,
             unboundedRanks,
             isAscending,
@@ -326,7 +320,6 @@ const Partitioned = (): JSX.Element => {
         setPercentiles([...percentiles]);
         setKeyedSamples([...keyedSamples]);
         setTop([...top]);
-        setRemaining([...remaining]);
     }, [targetIdToSamples]);
 
     // TODO(dnguyen0304): Add real implementation for rank tracking.
