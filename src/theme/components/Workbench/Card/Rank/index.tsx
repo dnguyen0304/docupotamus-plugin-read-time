@@ -40,9 +40,8 @@ export default function Rank(
         arrowPosition,
     }: Props
 ): JSX.Element {
+    const [resolvedPrev, setResolvedPrev] = React.useState<number>(0);
     const [isVertical, setIsVertical] = React.useState<boolean>(false);
-
-    const resolvedPrev = (prev !== undefined) ? prev : curr;
 
     const getIcon = (
         change: number,
@@ -68,6 +67,10 @@ export default function Rank(
         }
         return <RemoveIcon viewBox='-12 -12 48 48' />;
     };
+
+    React.useEffect(() => {
+        setResolvedPrev((prev !== undefined) ? prev : curr);
+    }, [curr, prev])
 
     React.useEffect(() => {
         setIsVertical(arrowPosition === 'top' || arrowPosition === 'bottom');
