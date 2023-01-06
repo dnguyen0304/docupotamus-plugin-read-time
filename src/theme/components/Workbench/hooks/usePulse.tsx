@@ -15,6 +15,7 @@ export default function usePulse(
             });
             element?.classList.add(styles.target_container__pulse);
         }
+        return () => element?.classList.remove(styles.target_container__pulse);
     }, [isEnabled]);
 
     return [isEnabled, setIsEnabled];
