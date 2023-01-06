@@ -186,6 +186,7 @@ export default function Delta(
             config={getConfig(delta)}
             onAnimationEnd={resetAnimation}
             ref={ref}
+            // Setting display: none causes a re-render but not an unmount.
             sx={{ display: delta ? 'block' : 'none' }}
         >
             {`+${delta}`}
