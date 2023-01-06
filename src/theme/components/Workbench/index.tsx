@@ -192,6 +192,24 @@ const rank = (
     return ranks;
 };
 
+const hideFirstN = (
+    keyedSamples: readonly KeyedSample[],
+    n: number = HEADER_CARD_COUNT,
+) => {
+    for (let i = 0; i < Math.min(n, keyedSamples.length); ++i) {
+        keyedSamples[i][1].isHidden = true;
+    }
+};
+
+const hideLastN = (
+    keyedSamples: readonly KeyedSample[],
+    n: number = HEADER_CARD_COUNT,
+) => {
+    for (let i = Math.max(0, keyedSamples.length - n); i < keyedSamples.length; ++i) {
+        keyedSamples[i][1].isHidden = true;
+    }
+};
+
 // TODO(dnguyen0304): [medium] Investigate moving rank to WorkbenchSample as
 // Metadata.rankCurr for scalability.
 const preprocess = (
@@ -231,17 +249,13 @@ const preprocess = (
         preprocessed = sortedAndRanked.slice().reverse();
         top = preprocessed.slice(-3);
         remaining = preprocessed.slice(0, -3);
-        for (let i = Math.max(0, preprocessed.length - HEADER_CARD_COUNT); i < preprocessed.length; ++i) {
-            preprocessed[i][1].isHidden = true;
-        }
+        hideLastN(preprocessed);
     } else {
         preprocessed = sortedAndRanked;
         top = preprocessed.slice(0, 3);
         remaining = preprocessed.slice(3);
         percentileRanks.reverse();
-        for (let i = 0; i < Math.min(HEADER_CARD_COUNT, preprocessed.length); ++i) {
-            preprocessed[i][1].isHidden = true;
-        }
+        hideFirstN(preprocessed);
     }
 
     const percentiles = getPercentileScores(
