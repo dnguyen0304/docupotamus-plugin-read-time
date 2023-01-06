@@ -79,10 +79,9 @@ export default function Content(
         percentile: {
             style: percentileRankStyle,
         },
-    } =
-        useDocusaurusContext()
-            .siteConfig
-            .themeConfig
+    } = useDocusaurusContext()
+        .siteConfig
+        .themeConfig
             .docupotamusReadTimePlugin;
 
     const { minRank, minScore } = usePercentile();
