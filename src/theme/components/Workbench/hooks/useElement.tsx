@@ -2,7 +2,6 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import * as React from 'react';
 import { getElement } from '../../../../services/dom';
 
-// TODO(dnguyen0304): Investigate useMemo to improve performance.
 export default function useElement(
     targetId: string,
     cleanUp?: () => void,
