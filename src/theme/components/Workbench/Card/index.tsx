@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import useElement from '../hooks/useElement';
 import useHighlight from '../hooks/useHighlight';
 import usePulse from '../hooks/usePulse';
 import useVisibility from '../hooks/useVisibility';
@@ -59,7 +60,8 @@ export default function Card(
         showMinute,
     }: CardProps
 ): JSX.Element {
-    const [, setPulse] = usePulse(targetId);
+    const element = useElement(targetId);
+    const [, setPulse] = usePulse(element);
     const [, setHighlight] = useHighlight(targetId);
     const targetIsVisible = useVisibility(targetId);
 

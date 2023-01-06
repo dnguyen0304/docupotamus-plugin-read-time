@@ -1,11 +1,9 @@
 import * as React from 'react';
 import styles from './styles.module.css';
-import useElement from './useElement';
 
 export default function usePulse(
-    targetId: string,
+    element: Element | undefined,
 ): [boolean, React.Dispatch<React.SetStateAction<boolean>>] {
-    const element = useElement(targetId);
     const [isEnabled, setIsEnabled] = React.useState<boolean>(false);
 
     React.useEffect(() => {
