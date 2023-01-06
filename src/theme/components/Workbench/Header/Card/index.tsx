@@ -61,7 +61,7 @@ export default function Card(
     const element = useElement(targetId);
     const [, setPulse] = usePulse(element);
     const [, setHighlight] = useHighlight(element);
-    const targetIsVisible = useVisibility(targetId);
+    const targetIsVisible = useVisibility(element);
 
     const handleClick = () => {
         onClick();

@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { observeVisibility } from '../../../../services/visibility';
-import useElement from './useElement';
 
-export default function useVisibility(targetId: string): boolean {
-    const element = useElement(targetId);
-
+export default function useVisibility(element: Element | undefined): boolean {
     const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
     const onChange: IntersectionObserverCallback = (entries) => {
