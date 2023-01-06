@@ -62,7 +62,7 @@ export default function Card(
 ): JSX.Element {
     const element = useElement(targetId);
     const [, setPulse] = usePulse(element);
-    const [, setHighlight] = useHighlight(targetId);
+    const [, setHighlight] = useHighlight(element);
     const targetIsVisible = useVisibility(targetId);
 
     return (

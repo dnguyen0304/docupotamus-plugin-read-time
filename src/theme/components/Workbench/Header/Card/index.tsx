@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import Symbol from '../../Card/Symbol';
-import useHighlight from '../../hooks/useHighlight';
 import useElement from '../../hooks/useElement';
+import useHighlight from '../../hooks/useHighlight';
 import usePulse from '../../hooks/usePulse';
 import useVisibility from '../../hooks/useVisibility';
 import { Card as CardStyles } from '../../styles';
@@ -60,7 +60,7 @@ export default function Card(
 ): JSX.Element {
     const element = useElement(targetId);
     const [, setPulse] = usePulse(element);
-    const [, setHighlight] = useHighlight(targetId);
+    const [, setHighlight] = useHighlight(element);
     const targetIsVisible = useVisibility(targetId);
 
     const handleClick = () => {
