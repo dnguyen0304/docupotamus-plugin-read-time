@@ -86,35 +86,39 @@ export default function Content(
 
     const { minRank, minScore } = usePercentile();
 
+    const [partitions, setPartitions] = React.useState<Partition[]>([]);
     const [excludedLabel, setExcludedLabel] = React.useState<string>('');
 
-    const seen = new Set<string>();
-    const partitions: Partition[] = percentiles.map((percentile) => {
-        const { rank, scoreLower, scoreUpper } = percentile;
-        let partitionedSamples: KeyedSample[] = [];
-        // TODO(dnguyen0304): Fix unnecessary iteration passes.
-        for (const current of keyedSamples) {
-            const [targetId, sample] = current;
-            const score = sample.runningTotal.readTimeSecond;
-            const isInside = score > scoreLower && score <= scoreUpper;
-            const isMin = rank === minRank && score === minScore;
-            if (seen.has(targetId)) {
-                continue;
+    React.useEffect(() => {
+        const seen = new Set<string>();
+        const newPartitions: Partition[] = percentiles.map((percentile) => {
+            const { rank, scoreLower, scoreUpper } = percentile;
+            let partitionedSamples: KeyedSample[] = [];
+            // TODO(dnguyen0304): Fix unnecessary iteration passes.
+            for (const current of keyedSamples) {
+                const [targetId, sample] = current;
+                const score = sample.runningTotal.readTimeSecond;
+                const isInside = score > scoreLower && score <= scoreUpper;
+                const isMin = rank === minRank && score === minScore;
+                if (seen.has(targetId)) {
+                    continue;
+                }
+                if (hideUnread && score === 0) {
+                    continue;
+                }
+                if (!isInside && !isMin) {
+                    continue;
+                }
+                partitionedSamples.push(current);
+                seen.add(targetId);
             }
-            if (hideUnread && score === 0) {
-                continue;
-            }
-            if (!isInside && !isMin) {
-                continue;
-            }
-            partitionedSamples.push(current);
-            seen.add(targetId);
-        }
-        return {
-            label: formatPercentileRank(rank, percentileRankStyle),
-            keyedSamples: partitionedSamples,
-        };
-    });
+            return {
+                label: formatPercentileRank(rank, percentileRankStyle),
+                keyedSamples: partitionedSamples,
+            };
+        });
+        setPartitions(newPartitions);
+    }, [percentiles]);
 
     React.useEffect(() => {
         // Hide the divider for the 100th percentile because it creates a
