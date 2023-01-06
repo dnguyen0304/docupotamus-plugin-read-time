@@ -86,6 +86,8 @@ export default function Content(
 
     const { minRank, minScore } = usePercentile();
 
+    const [excludedLabel, setExcludedLabel] = React.useState<string>('');
+
     const seen = new Set<string>();
     const partitions: Partition[] = percentiles.map((percentile) => {
         const { rank, scoreLower, scoreUpper } = percentile;
@@ -114,12 +116,14 @@ export default function Content(
         };
     });
 
-    // Hide the divider for the 100th percentile because it creates a separation
-    // between the header and content cards.
-    const excludedLabel = formatPercentileRank(
-        LARGEST_PERCENTILE_RANK,
-        percentileRankStyle,
-    );
+    React.useEffect(() => {
+        // Hide the divider for the 100th percentile because it creates a
+        // separation between the header and content cards.
+        setExcludedLabel(formatPercentileRank(
+            LARGEST_PERCENTILE_RANK,
+            percentileRankStyle,
+        ));
+    }, []);
 
     return (
         <StyledBox>
