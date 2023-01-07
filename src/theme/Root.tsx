@@ -31,11 +31,13 @@ interface Props {
 
 export default function Root({ children }: Props): JSX.Element {
     return (
-        <ThemeProvider theme={theme}>
-            <SamplesProvider>
-                <App />
-                {children}
-            </SamplesProvider>
-        </ThemeProvider>
+        <React.StrictMode>
+            <ThemeProvider theme={theme}>
+                <SamplesProvider>
+                    <App />
+                    {children}
+                </SamplesProvider>
+            </ThemeProvider>
+        </React.StrictMode>
     );
 };
