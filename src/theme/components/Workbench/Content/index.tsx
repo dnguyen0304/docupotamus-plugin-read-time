@@ -114,6 +114,42 @@ export default function Content(
     const [partitions, setPartitions] = React.useState<Partition[]>([]);
     const [excludedLabel, setExcludedLabel] = React.useState<string>('');
 
+    // TODO(dnguyen0304): Investigate unnecessary re-renders.
+    const getListItems = (): (JSX.Element | null)[] => {
+        let listItems: (JSX.Element | null)[] = [];
+        for (const partition of partitions) {
+            const {
+                label,
+                keyedSamples: partitionedSamples,
+            } = partition;
+            for (let i = 0; i < partitionedSamples.length; ++i) {
+                const [targetId, sample, rankCurr] = partitionedSamples[i];
+                const rankPrev = targetIdToPrevRank.get(targetId);
+                const divider = getDivider(
+                    label,
+                    excludedLabel,
+                    i,
+                    sample.isHidden,
+                );
+                const card = (
+                    <Card
+                        key={`${CARD_KEY_PREFIX}-${targetId}`}
+                        targetId={targetId}
+                        details={sample.target.snippet}
+                        percentileDivider={divider}
+                        rankCurr={rankCurr}
+                        rankPrev={rankPrev}
+                        readTimeSecond={sample.runningTotal.readTimeSecond}
+                        showMinute={showMinute}
+                        isHidden={sample.isHidden}
+                    />
+                );
+                listItems.push(divider, card);
+            }
+        }
+        return listItems;
+    };
+
     React.useEffect(() => {
         const seen = new Set<string>();
         const newPartitions: Partition[] = percentiles.map((percentile) => {
@@ -156,46 +192,7 @@ export default function Content(
 
     return (
         <StyledOrderedList>
-            {partitions.map((partition) => {
-                const {
-                    label,
-                    keyedSamples: partitionedSamples,
-                } = partition;
-                return (
-                    <>
-                        {partitionedSamples.map((keyedSample, i) => {
-                            const [
-                                targetId,
-                                sample,
-                                rankCurr,
-                            ] = keyedSample;
-                            const rankPrev =
-                                targetIdToPrevRank.get(targetId);
-                            const divider = getDivider(
-                                label,
-                                excludedLabel,
-                                i,
-                                sample.isHidden,
-                            );
-                            return (
-                                <Card
-                                    key={`${CARD_KEY_PREFIX}-${targetId}`}
-                                    targetId={targetId}
-                                    details={sample.target.snippet}
-                                    percentileDivider={divider}
-                                    rankCurr={rankCurr}
-                                    rankPrev={rankPrev}
-                                    readTimeSecond={
-                                        sample.runningTotal.readTimeSecond
-                                    }
-                                    showMinute={showMinute}
-                                    isHidden={sample.isHidden}
-                                />
-                            );
-                        })}
-                    </>
-                );
-            })}
+            {getListItems()}
         </StyledOrderedList>
     );
 };
