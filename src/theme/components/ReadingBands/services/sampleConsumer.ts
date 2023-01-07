@@ -113,6 +113,9 @@ export function createUpdateRunningTotals(
                 samples.get(targetId)?.set(bandKey, []);
             }
         }
+        // Warning: Updating this state is the _most_ expensive call in the
+        // entire app because it causes a re-calculation of all running totals
+        // and a re-render of every Card.
         setTargetIdToSamples(prev => ({ ...prev, ...newTargetIdToSamples }));
     };
 };
