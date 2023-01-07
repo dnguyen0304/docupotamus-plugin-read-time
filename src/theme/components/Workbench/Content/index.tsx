@@ -58,9 +58,10 @@ const getDivider = (
     label: string,
     excludedLabel: string,
     partitionIndex: number,
+    isHidden: boolean,
 ): JSX.Element | null => {
     // TODO(dnguyen0304): Fix not showing first percentile divider.
-    if (label === excludedLabel || partitionIndex !== 0) {
+    if (isHidden || label === excludedLabel || partitionIndex !== 0) {
         return null;
     }
     return (
@@ -161,7 +162,12 @@ export default function Content(
                             ] = keyedSample;
                             const rankPrev =
                                 targetIdToPrevRank.get(targetId);
-                            const divider = getDivider(label, excludedLabel, i);
+                            const divider = getDivider(
+                                label,
+                                excludedLabel,
+                                i,
+                                sample.isHidden,
+                            );
                             return (
                                 <Card
                                     key={`${CARD_KEY_PREFIX}-${targetId}`}
