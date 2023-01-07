@@ -46,6 +46,8 @@ function getIntersectionRatio(sample: IntersectionSample): number {
     return intersectionRatio;
 };
 
+// TODO(dnguyen0304): [P1] Fix race condition dropping unprocessed samples due
+//   to unsynchronized reads.
 export function createUpdateRunningTotals(
     samples: Map<string, Map<BandFriendlyKey, IntersectionSample[]>>,
     setTargetIdToSamples:
