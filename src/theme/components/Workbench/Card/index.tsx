@@ -55,7 +55,6 @@ export default function Card(
         className,
         targetId,
         details,
-        percentileDivider,
         rankCurr,
         rankPrev,
         readTimeSecond,
@@ -69,40 +68,37 @@ export default function Card(
     const targetIsVisible = useVisibility(element);
 
     return (
-        <>
-            {percentileDivider}
-            <StyledListItem
-                className={className}
-                isHidden={isHidden}
-                onAnimationEnd={() => setPulse(false)}
-                onClick={() => setPulse(true)}
-                onMouseEnter={() => setHighlight(true)}
-                onMouseLeave={() => setHighlight(false)}
-                targetIsVisible={targetIsVisible}
-            >
-                <Rank
-                    curr={rankCurr}
-                    prev={rankPrev}
-                    arrowPosition='bottom'
-                />
-                <Box sx={{
-                    // TODO(dnguyen0304): Investigate changing percentages to grid
-                    // layout for responsive design.
-                    width: '65%',
-                    margin: '0 6px 0 4px',
-                }}>
-                    <Symbol />
-                    <Box sx={{ fontSize: 'var(--font-size--3)' }}>
-                        {details}
-                    </Box>
+        <StyledListItem
+            className={className}
+            isHidden={isHidden}
+            onAnimationEnd={() => setPulse(false)}
+            onClick={() => setPulse(true)}
+            onMouseEnter={() => setHighlight(true)}
+            onMouseLeave={() => setHighlight(false)}
+            targetIsVisible={targetIsVisible}
+        >
+            <Rank
+                curr={rankCurr}
+                prev={rankPrev}
+                arrowPosition='bottom'
+            />
+            <Box sx={{
+                // TODO(dnguyen0304): Investigate changing percentages to grid
+                // layout for responsive design.
+                width: '65%',
+                margin: '0 6px 0 4px',
+            }}>
+                <Symbol />
+                <Box sx={{ fontSize: 'var(--font-size--3)' }}>
+                    {details}
                 </Box>
-                <Metric
-                    readTimeSecond={readTimeSecond}
-                    showMinute={showMinute}
-                    sx={{ textAlign: 'right' }}
-                    withDelta
-                />
-            </StyledListItem>
-        </>
+            </Box>
+            <Metric
+                readTimeSecond={readTimeSecond}
+                showMinute={showMinute}
+                sx={{ textAlign: 'right' }}
+                withDelta
+            />
+        </StyledListItem>
     );
 };
