@@ -196,7 +196,8 @@ const hideFirstN = (
     keyedSamples: readonly KeyedSample[],
     n: number = HEADER_CARD_COUNT,
 ) => {
-    for (let i = 0; i < Math.min(n, keyedSamples.length); ++i) {
+    const terminal = Math.min(n, keyedSamples.length);
+    for (let i = 0; i < terminal; ++i) {
         keyedSamples[i][1].isHidden = true;
     }
 };
@@ -205,7 +206,7 @@ const hideLastN = (
     keyedSamples: readonly KeyedSample[],
     n: number = HEADER_CARD_COUNT,
 ) => {
-    const initial = Math.max(0, keyedSamples.length - n)
+    const initial = Math.max(0, keyedSamples.length - n);
     for (let i = initial; i < keyedSamples.length; ++i) {
         keyedSamples[i][1].isHidden = true;
     }
