@@ -15,7 +15,7 @@ const LARGEST_PERCENTILE_RANK = 100;
 interface Partition {
     readonly label: string;
     readonly keyedSamples: readonly KeyedSample[];
-}
+};
 
 // TODO(dnguyen0304): Investigate migrating to use MUI List.
 //   See: https://mui.com/material-ui/react-list/
