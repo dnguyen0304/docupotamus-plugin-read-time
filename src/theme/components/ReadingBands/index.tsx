@@ -36,7 +36,7 @@ import Tooltip from './Tooltip';
 //   (7) The useEffect hook fails when matching the previous content root
 //       element to the new content elements.
 //
-// Warning, this is unconfirmed. Therefore, include a buffer to delay calling
+// Warning: This is unconfirmed. Therefore, include a buffer to delay calling
 // the useEffect hook.
 // const CONTENT_ROOT_MOUNT_BUFFER_MILLI: number = 3 * 1000;
 const BORDER_COLOR: string = 'var(--ifm-hr-background-color)';
