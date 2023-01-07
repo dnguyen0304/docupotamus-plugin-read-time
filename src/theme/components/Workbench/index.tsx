@@ -242,6 +242,8 @@ const preprocess = (
             : 0
     );
 
+    // TODO(dnguyen0304): [P1] Investigating migrating from JavaScript to
+    //   flex-direction: column-reverse.
     // TODO(dnguyen0304): Fix confusing ascending vs. descending convention.
     // Warning: Using isAscending anywhere else is strongly discouraged because
     // doing so adds significant maintenance costs.
