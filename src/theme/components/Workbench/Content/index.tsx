@@ -1,6 +1,5 @@
 import type { PercentileRankStyle } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
@@ -18,9 +17,13 @@ interface Partition {
     readonly keyedSamples: readonly KeyedSample[];
 }
 
-const StyledBox = styled(Box)({
-    overflow: 'scroll',
+// TODO(dnguyen0304): Investigate migrating to use MUI List.
+//   See: https://mui.com/material-ui/react-list/
+const StyledOrderedList = styled('ol')({
+    margin: 0,
     marginBottom: 'var(--space-2xs)',
+    overflow: 'scroll',
+    padding: 0,
 });
 
 const StyledDivider = styled(Divider)({
@@ -30,13 +33,6 @@ const StyledDivider = styled(Divider)({
     '&::before, &::after': {
         borderColor: '#fff',
     },
-});
-
-// TODO(dnguyen0304): Investigate migrating to use MUI List.
-//   See: https://mui.com/material-ui/react-list/
-const StyledOrderedList = styled('ol')({
-    margin: 0,
-    padding: 0,
 });
 
 const formatPercentileRank = (
@@ -149,14 +145,14 @@ export default function Content(
     }, []);
 
     return (
-        <StyledBox>
+        <StyledOrderedList>
             {partitions.map((partition) => {
                 const {
                     label,
                     keyedSamples: partitionedSamples,
                 } = partition;
                 return (
-                    <StyledOrderedList>
+                    <>
                         {partitionedSamples.map((keyedSample, i) => {
                             const [
                                 targetId,
@@ -182,9 +178,9 @@ export default function Content(
                                 />
                             );
                         })}
-                    </StyledOrderedList>
+                    </>
                 );
             })}
-        </StyledBox>
+        </StyledOrderedList>
     );
 };
