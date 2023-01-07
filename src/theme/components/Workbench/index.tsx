@@ -307,6 +307,7 @@ const Partitioned = (): JSX.Element => {
             isClicked: showMinute,
             onClick: () => setShowMinute(prev => !prev),
         },
+        // TODO(dnguyen0304): Add loading animation.
         {
             label: 'Hide Unread',
             isClicked: hideUnread,
