@@ -1,6 +1,7 @@
 import type { PercentileRankStyle } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Divider from '@mui/material/Divider';
+import type { DividerProps } from '@mui/material/Divider';
+import MuiDivider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { usePercentile } from '../../../../contexts/percentile';
@@ -15,6 +16,13 @@ const LARGEST_PERCENTILE_RANK = 100;
 interface Partition {
     readonly label: string;
     readonly keyedSamples: readonly KeyedSample[];
+};
+
+// See: https://mui.com/material-ui/guides/composition/#with-typescript
+const Divider = (
+    props: DividerProps<'li', { component: 'li' }>,
+): JSX.Element => {
+    return <MuiDivider {...props} />
 };
 
 // TODO(dnguyen0304): Investigate migrating to use MUI List.
@@ -67,6 +75,7 @@ const getDivider = (
     return (
         <StyledDivider
             key={`${PARTITION_KEY_PREFIX}-${label}`}
+            component='li'
             textAlign='right'
         >
             {label}
