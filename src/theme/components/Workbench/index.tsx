@@ -249,13 +249,13 @@ const preprocess = (
     // doing so adds significant maintenance costs.
     if (isAscending) {
         preprocessed = sortedAndRanked.slice().reverse();
-        top = preprocessed.slice(-3);
         hideLastN(preprocessed);
+        top = preprocessed.slice(-3);
     } else {
         preprocessed = sortedAndRanked;
-        top = preprocessed.slice(0, 3);
         percentileRanks.reverse();
         hideFirstN(preprocessed);
+        top = preprocessed.slice(0, 3);
     }
 
     const percentiles = getPercentileScores(
