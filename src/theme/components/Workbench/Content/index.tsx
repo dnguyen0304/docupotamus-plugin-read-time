@@ -67,12 +67,13 @@ const getDivider = (
     label: string,
     excludedLabel: string,
     partitionIndex: number,
-    isHidden: boolean,
+    cardIsHidden: boolean,
 ): JSX.Element | null => {
     if (
-        isHidden
-        || label === excludedLabel
+        label === excludedLabel
+        // Only include a top divider for the first card of the partition.
         || partitionIndex !== DIVIDER_SHOW
+        || cardIsHidden
     ) {
         return null;
     }
