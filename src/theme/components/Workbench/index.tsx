@@ -295,11 +295,12 @@ const Partitioned = (): JSX.Element => {
     const [top, setTop] = React.useState<KeyedSample[]>([]);
 
     const chips: readonly ChipData[] = React.useMemo(() => [
-        {
-            label: 'Sort Ascending',
-            isClicked: isAscending,
-            onClick: () => setIsAscending(prev => !prev),
-        },
+        // TODO(dnguyen0304): Add real implementation.
+        // {
+        //     label: 'Sort Ascending',
+        //     isClicked: isAscending,
+        //     onClick: () => setIsAscending(prev => !prev),
+        // },
         {
             // TODO(dnguyen0304): Investigate renaming to "Minutes Format".
             label: 'Show Minutes',
