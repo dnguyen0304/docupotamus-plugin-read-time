@@ -171,6 +171,7 @@ export default function Content(
                                     key={`${CARD_KEY_PREFIX}-${targetId}`}
                                     targetId={targetId}
                                     details={sample.target.snippet}
+                                    percentileDivider={divider}
                                     rankCurr={rankCurr}
                                     rankPrev={rankPrev}
                                     readTimeSecond={
@@ -178,9 +179,7 @@ export default function Content(
                                     }
                                     showMinute={showMinute}
                                     isHidden={sample.isHidden}
-                                >
-                                    {divider}
-                                </Card>
+                                />
                             );
                         })}
                     </StyledOrderedList>

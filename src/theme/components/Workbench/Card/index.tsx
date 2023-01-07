@@ -52,10 +52,10 @@ const StyledListItem = styled('li', {
 
 export default function Card(
     {
-        children,
         className,
         targetId,
         details,
+        percentileDivider,
         rankCurr,
         rankPrev,
         readTimeSecond,
@@ -70,8 +70,7 @@ export default function Card(
 
     return (
         <>
-            {/* TODO(dnguyen0304): Investigate changing to prop. */}
-            {children}
+            {percentileDivider}
             <StyledListItem
                 className={className}
                 isHidden={isHidden}

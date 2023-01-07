@@ -18,10 +18,10 @@ export type KeyedSample = readonly [
 
 export interface CardProps {
     // TODO(dnguyen0304): Investigate extracting to CommonProps similar to @mui.
-    readonly children?: React.ReactNode;
     readonly className?: string;
     readonly targetId: string;
     readonly details: string;
+    readonly percentileDivider: JSX.Element | null;
     readonly rankCurr: number;
     readonly rankPrev: number | undefined;
     readonly readTimeSecond: number;
