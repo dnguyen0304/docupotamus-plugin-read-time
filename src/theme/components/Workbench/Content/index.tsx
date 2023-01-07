@@ -11,6 +11,7 @@ import type { KeyedSample, Percentile } from '../types';
 
 const PARTITION_KEY_PREFIX = 'contentPartition';
 const LARGEST_PERCENTILE_RANK = 100;
+const DIVIDER_SHOW = 0;
 
 // TODO(dnguyen0304): Investigate if position is needed.
 interface Partition {
@@ -68,8 +69,11 @@ const getDivider = (
     partitionIndex: number,
     isHidden: boolean,
 ): JSX.Element | null => {
-    // TODO(dnguyen0304): Fix not showing first percentile divider.
-    if (isHidden || label === excludedLabel || partitionIndex !== 0) {
+    if (
+        isHidden
+        || label === excludedLabel
+        || partitionIndex !== DIVIDER_SHOW
+    ) {
         return null;
     }
     return (
@@ -122,6 +126,16 @@ export default function Content(
                 label,
                 keyedSamples: partitionedSamples,
             } = partition;
+            if (partitionedSamples.length === 0) {
+                const divider = getDivider(
+                    label,
+                    excludedLabel,
+                    DIVIDER_SHOW,
+                    false,
+                );
+                listItems.push(divider);
+                continue;
+            }
             for (let i = 0; i < partitionedSamples.length; ++i) {
                 const [targetId, sample, rankCurr] = partitionedSamples[i];
                 const rankPrev = targetIdToPrevRank.get(targetId);
