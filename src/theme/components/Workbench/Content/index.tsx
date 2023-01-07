@@ -58,6 +58,25 @@ const formatPercentileRank = (
     return '';
 };
 
+const getDivider = (
+    label: string,
+    excludedLabel: string,
+    partitionIndex: number,
+): JSX.Element | null => {
+    // TODO(dnguyen0304): Fix not showing first percentile divider.
+    if (label === excludedLabel || partitionIndex !== 0) {
+        return null;
+    }
+    return (
+        <StyledDivider
+            key={`${PARTITION_KEY_PREFIX}-${label}`}
+            textAlign='right'
+        >
+            {label}
+        </StyledDivider>
+    );
+};
+
 interface Props {
     readonly keyedSamples: readonly KeyedSample[];
     readonly targetIdToPrevRank: ReadonlyMap<string, number>;
@@ -146,6 +165,7 @@ export default function Content(
                             ] = keyedSample;
                             const rankPrev =
                                 targetIdToPrevRank.get(targetId);
+                            const divider = getDivider(label, excludedLabel, i);
                             return (
                                 <Card
                                     key={`${CARD_KEY_PREFIX}-${targetId}`}
@@ -159,16 +179,7 @@ export default function Content(
                                     showMinute={showMinute}
                                     isHidden={sample.isHidden}
                                 >
-                                    {
-                                        // TODO(dnguyen0304): Fix not showing first percentile divider.
-                                        (label !== excludedLabel && i === 0)
-                                            ? (
-                                                <StyledDivider key={`${PARTITION_KEY_PREFIX}-${label}`} textAlign='right'>
-                                                    {label}
-                                                </StyledDivider>
-                                            )
-                                            : null
-                                    }
+                                    {divider}
                                 </Card>
                             );
                         })}
