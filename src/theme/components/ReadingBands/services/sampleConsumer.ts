@@ -4,7 +4,10 @@ import type {
     RunningTotal,
     StartIntersectionSample
 } from '@docusaurus/plugin-read-time';
-import type { TargetIdToSamples } from '../../../../contexts/samples';
+import type {
+    RunningTotalSample,
+    TargetIdToSamples
+} from '../../../../contexts/samples';
 import { BAND_FRIENDLY_KEYS } from '../config';
 
 // stale closure can't use entry
@@ -57,6 +60,8 @@ export function createUpdateRunningTotals(
         new Map();
 
     return () => {
+        const newTargetIdToSamples: { [key: string]: RunningTotalSample } = {};
+
         for (const [targetId, targetSamples] of samples) {
             for (const [bandKey, bandSamples] of targetSamples) {
                 const runningTotal = getRunningTotal(
@@ -92,25 +97,23 @@ export function createUpdateRunningTotals(
 
                 runningTotal.lastSample = prevSample;
 
-                setTargetIdToSamples(prev => ({
-                    ...prev,
-                    [targetId]: {
-                        target: runningTotal.lastSample!.target,
-                        runningTotal: {
-                            visibleTimeMilli: Array
-                                .from(runningTotals.get(targetId)!.values())
-                                .reduce(
-                                    (accumulator, current) =>
-                                        accumulator + current.visibleTimeMilli,
-                                    0
-                                ),
-                            lastSample: runningTotal.lastSample,
-                        },
+                newTargetIdToSamples[targetId] = {
+                    target: runningTotal.lastSample!.target,
+                    runningTotal: {
+                        visibleTimeMilli: Array
+                            .from(runningTotals.get(targetId)!.values())
+                            .reduce(
+                                (accumulator, current) =>
+                                    accumulator + current.visibleTimeMilli,
+                                0
+                            ),
+                        lastSample: runningTotal.lastSample,
                     },
-                }));
+                };
                 samples.get(targetId)?.set(bandKey, []);
             }
         }
+        setTargetIdToSamples(prev => ({ ...prev, ...newTargetIdToSamples }));
     };
 };
 
