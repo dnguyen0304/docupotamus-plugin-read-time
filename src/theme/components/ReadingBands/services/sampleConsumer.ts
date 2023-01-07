@@ -57,8 +57,8 @@ export function createUpdateRunningTotals(
         new Map();
 
     return () => {
-        for (const [targetId, targetSamples] of samples.entries()) {
-            for (const [bandKey, bandSamples] of targetSamples.entries()) {
+        for (const [targetId, targetSamples] of samples) {
+            for (const [bandKey, bandSamples] of targetSamples) {
                 const runningTotal = getRunningTotal(
                     runningTotals,
                     targetId,
