@@ -93,10 +93,11 @@ export default function ReadingBands(): JSX.Element | null {
                 const range = new Range();
                 range.selectNodeContents(element);
 
-                let selectors: Selector[] = [];
+                const selectors: Selector[] = [];
                 try {
-                    selectors =
-                        new RangeAnchor(rootElement, range).toSelector();
+                    selectors.push(
+                        new RangeAnchor(rootElement, range).toSelector()
+                    );
                 } catch (error) {
                     if (error instanceof RangeError
                         && error.message.includes('Offset exceeds text length')
