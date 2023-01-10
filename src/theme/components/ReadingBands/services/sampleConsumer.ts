@@ -81,9 +81,32 @@ const getLocalStorageKey = (targetId: string, pathname: string): string => {
     return `${pathname}/${targetId}`;
 };
 
-// const getLocalStorage = (): TargetIdToSamples => {
-//     return {};
-// };
+const readLocalStorage = (
+    pathname: string,
+): Map<string, Map<BandFriendlyKey, RunningTotal>> => {
+    const runningTotals = new Map();
+    for (let i = 0; i < localStorage.length; ++i) {
+        const key = localStorage.key(i) || '';
+        if (!key.startsWith(pathname)) {
+            continue;
+        }
+        const entry = localStorage.getItem(key);
+        if (!entry) {
+            continue;
+        }
+        const [targetId, sample] =
+            JSON.parse(entry) as [string, RunningTotalSample];
+        runningTotals.set(
+            targetId,
+            new Map<BandFriendlyKey, RunningTotal>([
+                // TODO(dnguyen0304): Fix using an arbitrary bandKey because of
+                //   data loss.
+                ['B0', sample.runningTotal],
+            ]),
+        );
+    }
+    return runningTotals;
+};
 
 const updateLocalStorage = (
     targetIdToSamples: TargetIdToSamples,
@@ -106,9 +129,8 @@ export const createUpdateRunningTotals = (
         React.Dispatch<React.SetStateAction<TargetIdToSamples>>,
     pathname: string,
 ): () => void => {
-    // setTargetIdToSamples(getLocalStorage())
     const runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>> =
-        new Map();
+        readLocalStorage(pathname);
 
     return () => {
         const newTargetIdToSamples: { [key: string]: RunningTotalSample } = {};
