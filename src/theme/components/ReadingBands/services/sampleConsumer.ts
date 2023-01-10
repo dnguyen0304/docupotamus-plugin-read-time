@@ -10,6 +10,23 @@ import type {
 } from '../../../../contexts/samples';
 import { BAND_FRIENDLY_KEYS } from '../config';
 
+function getRunningTotal(
+    runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>>,
+    targetId: string,
+    bandKey: BandFriendlyKey,
+): RunningTotal {
+    const bandKeyToRunningTotal = runningTotals.get(targetId);
+    if (!bandKeyToRunningTotal) {
+        runningTotals.set(targetId, new Map<BandFriendlyKey, RunningTotal>(
+            [...BAND_FRIENDLY_KEYS].map(bandKey => {
+                return [bandKey, { visibleTimeMilli: 0, lastSample: null }];
+            })
+        ));
+        return runningTotals.get(targetId)!.get(bandKey)!;
+    }
+    return bandKeyToRunningTotal.get(bandKey)!;
+};
+
 // stale closure can't use entry
 function getIntersectionRatio(sample: IntersectionSample): number {
     if (!sample.isIntersecting) {
@@ -118,21 +135,4 @@ export function createUpdateRunningTotals(
         // and a re-render of every Card.
         setTargetIdToSamples(prev => ({ ...prev, ...newTargetIdToSamples }));
     };
-};
-
-function getRunningTotal(
-    runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>>,
-    targetId: string,
-    bandKey: BandFriendlyKey,
-): RunningTotal {
-    const bandKeyToRunningTotal = runningTotals.get(targetId);
-    if (!bandKeyToRunningTotal) {
-        runningTotals.set(targetId, new Map<BandFriendlyKey, RunningTotal>(
-            [...BAND_FRIENDLY_KEYS].map(bandKey => {
-                return [bandKey, { visibleTimeMilli: 0, lastSample: null }];
-            })
-        ));
-        return runningTotals.get(targetId)!.get(bandKey)!;
-    }
-    return bandKeyToRunningTotal.get(bandKey)!;
 };
