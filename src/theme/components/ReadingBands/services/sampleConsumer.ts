@@ -10,11 +10,11 @@ import type {
 } from '../../../../contexts/samples';
 import { BAND_FRIENDLY_KEYS } from '../config';
 
-function getRunningTotal(
+const getRunningTotal = (
     runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>>,
     targetId: string,
     bandKey: BandFriendlyKey,
-): RunningTotal {
+): RunningTotal => {
     const bandKeyToRunningTotal = runningTotals.get(targetId);
     if (!bandKeyToRunningTotal) {
         runningTotals.set(targetId, new Map<BandFriendlyKey, RunningTotal>(
@@ -27,8 +27,7 @@ function getRunningTotal(
     return bandKeyToRunningTotal.get(bandKey)!;
 };
 
-// stale closure can't use entry
-function getIntersectionRatio(sample: IntersectionSample): number {
+const getIntersectionRatio = (sample: IntersectionSample): number => {
     if (!sample.isIntersecting) {
         return 0;
     }
@@ -68,11 +67,11 @@ function getIntersectionRatio(sample: IntersectionSample): number {
 
 // TODO(dnguyen0304): [P1] Fix race condition dropping unprocessed samples due
 //   to unsynchronized reads.
-export function createUpdateRunningTotals(
+export const createUpdateRunningTotals = (
     samples: Map<string, Map<BandFriendlyKey, IntersectionSample[]>>,
     setTargetIdToSamples:
         React.Dispatch<React.SetStateAction<TargetIdToSamples>>,
-): () => void {
+): () => void => {
     const runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>> =
         new Map();
 
