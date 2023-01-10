@@ -66,10 +66,10 @@ const getIntersectionRatio = (sample: IntersectionSample): number => {
 };
 
 const getLocalStorageKey = (
-    locationKey: string,
     targetId: string,
+    pathname: string,
 ): string => {
-    return `${locationKey}-${targetId}`;
+    return `${pathname}-${targetId}`;
 };
 
 // const getLocalStorage = (): TargetIdToSamples => {
@@ -78,12 +78,12 @@ const getLocalStorageKey = (
 
 const updateLocalStorage = (
     targetIdToSamples: TargetIdToSamples,
-    locationKey: string,
+    pathname: string,
 ) => {
     Object.entries(targetIdToSamples).forEach((entry) => {
         const [targetId,] = entry;
         localStorage.setItem(
-            getLocalStorageKey(locationKey, targetId),
+            getLocalStorageKey(targetId, pathname),
             JSON.stringify(entry),
         );
     });
@@ -95,7 +95,7 @@ export const createUpdateRunningTotals = (
     samples: Map<string, Map<BandFriendlyKey, IntersectionSample[]>>,
     setTargetIdToSamples:
         React.Dispatch<React.SetStateAction<TargetIdToSamples>>,
-    locationKey: string,
+    pathname: string,
 ): () => void => {
     // setTargetIdToSamples(getLocalStorage())
     const runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>> =
@@ -160,7 +160,7 @@ export const createUpdateRunningTotals = (
         // and a re-render of every Card.
         setTargetIdToSamples(prev => ({ ...prev, ...newTargetIdToSamples }));
         setTargetIdToSamples(prev => {
-            updateLocalStorage(prev, locationKey);
+            updateLocalStorage(prev, pathname);
             return prev;
         });
     };
