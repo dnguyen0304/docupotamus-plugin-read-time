@@ -65,11 +65,8 @@ const getIntersectionRatio = (sample: IntersectionSample): number => {
     return intersectionRatio;
 };
 
-const getLocalStorageKey = (
-    targetId: string,
-    pathname: string,
-): string => {
-    return `${pathname}-${targetId}`;
+const getLocalStorageKey = (targetId: string, pathname: string): string => {
+    return `${pathname}/${targetId}`;
 };
 
 // const getLocalStorage = (): TargetIdToSamples => {
