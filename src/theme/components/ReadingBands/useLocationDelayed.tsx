@@ -5,7 +5,7 @@ import * as React from 'react';
 export default function useLocationDelayed(
     delayMilli: number,
 ): Location | undefined {
-    const location = useLocation<Location>();
+    const location = useLocation();
 
     const timerId = React.useRef<number>();
     const [delayedLocation, setDelayedLocation] = React.useState<Location>();
