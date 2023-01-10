@@ -74,7 +74,7 @@ export default function ReadingBands(): JSX.Element | null {
     // Produce intersection samples.
     React.useEffect(() => {
         (async () => {
-            if (!locationDelayed?.key) {
+            if (!locationDelayed?.pathname) {
                 return;
             }
             const rootElement = await getElement(contentRootSelector);
@@ -156,15 +156,15 @@ export default function ReadingBands(): JSX.Element | null {
 
     // Consume intersection samples.
     React.useEffect(() => {
-        const locationKey = locationDelayed?.key;
-        if (!locationKey) {
+        const locationPathname = locationDelayed?.pathname;
+        if (!locationPathname) {
             return;
         }
         const intervalId = window.setInterval(
             createUpdateRunningTotals(
                 samples.current,
                 setTargetIdToSamples,
-                locationKey,
+                locationPathname,
             ),
             RUNNING_TOTALS_UPDATE_RATE_MILLI,
         );
