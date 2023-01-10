@@ -85,15 +85,14 @@ export default function ReadingBands(): JSX.Element | null {
 
             for (const element of elements) {
                 const targetId = uuidv4();
+                const selectors: Selector[] = [];
+                const range = new Range();
 
                 // TODO(dnguyen0304): Investigate if a clean up removing the
                 // data-attribute is needed.
                 element.dataset.targetId = targetId;
-
-                const range = new Range();
                 range.selectNodeContents(element);
 
-                const selectors: Selector[] = [];
                 try {
                     selectors.push(
                         new RangeAnchor(rootElement, range).toSelector()
