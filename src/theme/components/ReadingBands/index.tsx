@@ -5,8 +5,8 @@ import type {
     Target
 } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { Buffer } from 'buffer';
 import * as React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
 import { useSamples } from '../../../contexts/samples';
 import { BANDS } from './config';
@@ -74,6 +74,9 @@ export default function ReadingBands(): JSX.Element | null {
     // Produce intersection samples.
     React.useEffect(() => {
         (async () => {
+            if (!locationDelayed?.key) {
+                return;
+            }
             const rootElement = await getElement(contentRootSelector);
             const rootRange = new Range();
             rootRange.selectNodeContents(rootElement);
@@ -84,13 +87,8 @@ export default function ReadingBands(): JSX.Element | null {
                 await getElementAll(contentSelector) as HTMLElement[];
 
             for (const element of elements) {
-                const targetId = uuidv4();
                 const selectors: Selector[] = [];
                 const range = new Range();
-
-                // TODO(dnguyen0304): Investigate if a clean up removing the
-                // data-attribute is needed.
-                element.dataset.targetId = targetId;
                 range.selectNodeContents(element);
 
                 try {
@@ -108,6 +106,14 @@ export default function ReadingBands(): JSX.Element | null {
                         throw error;
                     }
                 }
+
+                const targetId =
+                    Buffer
+                        .from(JSON.stringify(selectors[0]))
+                        .toString('base64');
+                // TODO(dnguyen0304): Investigate if a clean up removing the
+                // data-attribute is needed.
+                element.dataset.targetId = targetId;
 
                 const target: Target = {
                     id: targetId,
@@ -150,8 +156,16 @@ export default function ReadingBands(): JSX.Element | null {
 
     // Consume intersection samples.
     React.useEffect(() => {
+        const locationKey = locationDelayed?.key;
+        if (!locationKey) {
+            return;
+        }
         const intervalId = window.setInterval(
-            createUpdateRunningTotals(samples.current, setTargetIdToSamples),
+            createUpdateRunningTotals(
+                samples.current,
+                setTargetIdToSamples,
+                locationKey,
+            ),
             RUNNING_TOTALS_UPDATE_RATE_MILLI,
         );
         return () => clearInterval(intervalId);

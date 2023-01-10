@@ -65,13 +65,39 @@ const getIntersectionRatio = (sample: IntersectionSample): number => {
     return intersectionRatio;
 };
 
+const getLocalStorageKey = (
+    locationKey: string,
+    targetId: string,
+): string => {
+    return `${locationKey}-${targetId}`;
+};
+
+// const getLocalStorage = (): TargetIdToSamples => {
+//     return {};
+// };
+
+const updateLocalStorage = (
+    targetIdToSamples: TargetIdToSamples,
+    locationKey: string,
+) => {
+    Object.entries(targetIdToSamples).forEach((entry) => {
+        const [targetId,] = entry;
+        localStorage.setItem(
+            getLocalStorageKey(locationKey, targetId),
+            JSON.stringify(entry),
+        );
+    });
+};
+
 // TODO(dnguyen0304): [P1] Fix race condition dropping unprocessed samples due
 //   to unsynchronized reads.
 export const createUpdateRunningTotals = (
     samples: Map<string, Map<BandFriendlyKey, IntersectionSample[]>>,
     setTargetIdToSamples:
         React.Dispatch<React.SetStateAction<TargetIdToSamples>>,
+    locationKey: string,
 ): () => void => {
+    // setTargetIdToSamples(getLocalStorage())
     const runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>> =
         new Map();
 
@@ -133,5 +159,9 @@ export const createUpdateRunningTotals = (
         // entire app because it causes a re-calculation of all running totals
         // and a re-render of every Card.
         setTargetIdToSamples(prev => ({ ...prev, ...newTargetIdToSamples }));
+        setTargetIdToSamples(prev => {
+            updateLocalStorage(prev, locationKey);
+            return prev;
+        });
     };
 };
