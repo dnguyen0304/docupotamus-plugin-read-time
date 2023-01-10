@@ -18,11 +18,23 @@ const getRunningTotal = (
     const bandKeyToRunningTotal = runningTotals.get(targetId);
     if (!bandKeyToRunningTotal) {
         runningTotals.set(targetId, new Map<BandFriendlyKey, RunningTotal>(
+            // Set a fallback for all bandKeys. The targetId was not found so
+            // the corresponding bandKeys are also guaranteed to be not found.
             [...BAND_FRIENDLY_KEYS].map(bandKey => {
                 return [bandKey, { visibleTimeMilli: 0, lastSample: null }];
             })
         ));
         return runningTotals.get(targetId)!.get(bandKey)!;
+    }
+    const runningTotal = bandKeyToRunningTotal.get(bandKey);
+    if (!runningTotal) {
+        // Set a fallback for only the specified bandKey. The targetId was found
+        // so it's possible there are existing runningTotals that should not be
+        // overwritten.
+        bandKeyToRunningTotal.set(
+            bandKey,
+            { visibleTimeMilli: 0, lastSample: null },
+        );
     }
     return bandKeyToRunningTotal.get(bandKey)!;
 };
