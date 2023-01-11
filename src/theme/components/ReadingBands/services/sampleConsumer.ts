@@ -155,17 +155,17 @@ export const createUpdateRunningTotals = (
                         ? bandSamples
                         : bandSamples.slice(1);
 
-                for (const bandSample of remainingSamples) {
+                for (const currSample of remainingSamples) {
                     const prevTimestampMilli = prevSample.timestampMilli;
                     const prevIntersectionRatio =
                         getIntersectionRatio(prevSample);
                     const currVisibleTime =
-                        (bandSample.timestampMilli - prevTimestampMilli)
+                        (currSample.timestampMilli - prevTimestampMilli)
                         * prevIntersectionRatio
-                        * bandSample.band.multiplier;
+                        * currSample.band.multiplier;
                     runningTotal.visibleTimeMilli += currVisibleTime;
 
-                    prevSample = bandSample;
+                    prevSample = currSample;
                 }
 
                 runningTotal.lastSample = prevSample;
