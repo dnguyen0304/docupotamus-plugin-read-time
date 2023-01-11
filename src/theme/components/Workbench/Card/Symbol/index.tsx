@@ -15,6 +15,8 @@ const getSymbol = (length: number): string => {
     return characters.join('');
 };
 
+// This is currently unused.
+// See: https://github.com/dnguyen0304/docusaurus-plugin-read-time/issues/4
 export default function Symbol(): JSX.Element {
     const [symbol, setSymbol] = React.useState<string>('');
 

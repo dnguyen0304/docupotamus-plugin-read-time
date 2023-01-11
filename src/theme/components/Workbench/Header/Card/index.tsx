@@ -2,7 +2,6 @@ import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOu
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import Symbol from '../../Card/Symbol';
 import useElement from '../../hooks/useElement';
 import useHighlight from '../../hooks/useHighlight';
 import usePulse from '../../hooks/usePulse';
@@ -23,7 +22,6 @@ const StyledBox = styled(Box, {
     position: 'relative',  // Create a positioning context for icon.
     backgroundColor: theme.palette.grey[600],
     borderTop: 'var(--space-3xs) solid transparent',
-    fontSize: 'var(--font-size--1)',
     margin: 0,
     transition: 'border-top-color 0.5s ease-in',
     ...(targetIsVisible && {
@@ -79,16 +77,11 @@ export default function Card(
             targetIsVisible={targetIsVisible}
         >
             <Box sx={{
+                fontStyle: 'italic',
                 margin: '0 6px 0 4px',
                 paddingBottom: 'var(--space-2xs-xs)',
             }}>
-                <Symbol />
-                <Box sx={{
-                    fontSize: 'var(--font-size--3)',
-                    fontStyle: 'italic',
-                }}>
-                    {details}
-                </Box>
+                {details}
             </Box>
             <WorkspacePremiumOutlinedIcon sx={{
                 position: 'absolute',
