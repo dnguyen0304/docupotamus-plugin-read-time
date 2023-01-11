@@ -328,7 +328,6 @@ const Partitioned = (): JSX.Element => {
         setTop([...top]);
     }, [targetIdToSamples]);
 
-    // TODO(dnguyen0304): Add real implementation for rank tracking.
     React.useEffect(() => {
         const existingKeys = Array.from(targetIdToPrevRank.current.keys());
         const targetIds = Object.keys(targetIdToSamples);
