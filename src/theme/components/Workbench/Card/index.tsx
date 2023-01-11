@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import type { CSSObject } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import useElement from '../hooks/useElement';
@@ -11,7 +12,7 @@ import Metric from './Metric';
 import Rank from './Rank';
 import Symbol from './Symbol';
 
-const HighlightStyles = {
+const HighlightStyles: CSSObject = {
     // Set the margin-right style on the children li instead of the parent ol to
     // avoid overflow clipping the Delta.
     margin: '0 var(--space-2xs)',
@@ -24,7 +25,7 @@ const HighlightStyles = {
         color: 'black',
         opacity: 1,
     },
-}
+};
 
 interface StyledListItemProps {
     readonly isHidden: boolean;
