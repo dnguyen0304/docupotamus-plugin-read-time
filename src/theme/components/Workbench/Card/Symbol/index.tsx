@@ -4,7 +4,7 @@ import * as React from 'react';
 const SYMBOL_CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const SYMBOL_LENGTH = 3;
 
-// TODO(dnguyen0304): Add real implementation for symbol ("stock ticker").
+// TODO(dnguyen0304): Add symbol ("stock ticker") real implementation.
 // Copied from: https://stackoverflow.com/a/1349426
 const getSymbol = (length: number): string => {
     const characters = [];

@@ -61,7 +61,7 @@ const getClickedClass = (current: number, clicked: number): string => {
     return className ? className : '';
 }
 
-// TODO(dnguyen0304): Add real implementation for border-top color.
+// TODO(dnguyen0304): Replace border-top color temporary placeholder stub.
 const getColor = (index: number): string => {
     switch (index) {
         case 0:
