@@ -7,6 +7,7 @@ import type {
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { Buffer } from 'buffer';
 import * as React from 'react';
+import PageVisibility from 'react-page-visibility';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
 import { useSamples } from '../../../contexts/samples';
 import { getElement } from '../../../services/dom';
@@ -68,7 +69,17 @@ export default function ReadingBands(): JSX.Element | null {
         React.useRef<Map<string, Map<BandFriendlyKey, IntersectionSample[]>>>(
             new Map(),
         );
+    const pageNotVisibleAtMilli =
+        React.useRef<number>(Number.POSITIVE_INFINITY);
+    // TODO(dnguyen0304): Investigate adding memoization.
     const viewportHeight = getViewportHeight();
+
+    const handlePageVisibilityChange = (isVisible: boolean) => {
+        pageNotVisibleAtMilli.current =
+            (isVisible)
+                ? Number.POSITIVE_INFINITY
+                : Date.now();
+    };
 
     // Produce intersection samples.
     React.useEffect(() => {
@@ -163,6 +174,7 @@ export default function ReadingBands(): JSX.Element | null {
             createUpdateRunningTotals(
                 samples.current,
                 setTargetIdToSamples,
+                () => pageNotVisibleAtMilli.current,
                 locationPathname,
             ),
             RUNNING_TOTALS_UPDATE_RATE_MILLI,
@@ -171,37 +183,41 @@ export default function ReadingBands(): JSX.Element | null {
     }, [locationDelayed]);
 
     return (
-        debugBandIsEnabled
-            ? <>
-                {BANDS.map((band, i) => {
-                    const topPx = band.topVh * viewportHeight;
-                    const bottomPx = band.bottomVh * viewportHeight;
-                    const heightPx = bottomPx - topPx;
-                    // TODO(dnguyen0304): Add animation on hover.
-                    return (
-                        <Tooltip
-                            key={band.friendlyKey}
-                            index={i}
-                            topPx={topPx}
-                            bottomPx={bottomPx}
-                        >
-                            <div
-                                className={styles.readingBands}
-                                style={{
-                                    backgroundColor: bandColors[i],
-                                    borderTop:
-                                        (i !== 0)
-                                            ? `${BORDER_HEIGHT_PX}px solid ${BORDER_COLOR}`
-                                            : ''
-                                    ,
-                                    height: `${heightPx}px`,
-                                    top: `${topPx}px`,
-                                }}
-                            />
-                        </Tooltip>
-                    );
-                })}
-            </>
-            : null
+        <PageVisibility onChange={handlePageVisibilityChange}>
+            {
+                debugBandIsEnabled
+                    ? <>
+                        {BANDS.map((band, i) => {
+                            const topPx = band.topVh * viewportHeight;
+                            const bottomPx = band.bottomVh * viewportHeight;
+                            const heightPx = bottomPx - topPx;
+                            // TODO(dnguyen0304): Add animation on hover.
+                            return (
+                                <Tooltip
+                                    key={band.friendlyKey}
+                                    index={i}
+                                    topPx={topPx}
+                                    bottomPx={bottomPx}
+                                >
+                                    <div
+                                        className={styles.readingBands}
+                                        style={{
+                                            backgroundColor: bandColors[i],
+                                            borderTop:
+                                                (i !== 0)
+                                                    ? `${BORDER_HEIGHT_PX}px solid ${BORDER_COLOR}`
+                                                    : ''
+                                            ,
+                                            height: `${heightPx}px`,
+                                            top: `${topPx}px`,
+                                        }}
+                                    />
+                                </Tooltip>
+                            );
+                        })}
+                    </>
+                    : null
+            }
+        </PageVisibility >
     );
 };

@@ -127,6 +127,7 @@ export const createUpdateRunningTotals = (
     samples: Map<string, Map<BandFriendlyKey, IntersectionSample[]>>,
     setTargetIdToSamples:
         React.Dispatch<React.SetStateAction<TargetIdToSamples>>,
+    getPageNotVisibleAtMilli: () => number,
     pathname: string,
 ): () => void => {
     const runningTotals: Map<string, Map<BandFriendlyKey, RunningTotal>> =
@@ -134,6 +135,7 @@ export const createUpdateRunningTotals = (
 
     return () => {
         const newTargetIdToSamples: { [key: string]: RunningTotalSample } = {};
+        const pageNotVisibleAtMill = getPageNotVisibleAtMilli();
 
         for (const [targetId, targetSamples] of samples) {
             for (const [bandKey, bandSamples] of targetSamples) {
@@ -156,6 +158,10 @@ export const createUpdateRunningTotals = (
                         : bandSamples.slice(1);
 
                 for (const currSample of remainingSamples) {
+                    if (currSample.timestampMilli > pageNotVisibleAtMill) {
+                        prevSample = currSample;
+                        continue;
+                    }
                     const prevTimestampMilli = prevSample.timestampMilli;
                     const prevIntersectionRatio =
                         getIntersectionRatio(prevSample);
@@ -164,7 +170,6 @@ export const createUpdateRunningTotals = (
                         * prevIntersectionRatio
                         * currSample.band.multiplier;
                     runningTotal.visibleTimeMilli += currVisibleTime;
-
                     prevSample = currSample;
                 }
 
