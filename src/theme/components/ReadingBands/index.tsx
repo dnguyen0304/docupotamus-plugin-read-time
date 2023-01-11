@@ -146,7 +146,7 @@ export default function ReadingBands(): JSX.Element | null {
                 }
             }
         })();
-        // TODO(dnguyen0304): Add real implemention for observer.disconnect().
+        // TODO(dnguyen0304): Add observer.disconnect real implemention.
         return () => {
             setTargetIdToSamples({});
             samples.current = new Map();
@@ -177,7 +177,7 @@ export default function ReadingBands(): JSX.Element | null {
                     const topPx = band.topVh * viewportHeight;
                     const bottomPx = band.bottomVh * viewportHeight;
                     const heightPx = bottomPx - topPx;
-                    // TODO(dnguyen0304): Support animation on hover.
+                    // TODO(dnguyen0304): Add animation on hover.
                     return (
                         <Tooltip
                             key={band.friendlyKey}
