@@ -10,7 +10,6 @@ import { Card as CardStyles } from '../styles';
 import { CardProps } from '../types';
 import Metric from './Metric';
 import Rank from './Rank';
-import Symbol from './Symbol';
 
 const HighlightStyles: CSSObject = {
     // Set the margin-right style on the children li instead of the parent ol to
@@ -89,10 +88,7 @@ export default function Card(
                 width: '65%',
                 margin: '0 6px 0 4px',
             }}>
-                <Symbol />
-                <Box sx={{ fontSize: 'var(--font-size--3)' }}>
-                    {details}
-                </Box>
+                {details}
             </Box>
             <Metric
                 readTimeSecond={readTimeSecond}
