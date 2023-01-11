@@ -1,6 +1,6 @@
 {
     "name": "@docupotamus/docusaurus-plugin-read-time",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Docusaurus read time plugin.",
     "main": "lib/index.js",
     "types": "src/docusaurus-plugin-read-time.d.ts",
