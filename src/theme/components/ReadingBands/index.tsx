@@ -9,12 +9,10 @@ import { Buffer } from 'buffer';
 import * as React from 'react';
 import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../constants';
 import { useSamples } from '../../../contexts/samples';
-import { BANDS } from './config';
-import useLocationDelayed from './useLocationDelayed';
-// TODO(dnguyen0304): Fix missing module declaration.
 import { getElement } from '../../../services/dom';
 import { observeVisibility } from '../../../services/visibility';
-import { RangeAnchor } from './services/annotator/anchoring/types';
+import { BANDS } from './config';
+import { RangeAnchor } from './services/annotator/anchoring/types'; // TODO(dnguyen0304): Fix missing module declaration.
 import {
     getElementAll,
     getSnippet,
@@ -24,6 +22,7 @@ import { createUpdateRunningTotals } from './services/sampleConsumer';
 import { createOnVisibilityChange } from './services/sampleProducer';
 import styles from './styles.module.css';
 import Tooltip from './Tooltip';
+import useLocationDelayed from './useLocationDelayed';
 
 // There is a race condition:
 //   (1) The user navigates to a new page.
