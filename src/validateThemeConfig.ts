@@ -13,7 +13,7 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
     contentSelector: `${CONTENT_ROOT_SELECTOR} > p`,
     workbenchIsOpen: false,
     percentile: {
-        ranks: [50, 75],
+        ranks: [25, 50],
         style: 'full-lower',
     },
     debug: {
