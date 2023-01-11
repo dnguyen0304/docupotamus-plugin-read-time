@@ -10,7 +10,7 @@ const CONTENT_ROOT_SELECTOR: string =
 
 const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
     contentRootSelector: CONTENT_ROOT_SELECTOR,
-    contentSelector: `${CONTENT_ROOT_SELECTOR} > *`,
+    contentSelector: `${CONTENT_ROOT_SELECTOR} > p`,
     workbenchIsOpen: false,
     percentile: {
         ranks: [50, 75],
