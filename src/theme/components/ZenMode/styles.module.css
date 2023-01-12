@@ -1,3 +1,15 @@
+.clippingBox > h1.chunk__active {
+    font-size: var(--step-5);
+}
+
+.clippingBox > h2.chunk__active {
+    font-size: var(--step-4);
+}
+
+.clippingBox > h3.chunk__active {
+    font-size: var(--step-3);
+}
+
 .chunk__active {
     /* TODO(dnguyen0304): Investigate changing to zeroed positioning. */
     width: 100%;

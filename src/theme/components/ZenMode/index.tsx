@@ -90,7 +90,10 @@ export default function ZenMode(
             disableAutoFocus
         >
             <StyledBox>
-                <ClippingBox ref={handleRefChange}>
+                <ClippingBox
+                    className={styles.clippingBox}
+                    ref={handleRefChange}
+                >
                     <MDXContent>{children}</MDXContent>
                 </ClippingBox>
             </StyledBox>
