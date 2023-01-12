@@ -41,7 +41,7 @@ const ClippingBox = styled(Box)({
     width: CLIPPING_BOX_SIZE,
     height: CLIPPING_BOX_SIZE,
     overflow: 'scroll',
-    // backgroundColor: 'red',
+    // border: '1px solid red',
 });
 
 interface Props {
