@@ -18,13 +18,14 @@ const StyledModal = styled(Modal)(({ theme }) => ({
 const StyledBox = styled(Box)({
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
-    minHeight: '40%',
+    height: '40%',
     borderRadius: '1rem',
     boxShadow: `
-        5px 5px 10px 0 rgb(0 0 0 / 5%),
-        10px 10px 20px 0 rgb(0 0 0 / 5%),
-        20px 20px 40px 0 rgb(0 0 0 / 5%),
-        40px 40px 80px 0 rgb(0 0 0 / 5%)`,
+    5px 5px 10px 0 rgb(0 0 0 / 5%),
+    10px 10px 20px 0 rgb(0 0 0 / 5%),
+    20px 20px 40px 0 rgb(0 0 0 / 5%),
+    40px 40px 80px 0 rgb(0 0 0 / 5%)`,
+    overflow: 'hidden',
 });
 
 interface Props {
