@@ -20,7 +20,7 @@ const StyledBox = styled(Box)({
     placeItems: 'center',
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
-    height: '40%',
+    height: '60%',
     borderRadius: '1rem',
     boxShadow: `
         5px 5px 10px 0 rgb(0 0 0 / 5%),
