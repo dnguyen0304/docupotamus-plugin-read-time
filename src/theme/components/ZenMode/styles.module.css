@@ -1,4 +1,7 @@
 .chunk__active {
+    /* TODO(dnguyen0304): Investigate changing to zeroed positioning. */
+    width: 100%;
+    height: 100%;
 }
 
 .chunk__notActive {

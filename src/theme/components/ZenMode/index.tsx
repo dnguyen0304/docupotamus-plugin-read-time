@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const StyledModal = styled(Modal)(({ theme }) => ({
     display: 'grid',
     // Modal adds an empty "sentinel" element before and after the children.
-    gridTemplateRows: '0 1fr 0',
+    gridTemplateRows: '0 100vh 0',
     placeItems: 'center',
     '& .MuiBackdrop-root': {
         backgroundColor: theme.palette.background.paper,
@@ -16,16 +16,32 @@ const StyledModal = styled(Modal)(({ theme }) => ({
 }));
 
 const StyledBox = styled(Box)({
+    display: 'grid',
+    placeItems: 'center',
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
     height: '40%',
     borderRadius: '1rem',
     boxShadow: `
-    5px 5px 10px 0 rgb(0 0 0 / 5%),
-    10px 10px 20px 0 rgb(0 0 0 / 5%),
-    20px 20px 40px 0 rgb(0 0 0 / 5%),
-    40px 40px 80px 0 rgb(0 0 0 / 5%)`,
-    overflow: 'hidden',
+        5px 5px 10px 0 rgb(0 0 0 / 5%),
+        10px 10px 20px 0 rgb(0 0 0 / 5%),
+        20px 20px 40px 0 rgb(0 0 0 / 5%),
+        40px 40px 80px 0 rgb(0 0 0 / 5%)`,
+});
+
+// Set the size with a calc "simulating" the parent's padding because otherwise
+// overflow: hidden would be broken.
+// Clamp from 320px at 16px to 2560px at 130px.
+const CLIPPING_BOX_SIZE: React.CSSProperties['width'] = `calc(
+    100%
+    - 2 * clamp(1rem, -0.017857142857142794rem + 5.089285714285714vw, 8.125rem)
+)`;
+
+const ClippingBox = styled(Box)({
+    width: CLIPPING_BOX_SIZE,
+    height: CLIPPING_BOX_SIZE,
+    overflow: 'scroll',
+    // backgroundColor: 'red',
 });
 
 interface Props {
@@ -73,8 +89,10 @@ export default function ZenMode(
             // See: https://github.com/mui/material-ui/issues/11504#issuecomment-390506409
             disableAutoFocus
         >
-            <StyledBox ref={handleRefChange}>
-                <MDXContent>{children}</MDXContent>
+            <StyledBox>
+                <ClippingBox ref={handleRefChange}>
+                    <MDXContent>{children}</MDXContent>
+                </ClippingBox>
             </StyledBox>
         </StyledModal>
     );
