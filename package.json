@@ -39,6 +39,7 @@
         "node": ">=16.14"
     },
     "scripts": {
+        "prepare": "npm run build",
         "build": "docusaurus-plugin build",
         "watch": "docusaurus-plugin watch"
     },
