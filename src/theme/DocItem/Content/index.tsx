@@ -10,7 +10,9 @@ export default function ContentWrapper(props: Props): JSX.Element {
     return (
         <>
             <Content {...props} />
-            <ZenMode />
+            <ZenMode>
+                {props.children}
+            </ZenMode>
         </>
     );
 };

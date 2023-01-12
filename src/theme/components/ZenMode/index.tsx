@@ -1,7 +1,9 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
+import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
+import styles from './styles.module.css';
 
 const StyledModal = styled(Modal)(({ theme }) => ({
     display: 'grid',
@@ -25,9 +27,42 @@ const StyledBox = styled(Box)({
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
 });
 
-export default function ZenMode(): JSX.Element {
+interface Props {
+    children: React.ReactNode;
+};
+
+export default function ZenMode(
+    {
+        children,
+    }: Props,
+): JSX.Element {
     // TODO(dnguyen0304): Remove development code.
     const [isOpen, setIsOpen] = React.useState<boolean>(true);
+    // TODO(dnguyen0304): Change active chunk default based on visibility.
+    const [activeChunkIndex] = React.useState<number>(0);
+    const chunksRef = React.useRef<Element[]>([]);
+
+    // See: https://stackoverflow.com/a/60066291
+    const handleRefChange = React.useCallback<(node: HTMLDivElement) => void>(
+        node => {
+            if (node === null) {
+                return;
+            }
+            if (chunksRef.current.length !== 0) {
+                return;
+            }
+            chunksRef.current = [...node.children];
+            const chunks = chunksRef.current;
+            for (let i = 0; i < chunks.length; ++i) {
+                if (i === activeChunkIndex) {
+                    chunks[i].classList.toggle(styles.chunk__active);
+                } else {
+                    chunks[i].classList.toggle(styles.chunk__notActive);
+                }
+            }
+        },
+        [activeChunkIndex],
+    );
 
     return (
         <StyledModal
@@ -37,10 +72,8 @@ export default function ZenMode(): JSX.Element {
             // See: https://github.com/mui/material-ui/issues/11504#issuecomment-390506409
             disableAutoFocus
         >
-            <StyledBox>
-                {/* TODO(dnguyen0304): Remove development code. */}
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices ligula et augue lacinia, eu scelerisque justo consequat. Praesent mollis metus et aliquam accumsan. Phasellus at urna felis. Aliquam elementum lobortis nisi at bibendum. Cras tincidunt, urna sed aliquam mollis, velit eros feugiat ipsum, eget tincidunt ante est quis odio. Aenean et imperdiet risus, nec accumsan dolor. Phasellus massa mi, pulvinar id nunc vel, porta porta metus. Sed mi dolor, convallis eget vestibulum quis, facilisis ac leo. Curabitur dignissim consequat velit.</p>
-                <p>Duis sed auctor magna. Maecenas consequat mi ac fringilla facilisis. Curabitur tempor sapien ac dignissim consequat. Sed pellentesque ligula tortor, sed ullamcorper velit auctor nec. Praesent congue nunc et risus pretium, eu convallis velit dignissim. Praesent nulla tortor, lobortis sit amet tellus vel, laoreet placerat nulla. Fusce vel magna id orci ullamcorper sodales. Phasellus sit amet maximus quam. Sed volutpat mattis nibh, eget auctor purus molestie eu.</p>
+            <StyledBox ref={handleRefChange}>
+                <MDXContent>{children}</MDXContent>
             </StyledBox>
         </StyledModal>
     );
