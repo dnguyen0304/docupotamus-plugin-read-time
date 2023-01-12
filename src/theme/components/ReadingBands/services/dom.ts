@@ -43,7 +43,7 @@ interface SubsetHTMLElement extends Pick<
 > { };
 
 // TODO(dnguyen0304): Investigate refactoring to text-overflow: ellipsis style.
-export function getSnippet(element: SubsetHTMLElement): string {
+export const getSnippet = (element: SubsetHTMLElement): string => {
     const text = element.innerText || element.textContent;
     if (!text) {
         return '';
