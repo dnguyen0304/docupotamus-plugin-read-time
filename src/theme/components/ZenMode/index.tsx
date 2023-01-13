@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
-import MDXContent from '@theme/MDXContent';
+// import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
 import ContentFocus from './ContentFocus';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
 const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
@@ -75,10 +75,10 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout onClick={() => setIsOpen(false)}>
-                <ContentFull className={styles.scrollbar__hidden}>
+                {/* <ContentFull className={styles.scrollbar__hidden}>
                     <MDXContent>{children}</MDXContent>
                 </ContentFull>
-                <Glass />
+                <Glass /> */}
                 <ContentFocus sx={{ zIndex: Z_INDEX_CONTENT_FOCUS }}>
                     {children}
                 </ContentFocus>
