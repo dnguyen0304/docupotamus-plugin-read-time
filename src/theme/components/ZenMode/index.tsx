@@ -10,6 +10,7 @@ const StyledModal = styled(Modal)(({ theme }) => ({
     // Modal adds an empty "sentinel" element before and after the children.
     gridTemplateRows: '0 100vh 0',
     placeItems: 'center',
+    // overflowY: 'scroll',
     '& .MuiBackdrop-root': {
         backgroundColor: theme.palette.background.paper,
     },
@@ -90,6 +91,7 @@ export default function ZenMode(
 
     return (
         <StyledModal
+            // className={`${styles.scrollbar__hidden}`}
             onClose={() => setIsOpen(false)}
             open={isOpen}
             // Override the default Chrome outline behavior.
@@ -103,7 +105,7 @@ export default function ZenMode(
             </OverlappingLayout>
             {/* <StyledBox>
                 <Box
-                    className={styles.clippingBox}
+                    className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
                     ref={handleRefChange}
                 >
                     <MDXContent>{children}</MDXContent>
