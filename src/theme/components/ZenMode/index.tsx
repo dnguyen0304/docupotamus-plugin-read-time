@@ -47,7 +47,8 @@ const Glass = styled(Box)({
 const ContentFocus = styled(Box)(({ theme }) => ({
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
-    height: '60%',
+    // TODO(dnguyen0304): Investigate why using a percentage does not work.
+    height: '60vh',
     display: 'grid',
     placeItems: 'center',
     alignSelf: 'center',
@@ -120,14 +121,17 @@ export default function ZenMode(
                     <MDXContent>{children}</MDXContent>
                 </ContentFull>
                 <Glass />
-                <ContentFocus />
+                <ContentFocus>
+                    <Box
+                        className={
+                            `${styles.clippingBox} ${styles.scrollbar__hidden}`
+                        }
+                        ref={handleRefChange}
+                    >
+                        <MDXContent>{children}</MDXContent>
+                    </Box>
+                </ContentFocus>
             </OverlappingLayout>
-            {/* <Box
-                    className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
-                    ref={handleRefChange}
-                >
-                    <MDXContent>{children}</MDXContent>
-                </Box> */}
         </StyledModal>
     );
 };
