@@ -48,6 +48,7 @@ const ContentFocus = styled(Box)(({ theme }) => ({
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
     height: '60%',
+    alignSelf: 'center',
     backgroundColor: theme.palette.background.paper,
     borderRadius: '1rem',
     boxShadow: `
