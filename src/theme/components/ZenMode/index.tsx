@@ -41,7 +41,7 @@ export default function ZenMode(
     // TODO(dnguyen0304): Remove development code.
     const [isOpen, setIsOpen] = React.useState<boolean>(true);
     // TODO(dnguyen0304): Change active chunk default based on visibility.
-    const [activeChunkIndex] = React.useState<number>(0);
+    // const [activeChunkIndex] = React.useState<number>(0);
     const chunksRef = React.useRef<Element[]>([]);
 
     // See: https://stackoverflow.com/a/60066291
@@ -57,14 +57,15 @@ export default function ZenMode(
             const chunks = chunksRef.current;
             for (let i = 0; i < chunks.length; ++i) {
                 chunks[i].classList.toggle(styles.chunk);
-                if (i === activeChunkIndex) {
-                    chunks[i].classList.toggle(styles.chunk__active);
-                } else {
-                    chunks[i].classList.toggle(styles.chunk__notActive);
-                }
+                // if (i === activeChunkIndex) {
+                //     chunks[i].classList.toggle(styles.chunk__active);
+                // } else {
+                //     chunks[i].classList.toggle(styles.chunk__notActive);
+                // }
             }
         },
-        [activeChunkIndex],
+        // [activeChunkIndex],
+        [],
     );
 
     return (
