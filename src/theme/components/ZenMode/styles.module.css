@@ -1,3 +1,9 @@
+.clippingBox {
+    /* border: 1px solid red; */
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
 .clippingBox > h1.chunk__active {
     font-size: var(--step-5);
 }

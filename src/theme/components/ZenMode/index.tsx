@@ -40,9 +40,6 @@ const CLIPPING_BOX_SIZE: React.CSSProperties['width'] = `calc(
 const ClippingBox = styled(Box)({
     width: CLIPPING_BOX_SIZE,
     height: CLIPPING_BOX_SIZE,
-    overflowY: 'scroll',
-    scrollSnapType: 'y mandatory',
-    // border: '1px solid red',
 });
 
 interface Props {
