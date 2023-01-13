@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import { styled, SxProps, Theme } from '@mui/material/styles';
 import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 const StyledBox = styled(Box)(({ theme }) => ({
     // TODO(dnguyen0304): Fix missing responsive design.
