@@ -5,8 +5,8 @@ import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
 import styles from './styles.module.css';
 
-const Z_INDEX_CONTENT: React.CSSProperties['zIndex'] = 1;
-const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT + 1;
+const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
+const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
 const Z_INDEX_FOCUS: React.CSSProperties['zIndex'] = Z_INDEX_GLASS + 1;
 
 const StyledModal = styled(Modal)(({ theme }) => ({
@@ -28,9 +28,9 @@ const OverlappingLayout = styled(Box)({
     },
 });
 
-const Content = styled(Box)({
+const ContentFull = styled(Box)({
     padding: '50vh 0',
-    zIndex: Z_INDEX_CONTENT,
+    zIndex: Z_INDEX_CONTENT_FULL,
 });
 
 const Glass = styled(Box)({
@@ -112,9 +112,9 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout onClick={() => setIsOpen(false)}>
-                <Content>
+                <ContentFull>
                     <MDXContent>{children}</MDXContent>
-                </Content>
+                </ContentFull>
                 <Glass />
                 <StyledBox />
             </OverlappingLayout>
