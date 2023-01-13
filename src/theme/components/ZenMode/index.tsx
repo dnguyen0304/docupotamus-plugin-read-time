@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
 const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
-const Z_INDEX_FOCUS: React.CSSProperties['zIndex'] = Z_INDEX_GLASS + 1;
+const Z_INDEX_CONTENT_FOCUS: React.CSSProperties['zIndex'] = Z_INDEX_GLASS + 1;
 
 const StyledModal = styled(Modal)(({ theme }) => ({
     // This is needed because the MUI root class sets sizing.
@@ -41,7 +41,7 @@ const Glass = styled(Box)({
     zIndex: Z_INDEX_GLASS,
 });
 
-const StyledBox = styled(Box)({
+const ContentFocus = styled(Box)({
     display: 'grid',
     placeItems: 'center',
     // TODO(dnguyen0304): Fix missing responsive design.
@@ -53,7 +53,7 @@ const StyledBox = styled(Box)({
         10px 10px 20px 0 rgb(0 0 0 / 5%),
         20px 20px 40px 0 rgb(0 0 0 / 5%),
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
-    zIndex: Z_INDEX_FOCUS,
+    zIndex: Z_INDEX_CONTENT_FOCUS,
 });
 
 // TODO(dnguyen0304): Remove development code.
@@ -116,7 +116,7 @@ export default function ZenMode(
                     <MDXContent>{children}</MDXContent>
                 </ContentFull>
                 <Glass />
-                <StyledBox />
+                <ContentFocus />
             </OverlappingLayout>
             {/* <Box
                     className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
