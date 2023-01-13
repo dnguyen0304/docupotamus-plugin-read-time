@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
-import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
 import styles from './styles.module.css';
 
@@ -14,6 +13,16 @@ const StyledModal = styled(Modal)(({ theme }) => ({
         backgroundColor: theme.palette.background.paper,
     },
 }));
+
+const OverlappingLayout = styled(Box)({
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    placeItems: 'center',
+    '& > *': {
+        gridColumnStart: 1,
+        gridRowStart: 1,
+    },
+});
 
 const StyledBox = styled(Box)({
     display: 'grid',
@@ -76,14 +85,16 @@ export default function ZenMode(
             // See: https://github.com/mui/material-ui/issues/11504#issuecomment-390506409
             disableAutoFocus
         >
-            <StyledBox>
+            <OverlappingLayout>
+            </OverlappingLayout>
+            {/* <StyledBox>
                 <Box
                     className={styles.clippingBox}
                     ref={handleRefChange}
                 >
                     <MDXContent>{children}</MDXContent>
                 </Box>
-            </StyledBox>
+            </StyledBox> */}
         </StyledModal>
     );
 };
