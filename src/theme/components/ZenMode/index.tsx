@@ -9,6 +9,7 @@ const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
 const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
 const Z_INDEX_CONTENT_FOCUS: React.CSSProperties['zIndex'] = Z_INDEX_GLASS + 1;
 
+// TODO(dnguyen0304): Fix confusing intrinsic sizing.
 const StyledModal = styled(Modal)(({ theme }) => ({
     '& .MuiBackdrop-root': {
         backgroundColor: theme.palette.background.paper,
