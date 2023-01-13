@@ -40,7 +40,8 @@ const CLIPPING_BOX_SIZE: React.CSSProperties['width'] = `calc(
 const ClippingBox = styled(Box)({
     width: CLIPPING_BOX_SIZE,
     height: CLIPPING_BOX_SIZE,
-    overflow: 'scroll',
+    overflowY: 'scroll',
+    scrollSnapType: 'y mandatory',
     // border: '1px solid red',
 });
 
@@ -71,6 +72,7 @@ export default function ZenMode(
             chunksRef.current = [...node.children];
             const chunks = chunksRef.current;
             for (let i = 0; i < chunks.length; ++i) {
+                chunks[i].classList.toggle(styles.chunk);
                 if (i === activeChunkIndex) {
                     chunks[i].classList.toggle(styles.chunk__active);
                 } else {
