@@ -11,7 +11,7 @@
     width: var(--size);
     height: var(--size);
     /* border: 1px solid red; */
-    overflow-y: scroll;
+    overflow-y: auto;
     scroll-snap-type: y mandatory;
 }
 
