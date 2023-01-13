@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
-// import MDXContent from '@theme/MDXContent';
+import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
 import styles from './styles.module.css';
 
@@ -10,7 +10,7 @@ const StyledModal = styled(Modal)(({ theme }) => ({
     // Modal adds an empty "sentinel" element before and after the children.
     gridTemplateRows: '0 100vh 0',
     placeItems: 'center',
-    // overflowY: 'scroll',
+    overflowY: 'scroll',
     '& .MuiBackdrop-root': {
         backgroundColor: theme.palette.background.paper,
     },
@@ -91,7 +91,7 @@ export default function ZenMode(
 
     return (
         <StyledModal
-            // className={`${styles.scrollbar__hidden}`}
+            className={styles.scrollbar__hidden}
             onClose={() => setIsOpen(false)}
             open={isOpen}
             // Override the default Chrome outline behavior.
@@ -99,9 +99,9 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout>
-                {/* <div>
+                <Box>
                     <MDXContent>{children}</MDXContent>
-                </div> */}
+                </Box>
             </OverlappingLayout>
             {/* <StyledBox>
                 <Box
