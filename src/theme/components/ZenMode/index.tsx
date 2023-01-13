@@ -6,10 +6,7 @@ import * as React from 'react';
 import styles from './styles.module.css';
 
 const StyledModal = styled(Modal)(({ theme }) => ({
-    display: 'grid',
-    // Modal adds an empty "sentinel" element before and after the children.
-    gridTemplateRows: '0 100vh 0',
-    placeItems: 'center',
+    // This is needed because the MUI root class sets sizing.
     overflowY: 'scroll',
     '& .MuiBackdrop-root': {
         backgroundColor: theme.palette.background.paper,
