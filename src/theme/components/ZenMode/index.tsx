@@ -28,6 +28,12 @@ const Content = styled(Box)({
     padding: '50vh 0',
 });
 
+const Glass = styled(Box)({
+    width: '100%',
+    maxHeight: '100vh',
+    // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+});
+
 const StyledBox = styled(Box)({
     display: 'grid',
     placeItems: 'center',
@@ -101,6 +107,7 @@ export default function ZenMode(
                 <Content>
                     <MDXContent>{children}</MDXContent>
                 </Content>
+                <Glass />
             </OverlappingLayout>
             {/* <StyledBox>
                 <Box
