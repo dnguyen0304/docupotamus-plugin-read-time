@@ -5,6 +5,10 @@ import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
 import styles from './styles.module.css';
 
+const Z_INDEX_CONTENT: React.CSSProperties['zIndex'] = 1;
+const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT + 1;
+const Z_INDEX_FOCUS: React.CSSProperties['zIndex'] = Z_INDEX_GLASS + 1;
+
 const StyledModal = styled(Modal)(({ theme }) => ({
     // This is needed because the MUI root class sets sizing.
     overflowY: 'scroll',
@@ -26,6 +30,7 @@ const OverlappingLayout = styled(Box)({
 
 const Content = styled(Box)({
     padding: '50vh 0',
+    zIndex: Z_INDEX_CONTENT,
 });
 
 const Glass = styled(Box)({
@@ -33,6 +38,7 @@ const Glass = styled(Box)({
     backdropFilter: 'blur(3px) saturate(30%)',
     '-webkitBackdropFilter': 'blur(3px) saturate(30%)',
     backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    zIndex: Z_INDEX_GLASS,
 });
 
 const StyledBox = styled(Box)({
@@ -40,13 +46,14 @@ const StyledBox = styled(Box)({
     placeItems: 'center',
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
-    height: '60%',
+    height: '60vh',
     borderRadius: '1rem',
     boxShadow: `
         5px 5px 10px 0 rgb(0 0 0 / 5%),
         10px 10px 20px 0 rgb(0 0 0 / 5%),
         20px 20px 40px 0 rgb(0 0 0 / 5%),
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
+    zIndex: Z_INDEX_FOCUS,
 });
 
 // TODO(dnguyen0304): Remove development code.
@@ -109,15 +116,14 @@ export default function ZenMode(
                     <MDXContent>{children}</MDXContent>
                 </Content>
                 <Glass />
+                <StyledBox />
             </OverlappingLayout>
-            {/* <StyledBox>
-                <Box
+            {/* <Box
                     className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
                     ref={handleRefChange}
                 >
                     <MDXContent>{children}</MDXContent>
-                </Box>
-            </StyledBox> */}
+                </Box> */}
         </StyledModal>
     );
 };
