@@ -3,6 +3,7 @@ import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
+import ContentFocus from './ContentFocus';
 import styles from './styles.module.css';
 
 const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
@@ -44,24 +45,6 @@ const Glass = styled(Box)({
     zIndex: Z_INDEX_GLASS,
 });
 
-const ContentFocus = styled(Box)(({ theme }) => ({
-    // TODO(dnguyen0304): Fix missing responsive design.
-    width: '60%',
-    // TODO(dnguyen0304): Investigate why using a percentage does not work.
-    height: '60vh',
-    display: 'grid',
-    placeItems: 'center',
-    alignSelf: 'center',
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: '1rem',
-    boxShadow: `
-        5px 5px 10px 0 rgb(0 0 0 / 5%),
-        10px 10px 20px 0 rgb(0 0 0 / 5%),
-        20px 20px 40px 0 rgb(0 0 0 / 5%),
-        40px 40px 80px 0 rgb(0 0 0 / 5%)`,
-    zIndex: Z_INDEX_CONTENT_FOCUS,
-}));
-
 // TODO(dnguyen0304): Remove development code.
 const DebugBox = styled(Box)({
     width: '10px',
@@ -83,31 +66,6 @@ export default function ZenMode(
     const [isOpen, setIsOpen] = React.useState<boolean>(true);
     // TODO(dnguyen0304): Change active chunk default based on visibility.
     // const [activeChunkIndex] = React.useState<number>(0);
-    const chunksRef = React.useRef<Element[]>([]);
-
-    // See: https://stackoverflow.com/a/60066291
-    const handleRefChange = React.useCallback<(node: HTMLDivElement) => void>(
-        node => {
-            if (node === null) {
-                return;
-            }
-            if (chunksRef.current.length !== 0) {
-                return;
-            }
-            chunksRef.current = [...node.children];
-            const chunks = chunksRef.current;
-            for (let i = 0; i < chunks.length; ++i) {
-                chunks[i].classList.toggle(styles.chunk);
-                // if (i === activeChunkIndex) {
-                //     chunks[i].classList.toggle(styles.chunk__active);
-                // } else {
-                //     chunks[i].classList.toggle(styles.chunk__notActive);
-                // }
-            }
-        },
-        // [activeChunkIndex],
-        [],
-    );
 
     return (
         <StyledModal
@@ -121,15 +79,8 @@ export default function ZenMode(
                     <MDXContent>{children}</MDXContent>
                 </ContentFull>
                 <Glass />
-                <ContentFocus>
-                    <Box
-                        className={
-                            `${styles.clippingBox} ${styles.scrollbar__hidden}`
-                        }
-                        ref={handleRefChange}
-                    >
-                        <MDXContent>{children}</MDXContent>
-                    </Box>
+                <ContentFocus sx={{ zIndex: Z_INDEX_CONTENT_FOCUS }}>
+                    {children}
                 </ContentFocus>
             </OverlappingLayout>
         </StyledModal>
