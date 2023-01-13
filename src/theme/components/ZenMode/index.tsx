@@ -41,12 +41,13 @@ const Glass = styled(Box)({
     zIndex: Z_INDEX_GLASS,
 });
 
-const ContentFocus = styled(Box)({
+const ContentFocus = styled(Box)(({theme}) => ({
     display: 'grid',
     placeItems: 'center',
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
     height: '60vh',
+    backgroundColor: theme.palette.background.paper,
     borderRadius: '1rem',
     boxShadow: `
         5px 5px 10px 0 rgb(0 0 0 / 5%),
@@ -54,7 +55,7 @@ const ContentFocus = styled(Box)({
         20px 20px 40px 0 rgb(0 0 0 / 5%),
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
     zIndex: Z_INDEX_CONTENT_FOCUS,
-});
+}));
 
 // TODO(dnguyen0304): Remove development code.
 const DebugBox = styled(Box)({
