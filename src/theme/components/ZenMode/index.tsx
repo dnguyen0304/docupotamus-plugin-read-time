@@ -10,15 +10,13 @@ const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
 const Z_INDEX_CONTENT_FOCUS: React.CSSProperties['zIndex'] = Z_INDEX_GLASS + 1;
 
 const StyledModal = styled(Modal)(({ theme }) => ({
-    // This is needed because the MUI root class sets sizing.
-    overflowY: 'scroll',
     '& .MuiBackdrop-root': {
         backgroundColor: theme.palette.background.paper,
     },
 }));
 
 const OverlappingLayout = styled(Box)({
-    // minHeight: '100%',
+    height: '100vh',
     display: 'grid',
     gridTemplateColumns: '1fr',
     justifyItems: 'center',
@@ -29,6 +27,8 @@ const OverlappingLayout = styled(Box)({
 });
 
 const ContentFull = styled(Box)({
+    height: '100%',
+    overflowY: 'scroll',
     padding: '50vh 0',
     zIndex: Z_INDEX_CONTENT_FULL,
 });
@@ -41,12 +41,12 @@ const Glass = styled(Box)({
     zIndex: Z_INDEX_GLASS,
 });
 
-const ContentFocus = styled(Box)(({theme}) => ({
+const ContentFocus = styled(Box)(({ theme }) => ({
     display: 'grid',
     placeItems: 'center',
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
-    height: '60vh',
+    height: '60%',
     backgroundColor: theme.palette.background.paper,
     borderRadius: '1rem',
     boxShadow: `
@@ -106,14 +106,13 @@ export default function ZenMode(
 
     return (
         <StyledModal
-            className={styles.scrollbar__hidden}
             open={isOpen}
             // Override the default Chrome outline behavior.
             // See: https://github.com/mui/material-ui/issues/11504#issuecomment-390506409
             disableAutoFocus
         >
             <OverlappingLayout onClick={() => setIsOpen(false)}>
-                <ContentFull>
+                <ContentFull className={styles.scrollbar__hidden}>
                     <MDXContent>{children}</MDXContent>
                 </ContentFull>
                 <Glass />
