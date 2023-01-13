@@ -15,6 +15,15 @@
     scroll-snap-type: y mandatory;
 }
 
+.clippingBox {
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.clippingBox::-webkit-scrollbar { /* WebKit */
+    display: none;  /* Chrome and Safari */
+}
+
 .clippingBox > h1.chunk__active {
     font-size: var(--step-5);
 }
