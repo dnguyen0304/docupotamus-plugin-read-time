@@ -41,6 +41,14 @@ const StyledBox = styled(Box)({
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
 });
 
+// TODO(dnguyen0304): Remove development code.
+const DebugBox = styled(Box)({
+    width: '10px',
+    height: '10px',
+    backgroundColor: 'red',
+    zIndex: 10,
+});
+
 interface Props {
     children: React.ReactNode;
 };
@@ -89,6 +97,9 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout>
+                {/* <div>
+                    <MDXContent>{children}</MDXContent>
+                </div> */}
             </OverlappingLayout>
             {/* <StyledBox>
                 <Box
