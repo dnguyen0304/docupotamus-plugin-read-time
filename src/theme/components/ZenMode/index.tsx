@@ -30,8 +30,9 @@ const Content = styled(Box)({
 
 const Glass = styled(Box)({
     width: '100%',
-    maxHeight: '100vh',
-    // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(3px) saturate(30%)',
+    '-webkitBackdropFilter': 'blur(3px) saturate(30%)',
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
 });
 
 const StyledBox = styled(Box)({
