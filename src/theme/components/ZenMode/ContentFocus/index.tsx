@@ -11,7 +11,6 @@ const StyledBox = styled(Box)(({ theme }) => ({
     height: '60vh',
     display: 'grid',
     placeItems: 'center',
-    alignSelf: 'center',
     backgroundColor: theme.palette.background.paper,
     borderRadius: '1rem',
     boxShadow: `
@@ -61,9 +60,7 @@ export default function ContentFocus(
     return (
         <StyledBox sx={sx}>
             <Box
-                className={
-                    `${styles.clippingBox} ${styles.scrollbar__hidden}`
-                }
+                className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
                 ref={handleRefChange}
             >
                 <MDXContent>{children}</MDXContent>

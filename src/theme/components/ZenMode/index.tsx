@@ -79,7 +79,10 @@ export default function ZenMode(
                     <MDXContent>{children}</MDXContent>
                 </ContentFull>
                 <Glass /> */}
-                <ContentFocus sx={{ zIndex: Z_INDEX_CONTENT_FOCUS }}>
+                <ContentFocus sx={{
+                    alignSelf: 'center',
+                    zIndex: Z_INDEX_CONTENT_FOCUS,
+                }}>
                     {children}
                 </ContentFocus>
             </OverlappingLayout>
