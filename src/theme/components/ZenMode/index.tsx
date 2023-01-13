@@ -45,11 +45,11 @@ const Glass = styled(Box)({
 });
 
 const ContentFocus = styled(Box)(({ theme }) => ({
-    display: 'grid',
-    placeItems: 'center',
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
     height: '60%',
+    display: 'grid',
+    placeItems: 'center',
     alignSelf: 'center',
     backgroundColor: theme.palette.background.paper,
     borderRadius: '1rem',
