@@ -29,19 +29,6 @@ const StyledBox = styled(Box)({
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
 });
 
-// Set the size with a calc "simulating" the parent's padding because otherwise
-// overflow: hidden would be broken.
-// Clamp from 320px at 16px to 2560px at 130px.
-const CLIPPING_BOX_SIZE: React.CSSProperties['width'] = `calc(
-    100%
-    - 2 * clamp(1rem, -0.017857142857142794rem + 5.089285714285714vw, 8.125rem)
-)`;
-
-const ClippingBox = styled(Box)({
-    width: CLIPPING_BOX_SIZE,
-    height: CLIPPING_BOX_SIZE,
-});
-
 interface Props {
     children: React.ReactNode;
 };
@@ -89,12 +76,12 @@ export default function ZenMode(
             disableAutoFocus
         >
             <StyledBox>
-                <ClippingBox
+                <Box
                     className={styles.clippingBox}
                     ref={handleRefChange}
                 >
                     <MDXContent>{children}</MDXContent>
-                </ClippingBox>
+                </Box>
             </StyledBox>
         </StyledModal>
     );
