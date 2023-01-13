@@ -70,7 +70,7 @@ const DebugBox = styled(Box)({
 });
 
 interface Props {
-    children: React.ReactNode;
+    readonly children: React.ReactNode;
 };
 
 export default function ZenMode(
