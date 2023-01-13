@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
+// import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
 import styles from './styles.module.css';
 
@@ -15,9 +16,11 @@ const StyledModal = styled(Modal)(({ theme }) => ({
 }));
 
 const OverlappingLayout = styled(Box)({
+    width: '100%',
+    minHeight: '100%',
     display: 'grid',
     gridTemplateColumns: '1fr',
-    placeItems: 'center',
+    justifyItems: 'center',
     '& > *': {
         gridColumnStart: 1,
         gridRowStart: 1,
