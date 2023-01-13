@@ -14,8 +14,7 @@ const StyledModal = styled(Modal)(({ theme }) => ({
 }));
 
 const OverlappingLayout = styled(Box)({
-    width: '100%',
-    minHeight: '100%',
+    // minHeight: '100%',
     display: 'grid',
     gridTemplateColumns: '1fr',
     justifyItems: 'center',
@@ -23,6 +22,10 @@ const OverlappingLayout = styled(Box)({
         gridColumnStart: 1,
         gridRowStart: 1,
     },
+});
+
+const Content = styled(Box)({
+    padding: '50vh 0',
 });
 
 const StyledBox = styled(Box)({
@@ -95,9 +98,9 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout onClick={() => setIsOpen(false)}>
-                <Box>
+                <Content>
                     <MDXContent>{children}</MDXContent>
-                </Box>
+                </Content>
             </OverlappingLayout>
             {/* <StyledBox>
                 <Box
