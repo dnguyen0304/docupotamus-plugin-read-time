@@ -45,14 +45,6 @@ const Glass = styled(Box)({
     zIndex: Z_INDEX_GLASS,
 });
 
-// TODO(dnguyen0304): Remove development code.
-const DebugBox = styled(Box)({
-    width: '10px',
-    height: '10px',
-    backgroundColor: 'red',
-    zIndex: 10,
-});
-
 interface Props {
     readonly children: React.ReactNode;
     readonly isOpen: boolean;
