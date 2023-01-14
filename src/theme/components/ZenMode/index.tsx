@@ -1,10 +1,8 @@
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
-// import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
-import ContentFocus from './ContentFocus';
-// import styles from './styles.module.css';
+import ContentFull from './ContentFull';
 
 const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
 const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
@@ -26,15 +24,6 @@ const OverlappingLayout = styled(Box)({
         gridColumnStart: 1,
         gridRowStart: 1,
     },
-});
-
-const ContentFull = styled(Box)({
-    // TODO(dnguyen0304): Fix missing responsive design.
-    width: '40%',
-    height: '100%',
-    overflowY: 'scroll',
-    padding: '50vh 0',
-    zIndex: Z_INDEX_CONTENT_FULL,
 });
 
 const Glass = styled(Box)({
@@ -67,16 +56,16 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout onClick={() => setIsOpen(false)}>
-                {/* <ContentFull className={styles.scrollbar__hidden}>
-                    <MDXContent>{children}</MDXContent>
+                <ContentFull sx={{ zIndex: Z_INDEX_CONTENT_FULL }}>
+                    {children}
                 </ContentFull>
-                <Glass /> */}
+                {/* <Glass />
                 <ContentFocus sx={{
                     alignSelf: 'center',
                     zIndex: Z_INDEX_CONTENT_FOCUS,
                 }}>
                     {children}
-                </ContentFocus>
+                </ContentFocus> */}
             </OverlappingLayout>
         </StyledModal>
     );
