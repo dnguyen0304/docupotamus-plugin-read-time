@@ -33,6 +33,17 @@ export default function ContentFocus(
 ): JSX.Element {
     const clippingBoxRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
+    const activeChunkIndexRef = React.useRef<number>(0);
+
+    const getActiveChunkIndex = () => {
+        if (!clippingBoxRef.current) {
+            return;
+        }
+        activeChunkIndexRef.current = Math.round(
+            clippingBoxRef.current.scrollTop
+            / clippingBoxRef.current.getBoundingClientRect().height
+        );
+    };
 
     React.useEffect(() => {
         if (!clippingBoxRef.current) {
@@ -58,6 +69,7 @@ export default function ContentFocus(
         >
             <Box
                 className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
+                onScroll={getActiveChunkIndex}
                 ref={clippingBoxRef}
             >
                 <MDXContent>{children}</MDXContent>
