@@ -24,6 +24,7 @@ declare module '@docusaurus/plugin-read-time' {
                 readonly isEnabled: boolean;
                 readonly durationMilli: number;
             };
+            readonly zenModeIsEnabled: boolean;
         };
     }
 
