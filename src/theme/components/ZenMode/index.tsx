@@ -66,9 +66,6 @@ export default function ZenMode(
         setIsOpen,
     }: Props,
 ): JSX.Element {
-    // TODO(dnguyen0304): Change active chunk default based on visibility.
-    // const [activeChunkIndex] = React.useState<number>(0);
-
     return (
         <StyledModal
             onClose={() => setIsOpen(false)}
