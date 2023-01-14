@@ -58,8 +58,9 @@ export default function ContentFocus(
         }
         chunk.scrollIntoView({
             behavior: 'smooth',
-            block: 'center',
-            // block: 'start',
+            // Because child elements are the same height as the parent element,
+            // using center or start are functionally equivalent.
+            block: 'start',
         });
     }, [chunkIndex]);
 
