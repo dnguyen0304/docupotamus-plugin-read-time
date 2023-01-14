@@ -1,6 +1,7 @@
+import { KeyMap } from '@docusaurus/plugin-read-time';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
-import { HotKeys, KeyMap } from 'react-hotkeys';
+import { HotKeys } from 'react-hotkeys';
 import { SamplesProvider } from '../contexts/samples';
 import '../styles.css';
 import App from '../theme/components/App';

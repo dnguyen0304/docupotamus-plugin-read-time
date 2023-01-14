@@ -2,6 +2,8 @@
 /// <reference types="@docusaurus/theme-classic" />
 
 declare module '@docusaurus/plugin-read-time' {
+    import type { KeySequence } from 'react-hotkeys';
+
     interface DocupotamusThemeConfig {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
@@ -139,4 +141,9 @@ declare module '@docusaurus/plugin-read-time' {
         | 'full-lower'
         // For example, "95th Percentile".
         | 'full-upper';
+
+    type KeyBindings = 'ZEN_MODE';
+    type KeyMap = {
+        [key in KeyBindings]: KeySequence;
+    };
 }
