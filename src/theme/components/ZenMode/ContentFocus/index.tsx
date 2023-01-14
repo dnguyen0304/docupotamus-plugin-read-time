@@ -58,7 +58,10 @@ export default function ContentFocus(
     );
 
     return (
-        <StyledBox sx={sx}>
+        <StyledBox
+            onClick={(event) => event.stopPropagation()}
+            sx={sx}
+        >
             <Box
                 className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
                 ref={handleRefChange}
