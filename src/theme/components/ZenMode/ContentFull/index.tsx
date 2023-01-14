@@ -14,17 +14,30 @@ const StyledBox = styled(Box)({
 
 interface Props {
     readonly children: React.ReactNode;
+    readonly chunkIndex: number;
     readonly sx?: SxProps<Theme>;
 };
 
 export default function ContentFull(
     {
         children,
+        chunkIndex,
         sx,
     }: Props,
 ): JSX.Element {
     const contentRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
+
+    React.useEffect(() => {
+        const chunk = chunksRef.current[chunkIndex];
+        if (!chunk) {
+            return;
+        }
+        chunk.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+        });
+    }, [chunkIndex]);
 
     // TODO(dnguyen0304): Investigate extracting to useChildElements hook.
     React.useEffect(() => {

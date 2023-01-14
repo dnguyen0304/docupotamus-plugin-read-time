@@ -47,6 +47,8 @@ export default function ZenMode(
         setIsOpen,
     }: Props,
 ): JSX.Element {
+    const [chunkIndex] = React.useState<number>(0);
+
     return (
         <StyledModal
             onClose={() => setIsOpen(false)}
@@ -56,7 +58,10 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout onClick={() => setIsOpen(false)}>
-                <ContentFull sx={{ zIndex: Z_INDEX_CONTENT_FULL }}>
+                <ContentFull
+                    chunkIndex={chunkIndex}
+                    sx={{ zIndex: Z_INDEX_CONTENT_FULL }}
+                >
                     {children}
                 </ContentFull>
                 {/* <Glass />
