@@ -1,8 +1,9 @@
+// import ContentFull from './ContentFull';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import ContentFull from './ContentFull';
+import ContentFocus from './ContentFocus';
 
 const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
 const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
@@ -47,7 +48,7 @@ export default function ZenMode(
         setIsOpen,
     }: Props,
 ): JSX.Element {
-    const [chunkIndex] = React.useState<number>(0);
+    // const [chunkIndex] = React.useState<number>(0);
 
     return (
         <StyledModal
@@ -58,19 +59,19 @@ export default function ZenMode(
             disableAutoFocus
         >
             <OverlappingLayout onClick={() => setIsOpen(false)}>
-                <ContentFull
+                {/* <ContentFull
                     chunkIndex={chunkIndex}
                     sx={{ zIndex: Z_INDEX_CONTENT_FULL }}
                 >
                     {children}
                 </ContentFull>
-                {/* <Glass />
+                <Glass /> */}
                 <ContentFocus sx={{
                     alignSelf: 'center',
                     zIndex: Z_INDEX_CONTENT_FOCUS,
                 }}>
                     {children}
-                </ContentFocus> */}
+                </ContentFocus>
             </OverlappingLayout>
         </StyledModal>
     );
