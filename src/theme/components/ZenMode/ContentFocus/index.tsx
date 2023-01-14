@@ -31,18 +31,20 @@ export default function ContentFocus(
         sx,
     }: Props,
 ): JSX.Element {
+    const [, setChunkIndex] = React.useState<number>(0);
+
     const clippingBoxRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
-    const chunkIndexRef = React.useRef<number>(0);
 
     const getActiveChunkIndex = () => {
         if (!clippingBoxRef.current) {
             return;
         }
-        chunkIndexRef.current = Math.round(
+        const newChunkIndex = Math.round(
             clippingBoxRef.current.scrollTop
             / clippingBoxRef.current.getBoundingClientRect().height
         );
+        setChunkIndex(newChunkIndex);
     };
 
     React.useEffect(() => {
