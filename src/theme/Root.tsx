@@ -1,11 +1,16 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
+import { HotKeys, KeyMap } from 'react-hotkeys';
 import { SamplesProvider } from '../contexts/samples';
 import '../styles.css';
 import App from '../theme/components/App';
 
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
 const COLOR_ACCENT_GREEN: React.CSSProperties['color'] = '#64ffda';
+
+const keyMap: KeyMap = {
+    ZEN_MODE: 'shift+Z',
+};
 
 const theme = createTheme({
     breakpoints: {
@@ -32,12 +37,15 @@ interface Props {
 export default function Root({ children }: Props): JSX.Element {
     return (
         <React.StrictMode>
-            <ThemeProvider theme={theme}>
-                <SamplesProvider>
-                    <App />
-                    {children}
-                </SamplesProvider>
-            </ThemeProvider>
+            {/* TODO(dnguyen0304): Extract integration for ZenMode component. */}
+            <HotKeys keyMap={keyMap}>
+                <ThemeProvider theme={theme}>
+                    <SamplesProvider>
+                        <App />
+                        {children}
+                    </SamplesProvider>
+                </ThemeProvider>
+            </HotKeys>
         </React.StrictMode>
     );
 };

@@ -55,15 +55,17 @@ const DebugBox = styled(Box)({
 
 interface Props {
     readonly children: React.ReactNode;
+    readonly isOpen: boolean;
+    readonly setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function ZenMode(
     {
         children,
+        isOpen,
+        setIsOpen,
     }: Props,
 ): JSX.Element {
-    // TODO(dnguyen0304): Remove development code.
-    const [isOpen, setIsOpen] = React.useState<boolean>(true);
     // TODO(dnguyen0304): Change active chunk default based on visibility.
     // const [activeChunkIndex] = React.useState<number>(0);
 
