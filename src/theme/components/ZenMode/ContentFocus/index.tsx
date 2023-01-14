@@ -36,18 +36,18 @@ export default function ContentFocus(
     const clippingBoxRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
 
-    // temp remove
-    const [, setChunkIndex] = React.useState<number>(0);
-    const getActiveChunkIndex = () => {
-        if (!clippingBoxRef.current) {
-            return;
-        }
-        const newChunkIndex = Math.round(
-            clippingBoxRef.current.scrollTop
-            / clippingBoxRef.current.getBoundingClientRect().height
-        );
-        setChunkIndex(newChunkIndex);
-    };
+    // TODO(dnguyen0304): Support scrolling.
+    // const getActiveChunkIndex = () => {
+    //     if (!clippingBoxRef.current) {
+    //         return;
+    //     }
+    //     // TODO(dnguyen0304): Update height on resize.
+    //     const newChunkIndex = Math.round(
+    //         clippingBoxRef.current.scrollTop
+    //         / clippingBoxRef.current.getBoundingClientRect().height
+    //     );
+    //     setChunkIndex(newChunkIndex);
+    // };
 
     // TODO(dnguyen0304): Investigate extracting to useChildElementScroll hook
     //   to minimize duplicated code.
@@ -82,7 +82,6 @@ export default function ContentFocus(
         >
             <Box
                 className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
-                onScroll={getActiveChunkIndex}
                 ref={clippingBoxRef}
             >
                 <MDXContent>{children}</MDXContent>
