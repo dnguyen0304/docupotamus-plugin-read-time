@@ -17,6 +17,8 @@ export default function ContentWrapper(props: Props): JSX.Element {
 
     return (
         <>
+            {/* TODO(dnguyen0304): Move to a parent component for better
+                  scope. */}
             <HotKeys handlers={handlers}>
                 <Content {...props} />
             </HotKeys>
