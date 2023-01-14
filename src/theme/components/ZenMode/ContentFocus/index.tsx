@@ -34,30 +34,22 @@ export default function ContentFocus(
     const clippingBoxRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
 
-    // See: https://stackoverflow.com/a/60066291
-    const handleRefChange = React.useCallback<(node: HTMLDivElement) => void>(
-        node => {
-            if (node === null) {
-                return;
-            }
-            if (chunksRef.current.length !== 0) {
-                return;
-            }
-            clippingBoxRef.current = node;
-            chunksRef.current = [...node.children];
-            const chunks = chunksRef.current;
-            for (let i = 0; i < chunks.length; ++i) {
-                chunks[i].classList.toggle(styles.chunk);
-                // if (i === activeChunkIndex) {
-                //     chunks[i].classList.toggle(styles.chunk__active);
-                // } else {
-                //     chunks[i].classList.toggle(styles.chunk__notActive);
-                // }
-            }
-        },
-        // [activeChunkIndex],
-        [],
-    );
+    React.useEffect(() => {
+        if (!clippingBoxRef.current) {
+            // TODO(dnguyen0304): Add error handling.
+            return;
+        }
+        chunksRef.current = [...clippingBoxRef.current.children];
+        const chunks = chunksRef.current;
+        for (let i = 0; i < chunks.length; ++i) {
+            chunks[i].classList.toggle(styles.chunk);
+            // if (i === activeChunkIndex) {
+            //     chunks[i].classList.toggle(styles.chunk__active);
+            // } else {
+            //     chunks[i].classList.toggle(styles.chunk__notActive);
+            // }
+        }
+    }, []);
 
     return (
         <StyledBox
@@ -66,7 +58,7 @@ export default function ContentFocus(
         >
             <Box
                 className={`${styles.clippingBox} ${styles.scrollbar__hidden}`}
-                ref={handleRefChange}
+                ref={clippingBoxRef}
             >
                 <MDXContent>{children}</MDXContent>
             </Box>
