@@ -1,4 +1,4 @@
-import { KeyMap } from '@docusaurus/plugin-read-time';
+import type { KeyMap } from '@docusaurus/plugin-read-time';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 import { HotKeys } from 'react-hotkeys';
