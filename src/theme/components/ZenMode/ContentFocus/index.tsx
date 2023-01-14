@@ -33,11 +33,11 @@ export default function ContentFocus(
         sx,
     }: Props,
 ): JSX.Element {
-    const [, setChunkIndex] = React.useState<number>(0);
-
     const clippingBoxRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
 
+    // temp remove
+    const [, setChunkIndex] = React.useState<number>(0);
     const getActiveChunkIndex = () => {
         if (!clippingBoxRef.current) {
             return;
@@ -72,11 +72,6 @@ export default function ContentFocus(
         const chunks = chunksRef.current;
         for (let i = 0; i < chunks.length; ++i) {
             chunks[i].classList.toggle(styles.chunk);
-            // if (i === activeChunkIndex) {
-            //     chunks[i].classList.toggle(styles.chunk__active);
-            // } else {
-            //     chunks[i].classList.toggle(styles.chunk__notActive);
-            // }
         }
     }, []);
 
