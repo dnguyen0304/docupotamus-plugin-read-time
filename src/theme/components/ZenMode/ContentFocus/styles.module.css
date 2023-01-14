@@ -10,7 +10,7 @@
 
     width: var(--size);
     height: var(--size);
-    /* border: 1px solid red; */
+    border: 1px solid red;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
 }
@@ -33,6 +33,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    scroll-margin: 0;
     scroll-snap-align: start;
 }
 
