@@ -23,9 +23,22 @@ export default function ContentFull(
         sx,
     }: Props,
 ): JSX.Element {
+    const contentRef = React.useRef<HTMLDivElement>();
+    const chunksRef = React.useRef<Element[]>([]);
+
+    // TODO(dnguyen0304): Investigate extracting to useChildElements hook.
+    React.useEffect(() => {
+        if (!contentRef.current) {
+            // TODO(dnguyen0304): Add error handling.
+            return;
+        }
+        chunksRef.current = [...contentRef.current.children];
+    }, []);
+
     return (
         <StyledBox
             className={styles.scrollbar__hidden}
+            ref={contentRef}
             sx={sx}
         >
             <MDXContent>{children}</MDXContent>
