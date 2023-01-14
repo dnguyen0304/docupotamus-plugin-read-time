@@ -47,6 +47,7 @@ export default function ContentFocus(
         setChunkIndex(newChunkIndex);
     };
 
+    // TODO(dnguyen0304): Investigate extracting to useChildElements hook.
     React.useEffect(() => {
         if (!clippingBoxRef.current) {
             // TODO(dnguyen0304): Add error handling.
