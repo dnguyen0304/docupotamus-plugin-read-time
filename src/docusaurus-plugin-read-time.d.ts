@@ -143,7 +143,12 @@ declare module '@docusaurus/plugin-read-time' {
         | 'full-upper';
 
     type KeyBindings = 'ZEN_MODE';
+
     type KeyMap = {
         [key in KeyBindings]: KeySequence;
+    };
+
+    type KeyHandlers = {
+        [key in KeyBindings]: (keyboardEvent?: KeyboardEvent | undefined) => void;
     };
 }

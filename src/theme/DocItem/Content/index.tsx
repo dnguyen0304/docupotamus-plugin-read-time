@@ -1,4 +1,5 @@
 // TODO(dnguyen0304): Extract integration for ZenMode component.
+import type { KeyHandlers } from '@docusaurus/plugin-read-time';
 import type { WrapperProps } from '@docusaurus/types';
 import Content from '@theme-init/DocItem/Content';
 import type ContentType from '@theme/DocItem/Content';
@@ -11,7 +12,7 @@ type Props = WrapperProps<typeof ContentType>;
 export default function ContentWrapper(props: Props): JSX.Element {
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
-    const handlers = React.useMemo(() => ({
+    const handlers = React.useMemo((): KeyHandlers => ({
         ZEN_MODE: () => setIsOpen(true),
     }), []);
 
