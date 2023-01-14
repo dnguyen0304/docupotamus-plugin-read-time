@@ -3,7 +3,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { HotKeys, KeyMap } from 'react-hotkeys';
 import ContentFocus from './ContentFocus';
+import ContentFull from './ContentFull';
 
 const Z_INDEX_CONTENT_FULL: React.CSSProperties['zIndex'] = 1;
 const Z_INDEX_GLASS: React.CSSProperties['zIndex'] = Z_INDEX_CONTENT_FULL + 1;
@@ -48,34 +50,51 @@ export default function ZenMode(
         setIsOpen,
     }: Props,
 ): JSX.Element {
-    const [chunkIndex] = React.useState<number>(0);
+    const [chunkIndex, setChunkIndex] = React.useState<number>(0);
+
+    const keyMap: KeyMap = React.useMemo(() => ({
+        CHUNK_DOWN: 'down',
+        CHUNK_UP: 'up',
+    }), []);
+
+    const handlers: {
+        [key: string]: (keyEvent?: KeyboardEvent | undefined) => void;
+    } = React.useMemo(() => ({
+        CHUNK_DOWN: () => setChunkIndex(prev => prev + 1),
+        CHUNK_UP: () => setChunkIndex(prev => prev ? prev - 1 : 0),
+    }), []);
 
     return (
-        <StyledModal
-            onClose={() => setIsOpen(false)}
-            open={isOpen}
-            // Override the default Chrome outline behavior.
-            // See: https://github.com/mui/material-ui/issues/11504#issuecomment-390506409
-            disableAutoFocus
+        <HotKeys
+            handlers={handlers}
+            keyMap={keyMap}
         >
-            <OverlappingLayout onClick={() => setIsOpen(false)}>
-                {/* <ContentFull
-                    chunkIndex={chunkIndex}
-                    sx={{ zIndex: Z_INDEX_CONTENT_FULL }}
-                >
-                    {children}
-                </ContentFull>
-                <Glass /> */}
-                <ContentFocus
-                    chunkIndex={chunkIndex}
-                    sx={{
-                        alignSelf: 'center',
-                        zIndex: Z_INDEX_CONTENT_FOCUS,
-                    }}
-                >
-                    {children}
-                </ContentFocus>
-            </OverlappingLayout>
-        </StyledModal>
+            <StyledModal
+                onClose={() => setIsOpen(false)}
+                open={isOpen}
+                // Override the default Chrome outline behavior.
+                // See: https://github.com/mui/material-ui/issues/11504#issuecomment-390506409
+                disableAutoFocus
+            >
+                <OverlappingLayout onClick={() => setIsOpen(false)}>
+                    <ContentFull
+                        chunkIndex={chunkIndex}
+                        sx={{ zIndex: Z_INDEX_CONTENT_FULL }}
+                    >
+                        {children}
+                    </ContentFull>
+                    <Glass />
+                    <ContentFocus
+                        chunkIndex={chunkIndex}
+                        sx={{
+                            alignSelf: 'center',
+                            zIndex: Z_INDEX_CONTENT_FOCUS,
+                        }}
+                    >
+                        {children}
+                    </ContentFocus>
+                </OverlappingLayout>
+            </StyledModal>
+        </HotKeys>
     );
 };

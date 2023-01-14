@@ -35,10 +35,17 @@ export default function ContentFull(
         if (!chunk) {
             return;
         }
-        chunk.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-        });
+        // TODO(dnguyen0304): Synchronize ContentFocus and ContentFull scrolling
+        //   because scrollIntoView calls will interrupt one another when called
+        //   "in parallel".
+        // Use behavior: auto instead of behavior: smooth because the animation
+        // is faster.
+        window.setTimeout(() => {
+            chunk.scrollIntoView({
+                behavior: 'auto',
+                block: 'center',
+            });
+        }, 1.5 * 1000)
     }, [chunkIndex]);
 
     // TODO(dnguyen0304): Investigate extracting to useChildElements hook.
