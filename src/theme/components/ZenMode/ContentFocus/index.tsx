@@ -31,6 +31,7 @@ export default function ContentFocus(
         sx,
     }: Props,
 ): JSX.Element {
+    const clippingBoxRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
 
     // See: https://stackoverflow.com/a/60066291
@@ -42,6 +43,7 @@ export default function ContentFocus(
             if (chunksRef.current.length !== 0) {
                 return;
             }
+            clippingBoxRef.current = node;
             chunksRef.current = [...node.children];
             const chunks = chunksRef.current;
             for (let i = 0; i < chunks.length; ++i) {
