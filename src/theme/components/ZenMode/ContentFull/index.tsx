@@ -8,7 +8,7 @@ const StyledBox = styled(Box)({
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '40%',
     height: '100%',
-    overflowY: 'scroll',
+    overflowY: 'auto',
     padding: '50vh 0',
 });
 
