@@ -41,7 +41,7 @@ export default function ContentFocus(
     //     if (!clippingBoxRef.current) {
     //         return;
     //     }
-    //     // TODO(dnguyen0304): Update height on resize.
+    //     // TODO(dnguyen0304): Update height with react-resize-detector.
     //     const newChunkIndex = Math.round(
     //         clippingBoxRef.current.scrollTop
     //         / clippingBoxRef.current.getBoundingClientRect().height
@@ -59,6 +59,7 @@ export default function ContentFocus(
         chunk.scrollIntoView({
             behavior: 'smooth',
             block: 'center',
+            // block: 'start',
         });
     }, [chunkIndex]);
 
