@@ -48,7 +48,7 @@ export default function ZenMode(
         setIsOpen,
     }: Props,
 ): JSX.Element {
-    // const [chunkIndex] = React.useState<number>(0);
+    const [chunkIndex] = React.useState<number>(0);
 
     return (
         <StyledModal
@@ -66,10 +66,13 @@ export default function ZenMode(
                     {children}
                 </ContentFull>
                 <Glass /> */}
-                <ContentFocus sx={{
-                    alignSelf: 'center',
-                    zIndex: Z_INDEX_CONTENT_FOCUS,
-                }}>
+                <ContentFocus
+                    chunkIndex={chunkIndex}
+                    sx={{
+                        alignSelf: 'center',
+                        zIndex: Z_INDEX_CONTENT_FOCUS,
+                    }}
+                >
                     {children}
                 </ContentFocus>
             </OverlappingLayout>

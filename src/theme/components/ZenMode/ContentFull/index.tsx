@@ -28,6 +28,8 @@ export default function ContentFull(
     const contentRef = React.useRef<HTMLDivElement>();
     const chunksRef = React.useRef<Element[]>([]);
 
+    // TODO(dnguyen0304): Investigate extracting to useChildElementScroll hook
+    //   to minimize duplicated code.
     React.useEffect(() => {
         const chunk = chunksRef.current[chunkIndex];
         if (!chunk) {

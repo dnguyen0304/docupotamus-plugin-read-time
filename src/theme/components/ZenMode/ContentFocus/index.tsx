@@ -22,12 +22,14 @@ const StyledBox = styled(Box)(({ theme }) => ({
 
 interface Props {
     readonly children: React.ReactNode;
+    readonly chunkIndex: number;
     readonly sx?: SxProps<Theme>;
 };
 
 export default function ContentFocus(
     {
         children,
+        chunkIndex,
         sx,
     }: Props,
 ): JSX.Element {
@@ -46,6 +48,19 @@ export default function ContentFocus(
         );
         setChunkIndex(newChunkIndex);
     };
+
+    // TODO(dnguyen0304): Investigate extracting to useChildElementScroll hook
+    //   to minimize duplicated code.
+    React.useEffect(() => {
+        const chunk = chunksRef.current[chunkIndex];
+        if (!chunk) {
+            return;
+        }
+        chunk.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+        });
+    }, [chunkIndex]);
 
     // TODO(dnguyen0304): Investigate extracting to useChildElements hook.
     React.useEffect(() => {
