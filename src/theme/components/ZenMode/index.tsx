@@ -71,6 +71,7 @@ export default function ZenMode(
 
     return (
         <StyledModal
+            onClose={() => setIsOpen(false)}
             open={isOpen}
             // Override the default Chrome outline behavior.
             // See: https://github.com/mui/material-ui/issues/11504#issuecomment-390506409
