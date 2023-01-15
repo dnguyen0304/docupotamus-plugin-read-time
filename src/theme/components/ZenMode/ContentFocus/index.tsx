@@ -30,6 +30,18 @@ const isCodeBlock = (classList: DOMTokenList): boolean => {
     return [...classList].some(x => x.startsWith('codeBlockContainer'));
 };
 
+const addClassName = (element: Element, className: string) => {
+    if (element.tagName === 'DIV') {
+        if (isAdmonition(element.classList)) {
+            return;
+        }
+        if (isCodeBlock(element.classList)) {
+            return
+        }
+    }
+    element.classList.toggle(className);
+};
+
 interface Props {
     readonly children: React.ReactNode;
     readonly chunkIndex: number;
@@ -89,15 +101,7 @@ export default function ContentFocus(
             wrapper.appendChild(chunkToWrap);
             wrapper.classList.toggle(styles.chunk_container);
 
-            if (chunkToWrap.tagName === 'DIV') {
-                if (isAdmonition(chunkToWrap.classList)) {
-                    continue;
-                }
-                if (isCodeBlock(chunkToWrap.classList)) {
-                    continue
-                }
-            }
-            chunkToWrap.classList.toggle(styles.chunk);
+            addClassName(chunkToWrap, styles.chunk);
         }
     }, []);
 
