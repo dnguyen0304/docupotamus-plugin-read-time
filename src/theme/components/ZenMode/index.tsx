@@ -33,7 +33,9 @@ const Glass = styled(Box)({
     width: '100%',
     backdropFilter: 'blur(3px) saturate(30%)',
     '-webkitBackdropFilter': 'blur(3px) saturate(30%)',
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    // TODO(dnguyen0304): Extract to a centralized location to facilitate
+    //   maintenance.
+    backgroundColor: 'rgba(249, 249, 249, 0.6)',
     zIndex: Z_INDEX_GLASS,
 });
 
