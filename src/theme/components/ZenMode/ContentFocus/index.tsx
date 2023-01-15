@@ -22,6 +22,14 @@ const StyledBox = styled(Box)(({ theme }) => ({
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
 }));
 
+const isAdmonition = (classList: DOMTokenList): boolean => {
+    return [...classList].some(x => x.startsWith('admonition'));
+};
+
+const isCodeBlock = (classList: DOMTokenList): boolean => {
+    return [...classList].some(x => x.startsWith('codeBlockContainer'));
+};
+
 interface Props {
     readonly children: React.ReactNode;
     readonly chunkIndex: number;
@@ -75,6 +83,14 @@ export default function ContentFocus(
         chunksRef.current = [...clippingBoxRef.current.children];
         const chunks = chunksRef.current;
         for (let i = 0; i < chunks.length; ++i) {
+            if (chunks[i].tagName === 'DIV') {
+                if (isAdmonition(chunks[i].classList)) {
+                    continue;
+                }
+                if (isCodeBlock(chunks[i].classList)) {
+                    continue
+                }
+            }
             chunks[i].classList.toggle(styles.chunk);
         }
     }, []);
