@@ -16,15 +16,15 @@
     scroll-snap-type: y mandatory;
 }
 
-.clippingBox > h1.chunk__active {
+.clippingBox > h1.chunk {
     font-size: var(--step-5);
 }
 
-.clippingBox > h2.chunk__active {
+.clippingBox > h2.chunk {
     font-size: var(--step-4);
 }
 
-.clippingBox > h3.chunk__active {
+.clippingBox > h3.chunk {
     font-size: var(--step-3);
 }
 
