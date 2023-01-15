@@ -83,15 +83,21 @@ export default function ContentFocus(
         chunksRef.current = [...clippingBoxRef.current.children];
         const chunks = chunksRef.current;
         for (let i = 0; i < chunks.length; ++i) {
-            if (chunks[i].tagName === 'DIV') {
-                if (isAdmonition(chunks[i].classList)) {
+            const chunkToWrap = chunks[i];
+            const wrapper = document.createElement('div');
+            chunkToWrap.parentNode?.insertBefore(wrapper, chunkToWrap);
+            wrapper.appendChild(chunkToWrap);
+            wrapper.classList.toggle(styles.chunk_container);
+
+            if (chunkToWrap.tagName === 'DIV') {
+                if (isAdmonition(chunkToWrap.classList)) {
                     continue;
                 }
-                if (isCodeBlock(chunks[i].classList)) {
+                if (isCodeBlock(chunkToWrap.classList)) {
                     continue
                 }
             }
-            chunks[i].classList.toggle(styles.chunk);
+            chunkToWrap.classList.toggle(styles.chunk);
         }
     }, []);
 
