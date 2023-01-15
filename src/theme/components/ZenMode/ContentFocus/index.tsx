@@ -22,6 +22,13 @@ const StyledBox = styled(Box)(({ theme }) => ({
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
 }));
 
+const addWrapper = (toWrap: Element, wrapperClassName: string) => {
+    const wrapper = document.createElement('div');
+    toWrap.parentNode?.insertBefore(wrapper, toWrap);
+    wrapper.appendChild(toWrap);
+    wrapper.classList.toggle(wrapperClassName);
+};
+
 const isAdmonition = (classList: DOMTokenList): boolean => {
     return [...classList].some(x => x.startsWith('admonition'));
 };
@@ -96,11 +103,7 @@ export default function ContentFocus(
         const chunks = chunksRef.current;
         for (let i = 0; i < chunks.length; ++i) {
             const chunkToWrap = chunks[i];
-            const wrapper = document.createElement('div');
-            chunkToWrap.parentNode?.insertBefore(wrapper, chunkToWrap);
-            wrapper.appendChild(chunkToWrap);
-            wrapper.classList.toggle(styles.chunk_container);
-
+            addWrapper(chunkToWrap, styles.chunk_container);
             addClassName(chunkToWrap, styles.chunk);
         }
     }, []);
