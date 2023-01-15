@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;600&display=swap');
+
 .clippingBox {
     /* TODO(dnguyen0304): Remove simulated padding because overflow: hidden is
        not needed. */
@@ -10,30 +12,36 @@
 
     width: var(--size);
     height: var(--size);
-    /* TODO(dnguyen0304): Remove development code. */
-    border: 1px solid red;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
 }
 
-.clippingBox > h1.chunk {
-    font-size: var(--step-5);
-}
-
-.clippingBox > h2.chunk {
+.chunk_container > h1.chunk,
+.chunk_container > h2.chunk {
+    line-height: 1.1;
     font-size: var(--step-4);
+    font-weight: 600;
+    color: rgb(55, 55, 55);
 }
 
-.clippingBox > h3.chunk {
-    font-size: var(--step-3);
+.chunk_container > p.chunk {
+    font-size: var(--step-2);
+    font-weight: 400;
 }
 
-.chunk {
+.chunk_container {
     /* TODO(dnguyen0304): Investigate changing to zeroed positioning. */
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: start;
+}
+
+.chunk {
+    font-family: 'Karla', sans-serif;
     margin: 0;
     padding: 0;
     scroll-margin: 0;
-    scroll-snap-align: start;
 }
