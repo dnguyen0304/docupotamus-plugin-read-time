@@ -11,7 +11,9 @@ const StyledBox = styled(Box)(({ theme }) => ({
     height: '60vh',
     display: 'grid',
     placeItems: 'center',
-    backgroundColor: theme.palette.background.paper,
+    // TODO(dnguyen0304): Extract to a centralized location to facilitate
+    //   maintenance.
+    backgroundColor: 'rgb(249, 249, 249)',
     borderRadius: '1rem',
     boxShadow: `
         5px 5px 10px 0 rgb(0 0 0 / 5%),
