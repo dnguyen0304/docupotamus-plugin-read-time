@@ -22,11 +22,15 @@ const StyledBox = styled(Box)(({ theme }) => ({
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
 }));
 
-const addWrapper = (toWrap: Element, wrapperClassName: string) => {
+const addWrapper = (
+    toWrap: Element,
+    wrapperClassName: string,
+): HTMLDivElement => {
     const wrapper = document.createElement('div');
     toWrap.parentNode?.insertBefore(wrapper, toWrap);
     wrapper.appendChild(toWrap);
     wrapper.classList.toggle(wrapperClassName);
+    return wrapper;
 };
 
 const isAdmonition = (classList: DOMTokenList): boolean => {
@@ -99,12 +103,12 @@ export default function ContentFocus(
             // TODO(dnguyen0304): Add error handling.
             return;
         }
-        chunksRef.current = [...clippingBoxRef.current.children];
-        const chunks = chunksRef.current;
+        const chunks = [...clippingBoxRef.current.children];
         for (let i = 0; i < chunks.length; ++i) {
             const chunkToWrap = chunks[i];
-            addWrapper(chunkToWrap, styles.chunk_container);
+            const wrapper = addWrapper(chunkToWrap, styles.chunk_container);
             addClassName(chunkToWrap, styles.chunk);
+            chunksRef.current.push(wrapper);
         }
     }, []);
 
