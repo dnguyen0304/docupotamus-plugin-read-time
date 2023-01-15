@@ -34,10 +34,12 @@ const addWrapper = (
 };
 
 const isAdmonition = (classList: DOMTokenList): boolean => {
+    // TODO(dnguyen0304): Extract to config.
     return [...classList].some(x => x.startsWith('admonition'));
 };
 
 const isCodeBlock = (classList: DOMTokenList): boolean => {
+    // TODO(dnguyen0304): Extract to config.
     return [...classList].some(x => x.startsWith('codeBlockContainer'));
 };
 
