@@ -32,7 +32,7 @@ const OverlappingLayout = styled(Box)({
 const Glass = styled(Box)({
     width: '100%',
     backdropFilter: 'blur(3px) saturate(30%)',
-    '-webkitBackdropFilter': 'blur(3px) saturate(30%)',
+    WebkitBackdropFilter: 'blur(3px) saturate(30%)',
     // TODO(dnguyen0304): Extract to a centralized location to facilitate
     //   maintenance.
     backgroundColor: 'rgba(232, 232, 232, 0.6)',
