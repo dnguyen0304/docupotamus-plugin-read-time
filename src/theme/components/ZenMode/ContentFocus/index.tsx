@@ -4,7 +4,7 @@ import MDXContent from '@theme/MDXContent';
 import * as React from 'react';
 import styles from './styles.module.css';
 
-const StyledBox = styled(Box)(({ theme }) => ({
+const StyledBox = styled(Box)({
     // TODO(dnguyen0304): Fix missing responsive design.
     width: '60%',
     // TODO(dnguyen0304): Investigate why using a percentage does not work.
@@ -20,7 +20,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
         10px 10px 20px 0 rgb(0 0 0 / 5%),
         20px 20px 40px 0 rgb(0 0 0 / 5%),
         40px 40px 80px 0 rgb(0 0 0 / 5%)`,
-}));
+});
 
 const addWrapper = (
     toWrap: Element,
