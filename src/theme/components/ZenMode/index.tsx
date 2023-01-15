@@ -35,7 +35,7 @@ const Glass = styled(Box)({
     '-webkitBackdropFilter': 'blur(3px) saturate(30%)',
     // TODO(dnguyen0304): Extract to a centralized location to facilitate
     //   maintenance.
-    backgroundColor: 'rgba(249, 249, 249, 0.6)',
+    backgroundColor: 'rgba(232, 232, 232, 0.6)',
     zIndex: Z_INDEX_GLASS,
 });
 
