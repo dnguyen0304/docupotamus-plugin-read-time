@@ -1,4 +1,3 @@
-// import ContentFull from './ContentFull';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
