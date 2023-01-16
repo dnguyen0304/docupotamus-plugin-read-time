@@ -5,7 +5,7 @@
     "main": "lib/index.js",
     "types": "src/docusaurus-plugin-read-time.d.ts",
     "dependencies": {
-        "@docusaurus/utils-validation": "^2.1.0",
+        "@docusaurus/utils-validation": "^2.2.x",
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
         "@mui/icons-material": "^5.8.4",
