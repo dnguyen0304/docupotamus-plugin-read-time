@@ -1,4 +1,3 @@
-// TODO(dnguyen0304): Extract integration for ZenMode component.
 import type { WrapperProps } from '@docusaurus/types';
 import Content from '@theme-init/DocItem/Content';
 import type ContentType from '@theme/DocItem/Content';
