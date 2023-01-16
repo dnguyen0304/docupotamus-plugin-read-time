@@ -2,9 +2,10 @@
 /// <reference types="@docusaurus/theme-classic" />
 
 declare module '@docusaurus/plugin-read-time' {
+    import type { ThemeConfig as ZenModeThemeConfig } from '@docusaurus/theme-zen-mode';
     import type { KeySequence } from 'react-hotkeys';
 
-    interface DocupotamusThemeConfig {
+    interface ReadTimeThemeConfig {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
         readonly workbenchIsOpen: boolean;
@@ -24,9 +25,10 @@ declare module '@docusaurus/plugin-read-time' {
                 readonly isEnabled: boolean;
                 readonly durationMilli: number;
             };
-            readonly zenModeIsEnabled: boolean;
         };
     }
+
+    type DocusaurusThemeConfig = ReadTimeThemeConfig & ZenModeThemeConfig;
 
     // Contiguous region of content.
     interface Target {
