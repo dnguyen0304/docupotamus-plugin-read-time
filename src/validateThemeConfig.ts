@@ -4,6 +4,9 @@ import type {
     ThemeConfigValidationContext
 } from '@docusaurus/types';
 import { Joi } from '@docusaurus/utils-validation';
+import {
+    DEFAULT_THEME_CONFIG as ZEN_MODE_DEFAULT_THEME_CONFIG
+} from './theme/components/ZenMode/validateThemeConfig';
 
 const CONTENT_ROOT_SELECTOR: string =
     'main[class*="docMainContainer"] article div.markdown';
@@ -38,7 +41,7 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
             // TODO(dnguyen0304): Fix missing cohesion with styles.
             durationMilli: 5 * 1000,
         },
-        zenModeIsEnabled: false,
+        ...ZEN_MODE_DEFAULT_THEME_CONFIG.debug,
     },
 };
 
