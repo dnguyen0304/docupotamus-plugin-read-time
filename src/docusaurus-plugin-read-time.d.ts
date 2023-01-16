@@ -28,7 +28,7 @@ declare module '@docusaurus/plugin-read-time' {
         };
     }
 
-    type DocusaurusThemeConfig = ReadTimeThemeConfig & ZenModeThemeConfig;
+    type DocupotamusThemeConfig = ReadTimeThemeConfig & ZenModeThemeConfig;
 
     // Contiguous region of content.
     interface Target {
