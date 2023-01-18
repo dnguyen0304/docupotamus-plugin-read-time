@@ -12,3 +12,5 @@ export default function pluginReadTime(): Plugin<undefined> {
 };
 
 export { validateThemeConfig } from './validateThemeConfig';
+
+export const getSwizzleComponentList = (): string[] => [];
