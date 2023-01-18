@@ -6,7 +6,11 @@ export default function pluginReadTime(): Plugin<undefined> {
         name: 'docusaurus-plugin-read-time',
 
         getThemePath() {
-            return './theme';
+            return '../lib/theme';
+        },
+
+        getTypeScriptThemePath() {
+            return '../src/theme';
         },
     };
 };
