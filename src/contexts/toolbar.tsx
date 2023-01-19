@@ -2,12 +2,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { ReactContextError } from './errors';
 
-// TODO(dnguyen0304): Investigate changing to dynamic.
-// TODO(dnguyen0304): Extract to config.
-type ActiveTabId = 'read-time' | 'editor';
-
 type TabIdToComponentType = ReadonlyMap<
-    ActiveTabId,
+    string,
     React.LazyExoticComponent<() => JSX.Element>
 >;
 
@@ -22,10 +18,8 @@ const TAB_ID_TO_COMPONENT: TabIdToComponentType = new Map([
 
 interface ContextValue {
     readonly tabIdToComponent: TabIdToComponentType;
-    readonly activeTabId: ActiveTabId | undefined;
-    readonly setActiveTabId: React.Dispatch<React.SetStateAction<
-        ActiveTabId | undefined
-    >>;
+    readonly activeTabId: string;
+    readonly setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Context = React.createContext<ContextValue | undefined>(undefined);
@@ -45,7 +39,7 @@ const useContextValue = (): ContextValue => {
     }
 
     const [activeTabId, setActiveTabId] =
-        React.useState<ActiveTabId | undefined>(activeTabIdDefault);
+        React.useState<string>(activeTabIdDefault);
 
     return React.useMemo(
         () => ({
