@@ -1,9 +1,7 @@
-import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { useToolbar } from '../../../../contexts/toolbar';
+import Button from './Button';
 
 // TODO(dnguyen0304): Add paddingRight for the scrollbar.
 const StyledBox = styled(Box)({
@@ -19,24 +17,11 @@ const StyledBox = styled(Box)({
     paddingTop: 'var(--space-s)',
 });
 
-interface Props { };
-
-export default function Toolbar(
-    {
-    }: Props
-): JSX.Element {
-    const { setActiveTabId } = useToolbar();
-
-    const handleClick = () => {
-        // TODO(dnguyen0304): Fix magic string.
-        setActiveTabId(prev => (prev === 'read-time') ? '' : 'read-time');
-    };
-
+export default function Toolbar(): JSX.Element {
     return (
         <StyledBox>
-            <IconButton onClick={handleClick}>
-                <InsightsOutlinedIcon />
-            </IconButton>
+            {/* TODO(dnguyen0304): Fix magic string. */}
+            <Button tabId='read-time' />
         </StyledBox>
     );
 };
