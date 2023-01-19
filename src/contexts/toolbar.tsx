@@ -8,13 +8,15 @@ interface TabConfig {
     readonly Component: React.LazyExoticComponent<() => JSX.Element>;
 };
 
-interface TabIdToConfig extends ReadonlyMap<string, TabConfig> { };
+interface TabIdToConfig extends ReadonlyMap<
+    string,
+    Omit<TabConfig, 'tabId'>
+> { };
 
 const TAB_ID_TO_CONFIG: TabIdToConfig = new Map([
     [
         'read-time',
         {
-            tabId: 'read-time',
             modulePath: '@theme/docupotamus-read-time/components/Workbench/ReadTime',
             Component: React.lazy(() => import(
                 '@theme/docupotamus-read-time/components/Workbench/ReadTime'
