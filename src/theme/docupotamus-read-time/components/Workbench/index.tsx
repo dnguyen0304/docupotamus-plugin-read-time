@@ -58,6 +58,7 @@ export default function Workbench(): JSX.Element {
 
     const location = useLocation();
     const { tabIdToComponent, workbenchIsOpen } = useToolbar();
+
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
 
     // TODO(dnguyen0304): Add error handling.
