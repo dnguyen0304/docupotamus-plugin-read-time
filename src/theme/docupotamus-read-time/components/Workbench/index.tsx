@@ -61,7 +61,7 @@ export default function Workbench(): JSX.Element {
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
 
     // TODO(dnguyen0304): Add error handling.
-    const Tab = tabIdToComponent.get('read-time')!
+    const Tab = tabIdToComponent.get('read-time')!;
 
     React.useEffect(() => {
         if (!loadingIsEnabled) {
