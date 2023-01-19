@@ -16,6 +16,7 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
         ranks: [25, 50],
         style: 'full-lower',
     },
+    swizzleIsEnabled: true,
     debug: {
         band: {
             isEnabled: false,
@@ -65,6 +66,9 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                 .default(DEFAULT_THEME_CONFIG.percentile.style),
         })
             .default(DEFAULT_THEME_CONFIG.percentile),
+        swizzleIsEnabled: Joi
+            .boolean()
+            .default(DEFAULT_THEME_CONFIG.swizzleIsEnabled),
         debug: Joi.object({
             band: Joi.object({
                 isEnabled: Joi

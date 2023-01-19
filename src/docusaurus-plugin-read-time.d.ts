@@ -12,6 +12,7 @@ declare module '@docusaurus/plugin-read-time' {
             readonly ranks: readonly number[];
             readonly style: PercentileRankStyle;
         };
+        readonly swizzleIsEnabled: boolean;
         readonly debug: {
             readonly band: {
                 readonly isEnabled: boolean;
