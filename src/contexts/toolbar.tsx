@@ -6,12 +6,12 @@ import { ReactContextError } from './errors';
 // TODO(dnguyen0304): Extract to config.
 type ActiveWorkbenchId = 'read-time' | 'editor';
 
-type WorkbenchIdToComponentType = ReadonlyMap<
+type TabIdToComponentType = ReadonlyMap<
     ActiveWorkbenchId,
     React.LazyExoticComponent<() => JSX.Element>
 >;
 
-const WORKBENCH_ID_TO_COMPONENT: WorkbenchIdToComponentType = new Map([
+const TAB_ID_TO_COMPONENT: TabIdToComponentType = new Map([
     [
         'read-time',
         React.lazy(() => import(
@@ -21,7 +21,7 @@ const WORKBENCH_ID_TO_COMPONENT: WorkbenchIdToComponentType = new Map([
 ]);
 
 interface ContextValue {
-    readonly workbenchIdToComponent: WorkbenchIdToComponentType;
+    readonly tabIdToComponent: TabIdToComponentType;
     readonly activeWorkbenchId: ActiveWorkbenchId | undefined;
     readonly workbenchIsOpen: boolean;
     readonly setActiveWorkbenchId: React.Dispatch<React.SetStateAction<
@@ -46,14 +46,14 @@ const useContextValue = (): ContextValue => {
 
     return React.useMemo(
         () => ({
-            workbenchIdToComponent: WORKBENCH_ID_TO_COMPONENT,
+            tabIdToComponent: TAB_ID_TO_COMPONENT,
             activeWorkbenchId,
             workbenchIsOpen,
             setActiveWorkbenchId,
             setWorkbenchIsOpen,
         }),
         [
-            WORKBENCH_ID_TO_COMPONENT,
+            TAB_ID_TO_COMPONENT,
             activeWorkbenchId,
             workbenchIsOpen,
             setActiveWorkbenchId,
