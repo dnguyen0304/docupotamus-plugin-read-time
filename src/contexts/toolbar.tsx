@@ -8,7 +8,7 @@ interface TabConfig {
     readonly Component: React.LazyExoticComponent<() => JSX.Element>;
 };
 
-type TabIdToConfig = ReadonlyMap<string, TabConfig>;
+interface TabIdToConfig extends ReadonlyMap<string, TabConfig> { };
 
 const TAB_ID_TO_CONFIG: TabIdToConfig = new Map([
     [
