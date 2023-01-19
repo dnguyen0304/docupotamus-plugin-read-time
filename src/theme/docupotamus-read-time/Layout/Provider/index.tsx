@@ -4,9 +4,9 @@ import { styled } from '@mui/material/styles';
 import LayoutProvider from '@theme-init/Layout/Provider';
 import type LayoutProviderType from '@theme/Layout/Provider';
 import * as React from 'react';
-import { PercentileProvider } from '../../../contexts/percentile';
-import { ToolbarProvider } from '../../../contexts/toolbar';
-import Workbench from '../../docupotamus-read-time/components/Workbench';
+import { PercentileProvider } from '../../../../contexts/percentile';
+import { ToolbarProvider } from '../../../../contexts/toolbar';
+import Workbench from '../../components/Workbench';
 
 const StyledLayout = styled(Box)({
     display: 'grid',
