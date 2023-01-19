@@ -4,13 +4,28 @@ import { ReactContextError } from './errors';
 
 // TODO(dnguyen0304): Investigate changing to dynamic.
 // TODO(dnguyen0304): Extract to config.
-type ActiveWorkbenchId = 'read-time' | 'editor' | undefined;
+type ActiveWorkbenchId = 'read-time' | 'editor';
+
+type WorkbenchIdToComponentType = ReadonlyMap<
+    ActiveWorkbenchId,
+    React.LazyExoticComponent<() => JSX.Element>
+>;
+
+const WORKBENCH_ID_TO_COMPONENT: WorkbenchIdToComponentType = new Map([
+    [
+        'read-time',
+        React.lazy(() => import(
+            '../theme/docupotamus-read-time/components/Workbench/ReadTime'
+        )),
+    ],
+]);
 
 interface ContextValue {
-    readonly activeWorkbenchId: ActiveWorkbenchId;
+    readonly workbenchIdToComponent: WorkbenchIdToComponentType;
+    readonly activeWorkbenchId: ActiveWorkbenchId | undefined;
     readonly workbenchIsOpen: boolean;
     readonly setActiveWorkbenchId: React.Dispatch<React.SetStateAction<
-        ActiveWorkbenchId
+        ActiveWorkbenchId | undefined
     >>;
     readonly setWorkbenchIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -31,12 +46,14 @@ const useContextValue = (): ContextValue => {
 
     return React.useMemo(
         () => ({
+            workbenchIdToComponent: WORKBENCH_ID_TO_COMPONENT,
             activeWorkbenchId,
             workbenchIsOpen,
             setActiveWorkbenchId,
             setWorkbenchIsOpen,
         }),
         [
+            WORKBENCH_ID_TO_COMPONENT,
             activeWorkbenchId,
             workbenchIsOpen,
             setActiveWorkbenchId,

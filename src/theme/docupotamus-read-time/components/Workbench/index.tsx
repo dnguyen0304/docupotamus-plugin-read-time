@@ -5,7 +5,6 @@ import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { useToolbar } from '../../../../contexts/toolbar';
 import Loading from './Loading';
-import ReadTime from './ReadTime';
 import styles from './styles.module.css';
 
 interface StyledBoxProps {
@@ -58,8 +57,11 @@ export default function Workbench(): JSX.Element {
             .docupotamusReadTimePlugin;
 
     const location = useLocation();
-    const { workbenchIsOpen } = useToolbar();
+    const { workbenchIdToComponent, workbenchIsOpen } = useToolbar();
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
+
+    // TODO(dnguyen0304): Add error handling.
+    const WorkbenchTab = workbenchIdToComponent.get('read-time')!
 
     React.useEffect(() => {
         if (!loadingIsEnabled) {
@@ -74,12 +76,15 @@ export default function Workbench(): JSX.Element {
             workbenchIsOpen={workbenchIsOpen}
             boxShadowWidth='var(--space-xs)'
         >
-            {
-                // TODO(dnguyen0304): Investigate refactoring to Suspense.
-                isLoading
-                    ? <Loading setIsLoading={setIsLoading} />
-                    : <ReadTime />
-            }
-        </StyledBox>
+            {/* TODO(dnguyen0304): Replace temporary placeholder stub. */}
+            <React.Suspense fallback={<p>Loading...</p>}>
+                {
+                    // TODO(dnguyen0304): Fix loading not triggering on open.
+                    isLoading
+                        ? <Loading setIsLoading={setIsLoading} />
+                        : <WorkbenchTab />
+                }
+            </React.Suspense>
+        </StyledBox >
     );
 };
