@@ -57,12 +57,12 @@ export default function Workbench(): JSX.Element {
             .docupotamusReadTimePlugin;
 
     const location = useLocation();
-    const { tabIdToComponent, activeTabId } = useToolbar();
+    const { tabIdToConfig, activeTabId } = useToolbar();
 
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
 
     // TODO(dnguyen0304): Add error handling.
-    const Tab = activeTabId && tabIdToComponent.get(activeTabId);
+    const Tab = activeTabId && tabIdToConfig.get(activeTabId)?.Component;
 
     React.useEffect(() => {
         if (!loadingIsEnabled) {

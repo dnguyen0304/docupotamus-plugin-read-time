@@ -2,22 +2,29 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { ReactContextError } from './errors';
 
-type TabIdToComponentType = ReadonlyMap<
-    string,
-    React.LazyExoticComponent<() => JSX.Element>
->;
+interface TabConfig {
+    readonly tabId: string;
+    readonly modulePath: string;
+    readonly Component: React.LazyExoticComponent<() => JSX.Element>;
+};
 
-const TAB_ID_TO_COMPONENT: TabIdToComponentType = new Map([
+type TabIdToConfig = ReadonlyMap<string, TabConfig>;
+
+const TAB_ID_TO_CONFIG: TabIdToConfig = new Map([
     [
         'read-time',
-        React.lazy(() => import(
-            '@theme/docupotamus-read-time/components/Workbench/ReadTime'
-        )),
+        {
+            tabId: 'read-time',
+            modulePath: '@theme/docupotamus-read-time/components/Workbench/ReadTime',
+            Component: React.lazy(() => import(
+                '@theme/docupotamus-read-time/components/Workbench/ReadTime'
+            )),
+        },
     ],
 ]);
 
 interface ContextValue {
-    readonly tabIdToComponent: TabIdToComponentType;
+    readonly tabIdToConfig: TabIdToConfig;
     readonly activeTabId: string;
     readonly setActiveTabId: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -31,7 +38,7 @@ const useContextValue = (): ContextValue => {
         },
     } = useDocusaurusContext().siteConfig.themeConfig;
 
-    if (activeTabIdDefault && !TAB_ID_TO_COMPONENT.has(activeTabIdDefault)) {
+    if (activeTabIdDefault && !TAB_ID_TO_CONFIG.has(activeTabIdDefault)) {
         throw new Error(
             `activeTabId not found in toolbar tabs - "${activeTabIdDefault}": `
             + `try checking your configuration`
@@ -43,12 +50,12 @@ const useContextValue = (): ContextValue => {
 
     return React.useMemo(
         () => ({
-            tabIdToComponent: TAB_ID_TO_COMPONENT,
+            tabIdToConfig: TAB_ID_TO_CONFIG,
             activeTabId,
             setActiveTabId,
         }),
         [
-            TAB_ID_TO_COMPONENT,
+            TAB_ID_TO_CONFIG,
             activeTabId,
             setActiveTabId,
         ],
