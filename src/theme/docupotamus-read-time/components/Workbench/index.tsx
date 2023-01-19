@@ -399,6 +399,7 @@ export default function Workbench(): JSX.Element {
             boxShadowWidth='var(--space-xs)'
         >
             {
+                // TODO(dnguyen0304): Investigate refactoring to Suspense.
                 isLoading
                     ? <Loading setIsLoading={setIsLoading} />
                     : <Partitioned />
