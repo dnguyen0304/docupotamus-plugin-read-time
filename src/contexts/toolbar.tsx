@@ -23,46 +23,40 @@ const TAB_ID_TO_COMPONENT: TabIdToComponentType = new Map([
 interface ContextValue {
     readonly tabIdToComponent: TabIdToComponentType;
     readonly activeTabId: ActiveTabId | undefined;
-    readonly workbenchIsOpen: boolean;
     readonly setActiveTabId: React.Dispatch<React.SetStateAction<
         ActiveTabId | undefined
     >>;
-    readonly setWorkbenchIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Context = React.createContext<ContextValue | undefined>(undefined);
 
 const useContextValue = (): ContextValue => {
-    const firstTabId = [...TAB_ID_TO_COMPONENT.keys()][0];
-    if (!firstTabId) {
-        throw new Error('no toolbar tabs configured');
-    }
-
     const {
         docupotamusReadTimePlugin: {
-            workbenchIsOpen: workbenchIsOpenDefault,
+            activeTabId: activeTabIdDefault,
         },
     } = useDocusaurusContext().siteConfig.themeConfig;
 
+    if (activeTabIdDefault && !TAB_ID_TO_COMPONENT.has(activeTabIdDefault)) {
+        throw new Error(
+            `activeTabId not found in toolbar tabs - "${activeTabIdDefault}": `
+            + `try checking your configuration`
+        );
+    }
+
     const [activeTabId, setActiveTabId] =
-        React.useState<ActiveTabId | undefined>(firstTabId);
-    const [workbenchIsOpen, setWorkbenchIsOpen] =
-        React.useState<boolean>(workbenchIsOpenDefault);
+        React.useState<ActiveTabId | undefined>(activeTabIdDefault);
 
     return React.useMemo(
         () => ({
             tabIdToComponent: TAB_ID_TO_COMPONENT,
             activeTabId,
-            workbenchIsOpen,
             setActiveTabId,
-            setWorkbenchIsOpen,
         }),
         [
             TAB_ID_TO_COMPONENT,
             activeTabId,
-            workbenchIsOpen,
             setActiveTabId,
-            setWorkbenchIsOpen,
         ],
     );
 };

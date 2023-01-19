@@ -7,7 +7,7 @@ declare module '@docusaurus/plugin-read-time' {
     interface ReadTimeThemeConfig {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
-        readonly workbenchIsOpen: boolean;
+        readonly activeTabId: string;
         readonly percentile: {
             readonly ranks: readonly number[];
             readonly style: PercentileRankStyle;

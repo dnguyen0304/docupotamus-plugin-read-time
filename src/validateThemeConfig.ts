@@ -11,7 +11,7 @@ const CONTENT_ROOT_SELECTOR: string =
 const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
     contentRootSelector: CONTENT_ROOT_SELECTOR,
     contentSelector: `${CONTENT_ROOT_SELECTOR} > p`,
-    workbenchIsOpen: false,
+    activeTabId: '',
     percentile: {
         ranks: [25, 50],
         style: 'full-lower',
@@ -53,9 +53,9 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
         contentSelector: Joi
             .string()
             .default(DEFAULT_THEME_CONFIG.contentSelector),
-        workbenchIsOpen: Joi
-            .boolean()
-            .default(DEFAULT_THEME_CONFIG.workbenchIsOpen),
+        activeTabId: Joi
+            .string()
+            .default(DEFAULT_THEME_CONFIG.activeTabId),
         percentile: Joi.object({
             ranks: Joi
                 .array()

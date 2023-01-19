@@ -57,7 +57,7 @@ export default function Workbench(): JSX.Element {
             .docupotamusReadTimePlugin;
 
     const location = useLocation();
-    const { workbenchIsOpen, tabIdToComponent, activeTabId } = useToolbar();
+    const { tabIdToComponent, activeTabId } = useToolbar();
 
     const [isLoading, setIsLoading] = React.useState<boolean>(loadingIsEnabled);
 
@@ -74,7 +74,7 @@ export default function Workbench(): JSX.Element {
     return (
         <StyledBox
             className={isLoading ? styles.workbench_container__load : ''}
-            workbenchIsOpen={workbenchIsOpen}
+            workbenchIsOpen={!!activeTabId}
             boxShadowWidth='var(--space-xs)'
         >
             {/* TODO(dnguyen0304): Replace temporary placeholder stub. */}

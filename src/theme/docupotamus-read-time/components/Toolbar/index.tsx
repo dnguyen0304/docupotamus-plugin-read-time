@@ -25,11 +25,16 @@ export default function Toolbar(
     {
     }: Props
 ): JSX.Element {
-    const { setWorkbenchIsOpen } = useToolbar();
+    const { setActiveTabId } = useToolbar();
+
+    const handleClick = () => {
+        // TODO(dnguyen0304): Fix magic string.
+        setActiveTabId(prev => (prev === 'read-time') ? '' : 'read-time');
+    };
 
     return (
         <StyledBox>
-            <IconButton onClick={() => { setWorkbenchIsOpen(prev => !prev) }}>
+            <IconButton onClick={handleClick}>
                 <InsightsOutlinedIcon />
             </IconButton>
         </StyledBox>
