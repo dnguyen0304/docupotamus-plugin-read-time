@@ -11,7 +11,7 @@ const TAB_ID_TO_COMPONENT: TabIdToComponentType = new Map([
     [
         'read-time',
         React.lazy(() => import(
-            '../theme/docupotamus-read-time/components/Workbench/ReadTime'
+            '@theme/docupotamus-read-time/components/Workbench/ReadTime'
         )),
     ],
 ]);
