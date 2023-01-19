@@ -6,7 +6,7 @@ import type LayoutProviderType from '@theme/Layout/Provider';
 import * as React from 'react';
 import { PercentileProvider } from '../../../contexts/percentile';
 import { ToolbarProvider } from '../../../contexts/toolbar';
-import Workbench from '../../components/Workbench';
+import Workbench from '../../docupotamus-read-time/components/Workbench';
 
 const StyledLayout = styled(Box)({
     display: 'grid',

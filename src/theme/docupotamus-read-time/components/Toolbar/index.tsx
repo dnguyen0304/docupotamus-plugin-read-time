@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { useToolbar } from '../../../contexts/toolbar';
+import { useToolbar } from '../../../../contexts/toolbar';
 
 // TODO(dnguyen0304): Add paddingRight for the scrollbar.
 const StyledBox = styled(Box)({

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { HotKeys } from 'react-hotkeys';
 import { SamplesProvider } from '../contexts/samples';
 import '../styles.css';
-import App from '../theme/components/App';
+import App from '../theme/docupotamus-read-time/components/App';
 
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
 const COLOR_ACCENT_GREEN: React.CSSProperties['color'] = '#64ffda';

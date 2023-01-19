@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { observeVisibility } from '../../../../services/visibility';
+import { observeVisibility } from '../../../../../services/visibility';
 
 export default function useVisibility(element: Element | undefined): boolean {
     const [isVisible, setIsVisible] = React.useState<boolean>(false);

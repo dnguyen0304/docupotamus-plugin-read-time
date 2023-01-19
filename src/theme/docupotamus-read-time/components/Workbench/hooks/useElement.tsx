@@ -1,6 +1,6 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import * as React from 'react';
-import { getElement } from '../../../../services/dom';
+import { getElement } from '../../../../../services/dom';
 
 export default function useElement(
     targetId: string,
