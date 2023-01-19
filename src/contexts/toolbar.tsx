@@ -4,10 +4,10 @@ import { ReactContextError } from './errors';
 
 // TODO(dnguyen0304): Investigate changing to dynamic.
 // TODO(dnguyen0304): Extract to config.
-type ActiveWorkbenchId = 'read-time' | 'editor';
+type ActiveTabId = 'read-time' | 'editor';
 
 type TabIdToComponentType = ReadonlyMap<
-    ActiveWorkbenchId,
+    ActiveTabId,
     React.LazyExoticComponent<() => JSX.Element>
 >;
 
@@ -22,10 +22,10 @@ const TAB_ID_TO_COMPONENT: TabIdToComponentType = new Map([
 
 interface ContextValue {
     readonly tabIdToComponent: TabIdToComponentType;
-    readonly activeWorkbenchId: ActiveWorkbenchId | undefined;
+    readonly activeTabId: ActiveTabId | undefined;
     readonly workbenchIsOpen: boolean;
-    readonly setActiveWorkbenchId: React.Dispatch<React.SetStateAction<
-        ActiveWorkbenchId | undefined
+    readonly setActiveTabId: React.Dispatch<React.SetStateAction<
+        ActiveTabId | undefined
     >>;
     readonly setWorkbenchIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -39,24 +39,24 @@ const useContextValue = (): ContextValue => {
         },
     } = useDocusaurusContext().siteConfig.themeConfig;
 
-    const [activeWorkbenchId, setActiveWorkbenchId] =
-        React.useState<ActiveWorkbenchId>();
+    const [activeTabId, setActiveTabId] =
+        React.useState<ActiveTabId>();
     const [workbenchIsOpen, setWorkbenchIsOpen] =
         React.useState<boolean>(workbenchIsOpenDefault);
 
     return React.useMemo(
         () => ({
             tabIdToComponent: TAB_ID_TO_COMPONENT,
-            activeWorkbenchId,
+            activeTabId,
             workbenchIsOpen,
-            setActiveWorkbenchId,
+            setActiveTabId,
             setWorkbenchIsOpen,
         }),
         [
             TAB_ID_TO_COMPONENT,
-            activeWorkbenchId,
+            activeTabId,
             workbenchIsOpen,
-            setActiveWorkbenchId,
+            setActiveTabId,
             setWorkbenchIsOpen,
         ],
     );
