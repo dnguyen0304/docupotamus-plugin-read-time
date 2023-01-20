@@ -1,7 +1,7 @@
-import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
+import { useToolbar } from '../../../../contexts/toolbar';
 import Button from './Button';
 
 // TODO(dnguyen0304): Add paddingRight for the scrollbar.
@@ -19,12 +19,20 @@ const StyledBox = styled(Box)({
 });
 
 export default function Toolbar(): JSX.Element {
+    const { tabIdToConfig } = useToolbar();
+
     return (
         <StyledBox>
-            {/* TODO(dnguyen0304): Fix magic string. */}
-            <Button tabId='read-time'>
-                <InsightsOutlinedIcon />
-            </Button>
+            {/* TODO(dnguyen0304): Replace temporary placeholder stub. */}
+            <React.Suspense fallback={<p>Loading...</p>}>
+                {[...tabIdToConfig.entries()].map(([tabId, config]) => {
+                    return (
+                        <Button tabId={tabId}>
+                            <config.IconComponent />
+                        </Button>
+                    );
+                })}
+            </React.Suspense>
         </StyledBox>
     );
 };
