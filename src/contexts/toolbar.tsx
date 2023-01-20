@@ -3,10 +3,11 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { ReactContextError } from './errors';
 
-interface TabIdToConfig extends ReadonlyMap<
-    string,
-    Omit<BaseTabConfig, 'tabId'>
-> { };
+interface TabConfig extends Omit<BaseTabConfig, 'tabId'> {
+    readonly Component: React.LazyExoticComponent<() => JSX.Element>;
+};
+
+interface TabIdToConfig extends ReadonlyMap<string, TabConfig> { };
 
 // TODO(dnguyen0304): Add real implementation.
 const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
