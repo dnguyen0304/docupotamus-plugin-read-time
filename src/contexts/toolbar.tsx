@@ -19,6 +19,17 @@ interface TabIdToConfig extends ReadonlyMap<string, TabConfig> { };
 const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
     return new Map([
         [
+            'editor',
+            {
+                Component: React.lazy(() => import(
+                    '@theme/docupotamus-editor/components/Editor'
+                )),
+                IconComponent: React.lazy(() => import(
+                    '@theme/docupotamus-editor/components/EditButton'
+                )),
+            },
+        ],
+        [
             'read-time',
             {
                 Component: React.lazy(() => import(
