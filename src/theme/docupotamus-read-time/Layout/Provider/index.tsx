@@ -32,7 +32,7 @@ export default function LayoutProviderWrapper(props: Props): JSX.Element {
                         display: 'flex',
                         flexDirection: 'column',
                     }}>
-                        <LayoutProvider {...props} />
+                        {props.children} || <LayoutProvider {...props} />
                     </Box>
                     <Workbench />
                 </StyledLayout>
