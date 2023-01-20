@@ -7,6 +7,7 @@ declare module '@docusaurus/plugin-read-time' {
     interface ReadTimeThemeConfig {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
+        readonly tabs: readonly TabConfig[];
         readonly activeTabId: string;
         readonly percentile: {
             readonly ranks: readonly number[];
@@ -26,6 +27,11 @@ declare module '@docusaurus/plugin-read-time' {
                 readonly durationMilli: number;
             };
         };
+    }
+
+    interface TabConfig {
+        readonly tabId: string;
+        readonly modulePath: string;
     }
 
     type DocupotamusThemeConfig = ReadTimeThemeConfig & ZenModeThemeConfig;

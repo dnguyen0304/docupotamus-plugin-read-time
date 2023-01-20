@@ -11,6 +11,11 @@ const CONTENT_ROOT_SELECTOR: string =
 const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
     contentRootSelector: CONTENT_ROOT_SELECTOR,
     contentSelector: `${CONTENT_ROOT_SELECTOR} > p`,
+    tabs: [{
+        tabId: 'read-time',
+        modulePath:
+            '@theme/docupotamus-read-time/components/Workbench/ReadTime',
+    }],
     activeTabId: '',
     percentile: {
         ranks: [25, 50],
@@ -43,6 +48,15 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
     },
 };
 
+const TabSchema = Joi.object({
+    tabId: Joi
+        .string()
+        .required(),
+    modulePath: Joi
+        .string()
+        .required(),
+});
+
 // TODO(dnguyen0304): Investigate missing labels.
 // TODO(dnguyen0304): Fix incorrect ThemeConfig type.
 export const ThemeConfigSchema = Joi.object<ThemeConfig>({
@@ -53,6 +67,10 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
         contentSelector: Joi
             .string()
             .default(DEFAULT_THEME_CONFIG.contentSelector),
+        tabs: Joi
+            .array()
+            .items(TabSchema)
+            .default(DEFAULT_THEME_CONFIG.tabs),
         activeTabId: Joi
             .string()
             .default(DEFAULT_THEME_CONFIG.activeTabId),

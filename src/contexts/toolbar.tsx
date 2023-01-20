@@ -1,3 +1,4 @@
+import { TabConfig as TabConfigBase } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { ReactContextError } from './errors';
@@ -13,17 +14,21 @@ interface TabIdToConfig extends ReadonlyMap<
     Omit<TabConfig, 'tabId'>
 > { };
 
-const TAB_ID_TO_CONFIG: TabIdToConfig = new Map([
-    [
-        'read-time',
+// TODO(dnguyen0304): Add real implementation.
+const keyByTabId = (tabConfigs: readonly TabConfigBase[]): TabIdToConfig => {
+    return new Map(tabConfigs.map(tabConfig => [
+        tabConfig.tabId,
         {
-            modulePath: '@theme/docupotamus-read-time/components/Workbench/ReadTime',
+            modulePath: tabConfig.modulePath,
+            // See: https://stackoverflow.com/a/47956054
+            // See: https://stackoverflow.com/a/58350377
+            // Component: React.lazy(() => import(tabConfig.modulePath)),
             Component: React.lazy(() => import(
                 '@theme/docupotamus-read-time/components/Workbench/ReadTime'
             )),
-        },
-    ],
-]);
+        }
+    ]));
+};
 
 interface ContextValue {
     readonly tabIdToConfig: TabIdToConfig;
@@ -36,11 +41,14 @@ const Context = React.createContext<ContextValue | undefined>(undefined);
 const useContextValue = (): ContextValue => {
     const {
         docupotamusReadTimePlugin: {
+            tabs: tabConfigs,
             activeTabId: activeTabIdDefault,
         },
     } = useDocusaurusContext().siteConfig.themeConfig;
 
-    if (activeTabIdDefault && !TAB_ID_TO_CONFIG.has(activeTabIdDefault)) {
+    const tabIdToConfig = keyByTabId(tabConfigs);
+
+    if (activeTabIdDefault && !tabIdToConfig.has(activeTabIdDefault)) {
         throw new Error(
             `activeTabId not found in toolbar tabs - "${activeTabIdDefault}": `
             + `try checking your configuration`
@@ -52,12 +60,12 @@ const useContextValue = (): ContextValue => {
 
     return React.useMemo(
         () => ({
-            tabIdToConfig: TAB_ID_TO_CONFIG,
+            tabIdToConfig,
             activeTabId,
             setActiveTabId,
         }),
         [
-            TAB_ID_TO_CONFIG,
+            tabIdToConfig,
             activeTabId,
             setActiveTabId,
         ],
