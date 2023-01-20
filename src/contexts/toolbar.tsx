@@ -3,7 +3,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { ReactContextError } from './errors';
 
-interface TabConfig extends Omit<BaseTabConfig, 'tabId'> {
+interface TabConfig {
     readonly Component: React.LazyExoticComponent<() => JSX.Element>;
 };
 
@@ -14,7 +14,6 @@ const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
     return new Map(tabConfigs.map(tabConfig => [
         tabConfig.tabId,
         {
-            modulePath: tabConfig.modulePath,
             // See: https://stackoverflow.com/a/47956054
             // See: https://stackoverflow.com/a/58350377
             // Component: React.lazy(() => import(tabConfig.modulePath)),
