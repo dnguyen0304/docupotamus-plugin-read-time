@@ -1,14 +1,15 @@
-import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined';
 import IconButton from '@mui/material/IconButton';
 import * as React from 'react';
 import { useToolbar } from '../../../../../contexts/toolbar';
 
 interface Props {
+    readonly children: React.ReactNode;
     readonly tabId: string;
 };
 
 export default function Button(
     {
+        children,
         tabId,
     }: Props
 ): JSX.Element {
@@ -20,7 +21,7 @@ export default function Button(
 
     return (
         <IconButton onClick={handleClick}>
-            <InsightsOutlinedIcon />
+            {children}
         </IconButton>
     );
 };
