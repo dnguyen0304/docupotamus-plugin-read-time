@@ -1,4 +1,4 @@
-import { TabConfig as TabConfigBase } from '@docusaurus/plugin-read-time';
+import { TabConfig as BaseTabConfig } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { ReactContextError } from './errors';
@@ -15,7 +15,7 @@ interface TabIdToConfig extends ReadonlyMap<
 > { };
 
 // TODO(dnguyen0304): Add real implementation.
-const keyByTabId = (tabConfigs: readonly TabConfigBase[]): TabIdToConfig => {
+const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
     return new Map(tabConfigs.map(tabConfig => [
         tabConfig.tabId,
         {
