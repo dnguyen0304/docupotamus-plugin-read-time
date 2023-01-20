@@ -5,11 +5,13 @@ import { ReactContextError } from './errors';
 
 interface TabConfig {
     readonly Component: React.LazyExoticComponent<() => JSX.Element>;
+    readonly IconComponent: React.LazyExoticComponent<() => JSX.Element>;
 };
 
 interface TabIdToConfig extends ReadonlyMap<string, TabConfig> { };
 
 // TODO(dnguyen0304): Add real implementation.
+// TODO(dnguyen0304): Fix type declaration.
 const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
     return new Map(tabConfigs.map(tabConfig => [
         tabConfig.tabId,
@@ -17,8 +19,12 @@ const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
             // See: https://stackoverflow.com/a/47956054
             // See: https://stackoverflow.com/a/58350377
             // Component: React.lazy(() => import(tabConfig.modulePath)),
+            // IconComponent: React.lazy(() => import(tabConfig.iconModulePath)),
             Component: React.lazy(() => import(
                 '@theme/docupotamus-read-time/components/Workbench/ReadTime'
+            )),
+            IconComponent: React.lazy(() => import(
+                '@mui/icons-material/InsightsOutlined'
             )),
         }
     ]));
