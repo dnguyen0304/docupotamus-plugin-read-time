@@ -32,6 +32,7 @@ declare module '@docusaurus/plugin-read-time' {
     interface TabConfig {
         readonly tabId: string;
         readonly modulePath: string;
+        readonly iconModulePath: string;
     }
 
     type DocupotamusThemeConfig = ReadTimeThemeConfig & ZenModeThemeConfig;

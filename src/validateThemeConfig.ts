@@ -15,6 +15,7 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
         tabId: 'read-time',
         modulePath:
             '@theme/docupotamus-read-time/components/Workbench/ReadTime',
+        iconModulePath: '@mui/icons-material/InsightsOutlined',
     }],
     activeTabId: '',
     percentile: {
@@ -53,6 +54,9 @@ const TabSchema = Joi.object({
         .string()
         .required(),
     modulePath: Joi
+        .string()
+        .required(),
+    iconModulePath: Joi
         .string()
         .required(),
 });
