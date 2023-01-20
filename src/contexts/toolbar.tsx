@@ -1,13 +1,7 @@
-import { TabConfig as BaseTabConfig } from '@docusaurus/plugin-read-time';
+import { TabConfig } from '@docusaurus/plugin-read-time';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import * as React from 'react';
 import { ReactContextError } from './errors';
-
-interface TabConfig {
-    readonly tabId: string;
-    readonly modulePath: string;
-    readonly Component: React.LazyExoticComponent<() => JSX.Element>;
-};
 
 interface TabIdToConfig extends ReadonlyMap<
     string,
@@ -15,7 +9,7 @@ interface TabIdToConfig extends ReadonlyMap<
 > { };
 
 // TODO(dnguyen0304): Add real implementation.
-const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
+const keyByTabId = (tabConfigs: readonly TabConfig[]): TabIdToConfig => {
     return new Map(tabConfigs.map(tabConfig => [
         tabConfig.tabId,
         {
