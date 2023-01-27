@@ -6,6 +6,17 @@ import { SamplesProvider } from '../../../contexts/samples';
 import App from '../components/App';
 import './styles.css';
 
+declare module '@mui/material/styles' {
+    interface BreakpointOverrides {
+        xs: false;
+        sm: false;
+        md: false;
+        lg: false;
+        xl: false;
+        mobile: true;
+    }
+}
+
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
 const COLOR_ACCENT_GREEN: React.CSSProperties['color'] = '#64ffda';
 
