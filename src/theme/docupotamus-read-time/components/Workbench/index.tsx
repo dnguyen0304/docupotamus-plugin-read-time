@@ -3,7 +3,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { useToolbar } from '../../../../contexts/toolbar';
+import { useToolbar } from '../../contexts/toolbar';
 import Loading from './Loading';
 import styles from './styles.module.css';
 

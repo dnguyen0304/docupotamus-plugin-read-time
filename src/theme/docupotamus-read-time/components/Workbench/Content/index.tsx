@@ -4,7 +4,7 @@ import type { DividerProps } from '@mui/material/Divider';
 import MuiDivider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { usePercentile } from '../../../../../contexts/percentile';
+import { usePercentile } from '../../../contexts/percentile';
 import Card from '../Card';
 import { CARD_KEY_PREFIX } from '../constants';
 import type { KeyedSample, Percentile } from '../types';

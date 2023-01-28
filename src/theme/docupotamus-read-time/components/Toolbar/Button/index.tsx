@@ -1,6 +1,6 @@
 import IconButton from '@mui/material/IconButton';
 import * as React from 'react';
-import { useToolbar } from '../../../../../contexts/toolbar';
+import { useToolbar } from '../../../contexts/toolbar';
 
 interface Props {
     readonly children: React.ReactNode;

@@ -7,7 +7,7 @@ import type {
 import type {
     RunningTotalSample,
     TargetIdToSamples
-} from '../../../../../contexts/samples';
+} from '../../../contexts/samples';
 import { BAND_FRIENDLY_KEYS } from '../config';
 
 const getRunningTotal = (

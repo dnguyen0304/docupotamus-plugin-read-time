@@ -2,8 +2,8 @@ import type { KeyMap } from '@docusaurus/plugin-read-time';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 import { HotKeys } from 'react-hotkeys';
-import { SamplesProvider } from '../../../contexts/samples';
 import App from '../components/App';
+import { SamplesProvider } from '../contexts/samples';
 import './styles.css';
 
 declare module '@mui/material/styles' {
@@ -15,7 +15,7 @@ declare module '@mui/material/styles' {
         xl: false;
         mobile: true;
     }
-}
+};
 
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
 const COLOR_ACCENT_GREEN: React.CSSProperties['color'] = '#64ffda';

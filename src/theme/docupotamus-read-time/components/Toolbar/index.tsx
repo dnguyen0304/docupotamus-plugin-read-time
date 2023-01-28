@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
-import { useToolbar } from '../../../../contexts/toolbar';
+import { useToolbar } from '../../contexts/toolbar';
 import Button from './Button';
 
 // TODO(dnguyen0304): Add paddingRight for the scrollbar.

@@ -1,12 +1,12 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import getPercentile from 'percentile';
 import * as React from 'react';
-import { usePercentile } from '../../../../../contexts/percentile';
+import { usePercentile } from '../../../contexts/percentile';
 import type {
     RunningTotalSample,
     TargetIdToSamples
-} from '../../../../../contexts/samples';
-import { useSamples } from '../../../../../contexts/samples';
+} from '../../../contexts/samples';
+import { useSamples } from '../../../contexts/samples';
 import { CONTENT_MARGIN_LEFT } from '../constants';
 import Content from '../Content';
 import type { ChipData } from '../Footer';
