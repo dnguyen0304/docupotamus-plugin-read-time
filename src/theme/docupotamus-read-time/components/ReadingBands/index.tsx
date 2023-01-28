@@ -8,10 +8,10 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { Buffer } from 'buffer';
 import * as React from 'react';
 import PageVisibility from 'react-page-visibility';
-import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../../../constants';
 import { useSamples } from '../../../../contexts/samples';
 import { getElement } from '../../../../services/dom';
 import { observeVisibility } from '../../../../services/visibility';
+import { RUNNING_TOTALS_UPDATE_RATE_MILLI } from '../../constants';
 import { BANDS } from './config';
 import { RangeAnchor } from './services/annotator/anchoring/types'; // TODO(dnguyen0304): Fix missing module declaration.
 import {
