@@ -3,7 +3,7 @@ import RootInit from '@theme-init/Root';
 import type RootType from '@theme/Root';
 import * as React from 'react';
 import useReadTimeThemeConfig from '../docupotamus-read-time/hooks/useReadTimeThemeConfig';
-import RootSwizzle from '../docupotamus-read-time/Root';
+import RootSwizzle from '../docupotamus-read-time/theme/Root';
 
 type Props = Readonly<WrapperProps<typeof RootType>>;
 

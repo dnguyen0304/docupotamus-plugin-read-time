@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
-import App from '../components/App';
-import { SamplesProvider } from '../contexts/samples';
+import App from '../../components/App';
+import { SamplesProvider } from '../../contexts/samples';
 import './styles.css';
 
 declare module '@mui/material/styles' {
