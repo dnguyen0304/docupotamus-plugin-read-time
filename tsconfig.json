@@ -6,8 +6,6 @@
         "lib": [
             "ESNext",
             "DOM",
-            // See: https://stackoverflow.com/a/55102966
-            "DOM.Iterable",
         ],
         "jsx": "react-native",
         "rootDir": "src",

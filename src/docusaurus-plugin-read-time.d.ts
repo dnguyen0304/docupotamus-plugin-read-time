@@ -1,9 +1,6 @@
 /// <reference types="@docusaurus/theme-classic" />
 
 declare module '@docusaurus/plugin-read-time' {
-    import type { ThemeConfig as ZenModeThemeConfig } from '@docusaurus/theme-zen-mode';
-    import type { KeySequence } from 'react-hotkeys';
-
     interface ReadTimeThemeConfig {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
@@ -35,7 +32,7 @@ declare module '@docusaurus/plugin-read-time' {
         readonly iconModulePath: string;
     }
 
-    type DocupotamusThemeConfig = ReadTimeThemeConfig & ZenModeThemeConfig;
+    type DocupotamusThemeConfig = ReadTimeThemeConfig;
 
     // Contiguous region of content.
     interface Target {
@@ -151,14 +148,4 @@ declare module '@docusaurus/plugin-read-time' {
         | 'full-lower'
         // For example, "95th Percentile".
         | 'full-upper';
-
-    type KeyBindings = 'ZEN_MODE';
-
-    type KeyMap = {
-        [key in KeyBindings]: KeySequence;
-    };
-
-    type KeyHandlers = {
-        [key in KeyBindings]: (keyboardEvent?: KeyboardEvent | undefined) => void;
-    };
 }

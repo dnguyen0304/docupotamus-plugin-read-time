@@ -1,7 +1,5 @@
-import type { KeyMap } from '@docusaurus/plugin-read-time';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
-import { HotKeys } from 'react-hotkeys';
 import App from '../components/App';
 import { SamplesProvider } from '../contexts/samples';
 import './styles.css';
@@ -19,10 +17,6 @@ declare module '@mui/material/styles' {
 
 // TODO(dnguyen0304): Fix unused primary color for Root theme component.
 const COLOR_ACCENT_GREEN: React.CSSProperties['color'] = '#64ffda';
-
-const keyMap: KeyMap = {
-    ZEN_MODE: 'shift+Z',
-};
 
 const theme = createTheme({
     breakpoints: {
@@ -49,15 +43,12 @@ interface Props {
 export default function Root({ children }: Props): JSX.Element {
     return (
         <React.StrictMode>
-            {/* TODO(dnguyen0304): Extract integration for ZenMode component. */}
-            <HotKeys keyMap={keyMap}>
-                <ThemeProvider theme={theme}>
-                    <SamplesProvider>
-                        <App />
-                        {children}
-                    </SamplesProvider>
-                </ThemeProvider>
-            </HotKeys>
+            <ThemeProvider theme={theme}>
+                <SamplesProvider>
+                    <App />
+                    {children}
+                </SamplesProvider>
+            </ThemeProvider>
         </React.StrictMode>
     );
 };

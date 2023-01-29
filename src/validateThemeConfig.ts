@@ -51,7 +51,6 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
             // TODO(dnguyen0304): Fix missing cohesion with styles.
             durationMilli: 5 * 1000,
         },
-        zenModeIsEnabled: false,
     },
 };
 
@@ -140,9 +139,6 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                     ),
             })
                 .default(DEFAULT_THEME_CONFIG.debug.loading),
-            zenModeIsEnabled: Joi
-                .boolean()
-                .default(DEFAULT_THEME_CONFIG.debug.zenModeIsEnabled),
         })
             .default(DEFAULT_THEME_CONFIG.debug),
     })
