@@ -34,8 +34,8 @@
         "baseUrl": ".",
         "types": [
             "node",
-            "@docusaurus/theme-classic",
             "@docusaurus/module-type-aliases",
+            "@docusaurus/theme-classic",
         ],
         /* Plugins */
         "plugins": [
