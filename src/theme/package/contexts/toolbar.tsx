@@ -13,6 +13,7 @@ interface TabIdToConfig extends ReadonlyMap<string, TabConfig> { };
 // TODO(dnguyen0304): Add real implementation.
 //   See: https://stackoverflow.com/a/47956054
 //   See: https://stackoverflow.com/a/58350377
+//   See: https://github.com/facebook/react/issues/14603
 //   Component: React.lazy(() => import(tabConfig.modulePath)),
 //   IconComponent: React.lazy(() => import(tabConfig.iconModulePath)),
 // TODO(dnguyen0304): Fix type declaration.
@@ -22,19 +23,19 @@ const keyByTabId = (tabConfigs: readonly BaseTabConfig[]): TabIdToConfig => {
             'editor',
             {
                 Component: React.lazy(() => import(
-                    '@theme/docupotamus-editor/components/Editor'
-                )),
+                    '@theme/docupotamus-editor'
+                ).then(module => ({ default: module.WorkbenchTab }))),
                 IconComponent: React.lazy(() => import(
-                    '@theme/docupotamus-editor/components/EditButton'
-                )),
+                    '@theme/docupotamus-editor'
+                ).then(module => ({ default: module.WorkbenchIcon }))),
             },
         ],
         [
             'read-time',
             {
                 Component: React.lazy(() => import(
-                    '@theme/docupotamus-read-time/components/Workbench/ReadTime'
-                )),
+                    '@theme/docupotamus-read-time-plugin'
+                ).then(module => ({ default: module.WorkbenchTab }))),
                 IconComponent: React.lazy(() => import(
                     '@mui/icons-material/InsightsOutlined'
                 )),

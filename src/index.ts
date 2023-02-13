@@ -1,16 +1,27 @@
-import type { Plugin } from '@docusaurus/types';
+import type { PluginOptions } from '@docusaurus/plugin-read-time';
+import type { LoadContext, Plugin } from '@docusaurus/types';
 
-// TODO(dnguyen0304): Fix missing LoadedContent type declaration.
-export default function pluginReadTime(): Plugin<undefined> {
+export default function pluginReadTime(
+    _context: LoadContext,
+    options: PluginOptions,
+): Plugin<undefined> {
+    const { swizzleIsEnabled = true } = options;
+
     return {
-        name: 'docusaurus-plugin-read-time',
+        name: 'docupotamus-plugin-read-time',
 
         getThemePath() {
-            return '../lib/theme';
+            if (swizzleIsEnabled) {
+                return '../lib/theme/swizzle';
+            }
+            return '../lib/theme/public';
         },
 
         getTypeScriptThemePath() {
-            return '../src/theme';
+            if (swizzleIsEnabled) {
+                return '../src/theme/swizzle';
+            }
+            return '../src/theme/public';
         },
     };
 };

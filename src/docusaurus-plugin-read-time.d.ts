@@ -1,6 +1,10 @@
 /// <reference types="@docusaurus/theme-classic" />
 
-declare module '@docusaurus/plugin-read-time' {
+declare module '@docupotamus/docusaurus-plugin-read-time' {
+    interface PluginOptions {
+        readonly swizzleIsEnabled: boolean;
+    }
+
     interface ReadTimeThemeConfig {
         readonly contentRootSelector: string;
         readonly contentSelector: string;
@@ -10,7 +14,6 @@ declare module '@docusaurus/plugin-read-time' {
             readonly ranks: readonly number[];
             readonly style: PercentileRankStyle;
         };
-        readonly swizzleIsEnabled: boolean;
         readonly debug: {
             readonly band: {
                 readonly isEnabled: boolean;
@@ -148,4 +151,8 @@ declare module '@docusaurus/plugin-read-time' {
         | 'full-lower'
         // For example, "95th Percentile".
         | 'full-upper';
+}
+
+declare module '@docusaurus/plugin-read-time' {
+    export * from '@docupotamus/docusaurus-plugin-read-time';
 }

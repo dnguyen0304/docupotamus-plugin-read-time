@@ -1,8 +1,8 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
-import App from '../../components/App';
-import { SamplesProvider } from '../../contexts/samples';
-import '../../styles.css';
+import App from '../../package/components/App';
+import { SamplesProvider } from '../../package/contexts/samples';
+import '../../package/styles.css';
 
 declare module '@mui/material/styles' {
     interface BreakpointOverrides {
@@ -40,13 +40,13 @@ interface Props {
     readonly children: React.ReactNode;
 };
 
-export default function Root({ children }: Props): JSX.Element {
+export default function RootDecorator({ children }: Props): JSX.Element {
     return (
         <React.StrictMode>
             <ThemeProvider theme={theme}>
                 <SamplesProvider>
-                    <App />
                     {children}
+                    <App />
                 </SamplesProvider>
             </ThemeProvider>
         </React.StrictMode>

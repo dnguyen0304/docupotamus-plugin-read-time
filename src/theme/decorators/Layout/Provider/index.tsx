@@ -1,12 +1,9 @@
-import type { WrapperProps } from '@docusaurus/types';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
-import LayoutProvider from '@theme-init/Layout/Provider';
-import type LayoutProviderType from '@theme/Layout/Provider';
 import * as React from 'react';
-import Workbench from '../../../components/Workbench';
-import { PercentileProvider } from '../../../contexts/percentile';
-import { ToolbarProvider } from '../../../contexts/toolbar';
+import Workbench from '../../../package/components/Workbench';
+import { PercentileProvider } from '../../../package/contexts/percentile';
+import { ToolbarProvider } from '../../../package/contexts/toolbar';
 
 const StyledLayout = styled(Box)({
     display: 'grid',
@@ -20,10 +17,11 @@ const StyledLayout = styled(Box)({
         minmax(auto, 20vw)`,
 });
 
-// TODO(dnguyen0304): Migrate to interface for declaration merging.
-type Props = Readonly<WrapperProps<typeof LayoutProviderType>>;
+interface Props {
+    readonly children: React.ReactNode;
+};
 
-export default function LayoutProviderWrapper(props: Props): JSX.Element {
+export default function ProviderDecorator({ children }: Props): JSX.Element {
     return (
         <ToolbarProvider>
             <PercentileProvider>
@@ -32,7 +30,7 @@ export default function LayoutProviderWrapper(props: Props): JSX.Element {
                         display: 'flex',
                         flexDirection: 'column',
                     }}>
-                        {props.children} || <LayoutProvider {...props} />
+                        {children}
                     </Box>
                     <Workbench />
                 </StyledLayout>

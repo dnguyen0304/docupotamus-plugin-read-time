@@ -28,7 +28,6 @@ const DEFAULT_THEME_CONFIG: DocupotamusThemeConfig = {
         ranks: [25, 50],
         style: 'full-lower',
     },
-    swizzleIsEnabled: true,
     debug: {
         band: {
             isEnabled: false,
@@ -67,7 +66,6 @@ const TabSchema = Joi.object({
 });
 
 // TODO(dnguyen0304): Investigate missing labels.
-// TODO(dnguyen0304): Fix incorrect ThemeConfig type.
 export const ThemeConfigSchema = Joi.object<ThemeConfig>({
     docupotamusReadTimePlugin: Joi.object({
         contentRootSelector: Joi
@@ -93,9 +91,6 @@ export const ThemeConfigSchema = Joi.object<ThemeConfig>({
                 .default(DEFAULT_THEME_CONFIG.percentile.style),
         })
             .default(DEFAULT_THEME_CONFIG.percentile),
-        swizzleIsEnabled: Joi
-            .boolean()
-            .default(DEFAULT_THEME_CONFIG.swizzleIsEnabled),
         debug: Joi.object({
             band: Joi.object({
                 isEnabled: Joi
